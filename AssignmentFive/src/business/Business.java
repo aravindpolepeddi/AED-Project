@@ -6,7 +6,6 @@
 package business;
 
 import business.Customer.CustomerDirectory;
-import business.DeliveryStaff.DeliveryStaffDirectory;
 import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
@@ -28,7 +27,6 @@ public class Business extends Organization {
     private RestaurantDirectory restaurantDirectory;
     private CustomerDirectory customerDirectory;
     private OrderDirectory orderDirectory;
-    private DeliveryStaffDirectory deliveryStaffDirectory;
     private ConcessionsDirectory concessionsDirectory;
     private PremiumDirectory premiumDirectory;
     private SuitesDirectory suitesDirectory;
@@ -111,14 +109,6 @@ public class Business extends Organization {
 
     public void setOrderDirectory(OrderDirectory orderDirectory) {
         this.orderDirectory = orderDirectory;
-    }
-
-    public DeliveryStaffDirectory getDeliveryStaffDirectory() {
-        return deliveryStaffDirectory;
-    }
-
-    public void setDeliveryStaffDirectory(DeliveryStaffDirectory deliveryStaffDirectory) {
-        this.deliveryStaffDirectory = deliveryStaffDirectory;
     }
 
 }

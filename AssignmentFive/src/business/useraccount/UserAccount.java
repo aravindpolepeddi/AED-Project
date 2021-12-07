@@ -5,9 +5,7 @@
  */
 package business.useraccount;
 
-import business.employee.Employee;
 import business.role.Role;
-import business.workqueue.WorkQueue;
 
 /**
  *
@@ -17,22 +15,17 @@ public class UserAccount {
 
     private String username;
     private String password;
-    private Employee employee;
     private Role role;
-    private WorkQueue workQueue;
+    String name;
 
-    public UserAccount() {
-        workQueue = new WorkQueue();
-    }
-
-    public UserAccount(String username, String password, String employee, Role role) {
-        Employee employee1 = new Employee(employee);
+    public UserAccount(String username, String password, String name,
+            Role role) {
         this.username = username;
         this.password = password;
-        this.employee = employee1;
+        this.name = name;
         this.role = role;
     }
-    
+
     public String getUsername() {
         return username;
     }
@@ -53,20 +46,16 @@ public class UserAccount {
         return role;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
     public void setRole(Role role) {
         this.role = role;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public String getName() {
+        return name;
     }
 
-    public WorkQueue getWorkQueue() {
-        return workQueue;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
