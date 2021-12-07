@@ -28,7 +28,11 @@ public abstract class Role {
         SuitesManager("SuitesManager"),
         KitchenManager("KitchenManager"),
         Vendor("Vendor"),
-        SysAdmin("Sysadmin");
+        SysAdmin("Sysadmin"),
+        FoodBeverageEntAdmin("FoodBevEntAdmin"),
+        MerchendiseEntAdmin("MerchendiseEntAdmin"),
+        BookingEntAdmin("BookingEntAdmin"),
+        HumanResourceEntAdmin("HumanResourceEntAdmin");
 
         private String value;
 

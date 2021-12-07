@@ -5,7 +5,11 @@
  */
 package business;
 
+import business.role.BookingEntAdminRole;
 import business.role.Customer;
+import business.role.FoodBeverageEntAdminRole;
+import business.role.HumanResourceEntAdmin;
+import business.role.MerchendiseEntAdminRole;
 import business.role.RestaurantRole;
 import business.role.SystemAdminRole;
 import business.useraccount.UserAccount;
@@ -21,9 +25,25 @@ public class ConfigureABusiness {
 
         Business system = Business.getInstance();
         ArrayList<UserAccount> userAccList = new ArrayList<>();
-        UserAccount testAccount = new UserAccount("admin", "admin", "Aravind", new SystemAdminRole());
+        UserAccount testAccount = new UserAccount("sysadmin", "sysadmin", "Aravind", new SystemAdminRole());
         userAccList.add(testAccount);
+
+        UserAccount testAccount1 = new UserAccount("food", "food", "Aravind", new FoodBeverageEntAdminRole());
+        userAccList.add(testAccount1);
+
+        UserAccount testAccount2 = new UserAccount("merch", "merch", "Aravind", new MerchendiseEntAdminRole());
+        userAccList.add(testAccount2);
+
+        UserAccount testAccount3 = new UserAccount("booking", "booking", "Aravind", new BookingEntAdminRole());
+        userAccList.add(testAccount3);
+
+        UserAccount testAccount4 = new UserAccount("hr", "hr", "Aravind", new HumanResourceEntAdmin());
+        userAccList.add(testAccount4);
         system.getUserAccountDirectory().getUserAccountList().add(testAccount);
+        system.getUserAccountDirectory().getUserAccountList().add(testAccount1);
+        system.getUserAccountDirectory().getUserAccountList().add(testAccount2);
+        system.getUserAccountDirectory().getUserAccountList().add(testAccount3);
+        system.getUserAccountDirectory().getUserAccountList().add(testAccount4);
 
         return system;
     }
