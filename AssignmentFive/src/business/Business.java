@@ -11,6 +11,7 @@ import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.concessions.ConcessionsDirectory;
+import business.event.EventDirectory;
 import business.premium.PremiumDirectory;
 import business.role.Role;
 import business.role.SystemAdminRole;
@@ -32,6 +33,15 @@ public class Business extends Organization {
     private ConcessionsDirectory concessionsDirectory;
     private PremiumDirectory premiumDirectory;
     private SuitesDirectory suitesDirectory;
+    private EventDirectory eventDirectory;
+
+    public EventDirectory getEventDirectory() {
+        return eventDirectory;
+    }
+
+    public void setEventDirectory(EventDirectory eventDirectory) {
+        this.eventDirectory = eventDirectory;
+    }
 
     public ConcessionsDirectory getConcessionsDirectory() {
         return concessionsDirectory;
@@ -73,6 +83,13 @@ public class Business extends Organization {
 
     private Business() {
         super(null);
+        //organizationDirectory = new OrganizationDirectory();
+        //customerDirectory = new CustomerDirectory();
+        //restaurantDirectory = new RestaurantDirectory();
+        //deliveryManDirectory = new DeliveryManDirectory();
+        //userAccountDirectory = new UserAccountDirectory();
+        //orderdirectory = new OrderDirectory();
+        eventDirectory = new EventDirectory();
         // networkList=new ArrayList<Network>();
     }
 
