@@ -7,6 +7,7 @@ package ui.Enterprises;
 
 import business.Business;
 import business.FlagClass;
+import business.Restaurant.Restaurant;
 import business.organizations.FoodBevOrganization;
 import business.premium.Premium;
 import business.premium.PremiumDirectory;
@@ -509,7 +510,29 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDelete1MouseExited
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
-        // TODO add your handling code here:
+        int selectedRowIndex = tblFoodBevManagers.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a User");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblFoodBevManagers.getModel();
+            UserAccount selectedUserAccount = (UserAccount) model.getValueAt(selectedRowIndex, 0);
+            UserAccount accountToBeRemoved = business.getUserAccountDirectory().fetchUserAccountUsingUserName(selectedUserAccount.getUsername());
+            business.getUserAccountDirectory().removeAccount(accountToBeRemoved);
+            JOptionPane.showMessageDialog(null, "User Account deleted successfully.");
+            populateTable();
+
+            Suites removedSuite = suites.findSuiteByManagerName(selectedUserAccount.getName());
+            if (removedSuite != null) {
+                suites.removeSuite(removedSuite);
+            }
+
+            Premium removedPremium = premium.findPremiumByManagerName(selectedUserAccount.getName());
+            if (removedPremium != null) {
+                premium.removePremium(removedPremium);
+            }
+        }
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
     private void btnUpdate1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdate1MouseEntered

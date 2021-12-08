@@ -44,4 +44,24 @@ public class SuitesDirectory {
         return suite;
     }
 
+    /**
+     * Return Suites object whose manager name matches the input
+     *
+     * @param managerNames
+     * @return
+     */
+    public Suites findSuiteByManagerName(String managerNames) {
+        Suites suite = suitesList.stream().filter(x -> x.getManagerName().equals(managerNames)).findAny().orElse(null);
+        return suite;
+    }
+
+    /**
+     * Method to remove the object from the directory
+     *
+     * @param premium
+     */
+    public void removeSuite(Suites suite) {
+        suitesList.remove(suite);
+    }
+
 }

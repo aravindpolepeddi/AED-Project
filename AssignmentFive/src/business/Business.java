@@ -11,6 +11,11 @@ import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.concessions.ConcessionsDirectory;
 import business.event.EventDirectory;
+import business.hrservices.CleaningServicesDirectory;
+import business.hrservices.EmergencyServicesDirectory;
+import business.hrservices.GroundServicesDirectory;
+import business.hrservices.SecurityServices;
+import business.hrservices.SecurityServicesDirectory;
 import business.organizations.FoodBevOrganization;
 import business.premium.PremiumDirectory;
 import business.role.Role;
@@ -30,9 +35,12 @@ public class Business extends Organization {
     private CustomerDirectory customerDirectory;
     private OrderDirectory orderDirectory;
     private ConcessionsDirectory concessionsDirectory;
-//    private FoodBevOrganization foodBevOrg;
     private PremiumDirectory premiumDirectory;
     private SuitesDirectory suitesDirectory;
+    private CleaningServicesDirectory cleaningServices;
+    private EmergencyServicesDirectory emergencyServices;
+    private GroundServicesDirectory groundServices;
+    private SecurityServicesDirectory securityServices;
 
     public PremiumDirectory getPremiumDirectory() {
         return premiumDirectory;
@@ -50,7 +58,6 @@ public class Business extends Organization {
         this.suitesDirectory = suitesDirectory;
     }
     private EventDirectory eventDirectory;
-
 
     public EventDirectory getEventDirectory() {
         return eventDirectory;
@@ -70,21 +77,38 @@ public class Business extends Organization {
         this.concessionsDirectory = concessionsDirectory;
     }
 
-//    public PremiumDirectory getPremiumDirectory() {
-//        return premiumDirectory;
-//    }
-//
-//    public void setPremiumDirectory(PremiumDirectory premiumDirectory) {
-//        this.premiumDirectory = premiumDirectory;
-//    }
-//
-//    public SuitesDirectory getSuitesDirectory() {
-//        return suitesDirectory;
-//    }
-//
-//    public void setSuitesDirectory(SuitesDirectory suitesDirectory) {
-//        this.suitesDirectory = suitesDirectory;
-//    }
+    public CleaningServicesDirectory getCleaningServices() {
+        return cleaningServices;
+    }
+
+    public void setCleaningServices(CleaningServicesDirectory cleaningServices) {
+        this.cleaningServices = cleaningServices;
+    }
+
+    public EmergencyServicesDirectory getEmergencyServices() {
+        return emergencyServices;
+    }
+
+    public void setEmergencyServices(EmergencyServicesDirectory emergencyServices) {
+        this.emergencyServices = emergencyServices;
+    }
+
+    public GroundServicesDirectory getGroundServices() {
+        return groundServices;
+    }
+
+    public void setGroundServices(GroundServicesDirectory groundServices) {
+        this.groundServices = groundServices;
+    }
+
+    public SecurityServicesDirectory getSecurityServices() {
+        return securityServices;
+    }
+
+    public void setSecurityServices(SecurityServicesDirectory securityServices) {
+        this.securityServices = securityServices;
+    }
+
     public static Business getInstance() {
         if (business == null) {
             business = new Business();

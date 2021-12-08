@@ -6,6 +6,20 @@
 package ui.Enterprises;
 
 import business.Business;
+import business.hrservices.CleaningServices;
+import business.hrservices.CleaningServicesDirectory;
+import business.hrservices.EmergencyServices;
+import business.hrservices.EmergencyServicesDirectory;
+import business.hrservices.GroundServices;
+import business.hrservices.GroundServicesDirectory;
+import business.hrservices.SecurityServices;
+import business.hrservices.SecurityServicesDirectory;
+import business.premium.Premium;
+import business.role.HumanResourceEntAdmin;
+import business.role.RestaurantRole;
+import business.role.Role;
+import business.suites.Suites;
+import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,11 +31,44 @@ import javax.swing.table.DefaultTableModel;
  */
 public class HumanResourcesEntJPanel extends javax.swing.JPanel {
 
+    Business business;
+    CleaningServicesDirectory cleaningServices;
+    EmergencyServicesDirectory emergencyServices;
+    GroundServicesDirectory groundServices;
+    SecurityServicesDirectory securityServices;
+
     /**
      * Creates new form HumanResourcesEntJPanel
      */
     public HumanResourcesEntJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+
+        this.business = business;
+        if (business.getCleaningServices() == null) {
+            this.cleaningServices = new CleaningServicesDirectory();
+        } else {
+            this.cleaningServices = business.getCleaningServices();
+        }
+
+        if (business.getEmergencyServices() == null) {
+            this.emergencyServices = new EmergencyServicesDirectory();
+        } else {
+            this.emergencyServices = business.getEmergencyServices();
+        }
+
+        if (business.getGroundServices() == null) {
+            this.groundServices = new GroundServicesDirectory();
+        } else {
+            this.groundServices = business.getGroundServices();
+        }
+
+        if (business.getSecurityServices() == null) {
+            this.securityServices = new SecurityServicesDirectory();
+        } else {
+            this.securityServices = business.getSecurityServices();
+        }
+
+        populateTable();
     }
 
     /**
@@ -37,32 +84,21 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
         NavigationJPanel = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         workAreaPanel = new javax.swing.JPanel();
-        pnlUpdate = new javax.swing.JPanel();
-        lblAddUser3 = new javax.swing.JLabel();
-        lblManagerName3 = new javax.swing.JLabel();
-        txtManagerName3 = new javax.swing.JTextField();
-        lblRestaurantName5 = new javax.swing.JLabel();
-        txtRestaurantName3 = new javax.swing.JTextField();
-        lblUserName3 = new javax.swing.JLabel();
-        txtUserName3 = new javax.swing.JTextField();
-        lblPassword3 = new javax.swing.JLabel();
-        txtPassword1 = new javax.swing.JTextField();
-        btnUpdateSave1 = new javax.swing.JButton();
         lblRestaurantName1 = new javax.swing.JLabel();
         lblAddUser2 = new javax.swing.JLabel();
         lblManagerName2 = new javax.swing.JLabel();
-        txtManagerName2 = new javax.swing.JTextField();
+        txtManagerName = new javax.swing.JTextField();
         lblRestaurantName4 = new javax.swing.JLabel();
-        txtRestaurantName2 = new javax.swing.JTextField();
         lblUserName2 = new javax.swing.JLabel();
-        txtUserName2 = new javax.swing.JTextField();
+        txtManagerUsername = new javax.swing.JTextField();
         lblPassword2 = new javax.swing.JLabel();
-        pwdPassword1 = new javax.swing.JPasswordField();
+        pwdManagerPassword = new javax.swing.JPasswordField();
         btnCreateUser1 = new javax.swing.JButton();
         btnDelete1 = new javax.swing.JButton();
         btnUpdate1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblHumanResourceManagers = new javax.swing.JTable();
+        cmbServices = new javax.swing.JComboBox<>();
 
         NavigationJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -83,94 +119,6 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
 
         workAreaPanel.setBackground(new java.awt.Color(240, 255, 255));
 
-        pnlUpdate.setBackground(new java.awt.Color(240, 255, 255));
-
-        lblAddUser3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblAddUser3.setForeground(new java.awt.Color(0, 102, 102));
-        lblAddUser3.setText("UPDATE USER");
-
-        lblManagerName3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblManagerName3.setText("Manager Name :");
-
-        lblRestaurantName5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblRestaurantName5.setText("Shop Name:");
-
-        lblUserName3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblUserName3.setText("Username : ");
-
-        lblPassword3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPassword3.setText("Password : ");
-
-        btnUpdateSave1.setBackground(new java.awt.Color(175, 211, 211));
-        btnUpdateSave1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnUpdateSave1.setForeground(new java.awt.Color(0, 102, 102));
-        btnUpdateSave1.setText("UPDATE");
-        btnUpdateSave1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnUpdateSave1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnUpdateSave1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnUpdateSave1MouseExited(evt);
-            }
-        });
-        btnUpdateSave1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateSave1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnlUpdateLayout = new javax.swing.GroupLayout(pnlUpdate);
-        pnlUpdate.setLayout(pnlUpdateLayout);
-        pnlUpdateLayout.setHorizontalGroup(
-            pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUpdateLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlUpdateLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(lblAddUser3))
-                    .addGroup(pnlUpdateLayout.createSequentialGroup()
-                        .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblManagerName3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblRestaurantName5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblUserName3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPassword3, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUserName3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRestaurantName3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtManagerName3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUpdateSave1)
-                            .addComponent(txtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlUpdateLayout.setVerticalGroup(
-            pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUpdateLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblAddUser3)
-                .addGap(18, 18, 18)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblManagerName3)
-                    .addComponent(txtManagerName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRestaurantName5)
-                    .addComponent(txtRestaurantName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUserName3)
-                    .addComponent(txtUserName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPassword3)
-                    .addComponent(txtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUpdateSave1)
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-
         lblRestaurantName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblRestaurantName1.setForeground(new java.awt.Color(0, 153, 153));
         lblRestaurantName1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -184,7 +132,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
         lblManagerName2.setText("Manager Name :");
 
         lblRestaurantName4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblRestaurantName4.setText("Shop Name:");
+        lblRestaurantName4.setText("Service Name:");
 
         lblUserName2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblUserName2.setText("Username : ");
@@ -253,18 +201,20 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
         tblHumanResourceManagers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblHumanResourceManagers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "USER NAME", "PASSWORD", "MANAGER NAME"
+                "USER NAME", "PASSWORD", "MANAGER NAME", "SERVICE TYPE"
             }
         ));
         tblHumanResourceManagers.setSelectionBackground(new java.awt.Color(153, 209, 232));
         tblHumanResourceManagers.setSelectionForeground(new java.awt.Color(0, 51, 51));
         jScrollPane3.setViewportView(tblHumanResourceManagers);
+
+        cmbServices.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT SERVICE", "CLEANING", "EMERGENCY", "GROUND", "SECURITY" }));
 
         javax.swing.GroupLayout workAreaPanelLayout = new javax.swing.GroupLayout(workAreaPanel);
         workAreaPanel.setLayout(workAreaPanelLayout);
@@ -282,17 +232,15 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                             .addComponent(lblUserName2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblPassword2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtUserName2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pwdPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtRestaurantName2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtManagerName2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCreateUser1))
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtManagerUsername)
+                            .addComponent(pwdManagerPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                            .addComponent(txtManagerName, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                            .addComponent(btnCreateUser1)
+                            .addComponent(cmbServices, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pnlUpdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(workAreaPanelLayout.createSequentialGroup()
                                 .addComponent(btnDelete1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -314,19 +262,19 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblManagerName2)
-                            .addComponent(txtManagerName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtManagerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtRestaurantName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblRestaurantName4))
+                            .addComponent(lblRestaurantName4)
+                            .addComponent(cmbServices, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtUserName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtManagerUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblUserName2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPassword2)
-                            .addComponent(pwdPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(pwdManagerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnUpdate1)
@@ -335,9 +283,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCreateUser1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(workAreaPanel, "card2");
@@ -361,18 +307,6 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUpdateSave1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateSave1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateSave1MouseEntered
-
-    private void btnUpdateSave1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateSave1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateSave1MouseExited
-
-    private void btnUpdateSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSave1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateSave1ActionPerformed
-
     private void btnCreateUser1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateUser1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCreateUser1MouseEntered
@@ -382,7 +316,52 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCreateUser1MouseExited
 
     private void btnCreateUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUser1ActionPerformed
-        // TODO add your handling code here:
+        String userName = txtManagerUsername.getText();
+        String password = pwdManagerPassword.getText();
+        String serviceType = cmbServices.getSelectedItem().toString();
+        String managerame = txtManagerName.getText();
+
+        if (!business.getUserAccountDirectory().checkIfUsernameIsUnique(userName)) {
+            JOptionPane.showMessageDialog(null, "UserName already taken!");
+            txtManagerUsername.setText("");
+            pwdManagerPassword.setText("");
+        } else {
+            HumanResourceEntAdmin role = new HumanResourceEntAdmin();
+            business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+        }
+
+        if (serviceType.equals("CLEANING")) {
+            CleaningServices cleaningService = cleaningServices.addCleaningService();
+            cleaningService.setManagerName(managerame);
+            cleaningService.setUserName(userName);
+            cleaningService.setManagerType("CLEANING");
+            business.setCleaningServices(cleaningServices);
+        } else if (serviceType.equals("EMERGENCY")) {
+            EmergencyServices emergencyService = emergencyServices.addEmergencyService();
+            emergencyService.setManagerName(managerame);
+            emergencyService.setUserName(userName);
+            emergencyService.setManagerType("EMERGENCY");
+            business.setEmergencyServices(emergencyServices);
+        } else if (serviceType.equals("GROUND")) {
+            GroundServices groundService = groundServices.addGroundService();
+            groundService.setManagerName(managerame);
+            groundService.setUserName(userName);
+            groundService.setManagerType("GROUND");
+            business.setGroundServices(groundServices);
+        } else if (serviceType.equals("SECURITY")) {
+            SecurityServices securityService = securityServices.addSecurityService();
+            securityService.setManagerName(managerame);
+            securityService.setUserName(userName);
+            securityService.setManagerType("SECURITY");
+            business.setSecurityServices(securityServices);
+        }
+
+        txtManagerName.setText("");
+        cmbServices.setSelectedItem("SELECT SERVICE");
+        txtManagerUsername.setText("");
+        pwdManagerPassword.setText("");
+
+        populateTable();
     }//GEN-LAST:event_btnCreateUser1ActionPerformed
 
     private void btnDelete1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete1MouseEntered
@@ -394,7 +373,39 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDelete1MouseExited
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
-        // TODO add your handling code here:
+        int selectedRowIndex = tblHumanResourceManagers.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a User");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblHumanResourceManagers.getModel();
+            UserAccount selectedUserAccount = (UserAccount) model.getValueAt(selectedRowIndex, 0);
+            UserAccount accountToBeRemoved = business.getUserAccountDirectory().fetchUserAccountUsingUserName(selectedUserAccount.getUsername());
+            business.getUserAccountDirectory().removeAccount(accountToBeRemoved);
+            JOptionPane.showMessageDialog(null, "User Account deleted successfully.");
+            populateTable();
+
+            CleaningServices removedCleaningService = cleaningServices.findCleaningServiceByManagerName(selectedUserAccount.getName());
+            if (removedCleaningService != null) {
+                cleaningServices.removeCleaningService(removedCleaningService);
+            }
+
+            EmergencyServices removedEmergencyServices = emergencyServices.findEmergencyServiceByManagerName(selectedUserAccount.getName());
+            if (removedEmergencyServices != null) {
+                emergencyServices.removeEmergencyService(removedEmergencyServices);
+            }
+
+            GroundServices removedGroundServices = groundServices.findGroundServiceByManagerName(selectedUserAccount.getName());
+            if (removedGroundServices != null) {
+                groundServices.removeGroundService(removedGroundServices);
+            }
+
+            SecurityServices removedSecurityServices = securityServices.findSecurityServiceByManagerName(selectedUserAccount.getName());
+            if (removedSecurityServices != null) {
+                securityServices.removeSecurityService(removedSecurityServices);
+            }
+        }
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
     private void btnUpdate1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdate1MouseEntered
@@ -414,41 +425,73 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
         } else {
             DefaultTableModel model = (DefaultTableModel) tblHumanResourceManagers.getModel();
             UserAccount selectedUserAccount = (UserAccount) model.getValueAt(selectedRowIndex, 0);
-            pnlUpdate.setVisible(true);
         }
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblHumanResourceManagers.getModel();
+        model.setRowCount(0);
+
+        for (UserAccount userAccount : business.getUserAccountDirectory().getUserAccountList()) {
+            Object[] row = new Object[4];
+            RestaurantRole role = new RestaurantRole();
+            CleaningServices cleaningService = null;
+            EmergencyServices emergencyService = null;
+            GroundServices groundService = null;
+            SecurityServices securityService = null;
+            if (cleaningServices != null && cleaningServices.getCleaningServices() != null && !cleaningServices.getCleaningServices().isEmpty()) {
+                cleaningService = cleaningServices.getCleaningServices().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
+            }
+            if (emergencyServices != null && emergencyServices.getEmergencyServices() != null && !emergencyServices.getEmergencyServices().isEmpty()) {
+                emergencyService = emergencyServices.getEmergencyServices().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
+            }
+
+            if (groundServices != null && groundServices.getGroundServices() != null && !groundServices.getGroundServices().isEmpty()) {
+                groundService = groundServices.getGroundServices().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
+            }
+
+            if (securityServices != null && securityServices.getSecurityServices() != null && !securityServices.getSecurityServices().isEmpty()) {
+                securityService = securityServices.getSecurityServices().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
+            }
+            if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.HumanResourceEntAdmin) {
+
+                row[0] = userAccount;
+                row[1] = userAccount.getPassword();
+                row[2] = userAccount.getName();
+
+                if (cleaningService != null) {
+                    row[3] = cleaningService.getManagerType();
+                } else if (emergencyService != null) {
+                    row[3] = emergencyService.getManagerType();
+                } else if (groundService != null) {
+                    row[3] = groundService.getManagerType();
+                } else if (securityService != null) {
+                    row[3] = securityService.getManagerType();
+                }
+                model.addRow(row);
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel NavigationJPanel;
     private javax.swing.JButton btnCreateUser1;
     private javax.swing.JButton btnDelete1;
     private javax.swing.JButton btnUpdate1;
-    private javax.swing.JButton btnUpdateSave1;
+    private javax.swing.JComboBox<String> cmbServices;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblAddUser2;
-    private javax.swing.JLabel lblAddUser3;
     private javax.swing.JLabel lblManagerName2;
-    private javax.swing.JLabel lblManagerName3;
     private javax.swing.JLabel lblPassword2;
-    private javax.swing.JLabel lblPassword3;
     private javax.swing.JLabel lblRestaurantName1;
     private javax.swing.JLabel lblRestaurantName4;
-    private javax.swing.JLabel lblRestaurantName5;
     private javax.swing.JLabel lblUserName2;
-    private javax.swing.JLabel lblUserName3;
-    private javax.swing.JPanel pnlUpdate;
-    private javax.swing.JPasswordField pwdPassword1;
+    private javax.swing.JPasswordField pwdManagerPassword;
     private javax.swing.JTable tblHumanResourceManagers;
-    private javax.swing.JTextField txtManagerName2;
-    private javax.swing.JTextField txtManagerName3;
-    private javax.swing.JTextField txtPassword1;
-    private javax.swing.JTextField txtRestaurantName2;
-    private javax.swing.JTextField txtRestaurantName3;
-    private javax.swing.JTextField txtUserName2;
-    private javax.swing.JTextField txtUserName3;
+    private javax.swing.JTextField txtManagerName;
+    private javax.swing.JTextField txtManagerUsername;
     private javax.swing.JPanel workAreaPanel;
     // End of variables declaration//GEN-END:variables
 }
