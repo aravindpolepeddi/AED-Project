@@ -16,6 +16,8 @@ public class FlagClass {
     private String deliveryStaffName;
     private String customerName;
     private int id;
+    private int suiteCount;
+    private int premiumCount;
 
     public String getRestaurantManagerName() {
         return restaurantManagerName;
@@ -55,6 +57,22 @@ public class FlagClass {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getSuiteCount() {
+        return suiteCount;
+    }
+
+    public void setSuiteCount(int suiteCount) {
+        this.suiteCount = suiteCount;
+    }
+
+    public int getPremiumCount() {
+        return premiumCount;
+    }
+
+    public void setPremiumCount(int premiumCount) {
+        this.premiumCount = premiumCount;
     }
 
 }

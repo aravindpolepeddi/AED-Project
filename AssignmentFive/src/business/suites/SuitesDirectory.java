@@ -5,10 +5,43 @@
  */
 package business.suites;
 
+import business.premium.Premium;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author aravindpolepeddi
  */
 public class SuitesDirectory {
-    
+
+    List<Suites> suitesList;
+    int count;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public List<Suites> getSuitesList() {
+        return suitesList;
+    }
+
+    public SuitesDirectory() {
+        suitesList = new ArrayList<>();
+    }
+
+    public void setSuitesList(List<Suites> suitesList) {
+        this.suitesList = suitesList;
+    }
+
+    public Suites addSuites() {
+        Suites suite = new Suites();
+        suitesList.add(suite);
+        return suite;
+    }
+
 }

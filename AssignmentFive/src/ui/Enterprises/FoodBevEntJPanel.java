@@ -6,6 +6,15 @@
 package ui.Enterprises;
 
 import business.Business;
+import business.FlagClass;
+import business.organizations.FoodBevOrganization;
+import business.premium.Premium;
+import business.premium.PremiumDirectory;
+import business.role.FoodBeverageEntAdminRole;
+import business.role.RestaurantRole;
+import business.role.Role;
+import business.suites.Suites;
+import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -19,6 +28,9 @@ import javax.swing.table.DefaultTableModel;
 public class FoodBevEntJPanel extends javax.swing.JPanel {
 
     Business business;
+    SuitesDirectory suites;
+    PremiumDirectory premium;
+    FlagClass flags;
 
     /**
      * Creates new form FoodBevEntJPanel
@@ -28,7 +40,21 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
 
         this.business = business;
 
+        if (business.getSuitesDirectory() == null) {
+            this.suites = new SuitesDirectory();
+        } else {
+            this.suites = business.getSuitesDirectory();
+        }
+
+        if (business.getPremiumDirectory() == null) {
+            this.premium = new PremiumDirectory();
+        } else {
+            this.premium = business.getPremiumDirectory();
+        }
+        this.flags = new FlagClass();
+
         pnlUpdate.setVisible(false);
+        populateTable();
     }
 
     /**
@@ -60,24 +86,15 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblFoodBevManagers = new javax.swing.JTable();
         pnlUpdate = new javax.swing.JPanel();
-        lblAddUser3 = new javax.swing.JLabel();
-        lblManagerName3 = new javax.swing.JLabel();
-        txtManagerName3 = new javax.swing.JTextField();
-        lblRestaurantName5 = new javax.swing.JLabel();
-        lblUserName3 = new javax.swing.JLabel();
-        txtUserName3 = new javax.swing.JTextField();
-        lblPassword3 = new javax.swing.JLabel();
-        txtPassword1 = new javax.swing.JTextField();
-        btnUpdateSave1 = new javax.swing.JButton();
-        cmbUpdateManager = new javax.swing.JComboBox<>();
         cmbCreateManager = new javax.swing.JComboBox<>();
         manageZones = new javax.swing.JPanel();
         lblRestaurantName2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtSuitsCount = new javax.swing.JTextField();
+        txtPremiumCount = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
+        btnSave2 = new javax.swing.JButton();
 
         NavigationJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -205,13 +222,13 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         tblFoodBevManagers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblFoodBevManagers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "USER NAME", "PASSWORD", "MANAGER NAME"
+                "USER NAME", "PASSWORD", "MANAGER NAME", "ORG TYP"
             }
         ));
         tblFoodBevManagers.setSelectionBackground(new java.awt.Color(153, 209, 232));
@@ -220,92 +237,15 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
 
         pnlUpdate.setBackground(new java.awt.Color(240, 255, 255));
 
-        lblAddUser3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblAddUser3.setForeground(new java.awt.Color(0, 102, 102));
-        lblAddUser3.setText("UPDATE USER");
-
-        lblManagerName3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblManagerName3.setText("Manager Name :");
-
-        lblRestaurantName5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblRestaurantName5.setText("Organization Type :");
-
-        lblUserName3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblUserName3.setText("Username : ");
-
-        lblPassword3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPassword3.setText("Password : ");
-
-        btnUpdateSave1.setBackground(new java.awt.Color(175, 211, 211));
-        btnUpdateSave1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnUpdateSave1.setForeground(new java.awt.Color(0, 102, 102));
-        btnUpdateSave1.setText("UPDATE");
-        btnUpdateSave1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnUpdateSave1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnUpdateSave1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnUpdateSave1MouseExited(evt);
-            }
-        });
-        btnUpdateSave1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateSave1ActionPerformed(evt);
-            }
-        });
-
-        cmbUpdateManager.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "SUITE", "PREMIUM" }));
-
         javax.swing.GroupLayout pnlUpdateLayout = new javax.swing.GroupLayout(pnlUpdate);
         pnlUpdate.setLayout(pnlUpdateLayout);
         pnlUpdateLayout.setHorizontalGroup(
             pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUpdateLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlUpdateLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(lblAddUser3))
-                    .addGroup(pnlUpdateLayout.createSequentialGroup()
-                        .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblManagerName3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblRestaurantName5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblUserName3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPassword3, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUserName3, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(txtManagerName3, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(btnUpdateSave1)
-                            .addComponent(txtPassword1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(cmbUpdateManager, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(124, Short.MAX_VALUE))
+            .addGap(0, 368, Short.MAX_VALUE)
         );
         pnlUpdateLayout.setVerticalGroup(
             pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUpdateLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblAddUser3)
-                .addGap(18, 18, 18)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblManagerName3)
-                    .addComponent(txtManagerName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRestaurantName5)
-                    .addComponent(cmbUpdateManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUserName3)
-                    .addComponent(txtUserName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPassword3)
-                    .addComponent(txtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUpdateSave1)
-                .addContainerGap(31, Short.MAX_VALUE))
+            .addGap(0, 208, Short.MAX_VALUE)
         );
 
         cmbCreateManager.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "SUITE", "PREMIUM" }));
@@ -411,6 +351,17 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnSave2.setBackground(new java.awt.Color(215, 254, 211));
+        btnSave2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSave2.setForeground(new java.awt.Color(72, 151, 64));
+        btnSave2.setText("SAVE");
+        btnSave2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSave2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSave2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout manageZonesLayout = new javax.swing.GroupLayout(manageZones);
         manageZones.setLayout(manageZonesLayout);
         manageZonesLayout.setHorizontalGroup(
@@ -429,9 +380,13 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(manageZonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtSuitsCount, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPremiumCount, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(manageZonesLayout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addComponent(btnSave2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         manageZonesLayout.setVerticalGroup(
             manageZonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,12 +398,14 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
                 .addGap(191, 191, 191)
                 .addGroup(manageZonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSuitsCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(manageZonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(323, Short.MAX_VALUE))
+                    .addComponent(txtPremiumCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(143, 143, 143)
+                .addComponent(btnSave2)
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(manageZones, "card2");
@@ -481,6 +438,8 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnManageZonesMouseExited
 
     private void btnManageZonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageZonesActionPerformed
+        txtSuitsCount.setText(String.valueOf(suites.getCount()));
+        txtPremiumCount.setText(String.valueOf(premium.getCount()));
         switchPanels(manageZones);
     }//GEN-LAST:event_btnManageZonesActionPerformed
 
@@ -495,11 +454,49 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     private void btnCreateUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUser1ActionPerformed
         String userName = txtCreateFoodManagerUserName.getText();
         String password = pwdCreateFoodManagerPassword.getText();
+        String orgType = cmbCreateManager.getSelectedItem().toString();
 
         if (!business.getUserAccountDirectory().checkIfUsernameIsUnique(userName)) {
             JOptionPane.showMessageDialog(null, "UserName already taken!");
             txtCreateFoodManagerUserName.setText("");
             pwdCreateFoodManagerPassword.setText("");
+        } else {
+
+            if (orgType.equals("SUITE") && suites != null && suites.getCount() > 0 && suites.getCount() == suites.getSuitesList().size()) {
+                JOptionPane.showMessageDialog(null, "No more Suites to create");
+                return;
+            }
+
+            if (orgType.equals("PREMIUM") && premium != null && premium.getCount() > 0 && premium.getCount() == premium.getPremiumList().size()) {
+                JOptionPane.showMessageDialog(null, "No more Premium Slots to create");
+                return;
+            }
+
+            String managerame = txtCreateFoodManagerName.getText();
+
+            FoodBeverageEntAdminRole role = new FoodBeverageEntAdminRole();
+            business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+
+            if (orgType.equals("SUITE")) {
+                Suites suite = suites.addSuites();
+                suite.setManagerName(managerame);
+                suite.setUserName(userName);
+                suite.setManagerType("SUITE");
+                business.setSuitesDirectory(suites);
+            } else if (orgType.equals("PREMIUM")) {
+                Premium prem = premium.addPremium();
+                prem.setManagerName(managerame);
+                prem.setUserName(userName);
+                prem.setManagerType("PREMIUM");
+                business.setPremiumDirectory(premium);
+            }
+
+            txtCreateFoodManagerName.setText("");
+            cmbCreateManager.setSelectedItem("SELECT TYPE");
+            txtCreateFoodManagerUserName.setText("");
+            pwdCreateFoodManagerPassword.setText("");
+
+            populateTable();
         }
     }//GEN-LAST:event_btnCreateUser1ActionPerformed
 
@@ -540,17 +537,18 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         switchPanels(workAreaPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnUpdateSave1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateSave1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateSave1MouseEntered
-
-    private void btnUpdateSave1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateSave1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateSave1MouseExited
-
-    private void btnUpdateSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSave1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateSave1ActionPerformed
+    private void btnSave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave2ActionPerformed
+        suites.setCount(Integer.parseInt(txtSuitsCount.getText()));
+        premium.setCount(Integer.parseInt(txtPremiumCount.getText()));
+        business.setSuitesDirectory(suites);
+        business.setPremiumDirectory(premium);
+        JOptionPane.showMessageDialog(this, "Updated seat count");
+        switchPanels(workAreaPanel);
+        txtSuitsCount.setText("");
+        txtPremiumCount.setText("");
+        flags.setSuiteCount(Integer.parseInt(txtSuitsCount.getText()));
+        flags.setPremiumCount(Integer.parseInt(txtPremiumCount.getText()));
+    }//GEN-LAST:event_btnSave2ActionPerformed
 
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
@@ -565,38 +563,60 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnCreateUser1;
     private javax.swing.JButton btnDelete1;
     private javax.swing.JButton btnManageZones;
+    private javax.swing.JButton btnSave2;
     private javax.swing.JButton btnUpdate1;
-    private javax.swing.JButton btnUpdateSave1;
     private javax.swing.JComboBox<String> cmbCreateManager;
-    private javax.swing.JComboBox<String> cmbUpdateManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblAddUser2;
-    private javax.swing.JLabel lblAddUser3;
     private javax.swing.JLabel lblManagerName2;
-    private javax.swing.JLabel lblManagerName3;
     private javax.swing.JLabel lblPassword2;
-    private javax.swing.JLabel lblPassword3;
     private javax.swing.JLabel lblRestaurantName1;
     private javax.swing.JLabel lblRestaurantName2;
     private javax.swing.JLabel lblRestaurantName4;
-    private javax.swing.JLabel lblRestaurantName5;
     private javax.swing.JLabel lblUserName2;
-    private javax.swing.JLabel lblUserName3;
     private javax.swing.JPanel manageZones;
     private javax.swing.JPanel pnlUpdate;
     private javax.swing.JPasswordField pwdCreateFoodManagerPassword;
     private javax.swing.JTable tblFoodBevManagers;
     private javax.swing.JTextField txtCreateFoodManagerName;
     private javax.swing.JTextField txtCreateFoodManagerUserName;
-    private javax.swing.JTextField txtManagerName3;
-    private javax.swing.JTextField txtPassword1;
-    private javax.swing.JTextField txtUserName3;
+    private javax.swing.JTextField txtPremiumCount;
+    private javax.swing.JTextField txtSuitsCount;
     private javax.swing.JPanel workAreaPanel;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblFoodBevManagers.getModel();
+        model.setRowCount(0);
+
+        for (UserAccount userAccount : business.getUserAccountDirectory().getUserAccountList()) {
+            Object[] row = new Object[4];
+            RestaurantRole role = new RestaurantRole();
+            Suites currentSuite = null;
+            Premium currentPremium = null;
+            if (suites != null && suites.getSuitesList() != null && !suites.getSuitesList().isEmpty()) {
+                currentSuite = suites.getSuitesList().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
+            }
+            if (premium != null && premium.getPremiumList() != null && !premium.getPremiumList().isEmpty()) {
+                currentPremium = premium.getPremiumList().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
+            }
+            if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.FoodBeverageEntAdmin) {
+
+                row[0] = userAccount;
+                row[1] = userAccount.getPassword();
+                row[2] = userAccount.getName();
+
+                if (currentSuite != null) {
+                    row[3] = currentSuite.getManagerType();
+                } else if (currentPremium != null) {
+                    row[3] = currentPremium.getManagerType();
+                }
+                model.addRow(row);
+            }
+        }
+    }
 }

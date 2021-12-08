@@ -11,6 +11,7 @@ import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.concessions.ConcessionsDirectory;
 import business.event.EventDirectory;
+import business.organizations.FoodBevOrganization;
 import business.premium.PremiumDirectory;
 import business.role.Role;
 import business.role.SystemAdminRole;
@@ -29,9 +30,27 @@ public class Business extends Organization {
     private CustomerDirectory customerDirectory;
     private OrderDirectory orderDirectory;
     private ConcessionsDirectory concessionsDirectory;
+//    private FoodBevOrganization foodBevOrg;
     private PremiumDirectory premiumDirectory;
     private SuitesDirectory suitesDirectory;
+
+    public PremiumDirectory getPremiumDirectory() {
+        return premiumDirectory;
+    }
+
+    public void setPremiumDirectory(PremiumDirectory premiumDirectory) {
+        this.premiumDirectory = premiumDirectory;
+    }
+
+    public SuitesDirectory getSuitesDirectory() {
+        return suitesDirectory;
+    }
+
+    public void setSuitesDirectory(SuitesDirectory suitesDirectory) {
+        this.suitesDirectory = suitesDirectory;
+    }
     private EventDirectory eventDirectory;
+
 
     public EventDirectory getEventDirectory() {
         return eventDirectory;
@@ -51,22 +70,21 @@ public class Business extends Organization {
         this.concessionsDirectory = concessionsDirectory;
     }
 
-    public PremiumDirectory getPremiumDirectory() {
-        return premiumDirectory;
-    }
-
-    public void setPremiumDirectory(PremiumDirectory premiumDirectory) {
-        this.premiumDirectory = premiumDirectory;
-    }
-
-    public SuitesDirectory getSuitesDirectory() {
-        return suitesDirectory;
-    }
-
-    public void setSuitesDirectory(SuitesDirectory suitesDirectory) {
-        this.suitesDirectory = suitesDirectory;
-    }
-
+//    public PremiumDirectory getPremiumDirectory() {
+//        return premiumDirectory;
+//    }
+//
+//    public void setPremiumDirectory(PremiumDirectory premiumDirectory) {
+//        this.premiumDirectory = premiumDirectory;
+//    }
+//
+//    public SuitesDirectory getSuitesDirectory() {
+//        return suitesDirectory;
+//    }
+//
+//    public void setSuitesDirectory(SuitesDirectory suitesDirectory) {
+//        this.suitesDirectory = suitesDirectory;
+//    }
     public static Business getInstance() {
         if (business == null) {
             business = new Business();
@@ -83,7 +101,7 @@ public class Business extends Organization {
 
     private Business() {
         super(null);
-         eventDirectory = new EventDirectory();
+        eventDirectory = new EventDirectory();
         // networkList=new ArrayList<Network>();
     }
 

@@ -39,11 +39,14 @@ public class ConfigureABusiness {
 
         UserAccount testAccount4 = new UserAccount("hr", "hr", "Aravind", new HumanResourceEntAdmin());
         userAccList.add(testAccount4);
-        system.getUserAccountDirectory().getUserAccountList().add(testAccount);
-        system.getUserAccountDirectory().getUserAccountList().add(testAccount1);
-        system.getUserAccountDirectory().getUserAccountList().add(testAccount2);
-        system.getUserAccountDirectory().getUserAccountList().add(testAccount3);
-        system.getUserAccountDirectory().getUserAccountList().add(testAccount4);
+        
+        system.getUserAccountDirectory().setUserAccountList(userAccList);
+        
+//        if (!system.getUserAccountDirectory().getUserAccountList().contains(testAccount)) system.getUserAccountDirectory().getUserAccountList().add(testAccount);
+//        if (!system.getUserAccountDirectory().getUserAccountList().contains(testAccount1)) system.getUserAccountDirectory().getUserAccountList().add(testAccount1);
+//        if (!system.getUserAccountDirectory().getUserAccountList().contains(testAccount2)) system.getUserAccountDirectory().getUserAccountList().add(testAccount2);
+//        if (!system.getUserAccountDirectory().getUserAccountList().contains(testAccount3)) system.getUserAccountDirectory().getUserAccountList().add(testAccount3);
+//        if (!system.getUserAccountDirectory().getUserAccountList().contains(testAccount4)) system.getUserAccountDirectory().getUserAccountList().add(testAccount4);
 
         return system;
     }
