@@ -7,7 +7,6 @@ package ui.CustomerRole;
 
 import business.Business;
 import business.Customer.CustomerDirectory;
-import business.DeliveryStaff.DeliveryStaffDirectory;
 import business.FlagClass;
 import business.Order.Order;
 import business.Order.OrderDirectory;
@@ -50,7 +49,6 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     int totalCost;
     ArrayList<String> foodItems;
     int orderId;
-    DeliveryStaffDirectory deliveryStaffDirectory;
     FlagClass flags;
 
     public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
@@ -59,7 +57,6 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
         this.orderDirectory = orderDirectory;
-        this.deliveryStaffDirectory = deliveryStaffDirectory;
         this.totalCost = 0;
         this.foodItems = new ArrayList<>();
         this.flags = new FlagClass();

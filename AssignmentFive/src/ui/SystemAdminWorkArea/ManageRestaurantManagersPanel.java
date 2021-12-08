@@ -9,7 +9,6 @@ import business.Business;
 import business.FlagClass;
 import business.Restaurant.Restaurant;
 import business.Restaurant.RestaurantDirectory;
-import business.employee.Employee;
 import business.role.RestaurantRole;
 import business.role.Role;
 import business.useraccount.UserAccount;
@@ -405,9 +404,8 @@ public class ManageRestaurantManagersPanel extends javax.swing.JPanel {
             } else {
                 managerame = txtManagerName.getText();
                 restaurantName = txtRestaurantName.getText();
-                Employee employee = new Employee(managerame);
                 RestaurantRole role = new RestaurantRole();
-                business.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+                business.getUserAccountDirectory().createUserAccount(userName, password, managerame, role);
 
                 JOptionPane.showMessageDialog(null, "User Account added successfully.");
                 txtManagerName.setText("");
@@ -444,10 +442,10 @@ public class ManageRestaurantManagersPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "User Account deleted successfully.");
             populateRestaurantRole();
 
-            Restaurant restaurant = restaurantDirectory.findRestaurant(selectedUserAccount.getEmployee().getName());
+            Restaurant restaurant = restaurantDirectory.findRestaurant(selectedUserAccount.getName());
             String restaurantName = restaurant.getName();
 
-            Restaurant restaurantToBeRemoved = restaurantDirectory.findRestaurant(selectedUserAccount.getEmployee().getName());
+            Restaurant restaurantToBeRemoved = restaurantDirectory.findRestaurant(selectedUserAccount.getName());
             restaurantDirectory.removeRestaurant(restaurantToBeRemoved);
 
             business.getOrderDirectory().removeSelectedRestaurantOrders(restaurantName);
@@ -464,12 +462,12 @@ public class ManageRestaurantManagersPanel extends javax.swing.JPanel {
             DefaultTableModel model = (DefaultTableModel) tblRestaurantManagers.getModel();
             UserAccount selectedUserAccount = (UserAccount) model.getValueAt(selectedRowIndex, 0);
             pnlUpdate.setVisible(true);
-            restaurant = restaurantDirectory.findRestaurant(selectedUserAccount.getEmployee().getName());
-            txtManagerName1.setText(selectedUserAccount.getEmployee().getName());
+            restaurant = restaurantDirectory.findRestaurant(selectedUserAccount.getName());
+            txtManagerName1.setText(selectedUserAccount.getName());
             txtRestaurantName1.setText(restaurant.getName());
             txtUserName1.setText(selectedUserAccount.getUsername());
             txtPassword.setText(selectedUserAccount.getPassword());
-            flag.setRestaurantManagerName(selectedUserAccount.getEmployee().getName());
+            flag.setRestaurantManagerName(selectedUserAccount.getName());
             flag.setUserName(selectedUserAccount.getUsername());
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -481,9 +479,7 @@ public class ManageRestaurantManagersPanel extends javax.swing.JPanel {
             UserAccount updatedAccount = business.getUserAccountDirectory().fetchUserAccountUsingUserName(flag.getUserName());
             updatedAccount.setUsername(txtUserName1.getText());
             updatedAccount.setPassword(txtPassword.getText());
-            Employee employee = new Employee();
-            employee.setName(txtManagerName1.getText());
-            updatedAccount.setEmployee(employee);
+            updatedAccount.setName(txtManagerName1.getText());
 
             for (int i = 0; i <= business.getUserAccountDirectory().getUserAccountList().size() - 1; i++) {
                 if (business.getUserAccountDirectory().getUserAccountList().get(i).getUsername().equals(flag.getUserName())) {
@@ -635,7 +631,7 @@ public class ManageRestaurantManagersPanel extends javax.swing.JPanel {
             if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.RestaurantAdmin) {
                 row[0] = userAccount;
                 row[1] = userAccount.getPassword();
-                row[2] = userAccount.getEmployee().getName();
+                row[2] = userAccount.getName();
                 model.addRow(row);
             }
         }

@@ -8,7 +8,6 @@ package ui;
 import business.Business;
 import business.Customer.CustomerDirectory;
 import business.DB4OUtil.DB4OUtil;
-import business.DeliveryStaff.DeliveryStaffDirectory;
 import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
@@ -37,7 +36,6 @@ public class LoginScreen extends javax.swing.JPanel {
     RestaurantDirectory restaurantDirectory;
     CustomerDirectory customerDirectory;
     OrderDirectory orderDirectory;
-    DeliveryStaffDirectory deliveryStaffDirectory;
 
     public LoginScreen(JPanel mainWorkArea, Business business) {
         initComponents();
@@ -47,7 +45,6 @@ public class LoginScreen extends javax.swing.JPanel {
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
         this.orderDirectory = orderDirectory;
-        this.deliveryStaffDirectory = deliveryStaffDirectory;
     }
 
     /**
