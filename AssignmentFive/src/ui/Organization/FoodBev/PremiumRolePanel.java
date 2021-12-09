@@ -395,7 +395,7 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         btnDetails1.setBackground(new java.awt.Color(204, 255, 255));
         btnDetails1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDetails1.setForeground(new java.awt.Color(0, 153, 204));
-        btnDetails1.setText("SEND FOR DELIVERY");
+        btnDetails1.setText("MARK DELIVERED");
         btnDetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDetails1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -434,7 +434,7 @@ public class PremiumRolePanel extends javax.swing.JPanel {
                             .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnFeedback)
                                 .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)

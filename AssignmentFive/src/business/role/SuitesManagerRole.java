@@ -11,7 +11,7 @@ import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
-import ui.Suites.SuitesAreaJPanel;
+import ui.Organization.FoodBev.SuiteRolePanel;
 
 /**
  *
@@ -25,7 +25,7 @@ public class SuitesManagerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Business business) {
-        return new SuitesAreaJPanel(userProcessContainer, account, business);
+        return new SuiteRolePanel(userProcessContainer, account, business);
     }
     
 }

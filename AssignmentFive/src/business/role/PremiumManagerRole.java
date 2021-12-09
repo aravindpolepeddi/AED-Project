@@ -11,7 +11,7 @@ import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
-import ui.Premium.PremiumAreaJPanel;
+import ui.Organization.FoodBev.PremiumRolePanel;
 
 /**
  *
@@ -25,7 +25,7 @@ public class PremiumManagerRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Business business) {
-        return new PremiumAreaJPanel(userProcessContainer, account, business);
+        return new PremiumRolePanel(userProcessContainer, account, business);
     }
     
 }

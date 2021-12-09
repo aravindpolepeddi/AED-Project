@@ -15,6 +15,8 @@ import business.hrservices.GroundServicesDirectory;
 import business.hrservices.SecurityServices;
 import business.hrservices.SecurityServicesDirectory;
 import business.premium.Premium;
+import business.role.CleaningServicesRole;
+import business.role.EmergencyServicesRole;
 import business.role.HumanResourceEntAdmin;
 import business.role.RestaurantRole;
 import business.role.Role;
@@ -326,42 +328,48 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
             txtManagerUsername.setText("");
             pwdManagerPassword.setText("");
         } else {
-            HumanResourceEntAdmin role = new HumanResourceEntAdmin();
-            business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+
+            if (serviceType.equals("CLEANING")) {
+                CleaningServices cleaningService = cleaningServices.addCleaningService();
+                cleaningService.setManagerName(managerame);
+                cleaningService.setUserName(userName);
+                cleaningService.setManagerType("CLEANING");
+                business.setCleaningServices(cleaningServices);
+                CleaningServicesRole role = new CleaningServicesRole();
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+            } else if (serviceType.equals("EMERGENCY")) {
+                EmergencyServices emergencyService = emergencyServices.addEmergencyService();
+                emergencyService.setManagerName(managerame);
+                emergencyService.setUserName(userName);
+                emergencyService.setManagerType("EMERGENCY");
+                business.setEmergencyServices(emergencyServices);
+                EmergencyServicesRole role = new EmergencyServicesRole();
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+            } else if (serviceType.equals("GROUND")) {
+                GroundServices groundService = groundServices.addGroundService();
+                groundService.setManagerName(managerame);
+                groundService.setUserName(userName);
+                groundService.setManagerType("GROUND");
+                business.setGroundServices(groundServices);
+                HumanResourceEntAdmin role = new HumanResourceEntAdmin();
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+            } else if (serviceType.equals("SECURITY")) {
+                SecurityServices securityService = securityServices.addSecurityService();
+                securityService.setManagerName(managerame);
+                securityService.setUserName(userName);
+                securityService.setManagerType("SECURITY");
+                business.setSecurityServices(securityServices);
+                HumanResourceEntAdmin role = new HumanResourceEntAdmin();
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+            }
+
+            txtManagerName.setText("");
+            cmbServices.setSelectedItem("SELECT SERVICE");
+            txtManagerUsername.setText("");
+            pwdManagerPassword.setText("");
+
+            populateTable();
         }
-
-        if (serviceType.equals("CLEANING")) {
-            CleaningServices cleaningService = cleaningServices.addCleaningService();
-            cleaningService.setManagerName(managerame);
-            cleaningService.setUserName(userName);
-            cleaningService.setManagerType("CLEANING");
-            business.setCleaningServices(cleaningServices);
-        } else if (serviceType.equals("EMERGENCY")) {
-            EmergencyServices emergencyService = emergencyServices.addEmergencyService();
-            emergencyService.setManagerName(managerame);
-            emergencyService.setUserName(userName);
-            emergencyService.setManagerType("EMERGENCY");
-            business.setEmergencyServices(emergencyServices);
-        } else if (serviceType.equals("GROUND")) {
-            GroundServices groundService = groundServices.addGroundService();
-            groundService.setManagerName(managerame);
-            groundService.setUserName(userName);
-            groundService.setManagerType("GROUND");
-            business.setGroundServices(groundServices);
-        } else if (serviceType.equals("SECURITY")) {
-            SecurityServices securityService = securityServices.addSecurityService();
-            securityService.setManagerName(managerame);
-            securityService.setUserName(userName);
-            securityService.setManagerType("SECURITY");
-            business.setSecurityServices(securityServices);
-        }
-
-        txtManagerName.setText("");
-        cmbServices.setSelectedItem("SELECT SERVICE");
-        txtManagerUsername.setText("");
-        pwdManagerPassword.setText("");
-
-        populateTable();
     }//GEN-LAST:event_btnCreateUser1ActionPerformed
 
     private void btnDelete1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete1MouseEntered
@@ -434,7 +442,6 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
 
         for (UserAccount userAccount : business.getUserAccountDirectory().getUserAccountList()) {
             Object[] row = new Object[4];
-            RestaurantRole role = new RestaurantRole();
             CleaningServices cleaningService = null;
             EmergencyServices emergencyService = null;
             GroundServices groundService = null;
@@ -453,7 +460,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
             if (securityServices != null && securityServices.getSecurityServices() != null && !securityServices.getSecurityServices().isEmpty()) {
                 securityService = securityServices.getSecurityServices().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
             }
-            if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.HumanResourceEntAdmin) {
+            if (userAccount.getRole() != null && userAccount.getRole().type != null && (userAccount.getRole().type == Role.RoleType.HumanResourceEntAdmin || userAccount.getRole().type == Role.RoleType.CleaningServicesRole)) {
 
                 row[0] = userAccount;
                 row[1] = userAccount.getPassword();

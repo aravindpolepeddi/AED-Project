@@ -506,7 +506,7 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
                 suite.setManagerName(managerame);
                 suite.setUserName(userName);
                 suite.setManagerType("SUITE");
-                suite.setRestaurantName(txtRestaurantName.getName());
+                suite.setRestaurantName(txtRestaurantName.getText());
                 business.setSuitesDirectory(suites);
             } else if (orgType.equals("PREMIUM")) {
                 FoodBeverageOrgAdminRole role = new FoodBeverageOrgAdminRole();
