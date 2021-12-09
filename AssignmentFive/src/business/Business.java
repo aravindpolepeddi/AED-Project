@@ -11,6 +11,7 @@ import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.concessions.ConcessionsDirectory;
 import business.event.EventDirectory;
+import business.merchandise.merchandiseShopDirectory;
 import business.premium.PremiumDirectory;
 import business.role.Role;
 import business.role.SystemAdminRole;
@@ -32,6 +33,15 @@ public class Business extends Organization {
     private PremiumDirectory premiumDirectory;
     private SuitesDirectory suitesDirectory;
     private EventDirectory eventDirectory;
+    private merchandiseShopDirectory merchandiseShopDirectory;
+
+    public merchandiseShopDirectory getMerchandiseShopDirectory() {
+        return merchandiseShopDirectory;
+    }
+
+    public void setMerchandiseShopDirectory(merchandiseShopDirectory merchandiseDirectory) {
+        this.merchandiseShopDirectory = merchandiseDirectory;
+    }
 
     public EventDirectory getEventDirectory() {
         return eventDirectory;
@@ -87,10 +97,6 @@ public class Business extends Organization {
         // networkList=new ArrayList<Network>();
     }
 
-    public boolean checkIfUserIsUnique(String userName) {
-        //
-        return false;
-    }
 
     public static Business getBusiness() {
         return business;

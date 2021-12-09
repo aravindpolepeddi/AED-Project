@@ -30,7 +30,8 @@ public abstract class Organization {
         SuitesManager("SuitesManager"),
         KitchenManager("KitchenManager"),
         Vendor("Vendor"),
-        SysAdmin("Sysadmin");
+        SysAdmin("Sysadmin"),
+        MerchandiseShop("MerchandiseShop");
 
         private String value;
 
