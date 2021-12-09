@@ -32,7 +32,6 @@ public class MainScreen extends javax.swing.JPanel {
     RestaurantDirectory restaurantDirectory;
     CustomerDirectory customerDirectory;
     OrderDirectory orderDirectory;
-//    DeliveryStaffDirectory deliveryStaffDirectory;
 
     public MainScreen(JPanel mainWorkArea, UserAccount userAccount, Business business) {
         initComponents();
@@ -57,12 +56,6 @@ public class MainScreen extends javax.swing.JPanel {
         } else {
             this.orderDirectory = new OrderDirectory();
         }
-
-//        if (system.getDeliveryStaffDirectory() != null) {
-//            this.deliveryStaffDirectory = system.getDeliveryStaffDirectory();
-//        } else {
-//            this.deliveryStaffDirectory = new DeliveryStaffDirectory();
-//        }
         initUserWorkArea();
     }
 
@@ -176,7 +169,7 @@ public class MainScreen extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void initUserWorkArea() {
-//        lblUser.setText("Logged in as " + ((userAccount.getEmployee() != null) ? userAccount.getEmployee().getName().toUpperCase() : userAccount.getUsername()));
+        lblUser.setText("Logged in as " + ((userAccount.getName() != null) ? userAccount.getName().toUpperCase() : userAccount.getUsername()));
         CardLayout layout = (CardLayout) workArea.getLayout();
         workArea.add("workArea", userAccount.getRole().createWorkArea(workArea, userAccount, system));
         layout.next(workArea);
