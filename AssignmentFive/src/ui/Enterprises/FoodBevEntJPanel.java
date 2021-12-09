@@ -15,6 +15,7 @@ import business.role.FoodBeverageEntAdminRole;
 import business.role.FoodBeverageOrgAdminRole;
 import business.role.RestaurantRole;
 import business.role.Role;
+import business.role.SuitesRestaurantRole;
 import business.suites.Suites;
 import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
@@ -28,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  * @author deepv
  */
 public class FoodBevEntJPanel extends javax.swing.JPanel {
-
+    
     Business business;
     SuitesDirectory suites;
     PremiumDirectory premium;
@@ -39,22 +40,22 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
      */
     public FoodBevEntJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
-
+        
         this.business = business;
-
+        
         if (business.getSuitesDirectory() == null) {
             this.suites = new SuitesDirectory();
         } else {
             this.suites = business.getSuitesDirectory();
         }
-
+        
         if (business.getPremiumDirectory() == null) {
             this.premium = new PremiumDirectory();
         } else {
             this.premium = business.getPremiumDirectory();
         }
         this.flags = new FlagClass();
-
+        
         pnlUpdate.setVisible(false);
         populateTable();
     }
@@ -479,35 +480,37 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         String userName = txtCreateFoodManagerUserName.getText();
         String password = pwdCreateFoodManagerPassword.getText();
         String orgType = cmbCreateManager.getSelectedItem().toString();
-
+        
         if (!business.getUserAccountDirectory().checkIfUsernameIsUnique(userName)) {
             JOptionPane.showMessageDialog(null, "UserName already taken!");
             txtCreateFoodManagerUserName.setText("");
             pwdCreateFoodManagerPassword.setText("");
         } else {
-
+            
             if (orgType.equals("SUITE") && suites != null && suites.getCount() > 0 && suites.getCount() == suites.getSuitesList().size()) {
                 JOptionPane.showMessageDialog(null, "No more Suites to create");
                 return;
             }
-
+            
             if (orgType.equals("PREMIUM") && premium != null && premium.getCount() > 0 && premium.getCount() == premium.getPremiumList().size()) {
                 JOptionPane.showMessageDialog(null, "No more Premium Slots to create");
                 return;
             }
-
+            
             String managerame = txtCreateFoodManagerName.getText();
-
-            FoodBeverageOrgAdminRole role = new FoodBeverageOrgAdminRole();
-            business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
-
+            
             if (orgType.equals("SUITE")) {
+                SuitesRestaurantRole role = new SuitesRestaurantRole();
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
                 Suites suite = suites.addSuites();
                 suite.setManagerName(managerame);
                 suite.setUserName(userName);
                 suite.setManagerType("SUITE");
+                suite.setRestaurantName(txtRestaurantName.getName());
                 business.setSuitesDirectory(suites);
             } else if (orgType.equals("PREMIUM")) {
+                FoodBeverageOrgAdminRole role = new FoodBeverageOrgAdminRole();
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
                 Premium prem = premium.addPremium();
                 prem.setManagerName(managerame);
                 prem.setUserName(userName);
@@ -515,13 +518,13 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
                 prem.setRestaurantName(txtRestaurantName.getText());
                 business.setPremiumDirectory(premium);
             }
-
+            
             txtCreateFoodManagerName.setText("");
             cmbCreateManager.setSelectedItem("SELECT TYPE");
             txtCreateFoodManagerUserName.setText("");
             pwdCreateFoodManagerPassword.setText("");
             txtRestaurantName.setText("");
-
+            
             populateTable();
         }
     }//GEN-LAST:event_btnCreateUser1ActionPerformed
@@ -536,7 +539,7 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
         int selectedRowIndex = tblFoodBevManagers.getSelectedRow();
-
+        
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a User");
             return;
@@ -547,12 +550,12 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
             business.getUserAccountDirectory().removeAccount(accountToBeRemoved);
             JOptionPane.showMessageDialog(null, "User Account deleted successfully.");
             populateTable();
-
+            
             Suites removedSuite = suites.findSuiteByManagerName(selectedUserAccount.getName());
             if (removedSuite != null) {
                 suites.removeSuite(removedSuite);
             }
-
+            
             Premium removedPremium = premium.findPremiumByManagerName(selectedUserAccount.getName());
             if (removedPremium != null) {
                 premium.removePremium(removedPremium);
@@ -570,7 +573,7 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         int selectedRowIndex = tblFoodBevManagers.getSelectedRow();
-
+        
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a User");
             return;
@@ -597,7 +600,7 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         flags.setSuiteCount(Integer.parseInt(txtSuitsCount.getText()));
         flags.setPremiumCount(Integer.parseInt(txtPremiumCount.getText()));
     }//GEN-LAST:event_btnSave2ActionPerformed
-
+    
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(component);
@@ -642,7 +645,7 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblFoodBevManagers.getModel();
         model.setRowCount(0);
-
+        
         for (UserAccount userAccount : business.getUserAccountDirectory().getUserAccountList()) {
             Object[] row = new Object[4];
             RestaurantRole role = new RestaurantRole();
@@ -655,11 +658,11 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
                 currentPremium = premium.getPremiumList().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
             }
             if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.FoodBeverageEntAdmin) {
-
+                
                 row[0] = userAccount;
                 row[1] = userAccount.getPassword();
                 row[2] = userAccount.getName();
-
+                
                 if (currentSuite != null) {
                     row[3] = currentSuite.getManagerType();
                 } else if (currentPremium != null) {

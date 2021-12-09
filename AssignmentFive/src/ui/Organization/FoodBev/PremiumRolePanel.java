@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -1472,7 +1473,20 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDetailsMouseExited
 
     private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
+        int selectedRowIndex = tblOrders.getSelectedRow();
 
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an Order");
+            return;
+        } else {
+            switchPanels(OrderDetails);
+            DefaultTableModel model = (DefaultTableModel) tblOrders.getModel();
+//            Order selectedOrder = (Order) model.getValueAt(selectedRowIndex, 0);
+//            lblHeader3.setText("Order " + selectedOrder.getId() + " details");
+//            lblOrderedByValue.setText(selectedOrder.getCustomerName());
+//            lblOrderedAtValue.setText(String.valueOf(selectedOrder.getOrderDateTime()));
+//            popuateFoodItemList(selectedOrder.getId());
+        }
     }//GEN-LAST:event_btnDetailsActionPerformed
 
     private void btnDetails1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails1MouseEntered

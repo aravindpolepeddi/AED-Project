@@ -5,6 +5,10 @@
  */
 package business.suites;
 
+import business.Restaurant.Menu;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author aravindpolepeddi
@@ -14,6 +18,11 @@ public class Suites {
     String managerName;
     String userName;
     String managerType;
+    private String cuisine;
+    private String vegOrNonVeg;
+    private Menu menu;
+    private String restaurantName;
+    private Map<String, List<String>> seats;
 
     public String getManagerName() {
         return managerName;
@@ -37,6 +46,46 @@ public class Suites {
 
     public void setManagerType(String managerType) {
         this.managerType = managerType;
+    }
+
+    public String getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public String getVegOrNonVeg() {
+        return vegOrNonVeg;
+    }
+
+    public void setVegOrNonVeg(String vegOrNonVeg) {
+        this.vegOrNonVeg = vegOrNonVeg;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    public Map<String, List<String>> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Map<String, List<String>> seats) {
+        this.seats = seats;
     }
 
 }
