@@ -2,27 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
             <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/business/Customer/Customer.java</file>
-            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/DeliveryWorkArea/DeliveryAreaJPanel.java</file>
-            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/CustomerRole/CustomerRegisterEvent.java</file>
-            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/Vendor/VendorAreaJPanel.java</file>
-            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/business/DB4OUtil/DB4OUtil.java</file>
-            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/Premium/PremiumAreaJPanel.java</file>
-            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/SystemAdminWorkArea/SystemAdminWorkAreaJPanel.java</file>
-            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/KitchenManager/KitchenAreaJPanel.java</file>
-            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/CustomerRole/CustomerWorkAreaJPanel.java</file>
-            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/RestaurantRole/RestaurantAreaJPanel.java</file>
             <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/CustomerRole/CustomerRegisterJPanel.java</file>
+            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/CustomerRole/CustomerRegisterEvent.java</file>
             <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/CustomerRole/CustomerAreaJPanel.java</file>
             <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/SystemAdminWorkArea/ManageCustomerPanel.java</file>
+            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/business/DB4OUtil/DB4OUtil.java</file>
             <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/business/useraccount/UserAccount.java</file>
-            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/SystemAdminWorkArea/ManageDeliveryStaffPanel.java</file>
+            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/SystemAdminWorkArea/manageEventPanel.java</file>
+            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/SystemAdminWorkArea/SystemAdminWorkAreaJPanel.java</file>
             <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/SystemAdminWorkArea/ManageRestaurantManagersPanel.java</file>
+            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/CustomerRole/CustomerWorkAreaJPanel.java</file>
+            <file>file:/D:/college/AED%20FINAL%20PROJECT/AED-Project/AssignmentFive/src/ui/RestaurantRole/RestaurantAreaJPanel.java</file>
         </group>
-=======
-        <group/>
->>>>>>> 0e9c1f7bd00d91cca0936455a819b92c159df88b
     </open-files>
 </project-private>
