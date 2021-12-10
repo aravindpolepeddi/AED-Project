@@ -16,6 +16,8 @@ import business.useraccount.UserAccount;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -34,12 +36,24 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
     StaffDirectory staffDirectory;
     String managerName;
     FlagClass flags;
+    String test;
 
     /**
      * Creates new form SecurityServicesJPanel
      */
     public SecurityServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+
+        test = "TEST";
+        System.out.println(test);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                test = "HMM!";
+                System.out.println(test);
+            }
+        }, 2000);
 
         this.managerName = account.getName();
         this.flags = new FlagClass();
@@ -71,6 +85,7 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         navigationPanel = new javax.swing.JPanel();
         btnEditDetails1 = new javax.swing.JButton();
+        btnEditDetails2 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         SecurityDashboard = new javax.swing.JPanel();
         lblRestaurantName = new javax.swing.JLabel();
@@ -100,6 +115,15 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         txtEmail1 = new javax.swing.JTextField();
         lblStaffMemberName = new javax.swing.JLabel();
         btnBack8 = new javax.swing.JButton();
+        SecurtyGuardTraining = new javax.swing.JPanel();
+        lblStaffMemberName1 = new javax.swing.JLabel();
+        btnBack9 = new javax.swing.JButton();
+        rdPublicRelations = new javax.swing.JRadioButton();
+        rdObservation = new javax.swing.JRadioButton();
+        rdCommunication = new javax.swing.JRadioButton();
+        rdLiabilityLegality = new javax.swing.JRadioButton();
+        btnBack7 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(240, 255, 255));
 
@@ -124,6 +148,25 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnEditDetails2.setBackground(new java.awt.Color(206, 217, 217));
+        btnEditDetails2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEditDetails2.setForeground(new java.awt.Color(0, 51, 51));
+        btnEditDetails2.setText("TRAINING CENTER");
+        btnEditDetails2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditDetails2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditDetails2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditDetails2MouseExited(evt);
+            }
+        });
+        btnEditDetails2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditDetails2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout navigationPanelLayout = new javax.swing.GroupLayout(navigationPanel);
         navigationPanel.setLayout(navigationPanelLayout);
         navigationPanelLayout.setHorizontalGroup(
@@ -132,13 +175,19 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnEditDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navigationPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEditDetails2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         navigationPanelLayout.setVerticalGroup(
             navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navigationPanelLayout.createSequentialGroup()
                 .addGap(178, 178, 178)
                 .addComponent(btnEditDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(btnEditDetails2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(385, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(navigationPanel);
@@ -156,13 +205,13 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         tblStaff.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblStaff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "STAFF MEMBER", "ASSIGNED TO", "STATUS"
+                "STAFF MEMBER", "ASSIGNED TO", "STATUS", "TRAINING STATUS"
             }
         ));
         tblStaff.setSelectionBackground(new java.awt.Color(153, 209, 232));
@@ -427,10 +476,12 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblProfileImageView, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtFullName1)
-                                .addComponent(txtPhoneNumber1)
-                                .addComponent(txtEmail1)))))
+                            .addGroup(ViewDetailsPanelLayout.createSequentialGroup()
+                                .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFullName1)
+                                    .addComponent(txtPhoneNumber1)
+                                    .addComponent(txtEmail1))
+                                .addGap(41, 41, 41)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ViewDetailsPanelLayout.setVerticalGroup(
@@ -460,6 +511,123 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         );
 
         jLayeredPane1.add(ViewDetailsPanel, "card5");
+
+        SecurtyGuardTraining.setBackground(new java.awt.Color(240, 255, 255));
+
+        lblStaffMemberName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblStaffMemberName1.setForeground(new java.awt.Color(0, 153, 153));
+        lblStaffMemberName1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStaffMemberName1.setText("<<Staff Member Name>>");
+
+        btnBack9.setBackground(new java.awt.Color(255, 204, 204));
+        btnBack9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnBack9.setForeground(new java.awt.Color(255, 0, 51));
+        btnBack9.setText("BACK");
+        btnBack9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBack9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack9MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack9MouseExited(evt);
+            }
+        });
+        btnBack9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack9ActionPerformed(evt);
+            }
+        });
+
+        rdPublicRelations.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdPublicRelations.setForeground(new java.awt.Color(0, 0, 0));
+        rdPublicRelations.setText("Public Relations");
+
+        rdObservation.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdObservation.setForeground(new java.awt.Color(0, 0, 0));
+        rdObservation.setText("Observation & Documentation");
+
+        rdCommunication.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdCommunication.setForeground(new java.awt.Color(0, 0, 0));
+        rdCommunication.setText("Communication");
+
+        rdLiabilityLegality.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rdLiabilityLegality.setForeground(new java.awt.Color(0, 0, 0));
+        rdLiabilityLegality.setText("Liability & Legality");
+
+        btnBack7.setBackground(new java.awt.Color(215, 254, 211));
+        btnBack7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnBack7.setForeground(new java.awt.Color(72, 151, 64));
+        btnBack7.setText("COMPLETE TRAINING");
+        btnBack7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack7MouseExited(evt);
+            }
+        });
+        btnBack7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack7ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 17)); // NOI18N
+        jLabel1.setText("Welcome to the training center, complete all the below topics to conclude your training.");
+
+        javax.swing.GroupLayout SecurtyGuardTrainingLayout = new javax.swing.GroupLayout(SecurtyGuardTraining);
+        SecurtyGuardTraining.setLayout(SecurtyGuardTrainingLayout);
+        SecurtyGuardTrainingLayout.setHorizontalGroup(
+            SecurtyGuardTrainingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecurtyGuardTrainingLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(SecurtyGuardTrainingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rdObservation)
+                    .addComponent(rdPublicRelations)
+                    .addComponent(rdCommunication)
+                    .addComponent(rdLiabilityLegality))
+                .addGap(252, 252, 252))
+            .addGroup(SecurtyGuardTrainingLayout.createSequentialGroup()
+                .addGroup(SecurtyGuardTrainingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SecurtyGuardTrainingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecurtyGuardTrainingLayout.createSequentialGroup()
+                            .addGap(619, 619, 619)
+                            .addComponent(btnBack9))
+                        .addGroup(SecurtyGuardTrainingLayout.createSequentialGroup()
+                            .addGap(19, 19, 19)
+                            .addComponent(lblStaffMemberName1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(74, 74, 74)))
+                    .addGroup(SecurtyGuardTrainingLayout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(btnBack7, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(SecurtyGuardTrainingLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 705, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        SecurtyGuardTrainingLayout.setVerticalGroup(
+            SecurtyGuardTrainingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SecurtyGuardTrainingLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(btnBack9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblStaffMemberName1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(rdPublicRelations)
+                .addGap(18, 18, 18)
+                .addComponent(rdObservation)
+                .addGap(18, 18, 18)
+                .addComponent(rdCommunication)
+                .addGap(18, 18, 18)
+                .addComponent(rdLiabilityLegality)
+                .addGap(102, 102, 102)
+                .addComponent(btnBack7)
+                .addContainerGap(149, Short.MAX_VALUE))
+        );
+
+        jLayeredPane1.add(SecurtyGuardTraining, "card5");
 
         jSplitPane1.setRightComponent(jLayeredPane1);
 
@@ -582,6 +750,74 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
 
     private void btnBack8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack8ActionPerformed
     }//GEN-LAST:event_btnBack8ActionPerformed
+
+    private void btnEditDetails2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditDetails2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditDetails2MouseEntered
+
+    private void btnEditDetails2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditDetails2MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditDetails2MouseExited
+
+    private void btnEditDetails2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDetails2ActionPerformed
+        int selectedRowIndex = tblStaff.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            switchPanels(SecurtyGuardTraining);
+            DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+            Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
+            lblStaffMemberName1.setText(selectedStaff.getFullName());
+            flags.setStaffMemberName(selectedStaff.getFullName());
+        }
+    }//GEN-LAST:event_btnEditDetails2ActionPerformed
+
+    private void btnBack9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack9MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBack9MouseEntered
+
+    private void btnBack9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack9MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBack9MouseExited
+
+    private void btnBack9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack9ActionPerformed
+        switchPanels(SecurityDashboard);
+    }//GEN-LAST:event_btnBack9ActionPerformed
+
+    private void btnBack7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack7MouseEntered
+
+    }//GEN-LAST:event_btnBack7MouseEntered
+
+    private void btnBack7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack7MouseExited
+
+    }//GEN-LAST:event_btnBack7MouseExited
+
+    private void btnBack7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack7ActionPerformed
+        Staff currentStaff = staffDirectory.findStaffByName(flags.getStaffMemberName());
+        if (rdPublicRelations.isSelected() && rdObservation.isSelected() && rdCommunication.isSelected() && rdLiabilityLegality.isSelected()) {
+            currentStaff.setTrainingStatus("TRAINED");
+
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    currentStaff.setTrainingStatus("UN-TRAINED");
+                    populateStaff();
+                }
+            }, 10000);
+
+            JOptionPane.showMessageDialog(null, "Staff member trained successfully.");
+            switchPanels(SecurityDashboard);
+            populateStaff();
+            rdPublicRelations.setSelected(false);
+            rdObservation.setSelected(false);
+            rdCommunication.setSelected(false);
+            rdLiabilityLegality.setSelected(false);
+        }
+
+    }//GEN-LAST:event_btnBack7ActionPerformed
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(component);
@@ -594,27 +830,37 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (Staff staffMember : staffDirectory.getStaffList()) {
-            Object[] row = new Object[3];
+            Object[] row = new Object[4];
             if (staffMember.getStaffType().equals("SECURITY")) {
-
                 row[0] = staffMember;
                 row[1] = staffMember.getEmail();
                 row[2] = staffMember.getStatus();
+                row[3] = staffMember.getTrainingStatus();
                 model.addRow(row);
             }
         }
     }
 
+    private void testMethod(String test) {
+        test = "HMM";
+        System.out.println(test);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddStaff;
     private javax.swing.JPanel SecurityDashboard;
+    private javax.swing.JPanel SecurtyGuardTraining;
     private javax.swing.JPanel ViewDetailsPanel;
     private javax.swing.JButton btnBack3;
     private javax.swing.JButton btnBack6;
+    private javax.swing.JButton btnBack7;
     private javax.swing.JButton btnBack8;
+    private javax.swing.JButton btnBack9;
     private javax.swing.JButton btnDetails;
     private javax.swing.JButton btnEditDetails1;
+    private javax.swing.JButton btnEditDetails2;
     private javax.swing.JButton btnProfileImage;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
@@ -630,7 +876,12 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblRestaurantName;
     private javax.swing.JLabel lblRestaurantName2;
     private javax.swing.JLabel lblStaffMemberName;
+    private javax.swing.JLabel lblStaffMemberName1;
     private javax.swing.JPanel navigationPanel;
+    private javax.swing.JRadioButton rdCommunication;
+    private javax.swing.JRadioButton rdLiabilityLegality;
+    private javax.swing.JRadioButton rdObservation;
+    private javax.swing.JRadioButton rdPublicRelations;
     private javax.swing.JTable tblStaff;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEmail1;

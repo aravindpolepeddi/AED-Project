@@ -21,6 +21,7 @@ public class FlagClass {
     private int suiteCount;
     private int premiumCount;
     private String imageFilePath;
+    private String staffMemberName;
 
     public String getRestaurantManagerName() {
         return restaurantManagerName;
@@ -84,6 +85,14 @@ public class FlagClass {
 
     public void setImageFilePath(String imageFilePath) {
         this.imageFilePath = imageFilePath;
+    }
+
+    public String getStaffMemberName() {
+        return staffMemberName;
+    }
+
+    public void setStaffMemberName(String staffMemberName) {
+        this.staffMemberName = staffMemberName;
     }
 
 }
