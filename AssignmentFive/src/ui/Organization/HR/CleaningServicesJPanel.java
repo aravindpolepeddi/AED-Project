@@ -552,6 +552,10 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Staff member added successfully.");
         switchPanels(workAreaPanel);
         populateStaff();
+        txtFullName.setText("");
+        txtPhoneNumber.setText("");
+        txtEmail.setText("");
+        lblImageSlot.setText("");
     }//GEN-LAST:event_btnBack4ActionPerformed
 
     private void btnProfileImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileImageActionPerformed

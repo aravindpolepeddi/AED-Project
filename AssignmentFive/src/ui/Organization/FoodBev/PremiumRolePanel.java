@@ -7,12 +7,21 @@ package ui.Organization.FoodBev;
 
 import business.Business;
 import business.Restaurant.Menu;
+import business.hrservices.CleaningServices;
+import business.hrservices.CleaningServicesDirectory;
+import business.hrservices.EmergencyServices;
+import business.hrservices.EmergencyServicesDirectory;
+import business.hrservices.Staff;
 import business.premium.Premium;
 import business.premium.PremiumDirectory;
 import business.useraccount.UserAccount;
 import java.awt.Component;
+import java.awt.Image;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +34,9 @@ public class PremiumRolePanel extends javax.swing.JPanel {
 
     Premium premium;
     PremiumDirectory premiumDirectory;
+    CleaningServicesDirectory cleaningDirectory;
+    EmergencyServicesDirectory emergencyServiceDirectory;
+    List<Staff> staffMembers;
 
     /**
      * Creates new form PremiumRolePanel
@@ -32,10 +44,30 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     public PremiumRolePanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
 
+        staffMembers = new ArrayList<>();
+
         if (business.getPremiumDirectory() == null) {
             this.premiumDirectory = new PremiumDirectory();
         } else {
             this.premiumDirectory = business.getPremiumDirectory();
+        }
+
+        if (business.getCleaningServices() != null) {
+            this.cleaningDirectory = business.getCleaningServices();
+            for (CleaningServices cleaningServices : this.cleaningDirectory.getCleaningServices()) {
+                if (cleaningServices.getStaffDirectory() != null && cleaningServices.getStaffDirectory().getStaffList() != null && !cleaningServices.getStaffDirectory().getStaffList().isEmpty()) {
+                    staffMembers.addAll(cleaningServices.getStaffDirectory().getStaffList());
+                }
+            }
+        }
+
+        if (business.getEmergencyServices() != null) {
+            this.emergencyServiceDirectory = business.getEmergencyServices();
+            for (EmergencyServices emergencyServices : this.emergencyServiceDirectory.getEmergencyServices()) {
+                if (emergencyServices.getStaffDirectory() != null && emergencyServices.getStaffDirectory().getStaffList() != null && !emergencyServices.getStaffDirectory().getStaffList().isEmpty()) {
+                    staffMembers.addAll(emergencyServices.getStaffDirectory().getStaffList());
+                }
+            }
         }
 
         premium = premiumDirectory.findPremiumByManagerName(account.getName());
@@ -55,6 +87,7 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         NavigationJPanel = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
         btnEditDetails = new javax.swing.JButton();
+        btnMenu2 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         workAreaPanel = new javax.swing.JPanel();
         lblRestaurantName = new javax.swing.JLabel();
@@ -171,6 +204,24 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         tblDeliveryStaff = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnAssign = new javax.swing.JButton();
+        ServiceDetails = new javax.swing.JPanel();
+        lblHeader1 = new javax.swing.JLabel();
+        btnBack1 = new javax.swing.JButton();
+        btnDetails2 = new javax.swing.JButton();
+        btnDetails3 = new javax.swing.JButton();
+        btnDetails4 = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tblServices = new javax.swing.JTable();
+        ViewServiceDetails = new javax.swing.JPanel();
+        lblStaffMemberName = new javax.swing.JLabel();
+        btnBack8 = new javax.swing.JButton();
+        lblProfileImageView = new javax.swing.JLabel();
+        lblFullName1 = new javax.swing.JLabel();
+        txtFullName1 = new javax.swing.JTextField();
+        lblPhoneNumber1 = new javax.swing.JLabel();
+        txtPhoneNumber1 = new javax.swing.JTextField();
+        lblEmail2 = new javax.swing.JLabel();
+        txtEmail1 = new javax.swing.JTextField();
 
         NavigationJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -212,6 +263,25 @@ public class PremiumRolePanel extends javax.swing.JPanel {
             }
         });
 
+        btnMenu2.setBackground(new java.awt.Color(206, 217, 217));
+        btnMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnMenu2.setForeground(new java.awt.Color(0, 51, 51));
+        btnMenu2.setText("SERVICES");
+        btnMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMenu2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMenu2MouseExited(evt);
+            }
+        });
+        btnMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenu2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout NavigationJPanelLayout = new javax.swing.GroupLayout(NavigationJPanel);
         NavigationJPanel.setLayout(NavigationJPanelLayout);
         NavigationJPanelLayout.setHorizontalGroup(
@@ -222,6 +292,11 @@ public class PremiumRolePanel extends javax.swing.JPanel {
                     .addComponent(btnEditDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                     .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(NavigationJPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(btnMenu2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         NavigationJPanelLayout.setVerticalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,6 +306,11 @@ public class PremiumRolePanel extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(383, Short.MAX_VALUE))
+            .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(NavigationJPanelLayout.createSequentialGroup()
+                    .addGap(321, 321, 321)
+                    .addComponent(btnMenu2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(322, Short.MAX_VALUE)))
         );
 
         jSplitPane1.setLeftComponent(NavigationJPanel);
@@ -419,6 +499,13 @@ public class PremiumRolePanel extends javax.swing.JPanel {
             .addGroup(workAreaPanelLayout.createSequentialGroup()
                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnClose)
+                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnFeedback)
+                                .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(workAreaPanelLayout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addComponent(btnAcceptOrder)
                         .addGap(18, 18, 18)
@@ -426,14 +513,7 @@ public class PremiumRolePanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnDetails1)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDetails))
-                    .addGroup(workAreaPanelLayout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnClose)
-                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnFeedback)
-                                .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(btnDetails)))
                 .addContainerGap(145, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -1404,6 +1484,253 @@ public class PremiumRolePanel extends javax.swing.JPanel {
 
         jLayeredPane1.add(AssignDeliveryPanel, "card6");
 
+        ServiceDetails.setBackground(new java.awt.Color(240, 255, 255));
+
+        lblHeader1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblHeader1.setForeground(new java.awt.Color(0, 153, 153));
+        lblHeader1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHeader1.setText("Services");
+
+        btnBack1.setBackground(new java.awt.Color(255, 204, 204));
+        btnBack1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnBack1.setForeground(new java.awt.Color(255, 0, 51));
+        btnBack1.setText("BACK");
+        btnBack1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack1MouseExited(evt);
+            }
+        });
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
+            }
+        });
+
+        btnDetails2.setBackground(new java.awt.Color(255, 255, 255));
+        btnDetails2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDetails2.setForeground(new java.awt.Color(0, 153, 51));
+        btnDetails2.setText("VIEW SERVICE PERSONEL");
+        btnDetails2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetails2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetails2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDetails2MouseExited(evt);
+            }
+        });
+        btnDetails2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails2ActionPerformed(evt);
+            }
+        });
+
+        btnDetails3.setBackground(new java.awt.Color(255, 255, 255));
+        btnDetails3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDetails3.setForeground(new java.awt.Color(0, 153, 51));
+        btnDetails3.setText("Hire");
+        btnDetails3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetails3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetails3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDetails3MouseExited(evt);
+            }
+        });
+        btnDetails3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails3ActionPerformed(evt);
+            }
+        });
+
+        btnDetails4.setBackground(new java.awt.Color(255, 255, 255));
+        btnDetails4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDetails4.setForeground(new java.awt.Color(0, 153, 51));
+        btnDetails4.setText("Release");
+        btnDetails4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetails4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetails4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDetails4MouseExited(evt);
+            }
+        });
+        btnDetails4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails4ActionPerformed(evt);
+            }
+        });
+
+        tblServices.setBackground(new java.awt.Color(255, 255, 255));
+        tblServices.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tblServices.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "STAFF MEMBER", "SERVICE TYPE", "SUB-TYPE", "SERVICE MANAGER", "STATUS"
+            }
+        ));
+        tblServices.setSelectionBackground(new java.awt.Color(153, 209, 232));
+        tblServices.setSelectionForeground(new java.awt.Color(0, 51, 51));
+        jScrollPane7.setViewportView(tblServices);
+
+        javax.swing.GroupLayout ServiceDetailsLayout = new javax.swing.GroupLayout(ServiceDetails);
+        ServiceDetails.setLayout(ServiceDetailsLayout);
+        ServiceDetailsLayout.setHorizontalGroup(
+            ServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ServiceDetailsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBack1)
+                .addGap(50, 50, 50))
+            .addGroup(ServiceDetailsLayout.createSequentialGroup()
+                .addGroup(ServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ServiceDetailsLayout.createSequentialGroup()
+                        .addGap(305, 305, 305)
+                        .addComponent(lblHeader1))
+                    .addGroup(ServiceDetailsLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(ServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ServiceDetailsLayout.createSequentialGroup()
+                                .addComponent(btnDetails2)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDetails3)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDetails4))
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+        ServiceDetailsLayout.setVerticalGroup(
+            ServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ServiceDetailsLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(btnBack1)
+                .addGap(3, 3, 3)
+                .addComponent(lblHeader1)
+                .addGap(42, 42, 42)
+                .addGroup(ServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDetails2)
+                    .addComponent(btnDetails3)
+                    .addComponent(btnDetails4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(294, Short.MAX_VALUE))
+        );
+
+        jLayeredPane1.add(ServiceDetails, "card7");
+
+        ViewServiceDetails.setBackground(new java.awt.Color(240, 255, 255));
+
+        lblStaffMemberName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblStaffMemberName.setForeground(new java.awt.Color(0, 153, 153));
+        lblStaffMemberName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStaffMemberName.setText("<<Staff Member Name>>");
+
+        btnBack8.setBackground(new java.awt.Color(255, 204, 204));
+        btnBack8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnBack8.setForeground(new java.awt.Color(255, 0, 51));
+        btnBack8.setText("BACK");
+        btnBack8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBack8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack8MouseExited(evt);
+            }
+        });
+        btnBack8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack8ActionPerformed(evt);
+            }
+        });
+
+        lblProfileImageView.setBackground(new java.awt.Color(204, 204, 204));
+        lblProfileImageView.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblProfileImageView.setForeground(new java.awt.Color(0, 0, 0));
+        lblProfileImageView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblProfileImageView.setText("Profile Image");
+        lblProfileImageView.setOpaque(true);
+
+        lblFullName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblFullName1.setText("FULL NAME :");
+
+        txtFullName1.setEditable(false);
+
+        lblPhoneNumber1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblPhoneNumber1.setText("PHONE NUMBER : ");
+
+        txtPhoneNumber1.setEditable(false);
+
+        lblEmail2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblEmail2.setText("EMAIL : ");
+
+        txtEmail1.setEditable(false);
+
+        javax.swing.GroupLayout ViewServiceDetailsLayout = new javax.swing.GroupLayout(ViewServiceDetails);
+        ViewServiceDetails.setLayout(ViewServiceDetailsLayout);
+        ViewServiceDetailsLayout.setHorizontalGroup(
+            ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ViewServiceDetailsLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ViewServiceDetailsLayout.createSequentialGroup()
+                            .addComponent(lblStaffMemberName, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(74, 74, 74))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewServiceDetailsLayout.createSequentialGroup()
+                            .addGap(600, 600, 600)
+                            .addComponent(btnBack8)))
+                    .addGroup(ViewServiceDetailsLayout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFullName1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblPhoneNumber1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblEmail2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblProfileImageView, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPhoneNumber1)
+                            .addComponent(txtEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFullName1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+        ViewServiceDetailsLayout.setVerticalGroup(
+            ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ViewServiceDetailsLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(btnBack8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblStaffMemberName)
+                .addGap(57, 57, 57)
+                .addComponent(lblProfileImageView, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addGroup(ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFullName1)
+                    .addComponent(txtFullName1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPhoneNumber1)
+                    .addGroup(ViewServiceDetailsLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(txtPhoneNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEmail1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(203, Short.MAX_VALUE))
+        );
+
+        jLayeredPane1.add(ViewServiceDetails, "card8");
+
         jSplitPane1.setRightComponent(jLayeredPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1900,6 +2227,121 @@ public class PremiumRolePanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnMenuMouseEntered
 
+    private void btnMenu2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenu2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMenu2MouseEntered
+
+    private void btnMenu2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenu2MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMenu2MouseExited
+
+    private void btnMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu2ActionPerformed
+        switchPanels(ServiceDetails);
+        populateStaff();
+    }//GEN-LAST:event_btnMenu2ActionPerformed
+
+    private void btnBack1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBack1MouseEntered
+
+    private void btnBack1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBack1MouseExited
+
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        switchPanels(workAreaPanel);
+    }//GEN-LAST:event_btnBack1ActionPerformed
+
+    private void btnDetails2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails2MouseEntered
+
+    }//GEN-LAST:event_btnDetails2MouseEntered
+
+    private void btnDetails2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails2MouseExited
+
+    }//GEN-LAST:event_btnDetails2MouseExited
+
+    private void btnDetails2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails2ActionPerformed
+        int selectedRowIndex = tblServices.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            switchPanels(ViewServiceDetails);
+            DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
+            Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
+            lblStaffMemberName.setText(selectedStaff.getFullName());
+            txtFullName1.setText(selectedStaff.getFullName());
+            txtPhoneNumber1.setText(selectedStaff.getPhoneNumber());
+            txtEmail1.setText(selectedStaff.getEmail());
+
+            ImageIcon image = new ImageIcon(selectedStaff.getProfileImagePath());
+            Image resizedImage = image.getImage().getScaledInstance(149, 151, Image.SCALE_SMOOTH);
+            lblProfileImageView.setIcon(new ImageIcon(resizedImage));
+        }
+    }//GEN-LAST:event_btnDetails2ActionPerformed
+
+    private void btnDetails3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails3MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetails3MouseEntered
+
+    private void btnDetails3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails3MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetails3MouseExited
+
+    private void btnDetails3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails3ActionPerformed
+        int selectedRowIndex = tblServices.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
+            Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
+            selectedStaff.setStatus("HIRED");
+            populateStaff();
+        }
+    }//GEN-LAST:event_btnDetails3ActionPerformed
+
+    private void btnDetails4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails4MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetails4MouseEntered
+
+    private void btnDetails4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails4MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetails4MouseExited
+
+    private void btnDetails4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails4ActionPerformed
+        int selectedRowIndex = tblServices.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
+            Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
+
+            if (selectedStaff.getStatus() == null || selectedStaff.getStatus().isEmpty() || selectedStaff.getStatus().isBlank() || !selectedStaff.getStatus().equals("HIRED")) {
+                JOptionPane.showMessageDialog(this, "Hire this staff member first");
+                return;
+            }
+            selectedStaff.setStatus("FREE");
+            populateStaff();
+        }
+    }//GEN-LAST:event_btnDetails4ActionPerformed
+
+    private void btnBack8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack8MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBack8MouseEntered
+
+    private void btnBack8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack8MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBack8MouseExited
+
+    private void btnBack8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack8ActionPerformed
+        switchPanels(workAreaPanel);
+    }//GEN-LAST:event_btnBack8ActionPerformed
+
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(component);
@@ -2078,25 +2520,58 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         }
     }
 
+    private void populateStaff() {
+        DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
+        model.setRowCount(0);
+
+        if (staffMembers != null && !staffMembers.isEmpty()) {
+            for (Staff staffMember : staffMembers) {
+                Object[] row = new Object[5];
+                row[0] = staffMember;
+                row[1] = staffMember.getStaffType();
+
+                if (staffMember.getStaffType().equals("EMERGENCY")) {
+                    row[2] = staffMember.getStaffSubType();
+                } else {
+                    row[2] = "NA";
+                }
+
+                row[3] = staffMember.getManager();
+                row[4] = staffMember.getStatus();
+
+                model.addRow(row);
+            }
+        }
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AssignDeliveryPanel;
     private javax.swing.JPanel EditDetailsPanel;
     private javax.swing.JPanel MenuPanel1;
     private javax.swing.JPanel NavigationJPanel;
     private javax.swing.JPanel OrderDetails;
+    private javax.swing.JPanel ServiceDetails;
+    private javax.swing.JPanel ViewServiceDetails;
     private javax.swing.JButton btnAcceptOrder;
     private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnBack3;
     private javax.swing.JButton btnBack4;
     private javax.swing.JButton btnBack5;
     private javax.swing.JButton btnBack6;
+    private javax.swing.JButton btnBack8;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnDetails;
     private javax.swing.JButton btnDetails1;
+    private javax.swing.JButton btnDetails2;
+    private javax.swing.JButton btnDetails3;
+    private javax.swing.JButton btnDetails4;
     private javax.swing.JButton btnEditDetails;
     private javax.swing.JButton btnFeedback;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnMenu2;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnrejectOrder;
     private javax.swing.JCheckBox chkAll;
@@ -2111,6 +2586,7 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lbBeverages1;
     private javax.swing.JLabel lblAddress;
@@ -2121,8 +2597,11 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblAptVegan2;
     private javax.swing.JLabel lblCuisine;
     private javax.swing.JLabel lblDesserts1;
+    private javax.swing.JLabel lblEmail2;
     private javax.swing.JLabel lblEmailId;
+    private javax.swing.JLabel lblFullName1;
     private javax.swing.JLabel lblHeader;
+    private javax.swing.JLabel lblHeader1;
     private javax.swing.JLabel lblHeader2;
     private javax.swing.JLabel lblHeader3;
     private javax.swing.JLabel lblHeader4;
@@ -2136,7 +2615,10 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblOrderedBy;
     private javax.swing.JLabel lblOrderedByValue;
     private javax.swing.JLabel lblPhoneNum;
+    private javax.swing.JLabel lblPhoneNumber1;
+    private javax.swing.JLabel lblProfileImageView;
     private javax.swing.JLabel lblRestaurantName;
+    private javax.swing.JLabel lblStaffMemberName;
     private javax.swing.JLabel lblVeg;
     private javax.swing.JLabel lblVegan;
     private javax.swing.JLabel lvlAll;
@@ -2169,6 +2651,7 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private javax.swing.JTable tblFeedBack;
     private javax.swing.JTable tblFoodList;
     private javax.swing.JTable tblOrders;
+    private javax.swing.JTable tblServices;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtBlackForestCake;
     private javax.swing.JTextField txtCheeseBurger;
@@ -2176,18 +2659,21 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtCocaCola;
     private javax.swing.JTextField txtCrispyTofu;
     private javax.swing.JTextField txtCuisine;
+    private javax.swing.JTextField txtEmail1;
     private javax.swing.JTextField txtEmailId;
     private javax.swing.JTextField txtFalafelBowl;
     private javax.swing.JTextField txtFishNChips;
     private javax.swing.JTextField txtFreshLimeSalted;
     private javax.swing.JTextField txtFriedRice;
     private javax.swing.JTextField txtFriedShrimp;
+    private javax.swing.JTextField txtFullName1;
     private javax.swing.JTextField txtHamBurger;
     private javax.swing.JTextField txtMeatBalls;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtOnionRings;
     private javax.swing.JTextField txtPepsi;
     private javax.swing.JTextField txtPhoneNum;
+    private javax.swing.JTextField txtPhoneNumber1;
     private javax.swing.JTextField txtPineappleSwissRole;
     private javax.swing.JTextField txtPrawnFriedRice;
     private javax.swing.JTextField txtSausageDip;

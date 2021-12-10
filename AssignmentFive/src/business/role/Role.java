@@ -36,7 +36,8 @@ public abstract class Role {
         FoodBevOrgAdmin("FoodBevOrgAdmin"),
         SuitesRestaurantRole("SuitesRestaurantRole"),
         CleaningServicesRole("CleaningServicesRole"),
-        EmergencyServicesRole("EmergencyServicesRole");
+        EmergencyServicesRole("EmergencyServicesRole"),
+        SecurityServicesRole("SecurityServicesRole");
 
         private String value;
 

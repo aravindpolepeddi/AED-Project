@@ -20,6 +20,7 @@ import business.role.EmergencyServicesRole;
 import business.role.HumanResourceEntAdmin;
 import business.role.RestaurantRole;
 import business.role.Role;
+import business.role.SecurityServicesRole;
 import business.suites.Suites;
 import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
@@ -359,7 +360,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                 securityService.setUserName(userName);
                 securityService.setManagerType("SECURITY");
                 business.setSecurityServices(securityServices);
-                HumanResourceEntAdmin role = new HumanResourceEntAdmin();
+                SecurityServicesRole role = new SecurityServicesRole();
                 business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
             }
 

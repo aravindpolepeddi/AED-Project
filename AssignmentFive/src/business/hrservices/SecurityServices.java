@@ -11,9 +11,10 @@ package business.hrservices;
  */
 public class SecurityServices {
 
-    String managerName;
-    String userName;
-    String managerType;
+    private String managerName;
+    private String userName;
+    private String managerType;
+    private StaffDirectory staffDirectory;
 
     public String getManagerName() {
         return managerName;
@@ -37,6 +38,14 @@ public class SecurityServices {
 
     public void setManagerType(String managerType) {
         this.managerType = managerType;
+    }
+
+    public StaffDirectory getStaffDirectory() {
+        return staffDirectory;
+    }
+
+    public void setStaffDirectory(StaffDirectory staffDirectory) {
+        this.staffDirectory = staffDirectory;
     }
 
 }

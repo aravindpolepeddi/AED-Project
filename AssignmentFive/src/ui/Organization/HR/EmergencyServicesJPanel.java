@@ -6,13 +6,22 @@
 package ui.Organization.HR;
 
 import business.Business;
+import business.FlagClass;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServices;
 import business.hrservices.EmergencyServicesDirectory;
+import business.hrservices.Staff;
+import business.hrservices.StaffDirectory;
 import business.useraccount.UserAccount;
 import java.awt.Component;
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +31,9 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
 
     EmergencyServicesDirectory emergencyServiceDirectory;
     EmergencyServices emergencyServiceFetch;
+    StaffDirectory staffDirectory;
+    String managerName;
+    FlagClass flags;
 
     /**
      * Creates new form EmergencyServicesJPanel
@@ -29,13 +41,22 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
     public EmergencyServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
 
+        this.managerName = account.getName();
+        this.flags = new FlagClass();
+
         if (business.getEmergencyServices() == null) {
             this.emergencyServiceDirectory = new EmergencyServicesDirectory();
         } else {
             this.emergencyServiceDirectory = business.getEmergencyServices();
         }
 
-        emergencyServiceFetch = emergencyServiceDirectory.findEmergencyServiceByManagerName(account.getName());
+        emergencyServiceFetch = emergencyServiceDirectory.findEmergencyServiceByManagerName(managerName);
+
+        if (emergencyServiceFetch.getStaffDirectory() == null) {
+            this.staffDirectory = new StaffDirectory();
+        } else {
+            this.staffDirectory = emergencyServiceFetch.getStaffDirectory();
+        }
 
         if (emergencyServiceFetch != null) {
             lblAmbulanceCount.setText(String.valueOf(emergencyServiceFetch.getNumOfAmbulances()));
@@ -48,6 +69,8 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
             lblFirstAidKitCount.setText("--");
             lblAirAmbulanceCount.setText("--");
         }
+
+        populateStaff();
 
     }
 
@@ -63,6 +86,7 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         navigationPanel = new javax.swing.JPanel();
         btnEditDetails = new javax.swing.JButton();
+        btnEditDetails1 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         EmergencyDashboard = new javax.swing.JPanel();
         lblRestaurantName = new javax.swing.JLabel();
@@ -74,6 +98,9 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         lblFireBrigadeCount = new javax.swing.JLabel();
         lblFirstAidKitCount = new javax.swing.JLabel();
         lblAirAmbulanceCount = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblStaff = new javax.swing.JTable();
+        btnDetails = new javax.swing.JButton();
         AddProvisions = new javax.swing.JPanel();
         lblRestaurantName1 = new javax.swing.JLabel();
         btnBack5 = new javax.swing.JButton();
@@ -86,6 +113,33 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         txtFirstAidCount = new javax.swing.JTextField();
         txtAirAmbulanceCount = new javax.swing.JTextField();
         btnBack4 = new javax.swing.JButton();
+        AddStaff = new javax.swing.JPanel();
+        lblRestaurantName2 = new javax.swing.JLabel();
+        btnBack3 = new javax.swing.JButton();
+        lblFullName = new javax.swing.JLabel();
+        txtFullName = new javax.swing.JTextField();
+        lblPhoneNumber = new javax.swing.JLabel();
+        txtPhoneNumber = new javax.swing.JTextField();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        lblProfileImage = new javax.swing.JLabel();
+        btnProfileImage = new javax.swing.JButton();
+        btnBack6 = new javax.swing.JButton();
+        lblEmail1 = new javax.swing.JLabel();
+        cmbSubType = new javax.swing.JComboBox<>();
+        lblImageSlot = new javax.swing.JLabel();
+        ViewDetailsPanel = new javax.swing.JPanel();
+        lblProfileImageView = new javax.swing.JLabel();
+        lblFullName1 = new javax.swing.JLabel();
+        txtFullName1 = new javax.swing.JTextField();
+        lblPhoneNumber1 = new javax.swing.JLabel();
+        txtPhoneNumber1 = new javax.swing.JTextField();
+        lblEmail2 = new javax.swing.JLabel();
+        txtEmail1 = new javax.swing.JTextField();
+        lblEmail3 = new javax.swing.JLabel();
+        lblStaffMemberName = new javax.swing.JLabel();
+        btnBack8 = new javax.swing.JButton();
+        txtStaffType = new javax.swing.JTextField();
 
         navigationPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -108,13 +162,34 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnEditDetails1.setBackground(new java.awt.Color(206, 217, 217));
+        btnEditDetails1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEditDetails1.setForeground(new java.awt.Color(0, 51, 51));
+        btnEditDetails1.setText("ADD STAFF");
+        btnEditDetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditDetails1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditDetails1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditDetails1MouseExited(evt);
+            }
+        });
+        btnEditDetails1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditDetails1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout navigationPanelLayout = new javax.swing.GroupLayout(navigationPanel);
         navigationPanel.setLayout(navigationPanelLayout);
         navigationPanelLayout.setHorizontalGroup(
             navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navigationPanelLayout.createSequentialGroup()
+            .addGroup(navigationPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEditDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(navigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEditDetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditDetails1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         navigationPanelLayout.setVerticalGroup(
@@ -122,7 +197,9 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
             .addGroup(navigationPanelLayout.createSequentialGroup()
                 .addGap(242, 242, 242)
                 .addComponent(btnEditDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(401, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnEditDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(353, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(navigationPanel);
@@ -160,25 +237,68 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         lblAirAmbulanceCount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblAirAmbulanceCount.setText("--");
 
+        tblStaff.setBackground(new java.awt.Color(255, 255, 255));
+        tblStaff.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tblStaff.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "STAFF MEMBER", "ASSIGNED TO", "TYPE", "STATUS"
+            }
+        ));
+        tblStaff.setSelectionBackground(new java.awt.Color(153, 209, 232));
+        tblStaff.setSelectionForeground(new java.awt.Color(0, 51, 51));
+        jScrollPane3.setViewportView(tblStaff);
+
+        btnDetails.setBackground(new java.awt.Color(255, 255, 255));
+        btnDetails.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDetails.setForeground(new java.awt.Color(0, 153, 51));
+        btnDetails.setText("DETAILS");
+        btnDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetailsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDetailsMouseExited(evt);
+            }
+        });
+        btnDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout EmergencyDashboardLayout = new javax.swing.GroupLayout(EmergencyDashboard);
         EmergencyDashboard.setLayout(EmergencyDashboardLayout);
         EmergencyDashboardLayout.setHorizontalGroup(
             EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblRestaurantName, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
-            .addGroup(EmergencyDashboardLayout.createSequentialGroup()
-                .addGap(270, 270, 270)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmergencyDashboardLayout.createSequentialGroup()
                 .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAmbulance, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblFireBrigades, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblFirstAidKits, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblAirAmbulance, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAmbulanceCount)
-                    .addComponent(lblFireBrigadeCount)
-                    .addComponent(lblFirstAidKitCount)
-                    .addComponent(lblAirAmbulanceCount))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(EmergencyDashboardLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDetails)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(EmergencyDashboardLayout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAmbulance, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblFireBrigades, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblFirstAidKits, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblAirAmbulance, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAmbulanceCount)
+                            .addComponent(lblFireBrigadeCount)
+                            .addComponent(lblFirstAidKitCount)
+                            .addComponent(lblAirAmbulanceCount))))
+                .addGap(69, 69, 69))
         );
         EmergencyDashboardLayout.setVerticalGroup(
             EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +321,11 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
                 .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAirAmbulance)
                     .addComponent(lblAirAmbulanceCount))
-                .addContainerGap(408, Short.MAX_VALUE))
+                .addGap(68, 68, 68)
+                .addComponent(btnDetails)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(EmergencyDashboard, "card2");
@@ -328,6 +452,274 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
 
         jLayeredPane1.add(AddProvisions, "card3");
 
+        AddStaff.setBackground(new java.awt.Color(240, 255, 255));
+
+        lblRestaurantName2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRestaurantName2.setForeground(new java.awt.Color(0, 153, 153));
+        lblRestaurantName2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRestaurantName2.setText("ADD NEW EMERGENCY STAFF");
+
+        btnBack3.setBackground(new java.awt.Color(255, 204, 204));
+        btnBack3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnBack3.setForeground(new java.awt.Color(255, 0, 51));
+        btnBack3.setText("BACK");
+        btnBack3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBack3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack3MouseExited(evt);
+            }
+        });
+        btnBack3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack3ActionPerformed(evt);
+            }
+        });
+
+        lblFullName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblFullName.setText("FULL NAME :");
+
+        lblPhoneNumber.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblPhoneNumber.setText("PHONE NUMBER : ");
+
+        lblEmail.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblEmail.setText("EMAIL : ");
+
+        lblProfileImage.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblProfileImage.setText("Profile Image : ");
+
+        btnProfileImage.setText("Browse Image");
+        btnProfileImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileImageActionPerformed(evt);
+            }
+        });
+
+        btnBack6.setBackground(new java.awt.Color(215, 254, 211));
+        btnBack6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnBack6.setForeground(new java.awt.Color(72, 151, 64));
+        btnBack6.setText("SAVE");
+        btnBack6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack6MouseExited(evt);
+            }
+        });
+        btnBack6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack6ActionPerformed(evt);
+            }
+        });
+
+        lblEmail1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblEmail1.setText("Staff Type : ");
+
+        cmbSubType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "Medical", "Staff Fire Staff" }));
+
+        lblImageSlot.setBackground(new java.awt.Color(204, 204, 204));
+        lblImageSlot.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblImageSlot.setForeground(new java.awt.Color(0, 0, 0));
+        lblImageSlot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImageSlot.setText("Profile Image");
+        lblImageSlot.setOpaque(true);
+
+        javax.swing.GroupLayout AddStaffLayout = new javax.swing.GroupLayout(AddStaff);
+        AddStaff.setLayout(AddStaffLayout);
+        AddStaffLayout.setHorizontalGroup(
+            AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddStaffLayout.createSequentialGroup()
+                .addGroup(AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AddStaffLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AddStaffLayout.createSequentialGroup()
+                                .addComponent(lblRestaurantName2, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(74, 74, 74))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddStaffLayout.createSequentialGroup()
+                                .addGap(600, 600, 600)
+                                .addComponent(btnBack3))))
+                    .addGroup(AddStaffLayout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addGroup(AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnBack6, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(AddStaffLayout.createSequentialGroup()
+                                .addGroup(AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblFullName, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblProfileImage, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblEmail1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFullName)
+                                    .addComponent(txtPhoneNumber)
+                                    .addComponent(txtEmail)
+                                    .addComponent(btnProfileImage)
+                                    .addComponent(cmbSubType, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(AddStaffLayout.createSequentialGroup()
+                        .addGap(295, 295, 295)
+                        .addComponent(lblImageSlot, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        AddStaffLayout.setVerticalGroup(
+            AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddStaffLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(btnBack3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblRestaurantName2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(lblImageSlot, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFullName)
+                    .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPhoneNumber)
+                    .addGroup(AddStaffLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblEmail1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbSubType, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(AddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProfileImage)
+                    .addComponent(btnProfileImage))
+                .addGap(49, 49, 49)
+                .addComponent(btnBack6)
+                .addGap(89, 89, 89))
+        );
+
+        jLayeredPane1.add(AddStaff, "card4");
+
+        ViewDetailsPanel.setBackground(new java.awt.Color(240, 255, 255));
+
+        lblProfileImageView.setBackground(new java.awt.Color(204, 204, 204));
+        lblProfileImageView.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblProfileImageView.setForeground(new java.awt.Color(0, 0, 0));
+        lblProfileImageView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblProfileImageView.setText("Profile Image");
+        lblProfileImageView.setOpaque(true);
+
+        lblFullName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblFullName1.setText("FULL NAME :");
+
+        txtFullName1.setEditable(false);
+
+        lblPhoneNumber1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblPhoneNumber1.setText("PHONE NUMBER : ");
+
+        txtPhoneNumber1.setEditable(false);
+
+        lblEmail2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblEmail2.setText("EMAIL : ");
+
+        txtEmail1.setEditable(false);
+
+        lblEmail3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblEmail3.setText("Staff Type : ");
+
+        lblStaffMemberName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblStaffMemberName.setForeground(new java.awt.Color(0, 153, 153));
+        lblStaffMemberName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStaffMemberName.setText("<<Staff Member Name>>");
+
+        btnBack8.setBackground(new java.awt.Color(255, 204, 204));
+        btnBack8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnBack8.setForeground(new java.awt.Color(255, 0, 51));
+        btnBack8.setText("BACK");
+        btnBack8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBack8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack8MouseExited(evt);
+            }
+        });
+        btnBack8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack8ActionPerformed(evt);
+            }
+        });
+
+        txtStaffType.setEditable(false);
+
+        javax.swing.GroupLayout ViewDetailsPanelLayout = new javax.swing.GroupLayout(ViewDetailsPanel);
+        ViewDetailsPanel.setLayout(ViewDetailsPanelLayout);
+        ViewDetailsPanelLayout.setHorizontalGroup(
+            ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ViewDetailsPanelLayout.createSequentialGroup()
+                .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ViewDetailsPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ViewDetailsPanelLayout.createSequentialGroup()
+                                .addComponent(lblStaffMemberName, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(74, 74, 74))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewDetailsPanelLayout.createSequentialGroup()
+                                .addGap(600, 600, 600)
+                                .addComponent(btnBack8))))
+                    .addGroup(ViewDetailsPanelLayout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFullName1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblPhoneNumber1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblEmail2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblEmail3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblProfileImageView, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtFullName1)
+                                .addComponent(txtPhoneNumber1)
+                                .addComponent(txtEmail1)
+                                .addComponent(txtStaffType, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        ViewDetailsPanelLayout.setVerticalGroup(
+            ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ViewDetailsPanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(btnBack8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblStaffMemberName)
+                .addGap(57, 57, 57)
+                .addComponent(lblProfileImageView, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFullName1)
+                    .addComponent(txtFullName1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPhoneNumber1)
+                    .addGroup(ViewDetailsPanelLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(txtPhoneNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEmail1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtStaffType, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(170, Short.MAX_VALUE))
+        );
+
+        jLayeredPane1.add(ViewDetailsPanel, "card5");
+
         jSplitPane1.setRightComponent(jLayeredPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -383,7 +775,7 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         emergencyServiceFetch.setNumOfFireBrigades(Integer.valueOf(txtFireBrigadeCount.getText()));
         emergencyServiceFetch.setNumOfFirstAidKits(Integer.valueOf(txtFirstAidCount.getText()));
         emergencyServiceFetch.setNumOfAirAmbulance(Integer.parseInt(txtAirAmbulanceCount.getText()));
-        
+
         JOptionPane.showMessageDialog(null, "Provisions added successfully.");
         lblAmbulanceCount.setText(txtAmbulanceCount.getText());
         lblFireBrigadeCount.setText(txtFireBrigadeCount.getText());
@@ -396,6 +788,118 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         txtAirAmbulanceCount.setText("");
     }//GEN-LAST:event_btnBack4ActionPerformed
 
+    private void btnEditDetails1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditDetails1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditDetails1MouseEntered
+
+    private void btnEditDetails1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditDetails1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditDetails1MouseExited
+
+    private void btnEditDetails1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDetails1ActionPerformed
+        switchPanels(AddStaff);
+    }//GEN-LAST:event_btnEditDetails1ActionPerformed
+
+    private void btnBack3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack3MouseEntered
+
+    }//GEN-LAST:event_btnBack3MouseEntered
+
+    private void btnBack3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack3MouseExited
+
+    }//GEN-LAST:event_btnBack3MouseExited
+
+    private void btnBack3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack3ActionPerformed
+        switchPanels(EmergencyDashboard);
+    }//GEN-LAST:event_btnBack3ActionPerformed
+
+    private void btnProfileImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileImageActionPerformed
+        JFileChooser browseimage = new JFileChooser();
+        FileNameExtensionFilter fileExtension = new FileNameExtensionFilter(".JPG and .PNG", "jpg", "png");
+        browseimage.setFileFilter(fileExtension);
+        int showDialogue = browseimage.showOpenDialog(null);
+
+        if (showDialogue == JFileChooser.APPROVE_OPTION) {
+            File file = browseimage.getSelectedFile();
+            String selectedImagePath = file.getAbsolutePath();
+            JOptionPane.showConfirmDialog(this, "Set this image as the staff profile image?");
+            flags.setImageFilePath(selectedImagePath);
+
+            ImageIcon image = new ImageIcon(flags.getImageFilePath());
+            Image resizedImage = image.getImage().getScaledInstance(149, 151, Image.SCALE_SMOOTH);
+            lblImageSlot.setText("");
+            lblImageSlot.setIcon(new ImageIcon(resizedImage));
+        }
+    }//GEN-LAST:event_btnProfileImageActionPerformed
+
+    private void btnBack6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack6MouseEntered
+
+    }//GEN-LAST:event_btnBack6MouseEntered
+
+    private void btnBack6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack6MouseExited
+
+    }//GEN-LAST:event_btnBack6MouseExited
+
+    private void btnBack6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack6ActionPerformed
+        Staff staffMember = staffDirectory.addStaffMembers();
+        staffMember.setFullName(txtFullName.getText());
+        staffMember.setPhoneNumber(txtPhoneNumber.getText());
+        staffMember.setEmail(txtEmail.getText());
+        staffMember.setStaffType("EMERGENCY");
+        staffMember.setStaffSubType(cmbSubType.getSelectedItem().toString());
+        staffMember.setManager(managerName);
+        staffMember.setProfileImagePath(flags.getImageFilePath());
+        emergencyServiceFetch.setStaffDirectory(staffDirectory);
+        JOptionPane.showMessageDialog(null, "Staff member added successfully.");
+        switchPanels(EmergencyDashboard);
+        populateStaff();
+        txtFullName.setText("");
+        txtPhoneNumber.setText("");
+        txtEmail.setText("");
+        lblImageSlot.setText("");
+        cmbSubType.setSelectedItem("SELECT TYPE");
+    }//GEN-LAST:event_btnBack6ActionPerformed
+
+    private void btnDetailsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetailsMouseEntered
+
+    }//GEN-LAST:event_btnDetailsMouseEntered
+
+    private void btnDetailsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetailsMouseExited
+
+    }//GEN-LAST:event_btnDetailsMouseExited
+
+    private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
+        int selectedRowIndex = tblStaff.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            switchPanels(ViewDetailsPanel);
+            DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+            Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
+            lblStaffMemberName.setText(selectedStaff.getFullName());
+            txtFullName1.setText(selectedStaff.getFullName());
+            txtPhoneNumber1.setText(selectedStaff.getPhoneNumber());
+            txtEmail1.setText(selectedStaff.getEmail());
+
+            ImageIcon image = new ImageIcon(selectedStaff.getProfileImagePath());
+            Image resizedImage = image.getImage().getScaledInstance(149, 151, Image.SCALE_SMOOTH);
+            lblProfileImageView.setIcon(new ImageIcon(resizedImage));
+        }
+    }//GEN-LAST:event_btnDetailsActionPerformed
+
+    private void btnBack8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack8MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBack8MouseEntered
+
+    private void btnBack8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack8MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBack8MouseExited
+
+    private void btnBack8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack8ActionPerformed
+        switchPanels(EmergencyDashboard);
+    }//GEN-LAST:event_btnBack8ActionPerformed
+
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(component);
@@ -403,14 +907,40 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         jLayeredPane1.repaint();
     }
 
+    private void populateStaff() {
+        DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+        model.setRowCount(0);
+
+        for (Staff staffMember : staffDirectory.getStaffList()) {
+            Object[] row = new Object[4];
+            if (staffMember.getStaffType().equals("EMERGENCY")) {
+
+                row[0] = staffMember;
+                row[1] = staffMember.getEmail();
+                row[2] = staffMember.getStaffSubType();
+                row[3] = staffMember.getStatus();
+                model.addRow(row);
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddProvisions;
+    private javax.swing.JPanel AddStaff;
     private javax.swing.JPanel EmergencyDashboard;
+    private javax.swing.JPanel ViewDetailsPanel;
+    private javax.swing.JButton btnBack3;
     private javax.swing.JButton btnBack4;
     private javax.swing.JButton btnBack5;
+    private javax.swing.JButton btnBack6;
+    private javax.swing.JButton btnBack8;
+    private javax.swing.JButton btnDetails;
     private javax.swing.JButton btnEditDetails;
+    private javax.swing.JButton btnEditDetails1;
+    private javax.swing.JButton btnProfileImage;
+    private javax.swing.JComboBox<String> cmbSubType;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblAirAmbulance;
     private javax.swing.JLabel lblAirAmbulance1;
@@ -418,18 +948,39 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblAmbulance;
     private javax.swing.JLabel lblAmbulance1;
     private javax.swing.JLabel lblAmbulanceCount;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEmail1;
+    private javax.swing.JLabel lblEmail2;
+    private javax.swing.JLabel lblEmail3;
     private javax.swing.JLabel lblFireBrigadeCount;
     private javax.swing.JLabel lblFireBrigades;
     private javax.swing.JLabel lblFireBrigades1;
     private javax.swing.JLabel lblFirstAidKitCount;
     private javax.swing.JLabel lblFirstAidKits;
     private javax.swing.JLabel lblFirstAidKits1;
+    private javax.swing.JLabel lblFullName;
+    private javax.swing.JLabel lblFullName1;
+    private javax.swing.JLabel lblImageSlot;
+    private javax.swing.JLabel lblPhoneNumber;
+    private javax.swing.JLabel lblPhoneNumber1;
+    private javax.swing.JLabel lblProfileImage;
+    private javax.swing.JLabel lblProfileImageView;
     private javax.swing.JLabel lblRestaurantName;
     private javax.swing.JLabel lblRestaurantName1;
+    private javax.swing.JLabel lblRestaurantName2;
+    private javax.swing.JLabel lblStaffMemberName;
     private javax.swing.JPanel navigationPanel;
+    private javax.swing.JTable tblStaff;
     private javax.swing.JTextField txtAirAmbulanceCount;
     private javax.swing.JTextField txtAmbulanceCount;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtEmail1;
     private javax.swing.JTextField txtFireBrigadeCount;
     private javax.swing.JTextField txtFirstAidCount;
+    private javax.swing.JTextField txtFullName;
+    private javax.swing.JTextField txtFullName1;
+    private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JTextField txtPhoneNumber1;
+    private javax.swing.JTextField txtStaffType;
     // End of variables declaration//GEN-END:variables
 }

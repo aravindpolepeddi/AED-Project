@@ -16,6 +16,9 @@ public class Staff extends Person {
     private String staffType;
     private String manager;
     private String profileImagePath;
+    private String staffSubType;
+    private String status;
+    private String hiredBy;
 
     public String getStaffType() {
         return staffType;
@@ -39,6 +42,30 @@ public class Staff extends Person {
 
     public void setProfileImagePath(String profileImagePath) {
         this.profileImagePath = profileImagePath;
+    }
+
+    public String getStaffSubType() {
+        return staffSubType;
+    }
+
+    public void setStaffSubType(String staffSubType) {
+        this.staffSubType = staffSubType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getHiredBy() {
+        return hiredBy;
+    }
+
+    public void setHiredBy(String hiredBy) {
+        this.hiredBy = hiredBy;
     }
 
     @Override
