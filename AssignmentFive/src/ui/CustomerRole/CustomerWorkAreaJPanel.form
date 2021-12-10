@@ -1759,6 +1759,929 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Container class="javax.swing.JPanel" name="SeatingPanel">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="f0" type="rgb"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                  <CardConstraints cardName="card7"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace pref="80" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="rdT1C1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdT1C2" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdT4C1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdT4C2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel35" min="-2" pref="94" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="rdT1C5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdT1C6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="rdT2C1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdT2C2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="rdT4C7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT4C8" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jLabel36" alignment="1" min="-2" pref="94" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="rdT7C1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rdT7C2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="rdT4C5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rdT4C6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="rdT5C1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rdT5C2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="rdT1C3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT1C4" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="rdT1C7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT1C8" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="rdT4C3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT4C4" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="lblHeader4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="btnBack6" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnSaveSeats" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel38" min="-2" pref="94" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="rdT5C5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rdT5C6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="rdT6C1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rdT6C2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel37" min="-2" pref="94" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="rdT2C5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rdT2C6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="rdT3C1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rdT3C2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel34" alignment="0" min="-2" pref="94" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="rdT3C3" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="rdT3C4" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="rdT3C5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rdT3C6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="jLabel40" alignment="1" min="-2" pref="94" max="-2" attributes="0"/>
+                                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="rdT3C7" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                          <Component id="rdT3C8" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="rdT6C3" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                          <Component id="rdT6C4" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="rdT6C5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rdT6C6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                              <Component id="rdT6C7" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="rdT6C8" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="rdT5C3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT5C4" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                          <Component id="rdT2C7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT2C8" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="rdT2C3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT2C4" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="rdT7C3" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="rdT7C4" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jLabel39" alignment="1" min="-2" pref="94" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="rdT7C5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rdT7C6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="rdT5C7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT5C8" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="rdT7C7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT7C8" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                          <Component id="lblHeader4" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="rdT1C3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="rdT1C4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                                          <Component id="rdT2C3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="rdT2C4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Group type="103" groupAlignment="3" attributes="0">
+                                                              <Component id="rdT3C3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="rdT3C4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                          <Component id="btnBack6" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="btnSaveSeats" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel37" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                                      <Component id="jLabel34" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                                      <Component id="jLabel35" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="rdT2C1" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="rdT2C2" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="rdT1C5" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                              <Component id="rdT1C6" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="rdT3C1" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="rdT3C2" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="rdT2C5" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                                  <Component id="rdT2C6" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                          <Component id="rdT3C5" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Component id="rdT3C6" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
+                                  <Component id="rdT1C1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="rdT1C2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="rdT4C3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="rdT4C4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="rdT3C7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="rdT3C8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="3" attributes="0">
+                                                      <Component id="rdT5C3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="rdT5C4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="rdT6C3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="rdT6C4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel40" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                                              <Component id="jLabel38" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                                              <Component id="jLabel36" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="rdT4C5" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                                  <Component id="rdT4C6" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="rdT5C1" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="rdT5C2" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                                  <Component id="rdT4C7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rdT4C8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                                  <Component id="rdT5C7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rdT5C8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="rdT6C7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rdT6C8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="rdT7C3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdT7C4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jLabel39" min="-2" pref="89" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="rdT7C7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="rdT7C8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="rdT7C1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT7C2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="rdT1C7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rdT1C8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="rdT2C7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rdT2C8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Component id="rdT5C5" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                                          <Component id="rdT5C6" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Component id="rdT6C1" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                          <Component id="rdT6C2" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                                  <Component id="rdT6C5" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                                  <Component id="rdT6C6" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="rdT7C5" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Component id="rdT7C6" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                          <Component id="rdT4C1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="rdT4C2" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lblHeader4">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="99" green="99" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Seating"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnBack6">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="cc" green="cc" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="12" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="0" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="BACK"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBack6MouseEntered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBack6MouseExited"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBack6ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel34">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="T3"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel35">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="T1"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel36">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="T4"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel37">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="T2"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel38">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="T5"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel39">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="T7"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel40">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="T6"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT1C1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT1C2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C2"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT1C3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT1C4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C4"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT1C5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C5"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT1C6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C6"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT1C7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C7"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT1C8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C8"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT2C1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT2C2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C2"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT2C5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C5"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT2C6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C6"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT2C3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT2C4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C4"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT2C7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C7"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT2C8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C8"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT3C1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT3C2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C2"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT4C1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT4C2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C2"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT5C1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT5C2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C2"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdT5C2ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT6C1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT6C2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C2"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT7C1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C1"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT7C2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C2"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT3C5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C5"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT3C6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C6"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT4C5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C5"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT4C6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C6"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT5C5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C5"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT5C6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C6"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT6C5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C5"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT6C6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C6"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT7C5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C5"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT7C6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C6"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT3C3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT3C4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C4"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT4C3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT4C4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C4"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT5C3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT5C4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C4"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT6C3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT6C4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C4"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT7C3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C3"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT7C4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C4"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT3C7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C7"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT3C8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C8"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT4C8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C8"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT4C7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C7"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT5C7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C7"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT5C8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C8"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT6C8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C8"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT6C7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C7"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT7C8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C8"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rdT7C7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="C7"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnSaveSeats">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="d3" green="fe" red="d7" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="12" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="40" green="97" red="48" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="SAVE"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSaveSeatsMouseEntered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSaveSeatsMouseExited"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveSeatsActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

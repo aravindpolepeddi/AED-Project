@@ -150,6 +150,73 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane22 = new javax.swing.JScrollPane();
         jTable17 = new javax.swing.JTable();
         jLabel29 = new javax.swing.JLabel();
+        SeatingPanel = new javax.swing.JPanel();
+        lblHeader4 = new javax.swing.JLabel();
+        btnBack6 = new javax.swing.JButton();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        rdT1C1 = new javax.swing.JRadioButton();
+        rdT1C2 = new javax.swing.JRadioButton();
+        rdT1C3 = new javax.swing.JRadioButton();
+        rdT1C4 = new javax.swing.JRadioButton();
+        rdT1C5 = new javax.swing.JRadioButton();
+        rdT1C6 = new javax.swing.JRadioButton();
+        rdT1C7 = new javax.swing.JRadioButton();
+        rdT1C8 = new javax.swing.JRadioButton();
+        rdT2C1 = new javax.swing.JRadioButton();
+        rdT2C2 = new javax.swing.JRadioButton();
+        rdT2C5 = new javax.swing.JRadioButton();
+        rdT2C6 = new javax.swing.JRadioButton();
+        rdT2C3 = new javax.swing.JRadioButton();
+        rdT2C4 = new javax.swing.JRadioButton();
+        rdT2C7 = new javax.swing.JRadioButton();
+        rdT2C8 = new javax.swing.JRadioButton();
+        rdT3C1 = new javax.swing.JRadioButton();
+        rdT3C2 = new javax.swing.JRadioButton();
+        rdT4C1 = new javax.swing.JRadioButton();
+        rdT4C2 = new javax.swing.JRadioButton();
+        rdT5C1 = new javax.swing.JRadioButton();
+        rdT5C2 = new javax.swing.JRadioButton();
+        rdT6C1 = new javax.swing.JRadioButton();
+        rdT6C2 = new javax.swing.JRadioButton();
+        rdT7C1 = new javax.swing.JRadioButton();
+        rdT7C2 = new javax.swing.JRadioButton();
+        rdT3C5 = new javax.swing.JRadioButton();
+        rdT3C6 = new javax.swing.JRadioButton();
+        rdT4C5 = new javax.swing.JRadioButton();
+        rdT4C6 = new javax.swing.JRadioButton();
+        rdT5C5 = new javax.swing.JRadioButton();
+        rdT5C6 = new javax.swing.JRadioButton();
+        rdT6C5 = new javax.swing.JRadioButton();
+        rdT6C6 = new javax.swing.JRadioButton();
+        rdT7C5 = new javax.swing.JRadioButton();
+        rdT7C6 = new javax.swing.JRadioButton();
+        rdT3C3 = new javax.swing.JRadioButton();
+        rdT3C4 = new javax.swing.JRadioButton();
+        rdT4C3 = new javax.swing.JRadioButton();
+        rdT4C4 = new javax.swing.JRadioButton();
+        rdT5C3 = new javax.swing.JRadioButton();
+        rdT5C4 = new javax.swing.JRadioButton();
+        rdT6C3 = new javax.swing.JRadioButton();
+        rdT6C4 = new javax.swing.JRadioButton();
+        rdT7C3 = new javax.swing.JRadioButton();
+        rdT7C4 = new javax.swing.JRadioButton();
+        rdT3C7 = new javax.swing.JRadioButton();
+        rdT3C8 = new javax.swing.JRadioButton();
+        rdT4C8 = new javax.swing.JRadioButton();
+        rdT4C7 = new javax.swing.JRadioButton();
+        rdT5C7 = new javax.swing.JRadioButton();
+        rdT5C8 = new javax.swing.JRadioButton();
+        rdT6C8 = new javax.swing.JRadioButton();
+        rdT6C7 = new javax.swing.JRadioButton();
+        rdT7C8 = new javax.swing.JRadioButton();
+        rdT7C7 = new javax.swing.JRadioButton();
+        btnSaveSeats = new javax.swing.JButton();
 
         NavigationJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -1264,6 +1331,558 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
         jLayeredPane1.add(techService, "card10");
 
+        SeatingPanel.setBackground(new java.awt.Color(240, 255, 255));
+
+        lblHeader4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblHeader4.setForeground(new java.awt.Color(0, 153, 153));
+        lblHeader4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHeader4.setText("Seating");
+
+        btnBack6.setBackground(new java.awt.Color(255, 204, 204));
+        btnBack6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnBack6.setForeground(new java.awt.Color(255, 0, 51));
+        btnBack6.setText("BACK");
+        btnBack6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBack6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBack6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBack6MouseExited(evt);
+            }
+        });
+        btnBack6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack6ActionPerformed(evt);
+            }
+        });
+
+        jLabel34.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel34.setText("T3");
+        jLabel34.setOpaque(true);
+
+        jLabel35.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel35.setText("T1");
+        jLabel35.setOpaque(true);
+
+        jLabel36.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setText("T4");
+        jLabel36.setOpaque(true);
+
+        jLabel37.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setText("T2");
+        jLabel37.setOpaque(true);
+
+        jLabel38.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel38.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel38.setText("T5");
+        jLabel38.setOpaque(true);
+
+        jLabel39.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel39.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel39.setText("T7");
+        jLabel39.setOpaque(true);
+
+        jLabel40.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel40.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel40.setText("T6");
+        jLabel40.setOpaque(true);
+
+        rdT1C1.setText("C1");
+
+        rdT1C2.setText("C2");
+
+        rdT1C3.setText("C3");
+
+        rdT1C4.setText("C4");
+
+        rdT1C5.setText("C5");
+
+        rdT1C6.setText("C6");
+
+        rdT1C7.setText("C7");
+
+        rdT1C8.setText("C8");
+
+        rdT2C1.setText("C1");
+
+        rdT2C2.setText("C2");
+
+        rdT2C5.setText("C5");
+
+        rdT2C6.setText("C6");
+
+        rdT2C3.setText("C3");
+
+        rdT2C4.setText("C4");
+
+        rdT2C7.setText("C7");
+
+        rdT2C8.setText("C8");
+
+        rdT3C1.setText("C1");
+
+        rdT3C2.setText("C2");
+
+        rdT4C1.setText("C1");
+
+        rdT4C2.setText("C2");
+
+        rdT5C1.setText("C1");
+
+        rdT5C2.setText("C2");
+        rdT5C2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdT5C2ActionPerformed(evt);
+            }
+        });
+
+        rdT6C1.setText("C1");
+
+        rdT6C2.setText("C2");
+
+        rdT7C1.setText("C1");
+
+        rdT7C2.setText("C2");
+
+        rdT3C5.setText("C5");
+
+        rdT3C6.setText("C6");
+
+        rdT4C5.setText("C5");
+
+        rdT4C6.setText("C6");
+
+        rdT5C5.setText("C5");
+
+        rdT5C6.setText("C6");
+
+        rdT6C5.setText("C5");
+
+        rdT6C6.setText("C6");
+
+        rdT7C5.setText("C5");
+
+        rdT7C6.setText("C6");
+
+        rdT3C3.setText("C3");
+
+        rdT3C4.setText("C4");
+
+        rdT4C3.setText("C3");
+
+        rdT4C4.setText("C4");
+
+        rdT5C3.setText("C3");
+
+        rdT5C4.setText("C4");
+
+        rdT6C3.setText("C3");
+
+        rdT6C4.setText("C4");
+
+        rdT7C3.setText("C3");
+
+        rdT7C4.setText("C4");
+
+        rdT3C7.setText("C7");
+
+        rdT3C8.setText("C8");
+
+        rdT4C8.setText("C8");
+
+        rdT4C7.setText("C7");
+
+        rdT5C7.setText("C7");
+
+        rdT5C8.setText("C8");
+
+        rdT6C8.setText("C8");
+
+        rdT6C7.setText("C7");
+
+        rdT7C8.setText("C8");
+
+        rdT7C7.setText("C7");
+
+        btnSaveSeats.setBackground(new java.awt.Color(215, 254, 211));
+        btnSaveSeats.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSaveSeats.setForeground(new java.awt.Color(72, 151, 64));
+        btnSaveSeats.setText("SAVE");
+        btnSaveSeats.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSaveSeatsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSaveSeatsMouseExited(evt);
+            }
+        });
+        btnSaveSeats.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveSeatsActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout SeatingPanelLayout = new javax.swing.GroupLayout(SeatingPanel);
+        SeatingPanel.setLayout(SeatingPanelLayout);
+        SeatingPanelLayout.setHorizontalGroup(
+            SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                .addContainerGap(80, Short.MAX_VALUE)
+                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rdT1C1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rdT1C2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rdT4C1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rdT4C2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rdT1C5)
+                            .addComponent(rdT1C6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rdT2C1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(rdT2C2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addComponent(rdT4C7)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT4C8))
+                            .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rdT7C1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(rdT7C2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rdT4C5)
+                                    .addComponent(rdT4C6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rdT5C1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(rdT5C2, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addComponent(rdT1C3)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT1C4))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addComponent(rdT1C7)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT1C8))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addComponent(rdT4C3)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT4C4)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeatingPanelLayout.createSequentialGroup()
+                            .addComponent(lblHeader4)
+                            .addGap(213, 213, 213)
+                            .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnBack6)
+                                .addComponent(btnSaveSeats))
+                            .addGap(46, 46, 46))
+                        .addGroup(SeatingPanelLayout.createSequentialGroup()
+                            .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(rdT5C5)
+                                        .addComponent(rdT5C6))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(rdT6C1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(rdT6C2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(rdT2C5)
+                                        .addComponent(rdT2C6))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(rdT3C1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(rdT3C2, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                            .addComponent(rdT3C3)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(rdT3C4)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(rdT3C5)
+                                        .addComponent(rdT3C6)))
+                                .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                                .addComponent(rdT3C7)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(rdT3C8))
+                                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                                .addComponent(rdT6C3)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(rdT6C4))))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(rdT6C5)
+                                        .addComponent(rdT6C6)))
+                                .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(rdT6C7)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(rdT6C8)))
+                            .addContainerGap()))
+                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addComponent(rdT5C3)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT5C4))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(rdT2C7)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT2C8))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addComponent(rdT2C3)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT2C4))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                        .addComponent(rdT7C3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rdT7C4))
+                                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rdT7C5)
+                                    .addComponent(rdT7C6)))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addComponent(rdT5C7)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT5C8))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addComponent(rdT7C7)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT7C8)))
+                        .addGap(280, 280, 280))))
+        );
+        SeatingPanelLayout.setVerticalGroup(
+            SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(lblHeader4)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                        .addGap(82, 82, 82)
+                                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(rdT1C3)
+                                            .addComponent(rdT1C4)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeatingPanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(rdT2C3)
+                                                .addComponent(rdT2C4))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeatingPanelLayout.createSequentialGroup()
+                                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(rdT3C3)
+                                                    .addComponent(rdT3C4))
+                                                .addGap(8, 8, 8))))))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(btnBack6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSaveSeats)
+                                .addGap(86, 86, 86)))
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                    .addComponent(rdT2C1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(rdT2C2))
+                                .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                    .addComponent(rdT1C5)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(rdT1C6)))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                        .addComponent(rdT3C1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rdT3C2))
+                                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                        .addComponent(rdT2C5)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(rdT2C6))))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(rdT3C5)
+                                .addGap(27, 27, 27)
+                                .addComponent(rdT3C6))))
+                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                        .addGap(196, 196, 196)
+                        .addComponent(rdT1C1)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdT1C2)))
+                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                        .addGap(37, 37, 37)
+                                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(rdT4C3)
+                                            .addComponent(rdT4C4)))
+                                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(rdT3C7)
+                                            .addComponent(rdT3C8))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(rdT5C3)
+                                            .addComponent(rdT5C4)
+                                            .addComponent(rdT6C3)
+                                            .addComponent(rdT6C4))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                        .addComponent(rdT4C5)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(rdT4C6))
+                                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                        .addComponent(rdT5C1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rdT5C2)))))
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(rdT4C7)
+                                        .addComponent(rdT4C8))
+                                    .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(rdT5C7)
+                                        .addComponent(rdT5C8))))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(rdT6C7)
+                                    .addComponent(rdT6C8))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rdT7C3)
+                            .addComponent(rdT7C4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeatingPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(rdT7C7)
+                                    .addComponent(rdT7C8))
+                                .addGap(29, 29, 29))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeatingPanelLayout.createSequentialGroup()
+                                .addComponent(rdT7C1)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT7C2)
+                                .addGap(73, 73, 73))))
+                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(rdT1C7)
+                                .addComponent(rdT1C8))
+                            .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(rdT2C7)
+                                .addComponent(rdT2C8)))
+                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                        .addGap(44, 44, 44)
+                                        .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                                .addComponent(rdT5C5)
+                                                .addGap(27, 27, 27)
+                                                .addComponent(rdT5C6))
+                                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                                .addComponent(rdT6C1)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(rdT6C2))))
+                                    .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                        .addGap(49, 49, 49)
+                                        .addComponent(rdT6C5)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(rdT6C6)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rdT7C5)
+                                .addGap(27, 27, 27)
+                                .addComponent(rdT7C6)
+                                .addGap(69, 69, 69))
+                            .addGroup(SeatingPanelLayout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(rdT4C1)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdT4C2)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+        );
+
+        jLayeredPane1.add(SeatingPanel, "card7");
+
         jSplitPane1.setRightComponent(jLayeredPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1447,9 +2066,331 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMenu6MouseEntered
 
+    private void btnBack6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack6MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBack6MouseEntered
+
+    private void btnBack6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBack6MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBack6MouseExited
+
+    private void btnBack6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack6ActionPerformed
+        switchPanels(workAreaPanel);
+    }//GEN-LAST:event_btnBack6ActionPerformed
+
+    private void rdT5C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdT5C2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdT5C2ActionPerformed
+
+    private void btnSaveSeatsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveSeatsMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveSeatsMouseEntered
+
+    private void btnSaveSeatsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveSeatsMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveSeatsMouseExited
+
+    private void btnSaveSeatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveSeatsActionPerformed
+        Map<String, List<String>> seatsMap = new HashMap<>();
+        List<String> seatsListForT1 = new ArrayList<String>();
+
+        if (rdT1C1.isSelected()) {
+            seatsListForT1.add("C1");
+            seatsMap.put("T1", seatsListForT1);
+        }
+
+        if (rdT1C2.isSelected()) {
+            seatsListForT1.add("C2");
+            seatsMap.put("T1", seatsListForT1);
+        }
+
+        if (rdT1C3.isSelected()) {
+            seatsListForT1.add("C3");
+            seatsMap.put("T1", seatsListForT1);
+        }
+
+        if (rdT1C4.isSelected()) {
+            seatsListForT1.add("C4");
+            seatsMap.put("T1", seatsListForT1);
+        }
+
+        if (rdT1C5.isSelected()) {
+            seatsListForT1.add("C5");
+            seatsMap.put("T1", seatsListForT1);
+        }
+
+        if (rdT1C6.isSelected()) {
+            seatsListForT1.add("C6");
+            seatsMap.put("T1", seatsListForT1);
+        }
+
+        if (rdT1C7.isSelected()) {
+            seatsListForT1.add("C7");
+            seatsMap.put("T1", seatsListForT1);
+        }
+
+        if (rdT1C8.isSelected()) {
+            seatsListForT1.add("C8");
+            seatsMap.put("T1", seatsListForT1);
+        }
+
+        List<String> seatsListForT2 = new ArrayList<String>();
+        if (rdT2C1.isSelected()) {
+            seatsListForT2.add("C1");
+            seatsMap.put("T2", seatsListForT2);
+        }
+
+        if (rdT2C2.isSelected()) {
+            seatsListForT2.add("C2");
+            seatsMap.put("T2", seatsListForT2);
+        }
+
+        if (rdT2C3.isSelected()) {
+            seatsListForT2.add("C3");
+            seatsMap.put("T2", seatsListForT2);
+        }
+
+        if (rdT2C4.isSelected()) {
+            seatsListForT2.add("C4");
+            seatsMap.put("T2", seatsListForT2);
+        }
+
+        if (rdT2C5.isSelected()) {
+            seatsListForT2.add("C5");
+            seatsMap.put("T2", seatsListForT2);
+        }
+
+        if (rdT2C6.isSelected()) {
+            seatsListForT2.add("C6");
+            seatsMap.put("T2", seatsListForT2);
+        }
+
+        if (rdT2C7.isSelected()) {
+            seatsListForT2.add("C7");
+            seatsMap.put("T2", seatsListForT2);
+        }
+
+        if (rdT2C8.isSelected()) {
+            seatsListForT2.add("C8");
+            seatsMap.put("T2", seatsListForT2);
+        }
+
+        List<String> seatsListForT3 = new ArrayList<String>();
+        if (rdT3C1.isSelected()) {
+            seatsListForT3.add("C1");
+            seatsMap.put("T3", seatsListForT3);
+        }
+
+        if (rdT3C2.isSelected()) {
+            seatsListForT3.add("C2");
+            seatsMap.put("T3", seatsListForT3);
+        }
+
+        if (rdT3C3.isSelected()) {
+            seatsListForT3.add("C3");
+            seatsMap.put("T3", seatsListForT3);
+        }
+
+        if (rdT3C4.isSelected()) {
+            seatsListForT3.add("C4");
+            seatsMap.put("T3", seatsListForT3);
+        }
+
+        if (rdT3C5.isSelected()) {
+            seatsListForT3.add("C5");
+            seatsMap.put("T3", seatsListForT3);
+        }
+
+        if (rdT3C6.isSelected()) {
+            seatsListForT3.add("C6");
+            seatsMap.put("T3", seatsListForT3);
+        }
+
+        if (rdT3C7.isSelected()) {
+            seatsListForT3.add("C7");
+            seatsMap.put("T3", seatsListForT3);
+        }
+
+        if (rdT3C8.isSelected()) {
+            seatsListForT3.add("C8");
+            seatsMap.put("T3", seatsListForT3);
+        }
+
+        List<String> seatsListForT4 = new ArrayList<String>();
+        if (rdT4C1.isSelected()) {
+            seatsListForT4.add("C1");
+            seatsMap.put("T4", seatsListForT4);
+        }
+
+        if (rdT4C2.isSelected()) {
+            seatsListForT4.add("C2");
+            seatsMap.put("T4", seatsListForT4);
+        }
+
+        if (rdT4C3.isSelected()) {
+            seatsListForT4.add("C3");
+            seatsMap.put("T4", seatsListForT4);
+        }
+
+        if (rdT4C4.isSelected()) {
+            seatsListForT4.add("C4");
+            seatsMap.put("T4", seatsListForT4);
+        }
+
+        if (rdT4C5.isSelected()) {
+            seatsListForT4.add("C5");
+            seatsMap.put("T4", seatsListForT4);
+        }
+
+        if (rdT4C6.isSelected()) {
+            seatsListForT4.add("C6");
+            seatsMap.put("T4", seatsListForT4);
+        }
+
+        if (rdT4C7.isSelected()) {
+            seatsListForT4.add("C7");
+            seatsMap.put("T4", seatsListForT4);
+        }
+
+        if (rdT4C8.isSelected()) {
+            seatsListForT4.add("C8");
+            seatsMap.put("T4", seatsListForT4);
+        }
+
+        List<String> seatsListForT5 = new ArrayList<String>();
+        if (rdT5C1.isSelected()) {
+            seatsListForT5.add("C1");
+            seatsMap.put("T5", seatsListForT5);
+        }
+
+        if (rdT5C2.isSelected()) {
+            seatsListForT5.add("C2");
+            seatsMap.put("T5", seatsListForT5);
+        }
+
+        if (rdT5C3.isSelected()) {
+            seatsListForT5.add("C3");
+            seatsMap.put("T5", seatsListForT5);
+        }
+
+        if (rdT5C4.isSelected()) {
+            seatsListForT5.add("C4");
+            seatsMap.put("T5", seatsListForT5);
+        }
+
+        if (rdT5C5.isSelected()) {
+            seatsListForT5.add("C5");
+            seatsMap.put("T5", seatsListForT5);
+        }
+
+        if (rdT5C6.isSelected()) {
+            seatsListForT5.add("C6");
+            seatsMap.put("T5", seatsListForT5);
+        }
+
+        if (rdT5C7.isSelected()) {
+            seatsListForT5.add("C7");
+            seatsMap.put("T5", seatsListForT5);
+        }
+
+        if (rdT5C8.isSelected()) {
+            seatsListForT5.add("C8");
+            seatsMap.put("T5", seatsListForT5);
+        }
+
+        List<String> seatsListForT6 = new ArrayList<String>();
+        if (rdT6C1.isSelected()) {
+            seatsListForT5.add("C1");
+            seatsMap.put("T6", seatsListForT6);
+        }
+
+        if (rdT6C2.isSelected()) {
+            seatsListForT6.add("C2");
+            seatsMap.put("T6", seatsListForT6);
+        }
+
+        if (rdT6C3.isSelected()) {
+            seatsListForT6.add("C3");
+            seatsMap.put("T6", seatsListForT6);
+        }
+
+        if (rdT6C4.isSelected()) {
+            seatsListForT6.add("C4");
+            seatsMap.put("T6", seatsListForT6);
+        }
+
+        if (rdT6C5.isSelected()) {
+            seatsListForT6.add("C5");
+            seatsMap.put("T6", seatsListForT6);
+        }
+
+        if (rdT6C6.isSelected()) {
+            seatsListForT6.add("C6");
+            seatsMap.put("T6", seatsListForT6);
+        }
+
+        if (rdT6C7.isSelected()) {
+            seatsListForT6.add("C7");
+            seatsMap.put("T6", seatsListForT6);
+        }
+
+        if (rdT6C8.isSelected()) {
+            seatsListForT6.add("C8");
+            seatsMap.put("T6", seatsListForT6);
+        }
+
+        List<String> seatsListForT7 = new ArrayList<String>();
+        if (rdT7C1.isSelected()) {
+            seatsListForT7.add("C1");
+            seatsMap.put("T7", seatsListForT7);
+        }
+
+        if (rdT7C2.isSelected()) {
+            seatsListForT7.add("C2");
+            seatsMap.put("T7", seatsListForT7);
+        }
+
+        if (rdT7C3.isSelected()) {
+            seatsListForT7.add("C3");
+            seatsMap.put("T7", seatsListForT7);
+        }
+
+        if (rdT7C4.isSelected()) {
+            seatsListForT7.add("C4");
+            seatsMap.put("T7", seatsListForT7);
+        }
+
+        if (rdT7C5.isSelected()) {
+            seatsListForT7.add("C5");
+            seatsMap.put("T7", seatsListForT7);
+        }
+
+        if (rdT7C6.isSelected()) {
+            seatsListForT7.add("C6");
+            seatsMap.put("T7", seatsListForT7);
+        }
+
+        if (rdT7C7.isSelected()) {
+            seatsListForT7.add("C7");
+            seatsMap.put("T7", seatsListForT7);
+        }
+
+        if (rdT7C8.isSelected()) {
+            seatsListForT7.add("C8");
+            seatsMap.put("T7", seatsListForT7);
+        }
+
+        JOptionPane.showMessageDialog(null, "Seating saved successfully.");
+        switchPanels(workAreaPanel);
+        suites.setSeats(seatsMap);
+        restRadioButtons();
+    }//GEN-LAST:event_btnSaveSeatsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel NavigationJPanel;
+    private javax.swing.JPanel SeatingPanel;
+    private javax.swing.JButton btnBack6;
     private javax.swing.JButton btnEditDetails;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnMenu1;
@@ -1459,6 +2400,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnMenu5;
     private javax.swing.JButton btnMenu6;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JButton btnSaveSeats;
     private javax.swing.JPanel customerProfilePanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1499,7 +2441,14 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1552,10 +2501,67 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTable9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblHeader4;
     private javax.swing.JPanel merchandize;
     private javax.swing.JPanel orderFood;
     private javax.swing.JPanel parkingDetails;
     private javax.swing.JPanel pnlFeedbackTable;
+    private javax.swing.JRadioButton rdT1C1;
+    private javax.swing.JRadioButton rdT1C2;
+    private javax.swing.JRadioButton rdT1C3;
+    private javax.swing.JRadioButton rdT1C4;
+    private javax.swing.JRadioButton rdT1C5;
+    private javax.swing.JRadioButton rdT1C6;
+    private javax.swing.JRadioButton rdT1C7;
+    private javax.swing.JRadioButton rdT1C8;
+    private javax.swing.JRadioButton rdT2C1;
+    private javax.swing.JRadioButton rdT2C2;
+    private javax.swing.JRadioButton rdT2C3;
+    private javax.swing.JRadioButton rdT2C4;
+    private javax.swing.JRadioButton rdT2C5;
+    private javax.swing.JRadioButton rdT2C6;
+    private javax.swing.JRadioButton rdT2C7;
+    private javax.swing.JRadioButton rdT2C8;
+    private javax.swing.JRadioButton rdT3C1;
+    private javax.swing.JRadioButton rdT3C2;
+    private javax.swing.JRadioButton rdT3C3;
+    private javax.swing.JRadioButton rdT3C4;
+    private javax.swing.JRadioButton rdT3C5;
+    private javax.swing.JRadioButton rdT3C6;
+    private javax.swing.JRadioButton rdT3C7;
+    private javax.swing.JRadioButton rdT3C8;
+    private javax.swing.JRadioButton rdT4C1;
+    private javax.swing.JRadioButton rdT4C2;
+    private javax.swing.JRadioButton rdT4C3;
+    private javax.swing.JRadioButton rdT4C4;
+    private javax.swing.JRadioButton rdT4C5;
+    private javax.swing.JRadioButton rdT4C6;
+    private javax.swing.JRadioButton rdT4C7;
+    private javax.swing.JRadioButton rdT4C8;
+    private javax.swing.JRadioButton rdT5C1;
+    private javax.swing.JRadioButton rdT5C2;
+    private javax.swing.JRadioButton rdT5C3;
+    private javax.swing.JRadioButton rdT5C4;
+    private javax.swing.JRadioButton rdT5C5;
+    private javax.swing.JRadioButton rdT5C6;
+    private javax.swing.JRadioButton rdT5C7;
+    private javax.swing.JRadioButton rdT5C8;
+    private javax.swing.JRadioButton rdT6C1;
+    private javax.swing.JRadioButton rdT6C2;
+    private javax.swing.JRadioButton rdT6C3;
+    private javax.swing.JRadioButton rdT6C4;
+    private javax.swing.JRadioButton rdT6C5;
+    private javax.swing.JRadioButton rdT6C6;
+    private javax.swing.JRadioButton rdT6C7;
+    private javax.swing.JRadioButton rdT6C8;
+    private javax.swing.JRadioButton rdT7C1;
+    private javax.swing.JRadioButton rdT7C2;
+    private javax.swing.JRadioButton rdT7C3;
+    private javax.swing.JRadioButton rdT7C4;
+    private javax.swing.JRadioButton rdT7C5;
+    private javax.swing.JRadioButton rdT7C6;
+    private javax.swing.JRadioButton rdT7C7;
+    private javax.swing.JRadioButton rdT7C8;
     private javax.swing.JPanel registerEvent;
     private javax.swing.JPanel securityService;
     private javax.swing.JPanel selecSeatType;
