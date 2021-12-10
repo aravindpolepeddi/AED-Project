@@ -8,7 +8,6 @@ package ui;
 import business.Business;
 import business.Customer.CustomerDirectory;
 import business.DB4OUtil.DB4OUtil;
-import business.DeliveryStaff.DeliveryStaffDirectory;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.useraccount.UserAccount;
@@ -33,7 +32,6 @@ public class MainScreen extends javax.swing.JPanel {
     RestaurantDirectory restaurantDirectory;
     CustomerDirectory customerDirectory;
     OrderDirectory orderDirectory;
-    DeliveryStaffDirectory deliveryStaffDirectory;
 
     public MainScreen(JPanel mainWorkArea, UserAccount userAccount, Business business) {
         initComponents();
@@ -57,12 +55,6 @@ public class MainScreen extends javax.swing.JPanel {
             this.orderDirectory = system.getOrderDirectory();
         } else {
             this.orderDirectory = new OrderDirectory();
-        }
-
-        if (system.getDeliveryStaffDirectory() != null) {
-            this.deliveryStaffDirectory = system.getDeliveryStaffDirectory();
-        } else {
-            this.deliveryStaffDirectory = new DeliveryStaffDirectory();
         }
         initUserWorkArea();
     }
@@ -117,7 +109,7 @@ public class MainScreen extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(lblUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 630, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 609, Short.MAX_VALUE)
                 .addComponent(btnLogOff, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -146,7 +138,7 @@ public class MainScreen extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -177,7 +169,7 @@ public class MainScreen extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void initUserWorkArea() {
-        lblUser.setText("Logged in as " + ((userAccount.getEmployee() != null) ? userAccount.getEmployee().getName().toUpperCase() : userAccount.getUsername()));
+        lblUser.setText("Logged in as " + ((userAccount.getName() != null) ? userAccount.getName().toUpperCase() : userAccount.getUsername()));
         CardLayout layout = (CardLayout) workArea.getLayout();
         workArea.add("workArea", userAccount.getRole().createWorkArea(workArea, userAccount, system));
         layout.next(workArea);

@@ -8,7 +8,6 @@ package ui;
 import business.Business;
 import business.Customer.CustomerDirectory;
 import business.DB4OUtil.DB4OUtil;
-import business.DeliveryStaff.DeliveryStaffDirectory;
 import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
@@ -37,7 +36,6 @@ public class LoginScreen extends javax.swing.JPanel {
     RestaurantDirectory restaurantDirectory;
     CustomerDirectory customerDirectory;
     OrderDirectory orderDirectory;
-    DeliveryStaffDirectory deliveryStaffDirectory;
 
     public LoginScreen(JPanel mainWorkArea, Business business) {
         initComponents();
@@ -47,7 +45,6 @@ public class LoginScreen extends javax.swing.JPanel {
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
         this.orderDirectory = orderDirectory;
-        this.deliveryStaffDirectory = deliveryStaffDirectory;
     }
 
     /**
@@ -144,13 +141,11 @@ public class LoginScreen extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(pwdField, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
+                .addContainerGap(302, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
                 .addContainerGap())
         );
 
@@ -163,7 +158,7 @@ public class LoginScreen extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUser)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))

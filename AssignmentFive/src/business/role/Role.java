@@ -7,7 +7,6 @@ package business.role;
 
 import business.Business;
 import business.Customer.CustomerDirectory;
-import business.DeliveryStaff.DeliveryStaffDirectory;
 import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
@@ -29,7 +28,16 @@ public abstract class Role {
         SuitesManager("SuitesManager"),
         KitchenManager("KitchenManager"),
         Vendor("Vendor"),
-        SysAdmin("Sysadmin");
+        SysAdmin("Sysadmin"),
+        FoodBeverageEntAdmin("FoodBevEntAdmin"),
+        MerchendiseEntAdmin("MerchendiseEntAdmin"),
+        BookingEntAdmin("BookingEntAdmin"),
+        HumanResourceEntAdmin("HumanResourceEntAdmin"),
+        FoodBevOrgAdmin("FoodBevOrgAdmin"),
+        SuitesRestaurantRole("SuitesRestaurantRole"),
+        CleaningServicesRole("CleaningServicesRole"),
+        EmergencyServicesRole("EmergencyServicesRole"),
+        SecurityServicesRole("SecurityServicesRole");
 
         private String value;
 

@@ -5,10 +5,76 @@
  */
 package business.premium;
 
+import business.Restaurant.Menu;
+
 /**
  *
  * @author aravindpolepeddi
  */
 public class Premium {
-    
+
+    private String managerName;
+    private String userName;
+    private String managerType;
+    private String cuisine;
+    private String vegOrNonVeg;
+    private Menu menu;
+    private String restaurantName;
+
+    public String getManagerName() {
+        return managerName;
+    }
+
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getManagerType() {
+        return managerType;
+    }
+
+    public void setManagerType(String managerType) {
+        this.managerType = managerType;
+    }
+
+    public String getCuisine() {
+        return cuisine;
+    }
+
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
+    }
+
+    public String getVegOrNonVeg() {
+        return vegOrNonVeg;
+    }
+
+    public void setVegOrNonVeg(String vegOrNonVeg) {
+        this.vegOrNonVeg = vegOrNonVeg;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
 }

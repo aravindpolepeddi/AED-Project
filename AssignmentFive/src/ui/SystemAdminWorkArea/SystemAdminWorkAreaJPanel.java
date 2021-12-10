@@ -7,7 +7,6 @@ package ui.SystemAdminWorkArea;
 
 import business.Business;
 import business.Customer.CustomerDirectory;
-import business.DeliveryStaff.DeliveryStaffDirectory;
 import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
@@ -29,7 +28,6 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     RestaurantDirectory restaurantDirectory;
     CustomerDirectory customerDirectory;
     OrderDirectory orderDirectory;
-    DeliveryStaffDirectory deliveryStaffDirectory;
     UserAccount account;
 
     public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
@@ -38,7 +36,6 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
         this.orderDirectory = orderDirectory;
-        this.deliveryStaffDirectory = deliveryStaffDirectory;
         this.account = account;
     }
 
@@ -55,10 +52,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         NavigationJPanel = new javax.swing.JPanel();
-        btnRestaurant = new javax.swing.JButton();
-        btnDeliveryStaff = new javax.swing.JButton();
-        btnCustomers = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        ReportingjButton = new javax.swing.JButton();
         workAreaPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -83,101 +79,46 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         NavigationJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
-        btnRestaurant.setBackground(new java.awt.Color(206, 217, 217));
-        btnRestaurant.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnRestaurant.setForeground(new java.awt.Color(0, 51, 51));
-        btnRestaurant.setText("MANAGE RESTAURANTS");
-        btnRestaurant.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRestaurant.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRestaurantMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRestaurantMouseExited(evt);
-            }
-        });
-        btnRestaurant.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRestaurantActionPerformed(evt);
-            }
-        });
-
-        btnDeliveryStaff.setBackground(new java.awt.Color(206, 217, 217));
-        btnDeliveryStaff.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnDeliveryStaff.setForeground(new java.awt.Color(0, 51, 51));
-        btnDeliveryStaff.setText("MANAGE DELIVERY STAFF");
-        btnDeliveryStaff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDeliveryStaff.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDeliveryStaffMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDeliveryStaffMouseExited(evt);
-            }
-        });
-        btnDeliveryStaff.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeliveryStaffActionPerformed(evt);
-            }
-        });
-
-        btnCustomers.setBackground(new java.awt.Color(206, 217, 217));
-        btnCustomers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCustomers.setForeground(new java.awt.Color(0, 51, 51));
-        btnCustomers.setText("MANAGE CUSTOMERS");
-        btnCustomers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCustomers.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCustomersMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCustomersMouseExited(evt);
-            }
-        });
-        btnCustomers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCustomersActionPerformed(evt);
-            }
-        });
-
         jLabel5.setBackground(new java.awt.Color(178, 209, 201));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel5.setText("<html><span font color=\"rgb(178, 209, 201)\">C</span> <span font color=\"rgb(0,153,153)\">!<span></html> ");
+
+        jButton2.setText("MANAGE EVENT");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        ReportingjButton.setText("REPORTING");
 
         javax.swing.GroupLayout NavigationJPanelLayout = new javax.swing.GroupLayout(NavigationJPanel);
         NavigationJPanel.setLayout(NavigationJPanelLayout);
         NavigationJPanelLayout.setHorizontalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDeliveryStaff, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnRestaurant, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCustomers, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(NavigationJPanelLayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                    .addGroup(NavigationJPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ReportingjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        NavigationJPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCustomers, btnDeliveryStaff, btnRestaurant});
-
         NavigationJPanelLayout.setVerticalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(btnRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(btnDeliveryStaff)
-                .addGap(33, 33, 33)
-                .addComponent(btnCustomers)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addGap(204, 204, 204)
+                .addComponent(jButton2)
+                .addGap(30, 30, 30)
+                .addComponent(ReportingjButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75))
         );
-
-        NavigationJPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCustomers, btnDeliveryStaff, btnRestaurant});
 
         jSplitPane1.setLeftComponent(NavigationJPanel);
 
@@ -253,56 +194,20 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurantActionPerformed
-        JPanel manageRestaurantManagersPanel = new ManageRestaurantManagersPanel(business, account, workAreaPanel, restaurantDirectory);
-        workAreaPanel.add("ManageRestaurantManagersPanel", manageRestaurantManagersPanel);
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        JPanel manageEventPanel = new manageEventPanel(business,account,workAreaPanel);
+        workAreaPanel.add("ManageCustomerPanel", manageEventPanel);
         CardLayout layout = (CardLayout) workAreaPanel.getLayout();
         layout.next(workAreaPanel);
-    }//GEN-LAST:event_btnRestaurantActionPerformed
-
-    private void btnDeliveryStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveryStaffActionPerformed
-        JPanel manageDeliveryStaffPanel = new ManageDeliveryStaffPanel(business, deliveryStaffDirectory);
-        workAreaPanel.add("ManageDeliveryStaffPanel", manageDeliveryStaffPanel);
-        CardLayout layout = (CardLayout) workAreaPanel.getLayout();
-        layout.next(workAreaPanel);    }//GEN-LAST:event_btnDeliveryStaffActionPerformed
-
-    private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
-        JPanel manageCustomerPanel = new ManageCustomerPanel(business, customerDirectory);
-        workAreaPanel.add("ManageCustomerPanel", manageCustomerPanel);
-        CardLayout layout = (CardLayout) workAreaPanel.getLayout();
-        layout.next(workAreaPanel);    }//GEN-LAST:event_btnCustomersActionPerformed
-
-    private void btnRestaurantMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRestaurantMouseEntered
-        btnRestaurant.setBackground(new Color(112, 143, 143));
-    }//GEN-LAST:event_btnRestaurantMouseEntered
-
-    private void btnRestaurantMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRestaurantMouseExited
-        btnRestaurant.setBackground(new Color(206, 217, 217));
-    }//GEN-LAST:event_btnRestaurantMouseExited
-
-    private void btnDeliveryStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeliveryStaffMouseEntered
-        btnDeliveryStaff.setBackground(new Color(112, 143, 143));
-    }//GEN-LAST:event_btnDeliveryStaffMouseEntered
-
-    private void btnDeliveryStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeliveryStaffMouseExited
-        btnDeliveryStaff.setBackground(new Color(206, 217, 217));
-    }//GEN-LAST:event_btnDeliveryStaffMouseExited
-
-    private void btnCustomersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseEntered
-        btnCustomers.setBackground(new Color(112, 143, 143));
-    }//GEN-LAST:event_btnCustomersMouseEntered
-
-    private void btnCustomersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCustomersMouseExited
-        btnCustomers.setBackground(new Color(206, 217, 217));
-    }//GEN-LAST:event_btnCustomersMouseExited
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel NavigationJPanel;
-    private javax.swing.JButton btnCustomers;
-    private javax.swing.JButton btnDeliveryStaff;
-    private javax.swing.JButton btnRestaurant;
+    private javax.swing.JButton ReportingjButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

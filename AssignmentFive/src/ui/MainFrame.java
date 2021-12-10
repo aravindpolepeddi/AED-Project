@@ -8,7 +8,6 @@ package ui;
 import business.Business;
 import business.ConfigureABusiness;
 import business.Customer.CustomerDirectory;
-import business.DeliveryStaff.DeliveryStaffDirectory;
 import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
@@ -28,7 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
     private RestaurantDirectory restaurantDirectory;
     private CustomerDirectory customerDirectory;
     private OrderDirectory orderDirectory;
-    private DeliveryStaffDirectory deliveryStaffDirectory;
+//    private DeliveryStaffDirectory deliveryStaffDirectory;
 
     public MainFrame() {
         initComponents();
@@ -51,11 +50,11 @@ public class MainFrame extends javax.swing.JFrame {
             this.orderDirectory = new OrderDirectory();
         }
 
-        if (business.getDeliveryStaffDirectory() != null) {
-            this.deliveryStaffDirectory = business.getDeliveryStaffDirectory();
-        } else {
-            this.deliveryStaffDirectory = new DeliveryStaffDirectory();
-        }
+//        if (business.getDeliveryStaffDirectory() != null) {
+//            this.deliveryStaffDirectory = business.getDeliveryStaffDirectory();
+//        } else {
+//            this.deliveryStaffDirectory = new DeliveryStaffDirectory();
+//        }
         setSize(943, 738);
 
         initLoginScreen();

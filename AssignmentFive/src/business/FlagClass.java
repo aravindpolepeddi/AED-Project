@@ -5,6 +5,8 @@
  */
 package business;
 
+import business.hrservices.Staff;
+
 /**
  *
  * @author deepv
@@ -16,6 +18,9 @@ public class FlagClass {
     private String deliveryStaffName;
     private String customerName;
     private int id;
+    private int suiteCount;
+    private int premiumCount;
+    private String imageFilePath;
 
     public String getRestaurantManagerName() {
         return restaurantManagerName;
@@ -55,6 +60,30 @@ public class FlagClass {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getSuiteCount() {
+        return suiteCount;
+    }
+
+    public void setSuiteCount(int suiteCount) {
+        this.suiteCount = suiteCount;
+    }
+
+    public int getPremiumCount() {
+        return premiumCount;
+    }
+
+    public void setPremiumCount(int premiumCount) {
+        this.premiumCount = premiumCount;
+    }
+
+    public String getImageFilePath() {
+        return imageFilePath;
+    }
+
+    public void setImageFilePath(String imageFilePath) {
+        this.imageFilePath = imageFilePath;
     }
 
 }

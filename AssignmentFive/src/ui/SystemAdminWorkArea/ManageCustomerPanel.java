@@ -8,7 +8,6 @@ package ui.SystemAdminWorkArea;
 import business.Business;
 import business.Customer.CustomerDirectory;
 import business.FlagClass;
-import business.employee.Employee;
 import business.role.Customer;
 import business.role.RestaurantRole;
 import business.role.Role;
@@ -409,9 +408,9 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
                 pwdPassword.setText("");
             } else {
 
-                Employee employee = new Employee(txtFirstName.getText() + " " + txtLastName.getText());
+                String name = txtFirstName.getText() + " " + txtLastName.getText();
                 Customer role = new Customer();
-                business.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+                business.getUserAccountDirectory().createUserAccount(userName, password, name, role);
 
                 JOptionPane.showMessageDialog(null, "User Account added successfully.");
                 txtFirstName.setText("");
@@ -435,9 +434,8 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
             UserAccount updatedAccount = business.getUserAccountDirectory().fetchUserAccountUsingUserName(flags.getUserName());
             updatedAccount.setUsername(txtUserName1.getText());
             updatedAccount.setPassword(txtPassword.getText());
-            Employee employee = new Employee();
-            employee.setName(txtFirstName1.getText() + " " + txtLastName1.getText());
-            updatedAccount.setEmployee(employee);
+            String name = txtFirstName1.getText() + " " + txtLastName1.getText();
+            updatedAccount.setName(name);
 
             for (int i = 0; i <= business.getUserAccountDirectory().getUserAccountList().size() - 1; i++) {
                 if (business.getUserAccountDirectory().getUserAccountList().get(i).getUsername().equals(flags.getUserName())) {
@@ -480,7 +478,7 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
 
             business.Customer.Customer customer = business.getCustomerDirectory().findCustomer(selectedUserAccount.getUsername());
             business.getCustomerDirectory().removeCustomer(customer);
-            business.getOrderDirectory().removeSelectedCustomerOrders(selectedUserAccount.getEmployee().getName());
+            business.getOrderDirectory().removeSelectedCustomerOrders(selectedUserAccount.getName());
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -495,12 +493,12 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
             DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
             UserAccount selectedUserAccount = (UserAccount) model.getValueAt(selectedRowIndex, 0);
             pnlUpdate.setVisible(true);
-            txtFirstName1.setText(selectedUserAccount.getEmployee().getName().substring(0, selectedUserAccount.getEmployee().getName().indexOf(" ")));
-            txtLastName1.setText(selectedUserAccount.getEmployee().getName().substring(selectedUserAccount.getEmployee().getName().indexOf(" ") + 1, selectedUserAccount.getEmployee().getName().length()));
+            txtFirstName1.setText(selectedUserAccount.getName().substring(0, selectedUserAccount.getName().indexOf(" ")));
+            txtLastName1.setText(selectedUserAccount.getName().substring(selectedUserAccount.getName().indexOf(" ") + 1, selectedUserAccount.getName().length()));
             txtUserName1.setText(selectedUserAccount.getUsername());
             txtPassword.setText(selectedUserAccount.getPassword());
             flags.setUserName(selectedUserAccount.getUsername());
-            flags.setCustomerName(selectedUserAccount.getEmployee().getName());
+            flags.setCustomerName(selectedUserAccount.getName());
         }
 
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -631,7 +629,7 @@ public class ManageCustomerPanel extends javax.swing.JPanel {
             if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.Customer) {
                 row[0] = userAccount;
                 row[1] = userAccount.getPassword();
-                row[2] = userAccount.getEmployee().getName();
+                row[2] = userAccount.getName();
                 model.addRow(row);
             }
         }

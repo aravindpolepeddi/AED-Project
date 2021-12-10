@@ -7,8 +7,6 @@ package ui.RestaurantRole;
 
 import business.Business;
 import business.Customer.CustomerDirectory;
-import business.DeliveryStaff.DeliveryStaff;
-import business.DeliveryStaff.DeliveryStaffDirectory;
 import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.Menu;
@@ -44,7 +42,7 @@ public class RestaurantAreaJPanel extends javax.swing.JPanel {
     String managerName;
     CustomerDirectory customerDirectory;
     OrderDirectory orderDirectory;
-    DeliveryStaffDirectory deliveryStaffDirectory;
+//    DeliveryStaffDirectory deliveryStaffDirectory;
     int orderId;
 
     public RestaurantAreaJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
@@ -53,8 +51,8 @@ public class RestaurantAreaJPanel extends javax.swing.JPanel {
         this.restaurantDirectory = restaurantDirectory;
         this.account = account;
         this.orderDirectory = orderDirectory;
-        this.deliveryStaffDirectory = deliveryStaffDirectory;
-        managerName = account.getEmployee().getName();
+//        this.deliveryStaffDirectory = deliveryStaffDirectory;
+        managerName = account.getName();
         restaurant = restaurantDirectory.findRestaurant(managerName);
         lblRestaurantName.setText(restaurant.getName() == null ? managerName + "'s Dashboard" : restaurant.getName());
         this.customerDirectory = customerDirectory;
@@ -79,9 +77,9 @@ public class RestaurantAreaJPanel extends javax.swing.JPanel {
             populateOrders();
         }
 
-        if (deliveryStaffDirectory != null) {
-            populateStaffMembers();
-        }
+//        if (deliveryStaffDirectory != null) {
+//            populateStaffMembers();
+//        }
 
         pnlFeedbackTable.setVisible(false);
         btnClose.setVisible(false);
@@ -1773,9 +1771,9 @@ public class RestaurantAreaJPanel extends javax.swing.JPanel {
             return;
         } else {
             DefaultTableModel model = (DefaultTableModel) tblDeliveryStaff.getModel();
-            DeliveryStaff selectedStaff = (DeliveryStaff) model.getValueAt(selectedRowIndex, 0);
+//            DeliveryStaff selectedStaff = (DeliveryStaff) model.getValueAt(selectedRowIndex, 0);
             Order orderToBeUpdated = orderDirectory.findOrder(orderId);
-            orderToBeUpdated.setDeliveryStaffName(selectedStaff.getFirstName() + " " + selectedStaff.getLastName());
+//            orderToBeUpdated.setDeliveryStaffName(selectedStaff.getFirstName() + " " + selectedStaff.getLastName());
             orderToBeUpdated.setStatus("ASSIGNED");
 
             for (int i = 0; i <= orderDirectory.getOrders().size() - 1; i++) {
@@ -2557,11 +2555,11 @@ public class RestaurantAreaJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblDeliveryStaff.getModel();
         model.setRowCount(0);
 
-        for (DeliveryStaff staff : deliveryStaffDirectory.getDeliveryStaffMembers()) {
-            Object[] row = new Object[1];
-            row[0] = staff;
-            model.addRow(row);
-        }
+//        for (DeliveryStaff staff : deliveryStaffDirectory.getDeliveryStaffMembers()) {
+//            Object[] row = new Object[1];
+//            row[0] = staff;
+//            model.addRow(row);
+//        }
     }
 
     private boolean validations() {
