@@ -69,15 +69,17 @@ public class manageEventPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         //if(resdir.getRestaurantList()==null){}
 
-        for (Event eve : business.getEventDirectory().getEventList()) {
-            Object[] row = new Object[5];
-            row[0] = eve.getEventName();
-            row[1] = eve.getEventType();
-            row[2] = eve.getCapacity();
-            row[3] = eve.getStartDate();
-            row[4] = eve.getEndDate();
+        if (business.getEventDirectory() != null && business.getEventDirectory().getEventList() != null && !business.getEventDirectory().getEventList().isEmpty()) {
+            for (Event eve : business.getEventDirectory().getEventList()) {
+                Object[] row = new Object[5];
+                row[0] = eve.getEventName();
+                row[1] = eve.getEventType();
+                row[2] = eve.getCapacity();
+                row[3] = eve.getStartDate();
+                row[4] = eve.getEndDate();
 
-            model.addRow(row);
+                model.addRow(row);
+            }
         }
     }
 

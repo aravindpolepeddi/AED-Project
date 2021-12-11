@@ -6,6 +6,10 @@
 package business;
 
 import business.hrservices.Staff;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -22,6 +26,15 @@ public class FlagClass {
     private int premiumCount;
     private String imageFilePath;
     private String staffMemberName;
+    private String eventName;
+    private int foodCost;
+    private List<String> foodItems;
+    private Map<String, List<String>> seatsMap;
+
+    public FlagClass() {
+        foodItems = new ArrayList<>();
+        seatsMap = new HashMap<>();
+    }
 
     public String getRestaurantManagerName() {
         return restaurantManagerName;
@@ -93,6 +106,38 @@ public class FlagClass {
 
     public void setStaffMemberName(String staffMemberName) {
         this.staffMemberName = staffMemberName;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public int getFoodCost() {
+        return foodCost;
+    }
+
+    public void setFoodCost(int foodCost) {
+        this.foodCost = foodCost;
+    }
+
+    public List<String> getFoodItems() {
+        return foodItems;
+    }
+
+    public void setFoodItems(List<String> foodItems) {
+        this.foodItems = foodItems;
+    }
+
+    public Map<String, List<String>> getSeatsMap() {
+        return seatsMap;
+    }
+
+    public void setSeatsMap(Map<String, List<String>> seatsMap) {
+        this.seatsMap = seatsMap;
     }
 
 }

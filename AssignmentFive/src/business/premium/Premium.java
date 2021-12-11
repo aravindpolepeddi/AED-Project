@@ -13,13 +13,13 @@ import business.Restaurant.Menu;
  */
 public class Premium {
 
+    private String restaurantName;
     private String managerName;
     private String userName;
     private String managerType;
     private String cuisine;
     private String vegOrNonVeg;
     private Menu menu;
-    private String restaurantName;
 
     public String getManagerName() {
         return managerName;
@@ -77,4 +77,8 @@ public class Premium {
         this.restaurantName = restaurantName;
     }
 
+    @Override
+    public String toString() {
+        return restaurantName;
+    }
 }

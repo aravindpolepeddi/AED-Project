@@ -392,7 +392,6 @@ public class LoginScreen extends javax.swing.JPanel {
         userAccount = system.getUserAccountDirectory().authenticateUser(userName, password);
 
         if (userAccount != null) {
-            Role test = userAccount.getRole();
             JPanel mainScreen = new MainScreen(mainWorkArea, userAccount, system);
             mainWorkArea.add("MainScreen", mainScreen);
             CardLayout layout = (CardLayout) mainWorkArea.getLayout();
@@ -485,11 +484,13 @@ public class LoginScreen extends javax.swing.JPanel {
                 customer.setFullName(txtName.getText());
                 customer.setPhoneNumber(txtMobileNo.getText());
                 customer.setUserName(userName);
-
+                customer.setAddress(txtAddress.getText());
+                system.setCustomerDirectory(customerDirectory);
                 business.role.Customer customerRole = new business.role.Customer();
                 system.getUserAccountDirectory().createUserAccount(userName, txtName.getText(), password, customerRole);
                 JOptionPane.showMessageDialog(null, "Registered successfully!");
                 dB4OUtil.storeSystem(system);
+                switchPanels(LoginScreen);
 
                 Properties properties = new Properties();
                 properties.put("mail.smtp.auth", "true");
@@ -503,7 +504,7 @@ public class LoginScreen extends javax.swing.JPanel {
                         return new PasswordAuthentication("stadiopvtltd@gmail.com", "Stadio1234");
                     }
                 });
-                
+
                 try {
                     MimeMessage message = new MimeMessage(session);
                     message.setFrom(new InternetAddress("stadioStudios@gmail.com"));
@@ -511,7 +512,7 @@ public class LoginScreen extends javax.swing.JPanel {
                     message.setSubject("Thanks for registering with us!");
                     message.setText("This thing works!!!");
                     Transport.send(message);
-                } catch(Exception ex) {
+                } catch (Exception ex) {
                     System.out.println(ex);
                 }
             }

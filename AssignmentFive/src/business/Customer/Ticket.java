@@ -8,6 +8,7 @@ package business.Customer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -19,8 +20,8 @@ public class Ticket {
     private String eventName;
     private String count;
     private String seatType;
-    private ArrayList<String> foodItems;
-    private HashMap<String, List<String>> seats;
+    private List<String> foodItems;
+    private Map<String, List<String>> seats;
     private int foodCost;
 
     public String getEventName() {
@@ -55,19 +56,19 @@ public class Ticket {
         this.id = id;
     }
 
-    public ArrayList<String> getFoodItems() {
+    public List<String> getFoodItems() {
         return foodItems;
     }
 
-    public void setFoodItems(ArrayList<String> foodItems) {
+    public void setFoodItems(List<String> foodItems) {
         this.foodItems = foodItems;
     }
 
-    public HashMap<String, List<String>> getSeats() {
+    public Map<String, List<String>> getSeats() {
         return seats;
     }
 
-    public void setSeats(HashMap<String, List<String>> seats) {
+    public void setSeats(Map<String, List<String>> seats) {
         this.seats = seats;
     }
 
