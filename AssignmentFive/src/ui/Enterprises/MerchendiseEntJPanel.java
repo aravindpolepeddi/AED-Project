@@ -1,15 +1,27 @@
+package ui.Enterprises;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.Enterprises;
+
 
 import business.Business;
+<<<<<<< HEAD
+
+import business.Order.Order;
+
+import business.Restaurant.Restaurant;
+import business.Restaurant.RestaurantDirectory;
+=======
 import business.FlagClass;
 import business.merchandise.merchandiseShop;
 import business.role.merchandiseShopOwner;
+>>>>>>> e74ba31bf90a334e4ecca05b2cb3be8bb09f636a
 import business.useraccount.UserAccount;
+import business.merchandise.merchandiseShop;
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +40,23 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
     FlagClass flag;
     Boolean update=false;
     /**
+<<<<<<< HEAD
+     * Creates new form ManageRestaurantJPanel
+     */
+    private Business system; 
+    private RestaurantDirectory resdir;
+
+    private JPanel userProcessContainer;
+    private Boolean update=false;
+    merchandiseShop merchShop = new merchandiseShop();
+    
+    public MerchendiseEntJPanel(JPanel userProcessContainer,Business system,RestaurantDirectory resowndir) {
+        initComponents();
+        this.resdir=resowndir;
+        this.userProcessContainer=userProcessContainer;
+        this.system=system;
+        populateTable();
+=======
      * Creates new form manageEventPanel
      */
     public MerchendiseEntJPanel() {
@@ -67,8 +96,23 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
             
             model.addRow(row);
         }
+>>>>>>> e74ba31bf90a334e4ecca05b2cb3be8bb09f636a
     }
 
+        private void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) jTableMerchandiseManagers.getModel();
+        
+        model.setRowCount(0);
+        //if(resdir.getRestaurantList()==null){}
+
+        for (merchandiseShop merchShop : system.getMerchandiseShopDirectory().getMerchandiseShopList()){
+            Object[] row = new Object[2];
+            row[0] = merchShop.getOwnerName();
+            row[1] = merchShop.getMerchandiseShopName();
+            
+            model.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +122,27 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableMerchandiseManagers = new javax.swing.JTable();
+        jTextName = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextUsername = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jButtonSave = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTextMerchandiseShopName = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
+
+        jTableMerchandiseManagers.setModel(new javax.swing.table.DefaultTableModel(
+=======
         jScrollPane1 = new javax.swing.JScrollPane();
         jMerchandiseShopTable = new javax.swing.JTable();
         AddEventjButton = new javax.swing.JButton();
@@ -93,6 +158,7 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
 
         jMerchandiseShopTable.setModel(new javax.swing.table.DefaultTableModel(
+>>>>>>> e74ba31bf90a334e4ecca05b2cb3be8bb09f636a
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -100,6 +166,123 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
+<<<<<<< HEAD
+                "OwnerName", "Shop name"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableMerchandiseManagers);
+
+        jTextName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNameActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Enter Owner Name");
+
+        jLabel2.setText("Enter Username");
+
+        jLabel3.setText("Enter Password");
+
+        jButtonSave.setBackground(new java.awt.Color(255, 51, 51));
+        jButtonSave.setText("Save");
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Enter Shop Name");
+
+        jButton1.setBackground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(255, 51, 51));
+        jButton2.setText("Delete");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(255, 51, 51));
+        jButton3.setText("Update");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonSave)
+                        .addGap(118, 118, 118))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addComponent(jLabel1))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextName)
+                            .addComponent(jTextUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(jPasswordField1)
+                            .addComponent(jTextMerchandiseShopName))
+                        .addGap(43, 43, 43))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addComponent(jButton1))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3))))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextMerchandiseShopName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(jButtonSave)
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+
+=======
                 "Shop Name", "Owner Name"
             }
         ));
@@ -140,10 +323,14 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Password");
 
+>>>>>>> e74ba31bf90a334e4ecca05b2cb3be8bb09f636a
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -181,10 +368,129 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(PasswordjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(43, Short.MAX_VALUE))
+>>>>>>> e74ba31bf90a334e4ecca05b2cb3be8bb09f636a
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+<<<<<<< HEAD
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+        // TODO add your handling code here:
+        
+        StringBuilder Error = new StringBuilder();
+        //if(business.getEventDirectory()==null)
+        if(jTextName.getText().isEmpty()){ Error.append("Enter Valid Name \n");}
+        else{merchShop.setOwnerName(jTextName.getText());
+        jTextName.setText("");}
+        if(jTextMerchandiseShopName.getText().isEmpty()){ Error.append("Enter Valid Event Type \n");}
+        else{merchShop.setMerchandiseShopName(jTextMerchandiseShopName.getText());
+        jTextMerchandiseShopName.setText("");}
+        if(jTextUsername.getText().isEmpty()){ Error.append("Enter Capacity \n");}
+        else{merchShop.setUsername(jTextUsername.getText());
+        jTextUsername.setText("");}
+        if(jPasswordField1.getText().isEmpty()){ Error.append("Enter Valid Start Date \n");}
+        else{merchShop.setPassword(jPasswordField1.getText());
+        jPasswordField1.setText("");
+        }
+        if(update==true)
+            update=false;
+        if(Error.isEmpty())
+        system.getMerchandiseShopDirectory().getMerchandiseShopList().add(merchShop);
+        else
+        JOptionPane.showMessageDialog(this, Error);    
+        populateTable();
+      
+    }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private void jTextNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNameActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(!update){
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+        }
+        else{
+        JOptionPane.showMessageDialog(this, "Please Save your updated restaurant");
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int index =jTableMerchandiseManagers.getSelectedRow();
+        if (index < 0) {
+        JOptionPane.showMessageDialog(this, "Please select an Restaurant");
+        return;
+        }
+        else{
+        int j=0;
+        for(merchandiseShop merchShop : system.getMerchandiseShopDirectory().getMerchandiseShopList()){
+        if(j==index){
+        merchandiseShop deleteShop=system.getMerchandiseShopDirectory().findMerchandiseShop(merchShop.getMerchandiseShopName());
+        for(UserAccount ua:system.getUserAccountDirectory().getUserAccountList()){
+        if(ua.getUsername().equals(deleteShop.getUsername())){
+        system.getUserAccountDirectory().getUserAccountList().remove(ua);
+        //system.getRestaurantDirectory().deleteRestaurant(updatedrestaurant);
+        break;
+        }
+        }
+        system.getMerchandiseShopDirectory().getMerchandiseShopList().remove(merchShop);
+        break;
+        }
+        j++;
+        }
+
+        }
+        populateTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int index =jTableMerchandiseManagers.getSelectedRow();
+        if (index < 0) {
+        JOptionPane.showMessageDialog(this, "Please select an Restaurant");
+        return;
+        }
+        else{
+        int i=0;
+        for(merchandiseShop merchShop : system.getMerchandiseShopDirectory().getMerchandiseShopList()){
+        if(index==i){
+        jTextName.setText(merchShop.getOwnerName());
+        jTextMerchandiseShopName.setText(merchShop.getMerchandiseShopName());
+        jTextUsername.setText(merchShop.getUsername());
+        jPasswordField1.setText(merchShop.getPassword());
+        for(UserAccount ua: system.getUserAccountDirectory().getUserAccountList()){
+        if(ua.getUsername().equals(merchShop.getUsername())){
+        system.getUserAccountDirectory().getUserAccountList().remove(ua);
+        }
+        }
+        system.getMerchandiseShopDirectory().getMerchandiseShopList().remove(merchShop);
+        //system.getUserAccountDirectory().getUserAccountList().
+        update=true;
+        break;
+        }
+        i++;
+        }
+               
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonSave;
+=======
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -308,12 +614,23 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField ShopNamejTextField;
     private javax.swing.JTextField UserNamejTextField;
     private javax.swing.JButton deleteEventjButton;
+>>>>>>> e74ba31bf90a334e4ecca05b2cb3be8bb09f636a
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+<<<<<<< HEAD
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableMerchandiseManagers;
+    private javax.swing.JTextField jTextMerchandiseShopName;
+    private javax.swing.JTextField jTextName;
+    private javax.swing.JTextField jTextUsername;
+=======
     private javax.swing.JTable jMerchandiseShopTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modifyEventjButton;
+>>>>>>> e74ba31bf90a334e4ecca05b2cb3be8bb09f636a
     // End of variables declaration//GEN-END:variables
 }
