@@ -11,8 +11,7 @@ import business.Customer.CustomerDirectory;
 import business.DB4OUtil.DB4OUtil;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
-import business.hrservices.EmergencyServicesDirectory;
-import business.role.Role;
+import business.SendMail;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -20,13 +19,6 @@ import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.PasswordAuthentication;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.Transport;
 
 /**
  *
@@ -491,30 +483,8 @@ public class LoginScreen extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Registered successfully!");
                 dB4OUtil.storeSystem(system);
                 switchPanels(LoginScreen);
-
-                Properties properties = new Properties();
-                properties.put("mail.smtp.auth", "true");
-                properties.put("mail.smtp.starttls.enable", "true");
-                properties.put("mail.smtp.host", "smtp.gmail.com");
-                properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-                properties.put("mail.smtp.port", "587");
-
-                Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("stadiopvtltd@gmail.com", "Stadio1234");
-                    }
-                });
-
-                try {
-                    MimeMessage message = new MimeMessage(session);
-                    message.setFrom(new InternetAddress("stadioStudios@gmail.com"));
-                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(txtEmail.getText()));
-                    message.setSubject("Thanks for registering with us!");
-                    message.setText("This thing works!!!");
-                    Transport.send(message);
-                } catch (Exception ex) {
-                    System.out.println(ex);
-                }
+                SendMail sendMail = new SendMail();
+                sendMail.sendMail(txtEmail.getText(), null, null, null, null);
             }
         }
     }//GEN-LAST:event_btnRegister1ActionPerformed
