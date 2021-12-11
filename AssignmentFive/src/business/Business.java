@@ -16,6 +16,8 @@ import business.premium.PremiumDirectory;
 import business.role.Role;
 import business.role.SystemAdminRole;
 import business.suites.SuitesDirectory;
+import business.ticketing.ParkingDirectory;
+import business.ticketing.PickandDropDirectory;
 import business.useraccount.UserAccountDirectory;
 import java.util.ArrayList;
 
@@ -34,6 +36,27 @@ public class Business extends Organization {
     private SuitesDirectory suitesDirectory;
     private EventDirectory eventDirectory;
     private merchandiseShopDirectory merchandiseShopDirectory;
+<<<<<<< HEAD
+    private ParkingDirectory parkingDirectory; 
+    private PickandDropDirectory pdDirectory;
+
+    public ParkingDirectory getParkingDirectory() {
+        return parkingDirectory;
+    }
+
+    public void setParkingDirectory(ParkingDirectory parkingDirectory) {
+        this.parkingDirectory = parkingDirectory;
+    }
+
+    public PickandDropDirectory getPdDirectory() {
+        return pdDirectory;
+    }
+
+    public void setPdDirectory(PickandDropDirectory pdDirectory) {
+        this.pdDirectory = pdDirectory;
+    }
+=======
+>>>>>>> e74ba31bf90a334e4ecca05b2cb3be8bb09f636a
 
     public merchandiseShopDirectory getMerchandiseShopDirectory() {
         return merchandiseShopDirectory;

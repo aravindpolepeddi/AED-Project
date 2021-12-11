@@ -33,7 +33,13 @@ public abstract class Role {
         MerchendiseEntAdmin("MerchendiseEntAdmin"),
         BookingEntAdmin("BookingEntAdmin"),
         merchandiseShop("merchandiseShop"),
+<<<<<<< HEAD
+        HumanResourceEntAdmin("HumanResourceEntAdmin"),
+        ParkingManager("ParkingManager"),
+        PickandDropManager("PickandDropManager");
+=======
         HumanResourceEntAdmin("HumanResourceEntAdmin");
+>>>>>>> e74ba31bf90a334e4ecca05b2cb3be8bb09f636a
 
         private String value;
 

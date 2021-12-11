@@ -8,21 +8,23 @@ package business.role;
 import business.Business;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
-import ui.Enterprises.BookingEntJPanel;
-import ui.Enterprises.FoodBevEntJPanel;
 import ui.Enterprises.TicketingEntJPanel;
+import ui.ticketing.PickandDropJPanel;
 
 /**
  *
- * @author deepv
+ * @author aravindpolepeddi
  */
-public class BookingEntAdminRole extends Role {
-     public BookingEntAdminRole() {
-        this.type = Role.RoleType.BookingEntAdmin;
+public class PickandDropManagerRole extends Role{
+ 
+         public PickandDropManagerRole() {
+        this.type = Role.RoleType.PickandDropManager;
     }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Business business) {
-        return new TicketingEntJPanel(userProcessContainer, account, business);
+        
+        return new PickandDropJPanel(userProcessContainer, account, business);
     }
+    
 }

@@ -8,22 +8,22 @@ package business.role;
 import business.Business;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
-import ui.Enterprises.FoodBevEntJPanel;
-import ui.Enterprises.MerchendiseEntJPanel;
-
+import ui.Enterprises.TicketingEntJPanel;
 
 /**
  *
- * @author deepv
+ * @author aravindpolepeddi
  */
-public class MerchendiseEntAdminRole extends Role {
-
-    public MerchendiseEntAdminRole() {
-        this.type = Role.RoleType.MerchendiseEntAdmin;
+public class ParkingManagerRole extends Role{
+    
+     public ParkingManagerRole() {
+        this.type = Role.RoleType.ParkingManager;
     }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Business business) {
-        return new MerchendiseEntJPanel(userProcessContainer, account, business);
+        //change this
+        //return new TicketingEntJPanel(userProcessContainer, account, business);
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
