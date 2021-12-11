@@ -286,6 +286,16 @@ public class LoginScreen extends javax.swing.JPanel {
         RegisterPanelLayout.setHorizontalGroup(
             RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RegisterPanelLayout.createSequentialGroup()
+                .addGap(251, 251, 251)
+                .addComponent(btnRegister1)
+                .addGap(38, 38, 38)
+                .addComponent(btnRegister2)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                .addGap(345, 345, 345)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegisterPanelLayout.createSequentialGroup()
                 .addGap(214, 214, 214)
                 .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -307,16 +317,6 @@ public class LoginScreen extends javax.swing.JPanel {
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pwdPassword))
                 .addGap(308, 308, 308))
-            .addGroup(RegisterPanelLayout.createSequentialGroup()
-                .addGap(251, 251, 251)
-                .addComponent(btnRegister1)
-                .addGap(38, 38, 38)
-                .addComponent(btnRegister2)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(RegisterPanelLayout.createSequentialGroup()
-                .addGap(345, 345, 345)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         RegisterPanelLayout.setVerticalGroup(
             RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,9 +457,10 @@ public class LoginScreen extends javax.swing.JPanel {
             formDatafilled = false;
             JOptionPane.showMessageDialog(this, "Please enter address");
         }
-        if (!validateStringInput(pwdPassword.getText())) {
+        if (validatePasswordInput(pwdPassword.getText())) {
             formDatafilled = false;
-            JOptionPane.showMessageDialog(this, "Please enter password");
+            JOptionPane.showMessageDialog(this, "Please enter password containing 8 character,"
+                    + "one uppercase,one lowercase, one number and one special character");
         }
 
         if (formDatafilled) {
@@ -522,6 +523,15 @@ public class LoginScreen extends javax.swing.JPanel {
 
     private static boolean validateStringInput(String userInput) {
         if (userInput.trim().equals("") || userInput == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    private static boolean validatePasswordInput(String userInput) {
+        if (userInput.matches( "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+           
             return false;
         } else {
             return true;
