@@ -38,7 +38,11 @@ public abstract class Role {
         CleaningServicesRole("CleaningServicesRole"),
         EmergencyServicesRole("EmergencyServicesRole"),
         SecurityServicesRole("SecurityServicesRole"),
-        TechnicalServicesRole("TechnicalServicesRole");
+        TechnicalServicesRole("TechnicalServicesRole"),
+        merchandiseShop("merchandiseShop"),
+        ParkingManager("ParkingManager"),
+        PickandDropManager("PickandDropManager"),
+        TicketingAdmin("TicketingAdmin");
 
         private String value;
 

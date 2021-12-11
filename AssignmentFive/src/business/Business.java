@@ -17,13 +17,18 @@ import business.hrservices.EmergencyServicesDirectory;
 import business.hrservices.TechnicalServicesDirectory;
 import business.hrservices.SecurityServices;
 import business.hrservices.SecurityServicesDirectory;
+import business.merchandise.merchandiseShopDirectory;
 import business.organizations.FoodBevOrganization;
 import business.premium.PremiumDirectory;
 import business.role.Role;
 import business.role.SystemAdminRole;
 import business.suites.SuitesDirectory;
+import business.ticketing.ParkingDirectory;
+import business.ticketing.PickandDropDirectory;
 import business.useraccount.UserAccountDirectory;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -44,6 +49,11 @@ public class Business extends Organization {
     private SecurityServicesDirectory securityServices;
     private EventDirectory eventDirectory;
     private TicketDirectory ticketDirectory;
+    private merchandiseShopDirectory merchandiseShopDirectory;
+    private ParkingDirectory parkingDirectory;
+    private PickandDropDirectory pdDirectory;
+
+    private Map<String, List<Network>> networkList;
 
     public PremiumDirectory getPremiumDirectory() {
         return premiumDirectory;
@@ -172,6 +182,38 @@ public class Business extends Organization {
 
     public void setOrderDirectory(OrderDirectory orderDirectory) {
         this.orderDirectory = orderDirectory;
+    }
+
+    public merchandiseShopDirectory getMerchandiseShopDirectory() {
+        return merchandiseShopDirectory;
+    }
+
+    public void setMerchandiseShopDirectory(merchandiseShopDirectory merchandiseShopDirectory) {
+        this.merchandiseShopDirectory = merchandiseShopDirectory;
+    }
+
+    public ParkingDirectory getParkingDirectory() {
+        return parkingDirectory;
+    }
+
+    public void setParkingDirectory(ParkingDirectory parkingDirectory) {
+        this.parkingDirectory = parkingDirectory;
+    }
+
+    public PickandDropDirectory getPdDirectory() {
+        return pdDirectory;
+    }
+
+    public void setPdDirectory(PickandDropDirectory pdDirectory) {
+        this.pdDirectory = pdDirectory;
+    }
+
+    public Map<String, List<Network>> getNetworkList() {
+        return networkList;
+    }
+
+    public void setNetworkList(Map<String, List<Network>> networkList) {
+        this.networkList = networkList;
     }
 
 }
