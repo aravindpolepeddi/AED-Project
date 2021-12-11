@@ -34,4 +34,9 @@ public class TicketDirectory {
         return ticket;
     }
 
+    public Ticket findTicketById(int id) {
+        Ticket ticket = ticketList.stream().filter(x -> x.getId() == id).findAny().orElse(null);
+        return ticket;
+    }
+
 }

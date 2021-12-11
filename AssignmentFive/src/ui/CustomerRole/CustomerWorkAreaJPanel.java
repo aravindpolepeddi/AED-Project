@@ -50,6 +50,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     PremiumDirectory premiumDirectory;
     String premiumName;
     int totalCost;
+    int reservationCost;
     ArrayList<String> foodItems;
     TicketDirectory ticketDirectory;
     Business business;
@@ -62,10 +63,12 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         initComponents();
         this.ticket = new Ticket();
         this.totalCost = 0;
+        this.reservationCost = 0;
         this.foodItems = new ArrayList<>();
         this.business = business;
         this.flags = new FlagClass();
         restRadioButtons();
+        cmbTiers.setVisible(false);
 
         if (business.getEventDirectory() == null) {
             this.eventDirectory = new EventDirectory();
@@ -104,6 +107,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             txtUsername.setText(customer.getUserName());
             txtMobileNo.setText(customer.getPhoneNumber());
             txtAddress1.setText(customer.getAddress());
+            populateBooking();
         }
 
         JTableHeader tableHeader = tblEvents.getTableHeader();
@@ -112,6 +116,10 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
         JTableHeader tableHeader1 = tblFoodBev1.getTableHeader();
         tableHeader1.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        ((DefaultTableCellRenderer) tableHeader1.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+
+        JTableHeader tableHeader2 = tblBookings.getTableHeader();
+        tableHeader2.setFont(new Font("Segoe UI", Font.BOLD, 12));
         ((DefaultTableCellRenderer) tableHeader1.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
     }
 
@@ -133,7 +141,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
@@ -153,7 +160,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblBookings = new javax.swing.JTable();
         selecSeatType = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -235,6 +242,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         btnBookTicket = new javax.swing.JButton();
         btnConfirmSeats = new javax.swing.JButton();
         btnConfirmSeats1 = new javax.swing.JButton();
+        btnTier = new javax.swing.JButton();
+        cmbTiers = new javax.swing.JComboBox<>();
         OrderPanel = new javax.swing.JPanel();
         lblHeader1 = new javax.swing.JLabel();
         btnBack1 = new javax.swing.JButton();
@@ -444,17 +453,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(206, 217, 217));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 51, 51));
-        jButton5.setText("ORDER FOOD");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         jButton6.setBackground(new java.awt.Color(206, 217, 217));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton6.setForeground(new java.awt.Color(0, 51, 51));
@@ -483,7 +481,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnEditDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -496,22 +493,20 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnEditDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(453, Short.MAX_VALUE))
         );
 
-        NavigationJPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEditDetails, btnMenu, jButton2, jButton3, jButton4, jButton5, jButton6, jButton7});
+        NavigationJPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEditDetails, btnMenu, jButton2, jButton3, jButton4, jButton6, jButton7});
 
         jSplitPane1.setLeftComponent(NavigationJPanel);
 
@@ -635,21 +630,27 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(240, 255, 255));
 
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 153, 153));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("VIEW YOUR BOOKINGS");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblBookings.setBackground(new java.awt.Color(255, 255, 255));
+        tblBookings.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tblBookings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "BOOKING ID", "EVENT NAME", "NO. OF TICKETS", "SEAT TYPE", "TOTAL COST"
             }
         ));
-        jScrollPane5.setViewportView(jTable2);
+        tblBookings.setSelectionBackground(new java.awt.Color(0, 204, 204));
+        tblBookings.setSelectionForeground(new java.awt.Color(0, 51, 51));
+        jScrollPane5.setViewportView(tblBookings);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -659,20 +660,20 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(244, 244, 244)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel14))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(124, 124, 124)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(572, Short.MAX_VALUE))
+                .addGap(117, 117, 117)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(566, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -681,11 +682,11 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         viewBookings.setLayout(viewBookingsLayout);
         viewBookingsLayout.setHorizontalGroup(
             viewBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         viewBookingsLayout.setVerticalGroup(
             viewBookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
 
         jLayeredPane1.add(viewBookings, "card5");
@@ -1398,6 +1399,17 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnTier.setBackground(new java.awt.Color(255, 255, 255));
+        btnTier.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnTier.setForeground(new java.awt.Color(0, 0, 0));
+        btnTier.setText("Pick Tier");
+        btnTier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTierActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bookEventDetailsLayout = new javax.swing.GroupLayout(bookEventDetails);
         bookEventDetails.setLayout(bookEventDetailsLayout);
         bookEventDetailsLayout.setHorizontalGroup(
@@ -1426,18 +1438,21 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(bookEventDetailsLayout.createSequentialGroup()
                 .addGroup(bookEventDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bookEventDetailsLayout.createSequentialGroup()
-                        .addGap(121, 121, 121)
+                        .addGap(318, 318, 318)
+                        .addComponent(btnBookTicket))
+                    .addGroup(bookEventDetailsLayout.createSequentialGroup()
+                        .addGap(124, 124, 124)
                         .addGroup(bookEventDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(bookEventDetailsLayout.createSequentialGroup()
-                                .addGap(3, 3, 3)
+                                .addComponent(jScrollPane25, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbTiers, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(bookEventDetailsLayout.createSequentialGroup()
                                 .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(bookEventDetailsLayout.createSequentialGroup()
-                        .addGap(318, 318, 318)
-                        .addComponent(btnBookTicket)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnTier, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bookEventDetailsLayout.setVerticalGroup(
@@ -1464,9 +1479,15 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(87, 87, 87)
                 .addGroup(bookEventDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton18)
-                    .addComponent(jButton19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane25, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton19)
+                    .addComponent(btnTier))
+                .addGroup(bookEventDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bookEventDetailsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane25, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bookEventDetailsLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(cmbTiers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(35, 35, 35)
                 .addComponent(btnBookTicket)
                 .addContainerGap(349, Short.MAX_VALUE))
@@ -2700,10 +2721,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         switchPanels(viewBookings);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        switchPanels(parkingDetails);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -2722,10 +2739,21 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnSelectSeatType1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectSeatType1ActionPerformed
         populateFoodBev();
+        if (lstSeatType1.getSelectedValue().equals("SUITE TYPE")) {
+            btnTier.setEnabled(false);
+            if (!jButton19.isEnabled()) {
+                jButton19.setEnabled(true);
+            }
+        } else if (lstSeatType1.getSelectedValue().equals("PREMIUM TYPE")) {
+            jButton19.setEnabled(false);
+            if (!btnTier.isEnabled()) {
+                btnTier.setEnabled(true);
+            }
+        }
     }//GEN-LAST:event_btnSelectSeatType1ActionPerformed
 
     private void btnConfirmSeatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmSeatsActionPerformed
-        ticket.setCount(txtTicketCount.getText());
+        flags.setTicketCount(Integer.parseInt(txtTicketCount.getText()));
         JOptionPane.showMessageDialog(this, "Ticket count updated!");
     }//GEN-LAST:event_btnConfirmSeatsActionPerformed
 
@@ -2757,25 +2785,51 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         } else {
             switchPanels(OrderPanel);
             DefaultTableModel model = (DefaultTableModel) tblFoodBev1.getModel();
-            Suites selectedSuites = (Suites) model.getValueAt(selectedRowIndex, 0);
-            lblHeader1.setText("Place your order at " + selectedSuites.getRestaurantName() + "!");
-            suiteName = selectedSuites.getRestaurantName();
+            if (lstSeatType1.getSelectedValue().equals("SUITE TYPE")) {
+                Suites selectedSuites = (Suites) model.getValueAt(selectedRowIndex, 0);
+                lblHeader1.setText("Place your order at " + selectedSuites.getRestaurantName() + "!");
+                suiteName = selectedSuites.getRestaurantName();
+                flags.setSuiteName(suiteName);
 
-            if (selectedSuites.getMenu() != null) {
-                if (selectedSuites.getMenu().getApetizers() != null && !selectedSuites.getMenu().getApetizers().isEmpty()) {
-                    enableAppetizerRadioButtons(selectedSuites);
+                if (selectedSuites.getMenu() != null) {
+                    if (selectedSuites.getMenu().getApetizers() != null && !selectedSuites.getMenu().getApetizers().isEmpty()) {
+                        enableAppetizerRadioButtons(selectedSuites);
+                    }
+
+                    if (selectedSuites.getMenu().getMains() != null && !selectedSuites.getMenu().getMains().isEmpty()) {
+                        enableMainsRadioButtons(selectedSuites);
+                    }
+
+                    if (selectedSuites.getMenu().getDessert() != null && !selectedSuites.getMenu().getDessert().isEmpty()) {
+                        enableDessertRadioButtons(selectedSuites);
+                    }
+
+                    if (selectedSuites.getMenu().getBeverages() != null && !selectedSuites.getMenu().getBeverages().isEmpty()) {
+                        enableBeverageRadioButtons(selectedSuites);
+                    }
                 }
+            } else {
+                Premium selectedPremium = (Premium) model.getValueAt(selectedRowIndex, 0);
+                lblHeader1.setText("Place your order at " + selectedPremium.getRestaurantName() + "!");
+                suiteName = selectedPremium.getRestaurantName();
+                flags.setSuiteName(suiteName);
 
-                if (selectedSuites.getMenu().getMains() != null && !selectedSuites.getMenu().getMains().isEmpty()) {
-                    enableMainsRadioButtons(selectedSuites);
-                }
+                if (selectedPremium.getMenu() != null) {
+                    if (selectedPremium.getMenu().getApetizers() != null && !selectedPremium.getMenu().getApetizers().isEmpty()) {
+                        enableAppetizerRadioButtonsPremium(selectedPremium);
+                    }
 
-                if (selectedSuites.getMenu().getDessert() != null && !selectedSuites.getMenu().getDessert().isEmpty()) {
-                    enableDessertRadioButtons(selectedSuites);
-                }
+                    if (selectedPremium.getMenu().getMains() != null && !selectedPremium.getMenu().getMains().isEmpty()) {
+                        enableMainsRadioButtonsPremium(selectedPremium);
+                    }
 
-                if (selectedSuites.getMenu().getBeverages() != null && !selectedSuites.getMenu().getBeverages().isEmpty()) {
-                    enableBeverageRadioButtons(selectedSuites);
+                    if (selectedPremium.getMenu().getDessert() != null && !selectedPremium.getMenu().getDessert().isEmpty()) {
+                        enableDessertRadioButtonsPremium(selectedPremium);
+                    }
+
+                    if (selectedPremium.getMenu().getBeverages() != null && !selectedPremium.getMenu().getBeverages().isEmpty()) {
+                        enableBeverageRadioButtonsPremium(selectedPremium);
+                    }
                 }
             }
         }
@@ -2962,6 +3016,188 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Enable Appetizer buttons based on what is available
+     *
+     * @param selectedRestaurant
+     */
+    private void enableAppetizerRadioButtonsPremium(Premium selectedRestaurant) {
+        for (Map.Entry<String, Integer> appetizerMap : selectedRestaurant.getMenu().getApetizers().entrySet()) {
+            if (appetizerMap.getKey().equals("Onion Rings")) {
+                rdOnionRings1.setEnabled(true);
+                lblOnionRingsPrice.setText("- " + appetizerMap.getValue() + "$");
+                lblOnionRingsPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (appetizerMap.getKey().equals("Spinach Pie")) {
+                rdSpinachPie1.setEnabled(true);
+                lblSpinachPiePrice.setText("- " + appetizerMap.getValue() + "$");
+                lblSpinachPiePrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (appetizerMap.getKey().equals("Spring Roles")) {
+                rdSpringRoles1.setEnabled(true);
+                lblSpringRolesPrice.setText("- " + appetizerMap.getValue() + "$");
+                lblSpringRolesPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (appetizerMap.getKey().equals("Meat Balls")) {
+                rdMeatBalls1.setEnabled(true);
+                lblMeatBallsPrice.setText("- " + appetizerMap.getValue() + "$");
+                lblMeatBallsPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (appetizerMap.getKey().equals("Sausage Dip")) {
+                rdSausageDip1.setEnabled(true);
+                lblsausageDipPrice.setText("- " + appetizerMap.getValue() + "$");
+                lblsausageDipPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (appetizerMap.getKey().equals("Fried Shrimp")) {
+                rdFriedShrimp1.setEnabled(true);
+                lblFriedShrimpPrice.setText("- " + appetizerMap.getValue() + "$");
+                lblFriedShrimpPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (appetizerMap.getKey().equals("White Bean Dip")) {
+                rdWhiteBeanDip1.setEnabled(true);
+                lblWhiteBeanDipPrice.setText("- " + appetizerMap.getValue() + "$");
+                lblWhiteBeanDipPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (appetizerMap.getKey().equals("Tortilla Chips")) {
+                rdTortillaChips1.setEnabled(true);
+                lblTortillaChipsPrice.setText("- " + appetizerMap.getValue() + "$");
+                lblTortillaChipsPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (appetizerMap.getKey().equals("Crispy Tofu")) {
+                rdCrispyTofu1.setEnabled(true);
+                lblCrispyTofuPrice.setText("- " + appetizerMap.getValue() + "$");
+                lblCrispyTofuPrice.setForeground(Color.decode("#fc7703"));
+            }
+        }
+    }
+
+    /**
+     * Enable Mains buttons based on what is available
+     *
+     * @param selectedRestaurant
+     */
+    private void enableMainsRadioButtonsPremium(Premium selectedRestaurant) {
+        for (Map.Entry<String, Integer> mainsrMap : selectedRestaurant.getMenu().getMains().entrySet()) {
+            if (mainsrMap.getKey().equals("Cheese Burger")) {
+                rdCheeseBurger1.setEnabled(true);
+                lblCheeseBurgerPrice.setText("- " + mainsrMap.getValue() + "$");
+                lblCheeseBurgerPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (mainsrMap.getKey().equals("Fried Rice")) {
+                rdFriedRice1.setEnabled(true);
+                lblFriedRicePrice.setText("- " + mainsrMap.getValue() + "$");
+                lblFriedRicePrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (mainsrMap.getKey().equals("Veggie Pizza")) {
+                rdVeggiePizza1.setEnabled(true);
+                lblVeggiePrice.setText("- " + mainsrMap.getValue() + "$");
+                lblVeggiePrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (mainsrMap.getKey().equals("Ham Burger")) {
+                rdHamBurger1.setEnabled(true);
+                lblHamburgerPrice.setText("- " + mainsrMap.getValue() + "$");
+                lblHamburgerPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (mainsrMap.getKey().equals("Fish N' Chips")) {
+                rdFishNChips1.setEnabled(true);
+                lblFishNChipsPrice.setText("- " + mainsrMap.getValue() + "$");
+                lblFishNChipsPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (mainsrMap.getKey().equals("Prawn Fried Rice")) {
+                rdPrawnFriedRice1.setEnabled(true);
+                lblPrawnFriedRicePrice.setText("- " + mainsrMap.getValue() + "$");
+                lblPrawnFriedRicePrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (mainsrMap.getKey().equals("Tofu Salad")) {
+                rdTofuSalad1.setEnabled(true);
+                lblTofuSaladPrice.setText("- " + mainsrMap.getValue() + "$");
+                lblTofuSaladPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (mainsrMap.getKey().equals("Falafel Bowl")) {
+                rdFalafelBowl1.setEnabled(true);
+                lblFalafelBowlPrice.setText("- " + mainsrMap.getValue() + "$");
+                lblFalafelBowlPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (mainsrMap.getKey().equals("Tofu & Rice Platter")) {
+                rdTofuAndRiceBowl1.setEnabled(true);
+                lblTofuRiceBowlPrice.setText("- " + mainsrMap.getValue() + "$");
+                lblTofuRiceBowlPrice.setForeground(Color.decode("#fc7703"));
+            }
+        }
+    }
+
+    /**
+     * Enable Dessert buttons based on what is available
+     *
+     * @param selectedRestaurant
+     */
+    private void enableDessertRadioButtonsPremium(Premium selectedRestaurant) {
+        for (Map.Entry<String, Integer> dessertMap : selectedRestaurant.getMenu().getDessert().entrySet()) {
+            if (dessertMap.getKey().equals("Black Forest Cake")) {
+                rdBlackForestCake1.setEnabled(true);
+                lblBlackForestCakePrice.setText("- " + dessertMap.getValue() + "$");
+                lblBlackForestCakePrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (dessertMap.getKey().equals("Pineapple Swiss Role")) {
+                rdPineappleSwissRole1.setEnabled(true);
+                lblPineappleSwissRolePrice.setText("- " + dessertMap.getValue() + "$");
+                lblPineappleSwissRolePrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (dessertMap.getKey().equals("Chocolate Mousse")) {
+                rdChocolateMousse1.setEnabled(true);
+                lblChocolateMoussePrice.setText("- " + dessertMap.getValue() + "$");
+                lblChocolateMoussePrice.setForeground(Color.decode("#fc7703"));
+//                totalCost = totalCost + dessertMap.getValue();
+            }
+        }
+    }
+
+    /**
+     * Enable Beverage buttons based on what is available
+     *
+     * @param selectedRestaurant
+     */
+    private void enableBeverageRadioButtonsPremium(Premium selectedRestaurant) {
+        for (Map.Entry<String, Integer> beverageMap : selectedRestaurant.getMenu().getBeverages().entrySet()) {
+            if (beverageMap.getKey().equals("CocaCola")) {
+                rdCocaCola1.setEnabled(true);
+                lblCocaColaPrice.setText("- " + beverageMap.getValue() + "$");
+                lblCocaColaPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (beverageMap.getKey().equals("Fresh Lime Salted")) {
+                rdFreshLimesalted1.setEnabled(true);
+                lblFreshLimeSaltedPrice.setText("- " + beverageMap.getValue() + "$");
+                lblFreshLimeSaltedPrice.setForeground(Color.decode("#fc7703"));
+            }
+
+            if (beverageMap.getKey().equals("Pepsi")) {
+                rdPepsi1.setEnabled(true);
+                lblPepsiPrice.setText("- " + beverageMap.getValue() + "$");
+                lblPepsiPrice.setForeground(Color.decode("#fc7703"));
+            }
+        }
+    }
+
+
     private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
         switchPanels(bookEventDetails);
         lblOnionRingsPrice.setText("- NA -");
@@ -3085,6 +3321,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             switchPanels(SeatingPanel);
             DefaultTableModel model = (DefaultTableModel) tblFoodBev1.getModel();
             Suites selectedSuite = (Suites) model.getValueAt(selectedRowIndex, 0);
+            flags.setReservationCost(selectedSuite.getCost());
+            flags.setSuites(selectedSuite);
             enableSeats(selectedSuite);
         }
     }//GEN-LAST:event_jButton19ActionPerformed
@@ -3116,179 +3354,214 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private void btnBookSeatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookSeatsActionPerformed
         Map<String, List<String>> seatsMap = new HashMap<>();
         List<String> seatsListForT1 = new ArrayList<String>();
+        int seatCount = 0;
 
         if (rdT1C1.isSelected()) {
             seatsListForT1.add("C1");
             seatsMap.put("T1", seatsListForT1);
+            seatCount++;
         }
 
         if (rdT1C2.isSelected()) {
             seatsListForT1.add("C2");
             seatsMap.put("T1", seatsListForT1);
+            seatCount++;
         }
 
         if (rdT1C3.isSelected()) {
             seatsListForT1.add("C3");
             seatsMap.put("T1", seatsListForT1);
+            seatCount++;
         }
 
         if (rdT1C4.isSelected()) {
             seatsListForT1.add("C4");
             seatsMap.put("T1", seatsListForT1);
+            seatCount++;
         }
 
         if (rdT1C5.isSelected()) {
             seatsListForT1.add("C5");
             seatsMap.put("T1", seatsListForT1);
+            seatCount++;
         }
 
         if (rdT1C6.isSelected()) {
             seatsListForT1.add("C6");
             seatsMap.put("T1", seatsListForT1);
+            seatCount++;
         }
 
         if (rdT1C7.isSelected()) {
             seatsListForT1.add("C7");
             seatsMap.put("T1", seatsListForT1);
+            seatCount++;
         }
 
         if (rdT1C8.isSelected()) {
             seatsListForT1.add("C8");
             seatsMap.put("T1", seatsListForT1);
+            seatCount++;
         }
 
         List<String> seatsListForT2 = new ArrayList<String>();
         if (rdT2C1.isSelected()) {
             seatsListForT2.add("C1");
             seatsMap.put("T2", seatsListForT2);
+            seatCount++;
         }
 
         if (rdT2C2.isSelected()) {
             seatsListForT2.add("C2");
             seatsMap.put("T2", seatsListForT2);
+            seatCount++;
         }
 
         if (rdT2C3.isSelected()) {
             seatsListForT2.add("C3");
             seatsMap.put("T2", seatsListForT2);
+            seatCount++;
         }
 
         if (rdT2C4.isSelected()) {
             seatsListForT2.add("C4");
             seatsMap.put("T2", seatsListForT2);
+            seatCount++;
         }
 
         if (rdT2C5.isSelected()) {
             seatsListForT2.add("C5");
             seatsMap.put("T2", seatsListForT2);
+            seatCount++;
         }
 
         if (rdT2C6.isSelected()) {
             seatsListForT2.add("C6");
             seatsMap.put("T2", seatsListForT2);
+            seatCount++;
         }
 
         if (rdT2C7.isSelected()) {
             seatsListForT2.add("C7");
             seatsMap.put("T2", seatsListForT2);
+            seatCount++;
         }
 
         if (rdT2C8.isSelected()) {
             seatsListForT2.add("C8");
             seatsMap.put("T2", seatsListForT2);
+            seatCount++;
         }
 
         List<String> seatsListForT3 = new ArrayList<String>();
         if (rdT3C1.isSelected()) {
             seatsListForT3.add("C1");
             seatsMap.put("T3", seatsListForT3);
+            seatCount++;
         }
 
         if (rdT3C2.isSelected()) {
             seatsListForT3.add("C2");
             seatsMap.put("T3", seatsListForT3);
+            seatCount++;
         }
 
         if (rdT3C3.isSelected()) {
             seatsListForT3.add("C3");
             seatsMap.put("T3", seatsListForT3);
+            seatCount++;
         }
 
         if (rdT3C4.isSelected()) {
             seatsListForT3.add("C4");
             seatsMap.put("T3", seatsListForT3);
+            seatCount++;
         }
 
         if (rdT3C5.isSelected()) {
             seatsListForT3.add("C5");
             seatsMap.put("T3", seatsListForT3);
+            seatCount++;
         }
 
         if (rdT3C6.isSelected()) {
             seatsListForT3.add("C6");
             seatsMap.put("T3", seatsListForT3);
+            seatCount++;
         }
 
         if (rdT3C7.isSelected()) {
             seatsListForT3.add("C7");
             seatsMap.put("T3", seatsListForT3);
+            seatCount++;
         }
 
         if (rdT3C8.isSelected()) {
             seatsListForT3.add("C8");
             seatsMap.put("T3", seatsListForT3);
+            seatCount++;
         }
 
         List<String> seatsListForT4 = new ArrayList<String>();
         if (rdT4C1.isSelected()) {
             seatsListForT4.add("C1");
             seatsMap.put("T4", seatsListForT4);
+            seatCount++;
         }
 
         if (rdT4C2.isSelected()) {
             seatsListForT4.add("C2");
             seatsMap.put("T4", seatsListForT4);
+            seatCount++;
         }
 
         if (rdT4C3.isSelected()) {
             seatsListForT4.add("C3");
             seatsMap.put("T4", seatsListForT4);
+            seatCount++;
         }
 
         if (rdT4C4.isSelected()) {
             seatsListForT4.add("C4");
             seatsMap.put("T4", seatsListForT4);
+            seatCount++;
         }
 
         if (rdT4C5.isSelected()) {
             seatsListForT4.add("C5");
             seatsMap.put("T4", seatsListForT4);
+            seatCount++;
         }
 
         if (rdT4C6.isSelected()) {
             seatsListForT4.add("C6");
             seatsMap.put("T4", seatsListForT4);
+            seatCount++;
         }
 
         if (rdT4C7.isSelected()) {
             seatsListForT4.add("C7");
             seatsMap.put("T4", seatsListForT4);
+            seatCount++;
         }
 
         if (rdT4C8.isSelected()) {
             seatsListForT4.add("C8");
             seatsMap.put("T4", seatsListForT4);
+            seatCount++;
         }
 
         List<String> seatsListForT5 = new ArrayList<String>();
         if (rdT5C1.isSelected()) {
             seatsListForT5.add("C1");
             seatsMap.put("T5", seatsListForT5);
+            seatCount++;
         }
 
         if (rdT5C2.isSelected()) {
             seatsListForT5.add("C2");
             seatsMap.put("T5", seatsListForT5);
+            seatCount++;
         }
 
         if (rdT5C3.isSelected()) {
@@ -3299,110 +3572,138 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         if (rdT5C4.isSelected()) {
             seatsListForT5.add("C4");
             seatsMap.put("T5", seatsListForT5);
+            seatCount++;
         }
 
         if (rdT5C5.isSelected()) {
             seatsListForT5.add("C5");
             seatsMap.put("T5", seatsListForT5);
+            seatCount++;
         }
 
         if (rdT5C6.isSelected()) {
             seatsListForT5.add("C6");
             seatsMap.put("T5", seatsListForT5);
+            seatCount++;
         }
 
         if (rdT5C7.isSelected()) {
             seatsListForT5.add("C7");
             seatsMap.put("T5", seatsListForT5);
+            seatCount++;
         }
 
         if (rdT5C8.isSelected()) {
             seatsListForT5.add("C8");
             seatsMap.put("T5", seatsListForT5);
+            seatCount++;
         }
 
         List<String> seatsListForT6 = new ArrayList<String>();
         if (rdT6C1.isSelected()) {
             seatsListForT5.add("C1");
             seatsMap.put("T6", seatsListForT6);
+            seatCount++;
         }
 
         if (rdT6C2.isSelected()) {
             seatsListForT6.add("C2");
             seatsMap.put("T6", seatsListForT6);
+            seatCount++;
         }
 
         if (rdT6C3.isSelected()) {
             seatsListForT6.add("C3");
             seatsMap.put("T6", seatsListForT6);
+            seatCount++;
         }
 
         if (rdT6C4.isSelected()) {
             seatsListForT6.add("C4");
             seatsMap.put("T6", seatsListForT6);
+            seatCount++;
         }
 
         if (rdT6C5.isSelected()) {
             seatsListForT6.add("C5");
             seatsMap.put("T6", seatsListForT6);
+            seatCount++;
         }
 
         if (rdT6C6.isSelected()) {
             seatsListForT6.add("C6");
             seatsMap.put("T6", seatsListForT6);
+            seatCount++;
         }
 
         if (rdT6C7.isSelected()) {
             seatsListForT6.add("C7");
             seatsMap.put("T6", seatsListForT6);
+            seatCount++;
         }
 
         if (rdT6C8.isSelected()) {
             seatsListForT6.add("C8");
             seatsMap.put("T6", seatsListForT6);
+            seatCount++;
         }
 
         List<String> seatsListForT7 = new ArrayList<String>();
         if (rdT7C1.isSelected()) {
             seatsListForT7.add("C1");
             seatsMap.put("T7", seatsListForT7);
+            seatCount++;
         }
 
         if (rdT7C2.isSelected()) {
             seatsListForT7.add("C2");
             seatsMap.put("T7", seatsListForT7);
+            seatCount++;
         }
 
         if (rdT7C3.isSelected()) {
             seatsListForT7.add("C3");
             seatsMap.put("T7", seatsListForT7);
+            seatCount++;
         }
 
         if (rdT7C4.isSelected()) {
             seatsListForT7.add("C4");
             seatsMap.put("T7", seatsListForT7);
+            seatCount++;
         }
 
         if (rdT7C5.isSelected()) {
             seatsListForT7.add("C5");
             seatsMap.put("T7", seatsListForT7);
+            seatCount++;
         }
 
         if (rdT7C6.isSelected()) {
             seatsListForT7.add("C6");
             seatsMap.put("T7", seatsListForT7);
+            seatCount++;
         }
 
         if (rdT7C7.isSelected()) {
             seatsListForT7.add("C7");
             seatsMap.put("T7", seatsListForT7);
+            seatCount++;
         }
 
         if (rdT7C8.isSelected()) {
             seatsListForT7.add("C8");
             seatsMap.put("T7", seatsListForT7);
+            seatCount++;
         }
 
+//        for (Map.Entry<String, List<String>> seatsMapCost : flags.getSuites().getSeats().entrySet()) {
+//            for (String seats : seatsMapCost.getValue()) {
+//                seatCount++;
+//            }
+//        }
+        reservationCost = flags.getReservationCost() * seatCount;
+        flags.setReservationCost(reservationCost);
         JOptionPane.showMessageDialog(null, "Seating saved successfully.");
         flags.setSeatsMap(seatsMap);
         switchPanels(bookEventDetails);
@@ -3420,18 +3721,41 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             ticket.setSeatType("SUITE");
         } else if (lstSeatType1.getSelectedValue().equals("PREMIUM TYPE")) {
             ticket.setSeatType("PREMIUM");
+            ticket.setTier(cmbTiers.getSelectedItem().toString());
         }
+        ticket.setCustomerName(customer.getFullName());
+
         ticket.setFoodCost(flags.getFoodCost());
         ticket.setFoodItems(flags.getFoodItems());
         ticket.setSeats(flags.getSeatsMap());
+        ticket.setCount(flags.getTicketCount());
+        ticket.setSuiteName(flags.getSuiteName());
+        ticket.setReservationCost(flags.getReservationCost());
 
         customer.setTicket(ticket);
         business.setTicketDirectory(ticketDirectory);
+        populateBooking();
         switchPanels(viewBookings);
-
         SendMail sendMail = new SendMail();
         sendMail.sendMail(customer.getEmail(), String.valueOf(ticket.getId()), ticket.getEventName(), ticket, customer);
     }//GEN-LAST:event_btnBookTicketActionPerformed
+
+    private void btnTierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTierActionPerformed
+        int selectedRowIndex = tblFoodBev1.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Restaurant");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblFoodBev1.getModel();
+            Premium selectedPremium = (Premium) model.getValueAt(selectedRowIndex, 0);
+            cmbTiers.removeAllItems();
+            for (String tiers : selectedPremium.getTiers()) {
+                cmbTiers.addItem(tiers);
+            }
+            cmbTiers.setVisible(true);
+        }
+    }//GEN-LAST:event_btnTierActionPerformed
 
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
@@ -3457,7 +3781,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private void populateFoodBev() {
         DefaultTableModel model = (DefaultTableModel) tblFoodBev1.getModel();
         model.setRowCount(0);
-        System.out.println(lstSeatType1.getSelectedValue());
 
         if (lstSeatType1.getSelectedValue().equals("SUITE TYPE")) {
             for (Suites suite : suitedDirectory.getSuitesList()) {
@@ -3471,6 +3794,23 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 Object[] row = new Object[2];
                 row[0] = premium;
                 row[1] = "";
+                model.addRow(row);
+            }
+        }
+    }
+
+    private void populateBooking() {
+        DefaultTableModel model = (DefaultTableModel) tblBookings.getModel();
+        model.setRowCount(0);
+
+        for (Ticket ticket : ticketDirectory.getTicketList()) {
+            if (ticket.getCustomerName() != null && ticket.getCustomerName().equals(customer.getFullName())) {
+                Object[] row = new Object[6];
+                row[0] = ticket;
+                row[1] = ticket.getEventName();
+                row[2] = ticket.getCount();
+                row[3] = ticket.getSeatType();
+                row[4] = "$ " + String.valueOf(ticket.getFoodCost() + ticket.getReservationCost());
                 model.addRow(row);
             }
         }
@@ -3925,6 +4265,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnSelectSeatType1;
+    private javax.swing.JButton btnTier;
+    private javax.swing.JComboBox<String> cmbTiers;
     private javax.swing.JPanel customerProfilePanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -3938,7 +4280,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -4010,7 +4351,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTable12;
     private javax.swing.JTable jTable13;
     private javax.swing.JTable jTable14;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
@@ -4143,6 +4483,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel registerEvent;
     private javax.swing.JPanel securityService;
     private javax.swing.JPanel selecSeatType;
+    private javax.swing.JTable tblBookings;
     private javax.swing.JTable tblEvents;
     private javax.swing.JTable tblFoodBev1;
     private javax.swing.JTable tblParking;

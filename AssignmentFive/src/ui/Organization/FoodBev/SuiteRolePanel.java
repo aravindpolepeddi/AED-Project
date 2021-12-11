@@ -6,53 +6,66 @@
 package ui.Organization.FoodBev;
 
 import business.Business;
+import business.Customer.Ticket;
+import business.Customer.TicketDirectory;
+import business.Order.Order;
 import business.Restaurant.Menu;
 import business.hrservices.CleaningServices;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServices;
 import business.hrservices.EmergencyServicesDirectory;
 import business.hrservices.Staff;
-import business.premium.PremiumDirectory;
 import business.suites.Suites;
 import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
  * @author deepv
  */
 public class SuiteRolePanel extends javax.swing.JPanel {
-    
+
     Suites suites;
     SuitesDirectory suitesDirectory;
     CleaningServicesDirectory cleaningDirectory;
     EmergencyServicesDirectory emergencyServiceDirectory;
     List<Staff> staffMembers;
+    TicketDirectory ticketDirectory;
 
     /**
      * Creates new form SuiteRolePanel
      */
     public SuiteRolePanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
-        
+
         staffMembers = new ArrayList<>();
-        
+
         if (business.getSuitesDirectory() == null) {
             this.suitesDirectory = new SuitesDirectory();
         } else {
             this.suitesDirectory = business.getSuitesDirectory();
         }
-        
+
+        if (business.getTicketDirectory() == null) {
+            this.ticketDirectory = new TicketDirectory();
+        } else {
+            this.ticketDirectory = business.getTicketDirectory();
+        }
+
         if (business.getCleaningServices() != null) {
             this.cleaningDirectory = business.getCleaningServices();
             for (CleaningServices cleaningServices : this.cleaningDirectory.getCleaningServices()) {
@@ -61,7 +74,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                 }
             }
         }
-        
+
         if (business.getEmergencyServices() != null) {
             this.emergencyServiceDirectory = business.getEmergencyServices();
             for (EmergencyServices emergencyServices : this.emergencyServiceDirectory.getEmergencyServices()) {
@@ -70,9 +83,14 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                 }
             }
         }
-        
+
+        JTableHeader tableHeader = tblOrders.getTableHeader();
+        tableHeader.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        ((DefaultTableCellRenderer) tableHeader.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+
         suites = suitesDirectory.findSuiteByManagerName(account.getName());
         lblRestaurantName.setText(suites.getRestaurantName() == null ? account.getName() + "'s Dashboard" : suites.getRestaurantName());
+        populateOrders();
     }
 
     /**
@@ -97,8 +115,6 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         lblRestaurantName = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblOrders = new javax.swing.JTable();
-        btnAcceptOrder = new javax.swing.JButton();
-        btnrejectOrder = new javax.swing.JButton();
         pnlFeedbackTable = new javax.swing.JPanel();
         btnDetails = new javax.swing.JButton();
         txtCost = new javax.swing.JTextField();
@@ -416,56 +432,18 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         tblOrders.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "CUSTOMER", "BILL AMOUNT", "ORDER TIME", "STATUS", "DELIVERY STAFF", "ADDRESS"
+                "ID", "CUSTOMER", "BILL AMOUNT", "EVENT"
             }
         ));
-        tblOrders.setSelectionBackground(new java.awt.Color(153, 209, 232));
+        tblOrders.setSelectionBackground(new java.awt.Color(0, 204, 204));
         tblOrders.setSelectionForeground(new java.awt.Color(0, 51, 51));
         jScrollPane3.setViewportView(tblOrders);
-
-        btnAcceptOrder.setBackground(new java.awt.Color(204, 255, 204));
-        btnAcceptOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnAcceptOrder.setForeground(new java.awt.Color(0, 102, 51));
-        btnAcceptOrder.setText("ACCEPT ORDER");
-        btnAcceptOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAcceptOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAcceptOrderMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAcceptOrderMouseExited(evt);
-            }
-        });
-        btnAcceptOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAcceptOrderActionPerformed(evt);
-            }
-        });
-
-        btnrejectOrder.setBackground(new java.awt.Color(255, 204, 204));
-        btnrejectOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnrejectOrder.setForeground(new java.awt.Color(204, 0, 0));
-        btnrejectOrder.setText("REJECT ORDER");
-        btnrejectOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnrejectOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnrejectOrderMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnrejectOrderMouseExited(evt);
-            }
-        });
-        btnrejectOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnrejectOrderActionPerformed(evt);
-            }
-        });
 
         pnlFeedbackTable.setBackground(new java.awt.Color(240, 255, 255));
 
@@ -499,6 +477,9 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             }
         });
 
+        btnPricePerTable.setBackground(new java.awt.Color(255, 102, 0));
+        btnPricePerTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnPricePerTable.setForeground(new java.awt.Color(255, 255, 0));
         btnPricePerTable.setText("Add Price per table");
         btnPricePerTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -514,18 +495,11 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             .addGroup(workAreaPanelLayout.createSequentialGroup()
                 .addGap(108, 108, 108)
                 .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
-            .addGroup(workAreaPanelLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(btnAcceptOrder)
-                .addGap(18, 18, 18)
-                .addComponent(btnrejectOrder)
-                .addGap(26, 26, 26)
-                .addComponent(btnDetails)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(workAreaPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDetails)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
                         .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -539,10 +513,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addComponent(lblRestaurantName)
                 .addGap(62, 62, 62)
-                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcceptOrder)
-                    .addComponent(btnrejectOrder)
-                    .addComponent(btnDetails))
+                .addComponent(btnDetails)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1317,7 +1288,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
 
         lblOrderedAt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblOrderedAt.setForeground(new java.awt.Color(0, 51, 51));
-        lblOrderedAt.setText("ORDERED AT :");
+        lblOrderedAt.setText("EVENT");
 
         lblOrderedByValue.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblOrderedByValue.setForeground(new java.awt.Color(0, 153, 51));
@@ -1325,7 +1296,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
 
         lblOrderedAtValue.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblOrderedAtValue.setForeground(new java.awt.Color(0, 153, 51));
-        lblOrderedAtValue.setText("<OrderTime>");
+        lblOrderedAtValue.setText("<EventName>");
 
         tblFoodList.setBackground(new java.awt.Color(255, 255, 255));
         tblFoodList.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -2331,30 +2302,6 @@ public class SuiteRolePanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnEditDetailsActionPerformed
 
-    private void btnAcceptOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptOrderMouseEntered
-
-    }//GEN-LAST:event_btnAcceptOrderMouseEntered
-
-    private void btnAcceptOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptOrderMouseExited
-
-    }//GEN-LAST:event_btnAcceptOrderMouseExited
-
-    private void btnAcceptOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptOrderActionPerformed
-
-    }//GEN-LAST:event_btnAcceptOrderActionPerformed
-
-    private void btnrejectOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrejectOrderMouseEntered
-
-    }//GEN-LAST:event_btnrejectOrderMouseEntered
-
-    private void btnrejectOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrejectOrderMouseExited
-
-    }//GEN-LAST:event_btnrejectOrderMouseExited
-
-    private void btnrejectOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrejectOrderActionPerformed
-
-    }//GEN-LAST:event_btnrejectOrderActionPerformed
-
     private void btnDetailsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetailsMouseEntered
 
     }//GEN-LAST:event_btnDetailsMouseEntered
@@ -2364,7 +2311,20 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDetailsMouseExited
 
     private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
+        int selectedRowIndex = tblOrders.getSelectedRow();
 
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an Order");
+            return;
+        } else {
+            switchPanels(OrderDetails);
+            DefaultTableModel model = (DefaultTableModel) tblOrders.getModel();
+            Ticket selectedTicket = (Ticket) model.getValueAt(selectedRowIndex, 0);
+            lblHeader3.setText("Ticket " + selectedTicket.getId() + "order details");
+            lblOrderedByValue.setText(selectedTicket.getCustomerName());
+            lblOrderedAtValue.setText(String.valueOf(selectedTicket.getEventName()));
+            popuateFoodItemList(selectedTicket.getId());
+        }
     }//GEN-LAST:event_btnDetailsActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -2436,7 +2396,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         HashMap<String, Integer> mains = setMains();
         HashMap<String, Integer> desserts = setDessert();
         HashMap<String, Integer> beverages = setBeverages();
-        
+
         if (validateAppetizers() && validateMains() && validateDesserts() && validateBeverages()) {
             Menu menu = new Menu();
             menu.setApetizers(apetizers);
@@ -2448,10 +2408,10 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             switchPanels(workAreaPanel);
         }
     }//GEN-LAST:event_btnBack4ActionPerformed
-    
+
     private boolean validateAppetizers() {
         boolean valid = true;
-        
+
         if (rdOnionRings1.isSelected() && (txtOnionRings.getText() == null || txtOnionRings.getText().isBlank() || txtOnionRings.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Enter a price for the Onion Rings");
             valid = false;
@@ -2482,13 +2442,13 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         } else {
             valid = true;
         }
-        
+
         return valid;
     }
-    
+
     private boolean validateMains() {
         boolean valid = true;
-        
+
         if (rdCheeseBurger1.isSelected() && (txtCheeseBurger.getText() == null || txtCheeseBurger.getText().isBlank() || txtCheeseBurger.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Enter a price for the Cheese Burger");
             valid = false;
@@ -2519,13 +2479,13 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         } else {
             valid = true;
         }
-        
+
         return valid;
     }
-    
+
     private boolean validateDesserts() {
         boolean valid = true;
-        
+
         if (rdBlackForestCake1.isSelected() && (txtBlackForestCake.getText() == null || txtBlackForestCake.getText().isBlank() || txtBlackForestCake.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Enter a price for the Black Forest Cake");
             valid = false;
@@ -2538,13 +2498,13 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         } else {
             valid = true;
         }
-        
+
         return valid;
     }
-    
+
     private boolean validateBeverages() {
         boolean valid = true;
-        
+
         if (rdCocaCola1.isSelected() && (txtCocaCola.getText() == null || txtCocaCola.getText().isBlank() || txtCocaCola.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Enter a price for the CocaCola");
             valid = false;
@@ -2557,7 +2517,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         } else {
             valid = true;
         }
-        
+
         return valid;
     }
 
@@ -2572,35 +2532,35 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         if (rdOnionRings1.isSelected() && txtOnionRings.getText() != null && !txtOnionRings.getText().isBlank() && !txtOnionRings.getText().isEmpty()) {
             apetizers.put("Onion Rings", Integer.parseInt(txtOnionRings.getText()));
         }
-        
+
         if (rdSpinachPie1.isSelected() && txtSpinachPie.getText() != null && !txtSpinachPie.getText().isBlank() && !txtSpinachPie.getText().isEmpty()) {
             apetizers.put("Spinach Pie", Integer.parseInt(txtSpinachPie.getText()));
         }
-        
+
         if (rdSpringRoles1.isSelected() && txtSpringRoles.getText() != null && !txtSpringRoles.getText().isBlank() && !txtSpringRoles.getText().isEmpty()) {
             apetizers.put("Spring Roles", Integer.parseInt(txtSpringRoles.getText()));
         }
-        
+
         if (rdMeatBalls1.isSelected() && txtMeatBalls.getText() != null && !txtMeatBalls.getText().isBlank() && !txtMeatBalls.getText().isEmpty()) {
             apetizers.put("Meat Balls", Integer.parseInt(txtMeatBalls.getText()));
         }
-        
+
         if (rdSausageDip1.isSelected() && txtSausageDip.getText() != null && !txtSausageDip.getText().isBlank() && !txtSausageDip.getText().isEmpty()) {
             apetizers.put("Sausage Dip", Integer.parseInt(txtSausageDip.getText()));
         }
-        
+
         if (rdFriedShrimp1.isSelected() && txtFriedShrimp.getText() != null && !txtFriedShrimp.getText().isBlank() && !txtFriedShrimp.getText().isEmpty()) {
             apetizers.put("Fried Shrimp", Integer.parseInt(txtFriedShrimp.getText()));
         }
-        
+
         if (rdWhiteBeanDip1.isSelected() && txtWhiteBeanDip.getText() != null && !txtWhiteBeanDip.getText().isBlank() && !txtWhiteBeanDip.getText().isEmpty()) {
             apetizers.put("White Bean Dip", Integer.parseInt(txtWhiteBeanDip.getText()));
         }
-        
+
         if (rdTortillaChips1.isSelected() && txtTortillaChips.getText() != null && !txtTortillaChips.getText().isBlank() && !txtTortillaChips.getText().isEmpty()) {
             apetizers.put("Tortilla Chips", Integer.parseInt(txtTortillaChips.getText()));
         }
-        
+
         if (rdCrispyTofu1.isSelected() && txtCrispyTofu.getText() != null && !txtCrispyTofu.getText().isBlank() && !txtCrispyTofu.getText().isEmpty()) {
             apetizers.put("Crispy Tofu", Integer.parseInt(txtCrispyTofu.getText()));
         }
@@ -2617,35 +2577,35 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         if (rdCheeseBurger1.isSelected() && txtCheeseBurger.getText() != null && !txtCheeseBurger.getText().isBlank() && !txtCheeseBurger.getText().isEmpty()) {
             mains.put("Cheese Burger", Integer.parseInt(txtCheeseBurger.getText()));
         }
-        
+
         if (rdFriedRice1.isSelected() && txtFriedRice.getText() != null && !txtFriedRice.getText().isBlank() && !txtFriedRice.getText().isEmpty()) {
             mains.put("Fried Rice", Integer.parseInt(txtFriedRice.getText()));
         }
-        
+
         if (rdVeggiePizza1.isSelected() && txtVeggiePizza.getText() != null && !txtVeggiePizza.getText().isBlank() && !txtVeggiePizza.getText().isEmpty()) {
             mains.put("Veggie Pizza", Integer.parseInt(txtVeggiePizza.getText()));
         }
-        
+
         if (rdHamBurger1.isSelected() && txtHamBurger.getText() != null && !txtHamBurger.getText().isBlank() && !txtHamBurger.getText().isEmpty()) {
             mains.put("Ham Burger", Integer.parseInt(txtHamBurger.getText()));
         }
-        
+
         if (rdFishNChips1.isSelected() && txtFishNChips.getText() != null && !txtFishNChips.getText().isBlank() && !txtFishNChips.getText().isEmpty()) {
             mains.put("Fish N' Chips", Integer.parseInt(txtFishNChips.getText()));
         }
-        
+
         if (rdPrawnFriedRice1.isSelected() && txtPrawnFriedRice.getText() != null && !txtPrawnFriedRice.getText().isBlank() && !txtPrawnFriedRice.getText().isEmpty()) {
             mains.put("Prawn Fried Rice", Integer.parseInt(txtPrawnFriedRice.getText()));
         }
-        
+
         if (rdTofuSalad1.isSelected() && txtTofuSalad.getText() != null && !txtTofuSalad.getText().isBlank() && !txtTofuSalad.getText().isEmpty()) {
             mains.put("Tofu Salad", Integer.parseInt(txtTofuSalad.getText()));
         }
-        
+
         if (rdFalafelBowl1.isSelected() && txtFalafelBowl.getText() != null && !txtFalafelBowl.getText().isBlank() && !txtFalafelBowl.getText().isEmpty()) {
             mains.put("Falafel Bowl", Integer.parseInt(txtFalafelBowl.getText()));
         }
-        
+
         if (rdTofuAndRiceBowl1.isSelected() && txtTofuAndRiceBowl.getText() != null && !txtTofuAndRiceBowl.getText().isBlank() && !txtTofuAndRiceBowl.getText().isEmpty()) {
             mains.put("Tofu & Rice Platter", Integer.parseInt(txtTofuAndRiceBowl.getText()));
         }
@@ -2662,15 +2622,15 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         if (rdBlackForestCake1.isSelected() && txtBlackForestCake.getText() != null && !txtBlackForestCake.getText().isBlank() && !txtBlackForestCake.getText().isEmpty()) {
             desserts.put("Black Forest Cake", Integer.parseInt(txtBlackForestCake.getText()));
         }
-        
+
         if (rdPineappleSwissRole1.isSelected() && txtPineappleSwissRole.getText() != null && !txtPineappleSwissRole.getText().isBlank() && !txtPineappleSwissRole.getText().isEmpty()) {
             desserts.put("Pineapple Swiss Role", Integer.parseInt(txtPineappleSwissRole.getText()));
         }
-        
+
         if (rdChocolateMousse1.isSelected() && txtChocolateMousse.getText() != null && !txtChocolateMousse.getText().isBlank() && !txtChocolateMousse.getText().isEmpty()) {
             desserts.put("Chocolate Mousse", Integer.parseInt(txtChocolateMousse.getText()));
         }
-        
+
         return desserts;
     }
 
@@ -2684,18 +2644,18 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         if (rdCocaCola1.isSelected() && txtCocaCola.getText() != null && !txtCocaCola.getText().isBlank() && !txtCocaCola.getText().isEmpty()) {
             beverages.put("CocaCola", Integer.parseInt(txtCocaCola.getText()));
         }
-        
+
         if (rdFreshLimesalted1.isSelected() && txtFreshLimeSalted.getText() != null && !txtFreshLimeSalted.getText().isBlank() && !txtFreshLimeSalted.getText().isEmpty()) {
             beverages.put("Fresh Lime Salted", Integer.parseInt(txtFreshLimeSalted.getText()));
         }
-        
+
         if (rdPepsi1.isSelected() && txtPepsi.getText() != null && !txtPepsi.getText().isBlank() && !txtPepsi.getText().isEmpty()) {
             beverages.put("Pepsi", Integer.parseInt(txtPepsi.getText()));
         }
-        
+
         return beverages;
     }
-    
+
 
     private void rdOnionRings1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdOnionRings1ActionPerformed
 
@@ -2718,7 +2678,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBack5MouseExited
 
     private void btnBack5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack5ActionPerformed
-
+        switchPanels(workAreaPanel);
     }//GEN-LAST:event_btnBack5ActionPerformed
 
     private void btnMenu1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenu1MouseEntered
@@ -2774,293 +2734,293 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     private void btnSaveSeatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveSeatsActionPerformed
         Map<String, List<String>> seatsMap = new HashMap<>();
         List<String> seatsListForT1 = new ArrayList<String>();
-        
+
         if (rdT1C1.isSelected()) {
             seatsListForT1.add("C1");
             seatsMap.put("T1", seatsListForT1);
         }
-        
+
         if (rdT1C2.isSelected()) {
             seatsListForT1.add("C2");
             seatsMap.put("T1", seatsListForT1);
         }
-        
+
         if (rdT1C3.isSelected()) {
             seatsListForT1.add("C3");
             seatsMap.put("T1", seatsListForT1);
         }
-        
+
         if (rdT1C4.isSelected()) {
             seatsListForT1.add("C4");
             seatsMap.put("T1", seatsListForT1);
         }
-        
+
         if (rdT1C5.isSelected()) {
             seatsListForT1.add("C5");
             seatsMap.put("T1", seatsListForT1);
         }
-        
+
         if (rdT1C6.isSelected()) {
             seatsListForT1.add("C6");
             seatsMap.put("T1", seatsListForT1);
         }
-        
+
         if (rdT1C7.isSelected()) {
             seatsListForT1.add("C7");
             seatsMap.put("T1", seatsListForT1);
         }
-        
+
         if (rdT1C8.isSelected()) {
             seatsListForT1.add("C8");
             seatsMap.put("T1", seatsListForT1);
         }
-        
+
         List<String> seatsListForT2 = new ArrayList<String>();
         if (rdT2C1.isSelected()) {
             seatsListForT2.add("C1");
             seatsMap.put("T2", seatsListForT2);
         }
-        
+
         if (rdT2C2.isSelected()) {
             seatsListForT2.add("C2");
             seatsMap.put("T2", seatsListForT2);
         }
-        
+
         if (rdT2C3.isSelected()) {
             seatsListForT2.add("C3");
             seatsMap.put("T2", seatsListForT2);
         }
-        
+
         if (rdT2C4.isSelected()) {
             seatsListForT2.add("C4");
             seatsMap.put("T2", seatsListForT2);
         }
-        
+
         if (rdT2C5.isSelected()) {
             seatsListForT2.add("C5");
             seatsMap.put("T2", seatsListForT2);
         }
-        
+
         if (rdT2C6.isSelected()) {
             seatsListForT2.add("C6");
             seatsMap.put("T2", seatsListForT2);
         }
-        
+
         if (rdT2C7.isSelected()) {
             seatsListForT2.add("C7");
             seatsMap.put("T2", seatsListForT2);
         }
-        
+
         if (rdT2C8.isSelected()) {
             seatsListForT2.add("C8");
             seatsMap.put("T2", seatsListForT2);
         }
-        
+
         List<String> seatsListForT3 = new ArrayList<String>();
         if (rdT3C1.isSelected()) {
             seatsListForT3.add("C1");
             seatsMap.put("T3", seatsListForT3);
         }
-        
+
         if (rdT3C2.isSelected()) {
             seatsListForT3.add("C2");
             seatsMap.put("T3", seatsListForT3);
         }
-        
+
         if (rdT3C3.isSelected()) {
             seatsListForT3.add("C3");
             seatsMap.put("T3", seatsListForT3);
         }
-        
+
         if (rdT3C4.isSelected()) {
             seatsListForT3.add("C4");
             seatsMap.put("T3", seatsListForT3);
         }
-        
+
         if (rdT3C5.isSelected()) {
             seatsListForT3.add("C5");
             seatsMap.put("T3", seatsListForT3);
         }
-        
+
         if (rdT3C6.isSelected()) {
             seatsListForT3.add("C6");
             seatsMap.put("T3", seatsListForT3);
         }
-        
+
         if (rdT3C7.isSelected()) {
             seatsListForT3.add("C7");
             seatsMap.put("T3", seatsListForT3);
         }
-        
+
         if (rdT3C8.isSelected()) {
             seatsListForT3.add("C8");
             seatsMap.put("T3", seatsListForT3);
         }
-        
+
         List<String> seatsListForT4 = new ArrayList<String>();
         if (rdT4C1.isSelected()) {
             seatsListForT4.add("C1");
             seatsMap.put("T4", seatsListForT4);
         }
-        
+
         if (rdT4C2.isSelected()) {
             seatsListForT4.add("C2");
             seatsMap.put("T4", seatsListForT4);
         }
-        
+
         if (rdT4C3.isSelected()) {
             seatsListForT4.add("C3");
             seatsMap.put("T4", seatsListForT4);
         }
-        
+
         if (rdT4C4.isSelected()) {
             seatsListForT4.add("C4");
             seatsMap.put("T4", seatsListForT4);
         }
-        
+
         if (rdT4C5.isSelected()) {
             seatsListForT4.add("C5");
             seatsMap.put("T4", seatsListForT4);
         }
-        
+
         if (rdT4C6.isSelected()) {
             seatsListForT4.add("C6");
             seatsMap.put("T4", seatsListForT4);
         }
-        
+
         if (rdT4C7.isSelected()) {
             seatsListForT4.add("C7");
             seatsMap.put("T4", seatsListForT4);
         }
-        
+
         if (rdT4C8.isSelected()) {
             seatsListForT4.add("C8");
             seatsMap.put("T4", seatsListForT4);
         }
-        
+
         List<String> seatsListForT5 = new ArrayList<String>();
         if (rdT5C1.isSelected()) {
             seatsListForT5.add("C1");
             seatsMap.put("T5", seatsListForT5);
         }
-        
+
         if (rdT5C2.isSelected()) {
             seatsListForT5.add("C2");
             seatsMap.put("T5", seatsListForT5);
         }
-        
+
         if (rdT5C3.isSelected()) {
             seatsListForT5.add("C3");
             seatsMap.put("T5", seatsListForT5);
         }
-        
+
         if (rdT5C4.isSelected()) {
             seatsListForT5.add("C4");
             seatsMap.put("T5", seatsListForT5);
         }
-        
+
         if (rdT5C5.isSelected()) {
             seatsListForT5.add("C5");
             seatsMap.put("T5", seatsListForT5);
         }
-        
+
         if (rdT5C6.isSelected()) {
             seatsListForT5.add("C6");
             seatsMap.put("T5", seatsListForT5);
         }
-        
+
         if (rdT5C7.isSelected()) {
             seatsListForT5.add("C7");
             seatsMap.put("T5", seatsListForT5);
         }
-        
+
         if (rdT5C8.isSelected()) {
             seatsListForT5.add("C8");
             seatsMap.put("T5", seatsListForT5);
         }
-        
+
         List<String> seatsListForT6 = new ArrayList<String>();
         if (rdT6C1.isSelected()) {
             seatsListForT5.add("C1");
             seatsMap.put("T6", seatsListForT6);
         }
-        
+
         if (rdT6C2.isSelected()) {
             seatsListForT6.add("C2");
             seatsMap.put("T6", seatsListForT6);
         }
-        
+
         if (rdT6C3.isSelected()) {
             seatsListForT6.add("C3");
             seatsMap.put("T6", seatsListForT6);
         }
-        
+
         if (rdT6C4.isSelected()) {
             seatsListForT6.add("C4");
             seatsMap.put("T6", seatsListForT6);
         }
-        
+
         if (rdT6C5.isSelected()) {
             seatsListForT6.add("C5");
             seatsMap.put("T6", seatsListForT6);
         }
-        
+
         if (rdT6C6.isSelected()) {
             seatsListForT6.add("C6");
             seatsMap.put("T6", seatsListForT6);
         }
-        
+
         if (rdT6C7.isSelected()) {
             seatsListForT6.add("C7");
             seatsMap.put("T6", seatsListForT6);
         }
-        
+
         if (rdT6C8.isSelected()) {
             seatsListForT6.add("C8");
             seatsMap.put("T6", seatsListForT6);
         }
-        
+
         List<String> seatsListForT7 = new ArrayList<String>();
         if (rdT7C1.isSelected()) {
             seatsListForT7.add("C1");
             seatsMap.put("T7", seatsListForT7);
         }
-        
+
         if (rdT7C2.isSelected()) {
             seatsListForT7.add("C2");
             seatsMap.put("T7", seatsListForT7);
         }
-        
+
         if (rdT7C3.isSelected()) {
             seatsListForT7.add("C3");
             seatsMap.put("T7", seatsListForT7);
         }
-        
+
         if (rdT7C4.isSelected()) {
             seatsListForT7.add("C4");
             seatsMap.put("T7", seatsListForT7);
         }
-        
+
         if (rdT7C5.isSelected()) {
             seatsListForT7.add("C5");
             seatsMap.put("T7", seatsListForT7);
         }
-        
+
         if (rdT7C6.isSelected()) {
             seatsListForT7.add("C6");
             seatsMap.put("T7", seatsListForT7);
         }
-        
+
         if (rdT7C7.isSelected()) {
             seatsListForT7.add("C7");
             seatsMap.put("T7", seatsListForT7);
         }
-        
+
         if (rdT7C8.isSelected()) {
             seatsListForT7.add("C8");
             seatsMap.put("T7", seatsListForT7);
         }
-        
+
         JOptionPane.showMessageDialog(null, "Seating saved successfully.");
         switchPanels(workAreaPanel);
         suites.setSeats(seatsMap);
@@ -3089,7 +3049,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
 
     private void btnDetails1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails1ActionPerformed
         int selectedRowIndex = tblServices.getSelectedRow();
-        
+
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a Staff member");
             return;
@@ -3101,7 +3061,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             txtFullName1.setText(selectedStaff.getFullName());
             txtPhoneNumber1.setText(selectedStaff.getPhoneNumber());
             txtEmail1.setText(selectedStaff.getEmail());
-            
+
             ImageIcon image = new ImageIcon(selectedStaff.getProfileImagePath());
             Image resizedImage = image.getImage().getScaledInstance(149, 151, Image.SCALE_SMOOTH);
             lblProfileImageView.setIcon(new ImageIcon(resizedImage));
@@ -3118,7 +3078,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
 
     private void btnDetails2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails2ActionPerformed
         int selectedRowIndex = tblServices.getSelectedRow();
-        
+
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a Staff member");
             return;
@@ -3152,14 +3112,14 @@ public class SuiteRolePanel extends javax.swing.JPanel {
 
     private void btnDetails3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails3ActionPerformed
         int selectedRowIndex = tblServices.getSelectedRow();
-        
+
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a Staff member");
             return;
         } else {
             DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
             Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
-            
+
             if (selectedStaff.getStatus() == null || selectedStaff.getStatus().isEmpty() || selectedStaff.getStatus().isBlank() || !selectedStaff.getStatus().equals("HIRED")) {
                 JOptionPane.showMessageDialog(this, "Hire this staff member first");
                 return;
@@ -3190,10 +3150,15 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSubmitFeedbackActionPerformed
 
     private void btnPricePerTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPricePerTableActionPerformed
-        suites.setCost(Integer.parseInt(txtCost.getText()));
-        JOptionPane.showMessageDialog(this, "Price per table added successfully");
+
+        if (txtCost.getText() == null || txtCost.getText().isEmpty() || txtCost.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Enter a valid cost!");
+        } else {
+            suites.setCost(Integer.parseInt(txtCost.getText()));
+            JOptionPane.showMessageDialog(this, "Price per table added successfully");
+        }
     }//GEN-LAST:event_btnPricePerTableActionPerformed
-    
+
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(component);
@@ -3210,42 +3175,42 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                 rdOnionRings1.setSelected(true);
                 txtOnionRings.setText(String.valueOf(appetizerMap.getValue()));
             }
-            
+
             if (appetizerMap.getKey().equals("Spinach Pie")) {
                 rdSpinachPie1.setSelected(true);
                 txtSpinachPie.setText(String.valueOf(appetizerMap.getValue()));
             }
-            
+
             if (appetizerMap.getKey().equals("Spring Roles")) {
                 rdSpringRoles1.setSelected(true);
                 txtSpringRoles.setText(String.valueOf(appetizerMap.getValue()));
             }
-            
+
             if (appetizerMap.getKey().equals("Meat Balls")) {
                 rdMeatBalls1.setSelected(true);
                 txtMeatBalls.setText(String.valueOf(appetizerMap.getValue()));
             }
-            
+
             if (appetizerMap.getKey().equals("Sausage Dip")) {
                 rdSausageDip1.setSelected(true);
                 txtSausageDip.setText(String.valueOf(appetizerMap.getValue()));
             }
-            
+
             if (appetizerMap.getKey().equals("Fried Shrimp")) {
                 rdFriedShrimp1.setSelected(true);
                 txtFriedShrimp.setText(String.valueOf(appetizerMap.getValue()));
             }
-            
+
             if (appetizerMap.getKey().equals("White Bean Dip")) {
                 rdWhiteBeanDip1.setSelected(true);
                 txtWhiteBeanDip.setText(String.valueOf(appetizerMap.getValue()));
             }
-            
+
             if (appetizerMap.getKey().equals("Tortilla Chips")) {
                 rdTortillaChips1.setSelected(true);
                 txtTortillaChips.setText(String.valueOf(appetizerMap.getValue()));
             }
-            
+
             if (appetizerMap.getKey().equals("Crispy Tofu")) {
                 rdCrispyTofu1.setSelected(true);
                 txtCrispyTofu.setText(String.valueOf(appetizerMap.getValue()));
@@ -3262,42 +3227,42 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                 rdCheeseBurger1.setSelected(true);
                 txtCheeseBurger.setText(String.valueOf(mainsMap.getValue()));
             }
-            
+
             if (mainsMap.getKey().equals("Fried Rice")) {
                 rdFriedRice1.setSelected(true);
                 txtFriedRice.setText(String.valueOf(mainsMap.getValue()));
             }
-            
+
             if (mainsMap.getKey().equals("Veggie Pizza")) {
                 rdVeggiePizza1.setSelected(true);
                 txtVeggiePizza.setText(String.valueOf(mainsMap.getValue()));
             }
-            
+
             if (mainsMap.getKey().equals("Ham Burger")) {
                 rdHamBurger1.setSelected(true);
                 txtHamBurger.setText(String.valueOf(mainsMap.getValue()));
             }
-            
+
             if (mainsMap.getKey().equals("Fish N' Chips")) {
                 rdFishNChips1.setSelected(true);
                 txtFishNChips.setText(String.valueOf(mainsMap.getValue()));
             }
-            
+
             if (mainsMap.getKey().equals("Prawn Fried Rice")) {
                 rdPrawnFriedRice1.setSelected(true);
                 txtPrawnFriedRice.setText(String.valueOf(mainsMap.getValue()));
             }
-            
+
             if (mainsMap.getKey().equals("Tofu Salad")) {
                 rdTofuSalad1.setSelected(true);
                 txtTofuSalad.setText(String.valueOf(mainsMap.getValue()));
             }
-            
+
             if (mainsMap.getKey().equals("Falafel Bowl")) {
                 rdFalafelBowl1.setSelected(true);
                 txtFalafelBowl.setText(String.valueOf(mainsMap.getValue()));
             }
-            
+
             if (mainsMap.getKey().equals("Tofu & Rice Platter")) {
                 rdTofuAndRiceBowl1.setSelected(true);
                 txtTofuAndRiceBowl.setText(String.valueOf(mainsMap.getValue()));
@@ -3314,12 +3279,12 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                 rdBlackForestCake1.setSelected(true);
                 txtBlackForestCake.setText(String.valueOf(dessertsMap.getValue()));
             }
-            
+
             if (dessertsMap.getKey().equals("Pineapple Swiss Role")) {
                 rdPineappleSwissRole1.setSelected(true);
                 txtPineappleSwissRole.setText(String.valueOf(dessertsMap.getValue()));
             }
-            
+
             if (dessertsMap.getKey().equals("Chocolate Mousse")) {
                 rdChocolateMousse1.setSelected(true);
                 txtChocolateMousse.setText(String.valueOf(dessertsMap.getValue()));
@@ -3336,12 +3301,12 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                 rdCocaCola1.setSelected(true);
                 txtCocaCola.setText(String.valueOf(beveragesMap.getValue()));
             }
-            
+
             if (beveragesMap.getKey().equals("Fresh Lime Salted")) {
                 rdFreshLimesalted1.setSelected(true);
                 txtFreshLimeSalted.setText(String.valueOf(beveragesMap.getValue()));
             }
-            
+
             if (beveragesMap.getKey().equals("Pepsi")) {
                 rdPepsi1.setSelected(true);
                 txtPepsi.setText(String.valueOf(beveragesMap.getValue()));
@@ -3357,21 +3322,21 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             if (suites.getMenu().getApetizers() != null && !suites.getMenu().getApetizers().isEmpty()) {
                 populateAppetizerFields(suites.getMenu().getApetizers());
             }
-            
+
             if (suites.getMenu().getMains() != null && !suites.getMenu().getMains().isEmpty()) {
                 populateMainsFields(suites.getMenu().getMains());
             }
-            
+
             if (suites.getMenu().getDessert() != null && !suites.getMenu().getDessert().isEmpty()) {
                 populateDessertsFields(suites.getMenu().getDessert());
             }
-            
+
             if (suites.getMenu().getBeverages() != null && !suites.getMenu().getBeverages().isEmpty()) {
                 populateBeveragesFields(suites.getMenu().getBeverages());
             }
         }
     }
-    
+
     private void populateSeats() {
         if (suites.getSeats() != null && !suites.getSeats().isEmpty()) {
             for (Map.Entry<String, List<String>> seatsMap : suites.getSeats().entrySet()) {
@@ -3380,187 +3345,187 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                         if (chair.equals("C1")) {
                             rdT1C1.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C2")) {
                             rdT1C2.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C3")) {
                             rdT1C3.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C4")) {
                             rdT1C4.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C5")) {
                             rdT1C5.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C6")) {
                             rdT1C6.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C7")) {
                             rdT1C7.setSelected(true);
                         }
                     }
                 }
-                
+
                 if (seatsMap.getKey().equals("T2")) {
                     for (String chair : seatsMap.getValue()) {
                         if (chair.equals("C1")) {
                             rdT2C1.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C2")) {
                             rdT2C2.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C3")) {
                             rdT2C3.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C4")) {
                             rdT2C4.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C5")) {
                             rdT2C5.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C6")) {
                             rdT2C6.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C7")) {
                             rdT2C7.setSelected(true);
                         }
                     }
                 }
-                
+
                 if (seatsMap.getKey().equals("T3")) {
                     for (String chair : seatsMap.getValue()) {
                         if (chair.equals("C1")) {
                             rdT3C1.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C2")) {
                             rdT3C2.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C3")) {
                             rdT3C3.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C4")) {
                             rdT3C4.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C5")) {
                             rdT3C5.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C6")) {
                             rdT3C6.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C7")) {
                             rdT3C7.setSelected(true);
                         }
                     }
                 }
-                
+
                 if (seatsMap.getKey().equals("T4")) {
                     for (String chair : seatsMap.getValue()) {
                         if (chair.equals("C1")) {
                             rdT4C1.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C2")) {
                             rdT4C2.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C3")) {
                             rdT4C3.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C4")) {
                             rdT4C4.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C5")) {
                             rdT4C5.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C6")) {
                             rdT4C6.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C7")) {
                             rdT4C7.setSelected(true);
                         }
                     }
                 }
-                
+
                 if (seatsMap.getKey().equals("T5")) {
                     for (String chair : seatsMap.getValue()) {
                         if (chair.equals("C1")) {
                             rdT5C1.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C2")) {
                             rdT5C2.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C3")) {
                             rdT5C3.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C4")) {
                             rdT5C4.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C5")) {
                             rdT5C5.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C6")) {
                             rdT5C6.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C7")) {
                             rdT5C7.setSelected(true);
                         }
                     }
                 }
-                
+
                 if (seatsMap.getKey().equals("T6")) {
                     for (String chair : seatsMap.getValue()) {
                         if (chair.equals("C1")) {
                             rdT6C1.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C2")) {
                             rdT6C2.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C3")) {
                             rdT6C3.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C4")) {
                             rdT6C4.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C5")) {
                             rdT6C5.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C6")) {
                             rdT6C6.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C7")) {
                             rdT6C7.setSelected(true);
                         }
@@ -3571,27 +3536,27 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                         if (chair.equals("C1")) {
                             rdT7C1.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C2")) {
                             rdT7C2.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C3")) {
                             rdT7C3.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C4")) {
                             rdT7C4.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C5")) {
                             rdT7C5.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C6")) {
                             rdT7C6.setSelected(true);
                         }
-                        
+
                         if (chair.equals("C7")) {
                             rdT7C7.setSelected(true);
                         }
@@ -3600,7 +3565,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void restRadioButtons() {
         rdT1C1.setSelected(false);
         rdT1C2.setSelected(false);
@@ -3610,7 +3575,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         rdT1C6.setSelected(false);
         rdT1C7.setSelected(false);
         rdT1C8.setSelected(false);
-        
+
         rdT2C1.setSelected(false);
         rdT2C2.setSelected(false);
         rdT2C3.setSelected(false);
@@ -3619,7 +3584,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         rdT2C6.setSelected(false);
         rdT2C7.setSelected(false);
         rdT2C8.setSelected(false);
-        
+
         rdT3C1.setSelected(false);
         rdT3C2.setSelected(false);
         rdT3C3.setSelected(false);
@@ -3628,7 +3593,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         rdT3C6.setSelected(false);
         rdT3C7.setSelected(false);
         rdT3C8.setSelected(false);
-        
+
         rdT4C1.setSelected(false);
         rdT4C2.setSelected(false);
         rdT4C3.setSelected(false);
@@ -3637,7 +3602,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         rdT4C6.setSelected(false);
         rdT4C7.setSelected(false);
         rdT4C8.setSelected(false);
-        
+
         rdT5C1.setSelected(false);
         rdT5C2.setSelected(false);
         rdT5C3.setSelected(false);
@@ -3646,7 +3611,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         rdT5C6.setSelected(false);
         rdT5C7.setSelected(false);
         rdT5C8.setSelected(false);
-        
+
         rdT6C1.setSelected(false);
         rdT6C2.setSelected(false);
         rdT6C3.setSelected(false);
@@ -3655,7 +3620,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         rdT6C6.setSelected(false);
         rdT6C7.setSelected(false);
         rdT6C8.setSelected(false);
-        
+
         rdT7C1.setSelected(false);
         rdT7C2.setSelected(false);
         rdT7C3.setSelected(false);
@@ -3665,26 +3630,57 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         rdT7C7.setSelected(false);
         rdT7C8.setSelected(false);
     }
-    
+
     private void populateStaff() {
         DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
         model.setRowCount(0);
-        
+
         if (staffMembers != null && !staffMembers.isEmpty()) {
             for (Staff staffMember : staffMembers) {
                 Object[] row = new Object[5];
                 row[0] = staffMember;
                 row[1] = staffMember.getStaffType();
-                
+
                 if (staffMember.getStaffType().equals("EMERGENCY")) {
                     row[2] = staffMember.getStaffSubType();
                 } else {
                     row[2] = "NA";
                 }
-                
+
                 row[3] = staffMember.getManager();
                 row[4] = staffMember.getStatus();
-                
+
+                model.addRow(row);
+            }
+        }
+    }
+
+    private void populateOrders() {
+        DefaultTableModel model = (DefaultTableModel) tblOrders.getModel();
+        model.setRowCount(0);
+
+        for (Ticket ticket : ticketDirectory.getTicketList()) {
+            if (ticket.getSuiteName() != null && ticket.getSuiteName().equals(suites.getRestaurantName())) {
+                Object[] row = new Object[4];
+                row[0] = ticket;
+                row[1] = ticket.getCustomerName();
+                row[2] = "$ " + String.valueOf(ticket.getFoodCost() + ticket.getReservationCost());
+                row[3] = ticket.getEventName();
+
+                model.addRow(row);
+            }
+        }
+    }
+
+    private void popuateFoodItemList(int id) {
+        DefaultTableModel model = (DefaultTableModel) tblFoodList.getModel();
+        model.setRowCount(0);
+        Ticket ticket = ticketDirectory.findTicketById(id);
+
+        if (ticket != null && ticket.getFoodItems() != null && !ticket.getFoodItems().isEmpty()) {
+            for (String food : ticket.getFoodItems()) {
+                Object[] row = new Object[1];
+                row[0] = food;
                 model.addRow(row);
             }
         }
@@ -3699,7 +3695,6 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     private javax.swing.JPanel SeatingPanel;
     private javax.swing.JPanel ServicesPanel;
     private javax.swing.JPanel ViewServiceDetails;
-    private javax.swing.JButton btnAcceptOrder;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnBack3;
@@ -3720,7 +3715,6 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSaveSeats;
     private javax.swing.JButton btnSubmitFeedback;
-    private javax.swing.JButton btnrejectOrder;
     private javax.swing.JCheckBox chkAll;
     private javax.swing.JCheckBox chkNonVeg;
     private javax.swing.JCheckBox chkVeg;

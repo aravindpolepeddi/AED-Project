@@ -6,6 +6,8 @@
 package business.premium;
 
 import business.Restaurant.Menu;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,6 +22,11 @@ public class Premium {
     private String cuisine;
     private String vegOrNonVeg;
     private Menu menu;
+    private List<String> tiers;
+
+    public Premium() {
+        tiers = new ArrayList<>();
+    }
 
     public String getManagerName() {
         return managerName;
@@ -75,6 +82,14 @@ public class Premium {
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
+    }
+
+    public List<String> getTiers() {
+        return tiers;
+    }
+
+    public void setTiers(List<String> tiers) {
+        this.tiers = tiers;
     }
 
     @Override

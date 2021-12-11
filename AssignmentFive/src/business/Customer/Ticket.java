@@ -18,11 +18,15 @@ public class Ticket {
 
     private int id;
     private String eventName;
-    private String count;
+    private int count;
     private String seatType;
     private List<String> foodItems;
     private Map<String, List<String>> seats;
     private int foodCost;
+    private int reservationCost;
+    private String customerName;
+    private String suiteName;
+    private String tier;
 
     public String getEventName() {
         return eventName;
@@ -32,11 +36,11 @@ public class Ticket {
         this.eventName = eventName;
     }
 
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
@@ -78,6 +82,43 @@ public class Ticket {
 
     public void setFoodCost(int foodCost) {
         this.foodCost = foodCost;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getSuiteName() {
+        return suiteName;
+    }
+
+    public void setSuiteName(String suiteName) {
+        this.suiteName = suiteName;
+    }
+
+    public int getReservationCost() {
+        return reservationCost;
+    }
+
+    public void setReservationCost(int reservationCost) {
+        this.reservationCost = reservationCost;
+    }
+
+    public String getTier() {
+        return tier;
+    }
+
+    public void setTier(String tier) {
+        this.tier = tier;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(id);
     }
 
 }
