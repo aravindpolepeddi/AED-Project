@@ -15,6 +15,7 @@ public class Customer extends Person {
 
     private String userName;
     private String address;
+    private Ticket ticket;
 
     public String getUserName() {
         return userName;
@@ -30,6 +31,14 @@ public class Customer extends Person {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 
 }

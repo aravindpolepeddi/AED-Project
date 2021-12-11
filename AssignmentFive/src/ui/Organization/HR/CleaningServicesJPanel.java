@@ -161,13 +161,13 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
         tblStaff.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblStaff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "STAFF MEMBER", "ASSIGNED TO"
+                "STAFF MEMBER", "ASSIGNED TO", "STATUS"
             }
         ));
         tblStaff.setSelectionBackground(new java.awt.Color(153, 209, 232));
@@ -636,11 +636,12 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (Staff staffMember : staffDirectory.getStaffList()) {
-            Object[] row = new Object[2];
+            Object[] row = new Object[3];
             if (staffMember.getStaffType().equals("CLEANING")) {
 
                 row[0] = staffMember;
                 row[1] = staffMember.getEmail();
+                row[2] = staffMember.getStatus();
                 model.addRow(row);
             }
         }

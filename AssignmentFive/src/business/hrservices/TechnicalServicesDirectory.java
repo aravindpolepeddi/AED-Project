@@ -13,24 +13,24 @@ import java.util.List;
  *
  * @author deepv
  */
-public class GroundServicesDirectory {
+public class TechnicalServicesDirectory {
 
-    private List<GroundServices> groundServices;
+    private List<TechnicalServices> groundServices;
 
-    public GroundServicesDirectory() {
+    public TechnicalServicesDirectory() {
         groundServices = new ArrayList<>();
     }
 
-    public List<GroundServices> getGroundServices() {
+    public List<TechnicalServices> getGroundServices() {
         return groundServices;
     }
 
-    public void setGroundServices(List<GroundServices> groundServices) {
+    public void setGroundServices(List<TechnicalServices> groundServices) {
         this.groundServices = groundServices;
     }
 
-    public GroundServices addGroundService() {
-        GroundServices groundService = new GroundServices();
+    public TechnicalServices addGroundService() {
+        TechnicalServices groundService = new TechnicalServices();
         groundServices.add(groundService);
         return groundService;
     }
@@ -41,8 +41,8 @@ public class GroundServicesDirectory {
      * @param managerNames
      * @return
      */
-    public GroundServices findGroundServiceByManagerName(String managerNames) {
-        GroundServices groundService = groundServices.stream().filter(x -> x.getManagerName().equals(managerNames)).findAny().orElse(null);
+    public TechnicalServices findTechServiceByManagerName(String managerNames) {
+        TechnicalServices groundService = groundServices.stream().filter(x -> x.getManagerName().equals(managerNames)).findAny().orElse(null);
         return groundService;
     }
 
@@ -51,7 +51,7 @@ public class GroundServicesDirectory {
      *
      * @param premium
      */
-    public void removeGroundService(GroundServices groundService) {
+    public void removeGroundService(TechnicalServices groundService) {
         groundServices.remove(groundService);
     }
 

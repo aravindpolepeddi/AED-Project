@@ -366,7 +366,7 @@
                         <StringItem index="0" value="SELECT SERVICE"/>
                         <StringItem index="1" value="CLEANING"/>
                         <StringItem index="2" value="EMERGENCY"/>
-                        <StringItem index="3" value="GROUND"/>
+                        <StringItem index="3" value="TECHNICAL"/>
                         <StringItem index="4" value="SECURITY"/>
                       </StringArray>
                     </Property>

@@ -34,23 +34,25 @@ public class manageEventPanel extends javax.swing.JPanel {
     String managerame;
     Event event;
     FlagClass flag;
-    Boolean update=false;
+    Boolean update = false;
+
     /**
      * Creates new form manageEventPanel
      */
     public manageEventPanel() {
         initComponents();
     }
-    
-        public manageEventPanel(Business business, UserAccount account, JPanel workAreaPanel) {
+
+    public manageEventPanel(Business business, UserAccount account, JPanel workAreaPanel) {
         initComponents();
         this.business = business;
         this.workAreaPanel = workAreaPanel;
         this.account = account;
-        this.event=new Event();
+        this.event = new Event();
 
         flag = new FlagClass();
-        
+        populateTable();
+
 
         /*
         JTableHeader tableHeader = tblRestaurantManagers.getTableHeader();
@@ -58,24 +60,23 @@ public class manageEventPanel extends javax.swing.JPanel {
         ((DefaultTableCellRenderer) tableHeader.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
         populateRestaurantRole();
         pnlUpdate.setVisible(false);
-        */
-        
+         */
     }
-        
-        private void populateTable(){
+
+    private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) jEventTable.getModel();
-        
+
         model.setRowCount(0);
         //if(resdir.getRestaurantList()==null){}
 
-        for (Event eve : business.getEventDirectory().getEventList()){
+        for (Event eve : business.getEventDirectory().getEventList()) {
             Object[] row = new Object[5];
             row[0] = eve.getEventName();
             row[1] = eve.getEventType();
             row[2] = eve.getCapacity();
             row[3] = eve.getStartDate();
             row[4] = eve.getEndDate();
-            
+
             model.addRow(row);
         }
     }
@@ -243,37 +244,52 @@ public class manageEventPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddEventjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEventjButtonActionPerformed
-        // TODO add your handling code here:
-        Date startDate   = jStartDateChooser.getDate();
-        Date endDate     = jEndDateChooser.getDate();
+        Date startDate = jStartDateChooser.getDate();
+        Date endDate = jEndDateChooser.getDate();
         StringBuilder Error = new StringBuilder();
         //if(business.getEventDirectory()==null)
-        if(eventNamejTextField.getText().isEmpty() || !business.getEventDirectory().checkIfEventnameIsUnique(eventNamejTextField.getText())){ Error.append("Enter Valid Name \n");}
-        else{event.setEventName(eventNamejTextField.getText());
-        eventNamejTextField.setText("");}
-        if(eventTypejTextField.getText().isEmpty()){ Error.append("Enter Valid Event Type \n");}
-        else{event.setEventType(eventTypejTextField.getText());
-        eventTypejTextField.setText("");}
-        if(SeatCapacityjTextField.getText().isEmpty()){ Error.append("Enter Capacity \n");}
-        else{event.setCapacity(Integer.parseInt(SeatCapacityjTextField.getText()));
-        SeatCapacityjTextField.setText("");}
-        if(startDate.toString().isEmpty()){ Error.append("Enter Valid Start Date \n");}
-        else{event.setStartDate(startDate);
-        jStartDateChooser.setDate(null);
+        if (eventNamejTextField.getText().isEmpty() || !business.getEventDirectory().checkIfEventnameIsUnique(eventNamejTextField.getText())) {
+            Error.append("Enter Valid Name \n");
+        } else {
+            event.setEventName(eventNamejTextField.getText());
+            eventNamejTextField.setText("");
         }
-        if(endDate.toString().isEmpty() || endDate.before(startDate)){ Error.append("Enter Valid End Date \n");}
-        else{event.setEndDate(endDate);
-        jEndDateChooser.setDate(null);
+        if (eventTypejTextField.getText().isEmpty()) {
+            Error.append("Enter Valid Event Type \n");
+        } else {
+            event.setEventType(eventTypejTextField.getText());
+            eventTypejTextField.setText("");
         }
-        if(update==true)
-            update=false;
+        if (SeatCapacityjTextField.getText().isEmpty()) {
+            Error.append("Enter Capacity \n");
+        } else {
+            event.setCapacity(Integer.parseInt(SeatCapacityjTextField.getText()));
+            SeatCapacityjTextField.setText("");
+        }
+        if (startDate.toString().isEmpty()) {
+            Error.append("Enter Valid Start Date \n");
+        } else {
+            event.setStartDate(startDate);
+            jStartDateChooser.setDate(null);
+        }
+        if (endDate.toString().isEmpty() || endDate.before(startDate)) {
+            Error.append("Enter Valid End Date \n");
+        } else {
+            event.setEndDate(endDate);
+            jEndDateChooser.setDate(null);
+        }
+        if (update == true) {
+            update = false;
+        }
         business.getEventDirectory().createEvent(event);
         populateTable();
     }//GEN-LAST:event_AddEventjButtonActionPerformed
 
     private void BackjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackjButtonActionPerformed
         // TODO add your handling code here:
-        if(update==true) JOptionPane.showMessageDialog(this, "Please Save the updated Event");
+        if (update == true) {
+            JOptionPane.showMessageDialog(this, "Please Save the updated Event");
+        }
         workAreaPanel.remove(this);
         CardLayout layout = (CardLayout) workAreaPanel.getLayout();
         layout.previous(workAreaPanel);
@@ -286,14 +302,14 @@ public class manageEventPanel extends javax.swing.JPanel {
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select an Event");
             return;
-        }
-        else{
+        } else {
             DefaultTableModel model = (DefaultTableModel) jEventTable.getModel();
-            int j=0;
-            for(Event e:business.getEventDirectory().getEventList()){
-            if(j==selectedRowIndex)
-            business.getEventDirectory().getEventList().remove(e);
-            break;
+            int j = 0;
+            for (Event e : business.getEventDirectory().getEventList()) {
+                if (j == selectedRowIndex) {
+                    business.getEventDirectory().getEventList().remove(e);
+                }
+                break;
             }
             //UserAccount accountToBeRemoved = business.getUserAccountDirectory().fetchUserAccountUsingUserName(selectedUserAccount.getUsername());
             //business.getUserAccountDirectory().removeAccount(accountToBeRemoved);
@@ -304,27 +320,26 @@ public class manageEventPanel extends javax.swing.JPanel {
 
     private void modifyEventjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyEventjButtonActionPerformed
         // TODO add your handling code here:
-        int selectedRowIndex = jEventTable.getSelectedRow();        
+        int selectedRowIndex = jEventTable.getSelectedRow();
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a Event");
             return;
         } else {
             DefaultTableModel model = (DefaultTableModel) jEventTable.getModel();
-            int j=0;
-            for(Event selectedevent:business.getEventDirectory().getEventList()){
-            if(j==selectedRowIndex){
-            update=true;    
-            eventNamejTextField.setText(selectedevent.getEventName());
-            eventTypejTextField.setText(selectedevent.getEventType());
-            SeatCapacityjTextField.setText(String.valueOf(selectedevent.getCapacity()));
-            jStartDateChooser.setDate(selectedevent.getStartDate());
-            jEndDateChooser.setDate(selectedevent.getEndDate());
-            business.getEventDirectory().getEventList().remove(selectedevent);
+            int j = 0;
+            for (Event selectedevent : business.getEventDirectory().getEventList()) {
+                if (j == selectedRowIndex) {
+                    update = true;
+                    eventNamejTextField.setText(selectedevent.getEventName());
+                    eventTypejTextField.setText(selectedevent.getEventType());
+                    SeatCapacityjTextField.setText(String.valueOf(selectedevent.getCapacity()));
+                    jStartDateChooser.setDate(selectedevent.getStartDate());
+                    jEndDateChooser.setDate(selectedevent.getEndDate());
+                    business.getEventDirectory().getEventList().remove(selectedevent);
+                }
+                break;
             }
-            break;
-            }
-            
-            
+
         }
     }//GEN-LAST:event_modifyEventjButtonActionPerformed
 

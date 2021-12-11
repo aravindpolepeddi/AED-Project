@@ -146,13 +146,13 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblRestaurantName" alignment="0" pref="711" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnDetails" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane3" alignment="0" min="-2" pref="597" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -521,13 +521,10 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblProfileImageView" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txtFullName1" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="txtPhoneNumber1" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="txtEmail1" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtFullName1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtPhoneNumber1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtEmail1" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>

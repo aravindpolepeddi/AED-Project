@@ -20,24 +20,25 @@ public class EventDirectory {
     }
 
     public void setEventList(ArrayList<Event> event) {
-        if(eventList==null)
-            eventList=new ArrayList<Event>();
+        if (eventList == null) {
+            eventList = new ArrayList<Event>();
+        }
         this.eventList = event;
     }
 
-    public Event findEvent(String Name){
-    for(Event eve:eventList){
-    if(eve.getEventName().equals(Name)){
-    return eve;
-    }
-    }
-    return null;
+    public Event findEvent(String Name) {
+        for (Event eve : eventList) {
+            if (eve.getEventName().equals(Name)) {
+                return eve;
+            }
+        }
+        return null;
     }
 
-        public boolean checkIfEventnameIsUnique(String eventname) {
-        if(eventList==null){
-            eventList=new ArrayList<Event>();
-                  return true;
+    public boolean checkIfEventnameIsUnique(String eventname) {
+        if (eventList == null) {
+            eventList = new ArrayList<Event>();
+            return true;
         }
         for (Event eve : eventList) {
             if (eve.getEventName().equals(eventname)) {
@@ -47,7 +48,7 @@ public class EventDirectory {
         return true;
     }
 
-        public void createEvent(Event eve){
+    public void createEvent(Event eve) {
         eventList.add(eve);
     }
 

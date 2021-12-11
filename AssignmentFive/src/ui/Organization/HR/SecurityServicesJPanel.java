@@ -36,24 +36,12 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
     StaffDirectory staffDirectory;
     String managerName;
     FlagClass flags;
-    String test;
 
     /**
      * Creates new form SecurityServicesJPanel
      */
     public SecurityServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
-
-        test = "TEST";
-        System.out.println(test);
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                test = "HMM!";
-                System.out.println(test);
-            }
-        }, 2000);
 
         this.managerName = account.getName();
         this.flags = new FlagClass();
@@ -71,6 +59,8 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         } else {
             this.staffDirectory = securityServices.getStaffDirectory();
         }
+        
+        populateStaff();
     }
 
     /**
@@ -242,12 +232,12 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         SecurityDashboardLayout.setHorizontalGroup(
             SecurityDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblRestaurantName, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecurityDashboardLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(SecurityDashboardLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(SecurityDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnDetails)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         SecurityDashboardLayout.setVerticalGroup(
             SecurityDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -476,12 +466,10 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblProfileImageView, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(ViewDetailsPanelLayout.createSequentialGroup()
-                                .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFullName1)
-                                    .addComponent(txtPhoneNumber1)
-                                    .addComponent(txtEmail1))
-                                .addGap(41, 41, 41)))))
+                            .addGroup(ViewDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtFullName1)
+                                .addComponent(txtPhoneNumber1)
+                                .addComponent(txtEmail1)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ViewDetailsPanelLayout.setVerticalGroup(
@@ -602,7 +590,7 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
                         .addComponent(btnBack7, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(SecurtyGuardTrainingLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 705, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
                 .addContainerGap())
         );
         SecurtyGuardTrainingLayout.setVerticalGroup(

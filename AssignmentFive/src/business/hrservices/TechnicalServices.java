@@ -9,11 +9,12 @@ package business.hrservices;
  *
  * @author deepv
  */
-public class GroundServices {
+public class TechnicalServices {
 
-    String managerName;
-    String userName;
-    String managerType;
+    private String managerName;
+    private String userName;
+    private String managerType;
+    private StaffDirectory staffDirectory;
 
     public String getManagerName() {
         return managerName;
@@ -37,6 +38,14 @@ public class GroundServices {
 
     public void setManagerType(String managerType) {
         this.managerType = managerType;
+    }
+
+    public StaffDirectory getStaffDirectory() {
+        return staffDirectory;
+    }
+
+    public void setStaffDirectory(StaffDirectory staffDirectory) {
+        this.staffDirectory = staffDirectory;
     }
 
 }

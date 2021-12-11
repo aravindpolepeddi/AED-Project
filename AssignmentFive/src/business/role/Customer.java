@@ -14,6 +14,7 @@ import business.role.Role.RoleType;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
 import ui.CustomerRole.CustomerAreaJPanel;
+import ui.CustomerRole.CustomerWorkAreaJPanel;
 
 /**
  *
@@ -27,7 +28,7 @@ public class Customer extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Business business) {
-        return new CustomerAreaJPanel(userProcessContainer, account, business);
+        return new CustomerWorkAreaJPanel(userProcessContainer, account, business);
     }
 
 }

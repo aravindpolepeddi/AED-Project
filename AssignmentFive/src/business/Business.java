@@ -13,7 +13,7 @@ import business.concessions.ConcessionsDirectory;
 import business.event.EventDirectory;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServicesDirectory;
-import business.hrservices.GroundServicesDirectory;
+import business.hrservices.TechnicalServicesDirectory;
 import business.hrservices.SecurityServices;
 import business.hrservices.SecurityServicesDirectory;
 import business.organizations.FoodBevOrganization;
@@ -39,8 +39,9 @@ public class Business extends Organization {
     private SuitesDirectory suitesDirectory;
     private CleaningServicesDirectory cleaningServices;
     private EmergencyServicesDirectory emergencyServices;
-    private GroundServicesDirectory groundServices;
+    private TechnicalServicesDirectory technicalServices;
     private SecurityServicesDirectory securityServices;
+    private EventDirectory eventDirectory;
 
     public PremiumDirectory getPremiumDirectory() {
         return premiumDirectory;
@@ -57,7 +58,6 @@ public class Business extends Organization {
     public void setSuitesDirectory(SuitesDirectory suitesDirectory) {
         this.suitesDirectory = suitesDirectory;
     }
-    private EventDirectory eventDirectory;
 
     public EventDirectory getEventDirectory() {
         return eventDirectory;
@@ -66,8 +66,6 @@ public class Business extends Organization {
     public void setEventDirectory(EventDirectory eventDirectory) {
         this.eventDirectory = eventDirectory;
     }
-
-    ;
 
     public ConcessionsDirectory getConcessionsDirectory() {
         return concessionsDirectory;
@@ -93,12 +91,12 @@ public class Business extends Organization {
         this.emergencyServices = emergencyServices;
     }
 
-    public GroundServicesDirectory getGroundServices() {
-        return groundServices;
+    public TechnicalServicesDirectory getTechnicalServices() {
+        return technicalServices;
     }
 
-    public void setGroundServices(GroundServicesDirectory groundServices) {
-        this.groundServices = groundServices;
+    public void setTechnicalServices(TechnicalServicesDirectory technicalServices) {
+        this.technicalServices = technicalServices;
     }
 
     public SecurityServicesDirectory getSecurityServices() {
@@ -108,6 +106,8 @@ public class Business extends Organization {
     public void setSecurityServices(SecurityServicesDirectory securityServices) {
         this.securityServices = securityServices;
     }
+    
+    
 
     public static Business getInstance() {
         if (business == null) {

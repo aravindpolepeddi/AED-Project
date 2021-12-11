@@ -59,4 +59,9 @@ public class Event {
         this.endDate = endDate;
     }
 
+    @Override
+    public String toString() {
+        return eventName;
+    }
+
 }
