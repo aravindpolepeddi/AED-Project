@@ -49,21 +49,21 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
         lblPassword3 = new javax.swing.JLabel();
         txtPassword1 = new javax.swing.JTextField();
         btnUpdateSave1 = new javax.swing.JButton();
-        lblRestaurantName1 = new javax.swing.JLabel();
-        lblAddUser2 = new javax.swing.JLabel();
         lblManagerName2 = new javax.swing.JLabel();
-        txtManagerName2 = new javax.swing.JTextField();
         lblRestaurantName4 = new javax.swing.JLabel();
-        txtRestaurantName2 = new javax.swing.JTextField();
         lblUserName2 = new javax.swing.JLabel();
-        txtUserName2 = new javax.swing.JTextField();
         lblPassword2 = new javax.swing.JLabel();
+        lblRestaurantName1 = new javax.swing.JLabel();
+        txtManagerName2 = new javax.swing.JTextField();
+        txtRestaurantName2 = new javax.swing.JTextField();
+        txtUserName2 = new javax.swing.JTextField();
         pwdPassword1 = new javax.swing.JPasswordField();
         btnCreateUser1 = new javax.swing.JButton();
         btnDelete1 = new javax.swing.JButton();
         btnUpdate1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblMerchendiseManagers = new javax.swing.JTable();
+        lblAddUser2 = new javax.swing.JLabel();
 
         NavigationJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -71,7 +71,7 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
         NavigationJPanel.setLayout(NavigationJPanelLayout);
         NavigationJPanelLayout.setHorizontalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 175, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         NavigationJPanelLayout.setVerticalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,9 +102,9 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
         lblPassword3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblPassword3.setText("Password : ");
 
-        btnUpdateSave1.setBackground(new java.awt.Color(175, 211, 211));
+        btnUpdateSave1.setBackground(new java.awt.Color(0, 102, 102));
         btnUpdateSave1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnUpdateSave1.setForeground(new java.awt.Color(0, 102, 102));
+        btnUpdateSave1.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdateSave1.setText("UPDATE");
         btnUpdateSave1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUpdateSave1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -121,66 +121,6 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout pnlUpdateLayout = new javax.swing.GroupLayout(pnlUpdate);
-        pnlUpdate.setLayout(pnlUpdateLayout);
-        pnlUpdateLayout.setHorizontalGroup(
-            pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUpdateLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlUpdateLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(lblAddUser3))
-                    .addGroup(pnlUpdateLayout.createSequentialGroup()
-                        .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblManagerName3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblRestaurantName5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblUserName3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPassword3, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUserName3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRestaurantName3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtManagerName3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUpdateSave1)
-                            .addComponent(txtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlUpdateLayout.setVerticalGroup(
-            pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUpdateLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblAddUser3)
-                .addGap(18, 18, 18)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblManagerName3)
-                    .addComponent(txtManagerName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRestaurantName5)
-                    .addComponent(txtRestaurantName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUserName3)
-                    .addComponent(txtUserName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPassword3)
-                    .addComponent(txtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUpdateSave1)
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-
-        lblRestaurantName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblRestaurantName1.setForeground(new java.awt.Color(0, 153, 153));
-        lblRestaurantName1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRestaurantName1.setText("Merchendise");
-
-        lblAddUser2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblAddUser2.setForeground(new java.awt.Color(0, 102, 102));
-        lblAddUser2.setText("ADD NEW USER");
-
         lblManagerName2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblManagerName2.setText("Manager Name :");
 
@@ -193,9 +133,80 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
         lblPassword2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblPassword2.setText("Password : ");
 
-        btnCreateUser1.setBackground(new java.awt.Color(175, 211, 211));
+        javax.swing.GroupLayout pnlUpdateLayout = new javax.swing.GroupLayout(pnlUpdate);
+        pnlUpdate.setLayout(pnlUpdateLayout);
+        pnlUpdateLayout.setHorizontalGroup(
+            pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUpdateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblManagerName3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblRestaurantName5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblUserName3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPassword3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtUserName3, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                    .addComponent(txtRestaurantName3, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                    .addComponent(txtManagerName3, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                    .addComponent(txtPassword1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                    .addComponent(btnUpdateSave1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblManagerName2)
+                    .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblRestaurantName4)
+                        .addComponent(lblUserName2)
+                        .addComponent(lblPassword2)))
+                .addContainerGap())
+            .addGroup(pnlUpdateLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(lblAddUser3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlUpdateLayout.setVerticalGroup(
+            pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUpdateLayout.createSequentialGroup()
+                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlUpdateLayout.createSequentialGroup()
+                        .addComponent(lblAddUser3)
+                        .addGap(29, 29, 29)
+                        .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblManagerName3)
+                            .addComponent(txtManagerName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
+                        .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRestaurantName5)
+                            .addComponent(txtRestaurantName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlUpdateLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(lblManagerName2)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblRestaurantName4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUserName3)
+                    .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtUserName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblUserName2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPassword3)
+                    .addComponent(txtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword2))
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdateSave1)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        lblRestaurantName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRestaurantName1.setForeground(new java.awt.Color(0, 153, 153));
+        lblRestaurantName1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRestaurantName1.setText("Merchendise");
+
+        btnCreateUser1.setBackground(new java.awt.Color(0, 102, 102));
         btnCreateUser1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCreateUser1.setForeground(new java.awt.Color(0, 102, 102));
+        btnCreateUser1.setForeground(new java.awt.Color(255, 255, 255));
         btnCreateUser1.setText("CREATE");
         btnCreateUser1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCreateUser1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -212,9 +223,9 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnDelete1.setBackground(new java.awt.Color(255, 255, 255));
+        btnDelete1.setBackground(new java.awt.Color(153, 0, 0));
         btnDelete1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnDelete1.setForeground(new java.awt.Color(153, 0, 0));
+        btnDelete1.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete1.setText("DELETE USER");
         btnDelete1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDelete1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -231,9 +242,9 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnUpdate1.setBackground(new java.awt.Color(255, 255, 255));
+        btnUpdate1.setBackground(new java.awt.Color(0, 102, 102));
         btnUpdate1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnUpdate1.setForeground(new java.awt.Color(0, 102, 0));
+        btnUpdate1.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate1.setText("UPDATE USER");
         btnUpdate1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUpdate1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -250,7 +261,6 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
             }
         });
 
-        tblMerchendiseManagers.setBackground(new java.awt.Color(255, 255, 255));
         tblMerchendiseManagers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblMerchendiseManagers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -267,6 +277,10 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
         tblMerchendiseManagers.setSelectionForeground(new java.awt.Color(0, 51, 51));
         jScrollPane3.setViewportView(tblMerchendiseManagers);
 
+        lblAddUser2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAddUser2.setForeground(new java.awt.Color(0, 102, 102));
+        lblAddUser2.setText("ADD NEW USER");
+
         javax.swing.GroupLayout workAreaPanelLayout = new javax.swing.GroupLayout(workAreaPanel);
         workAreaPanel.setLayout(workAreaPanelLayout);
         workAreaPanelLayout.setHorizontalGroup(
@@ -274,34 +288,31 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
             .addComponent(lblRestaurantName1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblManagerName2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblRestaurantName4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblUserName2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPassword2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtUserName2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pwdPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtRestaurantName2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtManagerName2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCreateUser1))
-                        .addGap(38, 38, 38))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(pnlUpdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(workAreaPanelLayout.createSequentialGroup()
                                 .addComponent(btnDelete1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnUpdate1))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(128, 128, 128)
-                        .addComponent(lblAddUser2)
-                        .addGap(110, 110, 110))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtManagerName2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRestaurantName2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUserName2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pwdPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblAddUser2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnUpdate1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnCreateUser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(150, 150, 150))
         );
         workAreaPanelLayout.setVerticalGroup(
             workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,35 +320,26 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
                 .addGap(41, 41, 41)
                 .addComponent(lblRestaurantName1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdate1)
+                    .addComponent(btnDelete1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
                         .addComponent(lblAddUser2)
+                        .addGap(17, 17, 17)
+                        .addComponent(txtManagerName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtRestaurantName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblManagerName2)
-                            .addComponent(txtManagerName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtRestaurantName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblRestaurantName4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtUserName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUserName2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPassword2)
-                            .addComponent(pwdPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(workAreaPanelLayout.createSequentialGroup()
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnUpdate1)
-                            .addComponent(btnDelete1))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCreateUser1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUserName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pwdPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCreateUser1))
+                    .addComponent(pnlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(139, Short.MAX_VALUE))
         );
 
@@ -372,8 +374,43 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
 
     private void btnUpdateSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSave1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateSave1ActionPerformed
+          boolean formDatafilled = true;
+        if (!validateStringInput(txtManagerName3.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter Manager name");
+        }
+        if (!validateStringInput(txtRestaurantName3.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter organisation name");
+        }
+        if (!validateStringInput(txtUserName3.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter username ");
+        }
+        if (!validateStringInput(txtPassword1.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter password");
+        }
 
+        if(formDatafilled){
+            //save data
+        }
+    }//GEN-LAST:event_btnUpdateSave1ActionPerformed
+private static boolean validateStringInput(String userInput) {
+        if (userInput.trim().equals("") || userInput == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private static boolean validateIntegerInput(String userInput) {
+        if (userInput.matches("^[0-9]*$") && userInput.length() == 10) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     private void btnCreateUser1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateUser1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCreateUser1MouseEntered
@@ -384,6 +421,27 @@ public class MerchendiseEntJPanel extends javax.swing.JPanel {
 
     private void btnCreateUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUser1ActionPerformed
         // TODO add your handling code here:
+        boolean formDatafilled = true;
+        if (!validateStringInput(txtManagerName2.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter Manager name");
+        }
+        if (!validateStringInput(txtRestaurantName2.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter organisation name");
+        }
+        if (!validateStringInput(txtUserName2.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter username ");
+        }
+        if (!validateStringInput(pwdPassword1.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter password");
+        }
+
+        if(formDatafilled){
+            //save data
+        }
     }//GEN-LAST:event_btnCreateUser1ActionPerformed
 
     private void btnDelete1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete1MouseEntered
