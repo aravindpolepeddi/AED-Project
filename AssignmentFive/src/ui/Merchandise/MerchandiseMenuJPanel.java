@@ -236,47 +236,71 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        merchShop = merchShopDirectory.findMerchandiseShop(useraccount.getUsername());
+        boolean formValid = true;
 
-        if (merchShop == null) {
-            merchShop = merchShopDirectory.addShop();
-        }
 
         StringBuilder Error = new StringBuilder();
 
         merchandise merchandise = new merchandise();
 
         if (jTextItemName.getText().isEmpty()) {
+            formValid = false;
             Error.append("Enter Valid Name \n");
         } else {
             merchandise.setItemName(jTextItemName.getText());
             jTextItemName.setText("");
         }
         if (jTextPrice.getText().isEmpty()) {
+            formValid = false;
             Error.append("Enter Price \n");
         } else {
-            merchandise.setPrice(Integer.parseInt(jTextPrice.getText()));
-            jTextPrice.setText("");
+            if(validateIntegerInput(jTextPrice.getText())){
+                
+                merchandise.setPrice(Integer.parseInt(jTextPrice.getText()));
+            jTextPrice.setText(""); 
+            }
+            else{
+                formValid = false;
+                Error.append("Please enter numeric values");
+            }
+           
         }
-        if (merchShop != null && merchShop.findItem(merchandise.getItemName(), merchandise.getPrice()) != null) {
+        
+        if(formValid){
+            merchShop = merchShopDirectory.findMerchandiseShop(useraccount.getUsername());
+
+        if (merchShop == null) {
+            merchShop = merchShopDirectory.addShop();
+        }
+
+        }
+        if (formValid && merchShop != null && merchShop.findItem(merchandise.getItemName(), merchandise.getPrice()) != null) {
             Error.append("Item exists \n");
         }
-        if (Error.isEmpty()) {
+        if (Error.isEmpty() && formValid) {
             merchShop.addMerchandise(merchandise);
         } else {
             JOptionPane.showMessageDialog(this, Error);
         }
-        mergeShopList.add(merchShop);
+        if(formValid){
+             mergeShopList.add(merchShop);
         merchShopDirectory.setMerchandiseShopList(mergeShopList);
         enterprise.setMerchandiseShopDirectory(merchShopDirectory);
         network.put(networkString, enterprise);
         system.setNetworkList(network);
 
         refreshTable();
+        }
 //        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private static boolean validateIntegerInput(String userInput) {
+        if (userInput.matches("^[0-9]*$") ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public void refreshTable() {
 
 //        mmerchShop = merchShopDirectory.findMerchandiseShop(useraccount.getUsername());
