@@ -6,17 +6,22 @@ package ui.Enterprises;
  * and open the template in the editor.
  */
 import business.Business;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 
 import business.useraccount.UserAccount;
 import business.merchandise.merchandiseShop;
 import business.merchandise.merchandiseShopDirectory;
 import business.role.ParkingManagerRole;
+import business.role.PickandDropManagerRole;
 import business.role.Role;
 import business.ticketing.ParkingDirectory;
 import business.ticketing.ParkingManager;
 import business.ticketing.PickandDropDirectory;
 import business.ticketing.PickandDropManager;
 import java.awt.CardLayout;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -39,8 +44,19 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
     private Boolean update = false;
     merchandiseShop merchShop = new merchandiseShop();
 
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
+
     public TicketingEntJPanel(JPanel userProcessContainer, UserAccount uadir, Business system) {
         initComponents();
+
+        if (system.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = system.getNetworkList();
+        }
 
         if (system.getPdDirectory() == null) {
             pdDirectory = new PickandDropDirectory();
@@ -110,8 +126,10 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtNetwork = new javax.swing.JTextField();
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
+        jPanel1.setBackground(new java.awt.Color(153, 0, 51));
 
         jTableTicketingManagers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,6 +192,8 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Parking", "PickupandDrop", "SeatBooking" }));
 
+        jLabel5.setText("Network");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -181,15 +201,8 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButtonSave)
@@ -197,20 +210,35 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel1)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3))
-                                        .addGap(3, 3, 3))
                                     .addComponent(jLabel4))
                                 .addGap(67, 67, 67)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextName)
-                                        .addComponent(jTextUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                                        .addComponent(jPasswordField1)))
-                                .addGap(43, 43, 43))))))
+                                    .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(43, 43, 43))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(70, 70, 70)
+                                .addComponent(txtNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(30, 30, 30)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +258,11 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -238,10 +270,10 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSave)
                 .addGap(17, 17, 17))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -263,93 +295,211 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
 
         StringBuilder Error = new StringBuilder();
         if (jComboBox1.getSelectedIndex() == 0) {
-            ParkingManager parking = parkingDirectory.addParkingManager();
-            if (jTextName.getText().isEmpty()) {
-                Error.append("Enter Valid Name \n");
-            } else {
-                parking.setParkingManagerName(jTextName.getText());
+            ParkingManagerRole role = new ParkingManagerRole();
+            system.getUserAccountDirectory().createUserAccount(jTextUsername.getText(), jTextName.getText(), jPasswordField1.getText(), role, txtNetwork.getText());
 
-                jTextName.setText("");
-            }
-            if (jTextUsername.getText().isEmpty()) {
-                Error.append("Enter Capacity \n");
-            } else {
-                parking.setUsername(jTextUsername.getText());
-                jTextUsername.setText("");
-            }
-            if (jPasswordField1.getText().isEmpty()) {
-                Error.append("Enter Valid Start Date \n");
-            } else {
-                parking.setPassword(jPasswordField1.getText());
-                jPasswordField1.setText("");
-            }
+            if (network.containsKey(txtNetwork.getText())) {
+                for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                    if (iteration.getKey().equals(txtNetwork.getText())) {
+                        if (iteration.getValue().getParkingDirectory() == null) {
+                            parkingDirectory = new ParkingDirectory();
+                            Enterprise enterprise = iteration.getValue();
+                            ParkingManager parking = parkingDirectory.addParkingManager();
+                            if (jTextName.getText().isEmpty()) {
+                                Error.append("Enter Valid Name \n");
+                            } else {
+                                parking.setParkingManagerName(jTextName.getText());
 
-            if (update == true) {
-                update = false;
-            }
-            if (Error.isEmpty()) {
-                system.setParkingDirectory(parkingDirectory);
-                ParkingManagerRole role = new ParkingManagerRole();
-                system.getUserAccountDirectory().createUserAccount(parking.getUsername(), parking.getParkingManagerName(), parking.getPassword(), role, null);
+                                jTextName.setText("");
+                            }
+                            if (jTextUsername.getText().isEmpty()) {
+                                Error.append("Enter Capacity \n");
+                            } else {
+                                parking.setUsername(jTextUsername.getText());
+                                jTextUsername.setText("");
+                            }
+                            if (jPasswordField1.getText().isEmpty()) {
+                                Error.append("Enter Valid Start Date \n");
+                            } else {
+                                parking.setPassword(jPasswordField1.getText());
+                                jPasswordField1.setText("");
+                            }
 
+                            if (update == true) {
+                                update = false;
+                            } else {
+                                JOptionPane.showMessageDialog(this, Error);
+                            }
+                            enterprise.setParkingDirectory(parkingDirectory);
+                            network.put(txtNetwork.getText(), enterprise);
+                            system.setNetworkList(network);
+                        } else {
+                            parkingDirectory = iteration.getValue().getParkingDirectory();
+                            ParkingManager parking = parkingDirectory.addParkingManager();
+                            if (jTextName.getText().isEmpty()) {
+                                Error.append("Enter Valid Name \n");
+                            } else {
+                                parking.setParkingManagerName(jTextName.getText());
+
+                                jTextName.setText("");
+                            }
+                            if (jTextUsername.getText().isEmpty()) {
+                                Error.append("Enter Capacity \n");
+                            } else {
+                                parking.setUsername(jTextUsername.getText());
+                                jTextUsername.setText("");
+                            }
+                            if (jPasswordField1.getText().isEmpty()) {
+                                Error.append("Enter Valid Start Date \n");
+                            } else {
+                                parking.setPassword(jPasswordField1.getText());
+                                jPasswordField1.setText("");
+                            }
+
+                            if (update == true) {
+                                update = false;
+                            } else {
+                                JOptionPane.showMessageDialog(this, Error);
+                            }
+                        }
+                    }
+                }
             } else {
-                JOptionPane.showMessageDialog(this, Error);
+                Enterprise enterprise = new Enterprise();
+                ParkingDirectory parkingDirectory = new ParkingDirectory();
+                ParkingManager parking = parkingDirectory.addParkingManager();
+                if (jTextName.getText().isEmpty()) {
+                    Error.append("Enter Valid Name \n");
+                } else {
+                    parking.setParkingManagerName(jTextName.getText());
+
+                    jTextName.setText("");
+                }
+                if (jTextUsername.getText().isEmpty()) {
+                    Error.append("Enter Capacity \n");
+                } else {
+                    parking.setUsername(jTextUsername.getText());
+                    jTextUsername.setText("");
+                }
+                if (jPasswordField1.getText().isEmpty()) {
+                    Error.append("Enter Valid Start Date \n");
+                } else {
+                    parking.setPassword(jPasswordField1.getText());
+                    jPasswordField1.setText("");
+                }
+
+                if (update == true) {
+                    update = false;
+                } else {
+                    JOptionPane.showMessageDialog(this, Error);
+                }
+                enterprise.setParkingDirectory(parkingDirectory);
+                network.put(txtNetwork.getText(), enterprise);
+                system.setNetworkList(network);
             }
         }
 
         if (jComboBox1.getSelectedIndex() == 1) {
-            PickandDropManager pd = new PickandDropManager();
-            if (jTextName.getText().isEmpty()) {
-                Error.append("Enter Valid Name \n");
-            } else {
-                pd.setManagerName(jTextName.getText());
-                jTextName.setText("");
-            }
-            if (jTextUsername.getText().isEmpty()) {
-                Error.append("Enter Capacity \n");
-            } else {
-                pd.setUsername(jTextUsername.getText());
-                jTextUsername.setText("");
-            }
-            if (jPasswordField1.getText().isEmpty()) {
-                Error.append("Enter Valid Start Date \n");
-            } else {
-                pd.setPassword(jPasswordField1.getText());
-                jPasswordField1.setText("");
-            }
+            PickandDropManagerRole role = new PickandDropManagerRole();
+            system.getUserAccountDirectory().createUserAccount(jTextUsername.getText(), jTextName.getText(), jPasswordField1.getText(), role, txtNetwork.getText());
 
-            if (update == true) {
-                update = false;
-            }
-            if (Error.isEmpty()) {
-                system.getPdDirectory().getPdList().add(pd);
-                system.getUserAccountDirectory().createUserAccount(pd.getUsername(), pd.getManagerName(), pd.getPassword(), pd, null);
+            if (network.containsKey(txtNetwork.getText())) {
+                for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                    if (iteration.getKey().equals(txtNetwork.getText())) {
+                        if (iteration.getValue().getPdDirectory() == null) {
+                            pdDirectory = new PickandDropDirectory();
+                            Enterprise enterprise = iteration.getValue();
+                            PickandDropManager pd = pdDirectory.addPickDropManager();
+                            if (jTextName.getText().isEmpty()) {
+                                Error.append("Enter Valid Name \n");
+                            } else {
+                                pd.setManagerName(jTextName.getText());
+                                jTextName.setText("");
+                            }
+                            if (jTextUsername.getText().isEmpty()) {
+                                Error.append("Enter Capacity \n");
+                            } else {
+                                pd.setUsername(jTextUsername.getText());
+                                jTextUsername.setText("");
+                            }
+                            if (jPasswordField1.getText().isEmpty()) {
+                                Error.append("Enter Valid Start Date \n");
+                            } else {
+                                pd.setPassword(jPasswordField1.getText());
+                                jPasswordField1.setText("");
+                            }
+
+                            if (update == true) {
+                                update = false;
+                            } else {
+                                JOptionPane.showMessageDialog(this, Error);
+                            }
+                            enterprise.setPdDirectory(pdDirectory);
+                            network.put(txtNetwork.getText(), enterprise);
+                            system.setNetworkList(network);
+                        } else {
+                            pdDirectory = iteration.getValue().getPdDirectory();
+                            PickandDropManager pd = pdDirectory.addPickDropManager();
+                            if (jTextName.getText().isEmpty()) {
+                                Error.append("Enter Valid Name \n");
+                            } else {
+                                pd.setManagerName(jTextName.getText());
+                                jTextName.setText("");
+                            }
+                            if (jTextUsername.getText().isEmpty()) {
+                                Error.append("Enter Capacity \n");
+                            } else {
+                                pd.setUsername(jTextUsername.getText());
+                                jTextUsername.setText("");
+                            }
+                            if (jPasswordField1.getText().isEmpty()) {
+                                Error.append("Enter Valid Start Date \n");
+                            } else {
+                                pd.setPassword(jPasswordField1.getText());
+                                jPasswordField1.setText("");
+                            }
+
+                            if (update == true) {
+                                update = false;
+                            } else {
+                                JOptionPane.showMessageDialog(this, Error);
+                            }
+                        }
+                    }
+                }
             } else {
-                JOptionPane.showMessageDialog(this, Error);
+                Enterprise enterprise = new Enterprise();
+                PickandDropDirectory pdDir = new PickandDropDirectory();
+                PickandDropManager pd = pdDir.addPickDropManager();
+                if (jTextName.getText().isEmpty()) {
+                    Error.append("Enter Valid Name \n");
+                } else {
+                    pd.setManagerName(jTextName.getText());
+                    jTextName.setText("");
+                }
+                if (jTextUsername.getText().isEmpty()) {
+                    Error.append("Enter Capacity \n");
+                } else {
+                    pd.setUsername(jTextUsername.getText());
+                    jTextUsername.setText("");
+                }
+                if (jPasswordField1.getText().isEmpty()) {
+                    Error.append("Enter Valid Start Date \n");
+                } else {
+                    pd.setPassword(jPasswordField1.getText());
+                    jPasswordField1.setText("");
+                }
+
+                if (update == true) {
+                    update = false;
+                } else {
+                    JOptionPane.showMessageDialog(this, Error);
+                }
+                enterprise.setParkingDirectory(parkingDirectory);
+                network.put(txtNetwork.getText(), enterprise);
+                system.setNetworkList(network);
             }
         }
-
-        /*
-        if(jComboBox1.getSelectedIndex()==2){
-        PickandDrop pd = new PickandDrop();
-        if(jTextName.getText().isEmpty()){ Error.append("Enter Valid Name \n");}
-        else{pd.setDriverName(jTextName.getText());
-        jTextName.setText("");}
-        if(jTextUsername.getText().isEmpty()){ Error.append("Enter Username \n");}
-        else{pd.setUsername(jTextUsername.getText());
-        jTextUsername.setText("");}
-        if(jPasswordField1.getText().isEmpty()){ Error.append("Enter Password \n");}
-        else{pd.setPassword(jPasswordField1.getText());
-        jPasswordField1.setText("");}
-        
-        if(update==true)
-        update=false;
-        if(Error.isEmpty())
-        system.getPdDirectory().getPdList().add(pd);
-        else
-        JOptionPane.showMessageDialog(this, Error); 
-        }
-         */
         populateTable();
 
     }//GEN-LAST:event_jButtonSaveActionPerformed
@@ -438,11 +588,13 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTicketingManagers;
     private javax.swing.JTextField jTextName;
     private javax.swing.JTextField jTextUsername;
+    private javax.swing.JTextField txtNetwork;
     // End of variables declaration//GEN-END:variables
 }

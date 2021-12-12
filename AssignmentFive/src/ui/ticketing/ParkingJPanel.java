@@ -248,7 +248,7 @@ public class ParkingJPanel extends javax.swing.JPanel {
         } else {
             if (pdDirectory.getCarBookingList() != null && !pdDirectory.getCarBookingList().isEmpty()) {
                 for (CarBooking cb : pdDirectory.getCarBookingList()) {
-                    if (cb.getCarNumber().equals(jTextCarNumber.getText())) {
+                    if (cb.getCarNumber() == Integer.parseInt(jTextCarNumber.getText())) {
                         cb.setStatus("dropped");
                     }
                 }

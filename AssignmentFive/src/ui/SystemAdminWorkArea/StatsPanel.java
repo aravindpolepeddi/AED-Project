@@ -40,6 +40,7 @@ public class StatsPanel extends javax.swing.JPanel {
     Business business;
     CustomerDirectory customerDirectory;
     int merchCost;
+    int pickDropCost;
 
     /**
      * Creates new form StatsPanel
@@ -195,9 +196,15 @@ public class StatsPanel extends javax.swing.JPanel {
             merchCost = merchCost + customer.getMerchCost();
         }
 
+        this.pickDropCost = 0;
+        for (Customer customer : customerDirectory.getCustomers()) {
+            pickDropCost = pickDropCost + customer.getPickDropCost();
+        }
+
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
         dcd.setValue(foodBevCost, "Food & Beverage revenue", "Food & Beverage");
         dcd.setValue(merchCost, "Merchandise revenue", "Merchandise");
+        dcd.setValue(pickDropCost, "Bookings revenue", "Bookings");
 
         JFreeChart jchart = ChartFactory.createBarChart3D("", "ENTERPRISE", "REVENUE", dcd, PlotOrientation.VERTICAL, true, true, false);
         CategoryPlot plot = jchart.getCategoryPlot();

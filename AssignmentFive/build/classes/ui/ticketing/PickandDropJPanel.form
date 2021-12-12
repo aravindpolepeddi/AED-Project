@@ -75,14 +75,14 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="tblBookings">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="4">
+                <Column editable="true" title="PickupPoint" type="java.lang.Object"/>
                 <Column editable="true" title="Customer Name" type="java.lang.Object"/>
                 <Column editable="true" title="Car Number" type="java.lang.Object"/>
                 <Column editable="true" title="Status" type="java.lang.Object"/>
-                <Column editable="true" title="PickupPoint" type="java.lang.Object"/>
                 <Column editable="true" title="TwoWay" type="java.lang.Object"/>
                 <Column editable="true" title="Price" type="java.lang.Object"/>
               </Table>

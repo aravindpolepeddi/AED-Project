@@ -15,15 +15,17 @@ import business.Enterprises.EnterpriseDirectory;
 import business.merchandise.merchandise;
 import business.merchandise.merchandiseShop;
 import business.ticketing.CarBooking;
+import business.ticketing.PickandDropDirectory;
 import business.useraccount.UserAccount;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class PickandDropJPanel extends javax.swing.JPanel {
-
+    
     JPanel userProcessContainer;
     Business system;
     UserAccount useraccount;
@@ -31,42 +33,49 @@ public class PickandDropJPanel extends javax.swing.JPanel {
     EnterpriseDirectory enterpriseDirectory;
     Enterprise enterprise;
     String networkString;
+    PickandDropDirectory pdDirectory;
 
     /**
      * Creates new form PickandDropJPanel
      */
     public PickandDropJPanel(JPanel userProcessContainer, UserAccount account, Business system) {
         initComponents();
-
+        
         this.networkString = account.getNetwork();
-
+        
         if (system.getNetworkList() == null) {
             this.network = new HashMap<String, Enterprise>();
         } else {
             this.network = system.getNetworkList();
         }
-
+        
         this.enterprise = system.findEnterpriseByNetwork(account.getNetwork());
-
+        
+        if (enterprise.getPdDirectory() == null) {
+            this.pdDirectory = new PickandDropDirectory();
+        } else {
+            this.pdDirectory = enterprise.getPdDirectory();
+        }
+        
         this.userProcessContainer = userProcessContainer;
         this.useraccount = account;
         this.system = system;
         refreshTable();
     }
-
+    
     public void refreshTable() {
-
-        int rowCount = jTable1.getRowCount();
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
+        int rowCount = tblBookings.getRowCount();
+        DefaultTableModel model = (DefaultTableModel) tblBookings.getModel();
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        for (CarBooking cb : enterprise.getPdDirectory().getCarBookingList()) {
+        for (CarBooking cb : pdDirectory.getCarBookingList()) {
             Object row[] = new Object[6];
-            row[0] = cb.getCustomerName();
-            row[1] = cb.getCarNumber();
-            row[2] = cb.getStatus();
-            row[3] = cb.getPickupPoint();
+            row[0] = cb;
+            row[1] = cb.getCustomerName();
+            row[2] = cb.getCarNumber();
+            row[3] = cb.getStatus();
             row[4] = cb.getTwoWay();
             row[5] = cb.getPrice();
             model.addRow(row);
@@ -83,14 +92,14 @@ public class PickandDropJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblBookings = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextPrice = new javax.swing.JTextField();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblBookings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -98,10 +107,10 @@ public class PickandDropJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Customer Name", "Car Number", "Status", "PickupPoint", "TwoWay", "Price"
+                "PickupPoint", "Customer Name", "Car Number", "Status", "TwoWay", "Price"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblBookings);
 
         jButton1.setText("Approve");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -171,51 +180,61 @@ public class PickandDropJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int rowupdate = jTable1.getSelectedRow();
+        int rowupdate = tblBookings.getSelectedRow();
         if (rowupdate < 0) {
             JOptionPane.showMessageDialog(this, "Please select Booking");
             return;
         }
         int j = 0;
-        for (CarBooking cb : enterprise.getPdDirectory().getCarBookingList()) {
+        for (CarBooking cb : pdDirectory.getCarBookingList()) {
             if (j == rowupdate) {
                 cb.setStatus("On the Way");
             }
+            j++;
         }
+        refreshTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        int rowupdate = jTable1.getSelectedRow();
+        int rowupdate = tblBookings.getSelectedRow();
         if (rowupdate < 0) {
             JOptionPane.showMessageDialog(this, "Please select Booking");
             return;
         }
         int j = 0;
-        for (CarBooking cb : enterprise.getPdDirectory().getCarBookingList()) {
+        Random randomNum = new Random();
+        int randomOrderId = randomNum.nextInt(65536 - 32768);
+        for (CarBooking cb : pdDirectory.getCarBookingList()) {
             if (j == rowupdate) {
                 if (jTextPrice.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Please select Booking");
                     return;
                 }
                 cb.setPrice(Integer.parseInt(jTextPrice.getText()));
+                cb.setCarNumber(randomOrderId);
             }
+            j++;
         }
+        
+        refreshTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int rowupdate = jTable1.getSelectedRow();
+        int rowupdate = tblBookings.getSelectedRow();
         if (rowupdate < 0) {
             JOptionPane.showMessageDialog(this, "Please select Booking");
             return;
         }
         int j = 0;
-        for (CarBooking cb : enterprise.getPdDirectory().getCarBookingList()) {
+        for (CarBooking cb : pdDirectory.getCarBookingList()) {
             if (j == rowupdate) {
                 cb.setStatus("Denied");
             }
+            j++;
         }
+        refreshTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -225,8 +244,8 @@ public class PickandDropJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextPrice;
+    private javax.swing.JTable tblBookings;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -10,21 +10,13 @@ package business.ticketing;
  * @author aravindpolepeddi
  */
 public class CarBooking {
-    
-    String CustomerName;
-    String PickupPoint;
-    Boolean twoWay;
-    int Price;
-    String Status;
-    String CarNumber;
 
-    public String getCustomerName() {
-        return CustomerName;
-    }
-
-    public void setCustomerName(String CustomerName) {
-        this.CustomerName = CustomerName;
-    }
+    private String PickupPoint;
+    private int CarNumber;
+    private String CustomerName;
+    private Boolean twoWay;
+    private int Price;
+    private String Status;
 
     public String getPickupPoint() {
         return PickupPoint;
@@ -32,6 +24,22 @@ public class CarBooking {
 
     public void setPickupPoint(String PickupPoint) {
         this.PickupPoint = PickupPoint;
+    }
+
+    public int getCarNumber() {
+        return CarNumber;
+    }
+
+    public void setCarNumber(int CarNumber) {
+        this.CarNumber = CarNumber;
+    }
+
+    public String getCustomerName() {
+        return CustomerName;
+    }
+
+    public void setCustomerName(String CustomerName) {
+        this.CustomerName = CustomerName;
     }
 
     public Boolean getTwoWay() {
@@ -58,12 +66,8 @@ public class CarBooking {
         this.Status = Status;
     }
 
-    public String getCarNumber() {
-        return CarNumber;
+    @Override
+    public String toString() {
+        return PickupPoint;
     }
-
-    public void setCarNumber(String CarNumber) {
-        this.CarNumber = CarNumber;
-    }
-    
 }

@@ -23,6 +23,8 @@ import business.premium.Premium;
 import business.premium.PremiumDirectory;
 import business.suites.Suites;
 import business.suites.SuitesDirectory;
+import business.ticketing.CarBooking;
+import business.ticketing.PickandDropDirectory;
 import business.useraccount.UserAccount;
 import java.awt.Color;
 import java.awt.Component;
@@ -65,6 +67,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     Enterprise enterprise;
     String networkString;
     merchandiseShopDirectory merchDirectory;
+    PickandDropDirectory pdDirectory;
 
     /**
      * Creates new form CustomerWorkAreaJPanel
@@ -127,6 +130,12 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             this.merchDirectory = enterprise.getMerchandiseShopDirectory();
         }
         
+        if (enterprise.getPdDirectory() == null) {
+            this.pdDirectory = new PickandDropDirectory();
+        } else {
+            this.pdDirectory = enterprise.getPdDirectory();
+        }
+        
         customer = customerDirectory.findCustomer(account.getUsername());
         
         if (customer != null) {
@@ -172,6 +181,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         customerProfilePanel = new javax.swing.JPanel();
         pnlFeedbackTable = new javax.swing.JPanel();
@@ -200,18 +210,14 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jTable6 = new javax.swing.JTable();
         jButton11 = new javax.swing.JButton();
         parkingDetails = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblParking = new javax.swing.JTable();
-        jLabel12 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
-        jLabel24 = new javax.swing.JLabel();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
-        jButton12 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtPickupLocation = new javax.swing.JTextField();
+        chkReturntrip = new javax.swing.JCheckBox();
+        btnSubmit = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblPickup = new javax.swing.JTable();
         orderFood = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -459,6 +465,11 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jButton6.setForeground(new java.awt.Color(0, 51, 51));
         jButton6.setText("BOOK PARKING SERVICE");
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(206, 217, 217));
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -471,19 +482,34 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton12.setBackground(new java.awt.Color(206, 217, 217));
+        jButton12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton12.setForeground(new java.awt.Color(0, 51, 51));
+        jButton12.setText("PICK & DROP");
+        jButton12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout NavigationJPanelLayout = new javax.swing.GroupLayout(NavigationJPanel);
         NavigationJPanel.setLayout(NavigationJPanelLayout);
         NavigationJPanelLayout.setHorizontalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEditDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(NavigationJPanelLayout.createSequentialGroup()
+                        .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         NavigationJPanelLayout.setVerticalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,7 +524,9 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(575, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(514, Short.MAX_VALUE))
         );
 
         NavigationJPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnEditDetails, btnMenu, jButton2, jButton6, jButton7});
@@ -762,33 +790,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
         parkingDetails.setBackground(new java.awt.Color(240, 255, 255));
 
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("PARKING DETAILS");
-
-        jLabel11.setText("SELECT PARKING TYPE");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "ECONOMY (PARK YOUR OWN CAR)", "FIRST CLASS (VALET PARKING)", "LUXURY (PICKUP & DROP)", " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(jList1);
-
-        tblParking.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Sr No", "Availability", "Slot no", "Price"
-            }
-        ));
-        jScrollPane4.setViewportView(tblParking);
-
-        jLabel12.setText("PLEASE SELECT PARKING AREA");
-
         jButton8.setText("BOOK");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -796,9 +797,18 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel24.setText("PLEASE SELECT THE EVENT TO ORDER FOOD FOR");
+        jLabel6.setText("Pickup location : ");
 
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel10.setText("Return trip ? ");
+
+        btnSubmit.setText("SUBMIT");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
+        tblPickup.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -806,69 +816,55 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Sr No", "Event Name", "Date", "Title 4", "Number of tickets"
+                "Pickup Point", "Car Number", "Two Way", "Status", "Price"
             }
         ));
-        jScrollPane13.setViewportView(jTable8);
-
-        jButton12.setText("VIEW HISTORY");
+        jScrollPane3.setViewportView(tblPickup);
 
         javax.swing.GroupLayout parkingDetailsLayout = new javax.swing.GroupLayout(parkingDetails);
         parkingDetails.setLayout(parkingDetailsLayout);
         parkingDetailsLayout.setHorizontalGroup(
             parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(parkingDetailsLayout.createSequentialGroup()
-                .addGap(311, 311, 311)
-                .addComponent(jButton8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parkingDetailsLayout.createSequentialGroup()
-                .addGap(0, 147, Short.MAX_VALUE)
-                .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane4)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, parkingDetailsLayout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane13))
-                .addGap(114, 114, 114))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parkingDetailsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parkingDetailsLayout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parkingDetailsLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(54, 54, 54)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(181, 181, 181))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parkingDetailsLayout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(265, 265, 265))))
+                    .addGroup(parkingDetailsLayout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkReturntrip)
+                            .addComponent(txtPickupLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(parkingDetailsLayout.createSequentialGroup()
+                        .addGap(296, 296, 296)
+                        .addComponent(btnSubmit))
+                    .addGroup(parkingDetailsLayout.createSequentialGroup()
+                        .addGap(308, 308, 308)
+                        .addComponent(jButton8))
+                    .addGroup(parkingDetailsLayout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         parkingDetailsLayout.setVerticalGroup(
             parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(parkingDetailsLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(192, 192, 192)
                 .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jLabel24)
-                .addGap(9, 9, 9)
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel12)
+                    .addComponent(jLabel6)
+                    .addComponent(txtPickupLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(chkReturntrip))
+                .addGap(41, 41, 41)
+                .addComponent(btnSubmit)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jButton8)
-                .addGap(127, 127, 127))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(parkingDetails, "card5");
@@ -2686,7 +2682,30 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        int selectedRowIndex = tblPickup.getSelectedRow();
+        
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a booking!");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblPickup.getModel();
+            CarBooking booking = (CarBooking) model.getValueAt(selectedRowIndex, 0);
+            
+            if (!booking.getStatus().equals("On the Way")) {
+                JOptionPane.showMessageDialog(this, "Booking not yet approved!");
+                return;
+            } else {
+                switchPanels(bookEventDetails);
+                
+                if (customer.getPickDropCost() == 0) {
+                    customer.setPickDropCost(booking.getPrice());
+                } else {
+                    customer.setPickDropCost(customer.getPickDropCost() + booking.getPrice());
+                }
+                
+                JOptionPane.showMessageDialog(this, "Ride booked successfully!");
+            }
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -3742,6 +3761,34 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             switchPanels(customerProfilePanel);
         }
     }//GEN-LAST:event_btnBuyActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        CarBooking bookingReq = pdDirectory.addCarBooking();
+        bookingReq.setCustomerName(customer.getFullName());
+        bookingReq.setPickupPoint(txtPickupLocation.getText());
+        bookingReq.setStatus("REQUESTED");
+        
+        if (chkReturntrip.isSelected()) {
+            bookingReq.setTwoWay(true);
+        } else {
+            bookingReq.setTwoWay(false);
+        }
+        enterprise.setPdDirectory(pdDirectory);
+        network.put(networkString, enterprise);
+        business.setNetworkList(network);
+        JOptionPane.showMessageDialog(this, "Booking req sent successfully!");
+        populatePickAndDrop();
+
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        switchPanels(parkingDetails);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        switchPanels(parkingDetails);
+        populatePickAndDrop();
+    }//GEN-LAST:event_jButton12ActionPerformed
     
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
@@ -3779,6 +3826,21 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                     model.addRow(row);
                 }
             }
+        }
+    }
+    
+    private void populatePickAndDrop() {
+        DefaultTableModel model = (DefaultTableModel) tblPickup.getModel();
+        model.setRowCount(0);
+        
+        for (CarBooking booking : pdDirectory.getCarBookingList()) {
+            Object[] row = new Object[5];
+            row[0] = booking;
+            row[1] = booking.getCarNumber();
+            row[2] = booking.getTwoWay();
+            row[3] = booking.getStatus();
+            row[4] = booking.getPrice();
+            model.addRow(row);
         }
     }
     
@@ -4270,7 +4332,9 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnSelectSeatType1;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnTier;
+    private javax.swing.JCheckBox chkReturntrip;
     private javax.swing.JComboBox<String> cmbTiers;
     private javax.swing.JPanel customerProfilePanel;
     private javax.swing.JButton jButton1;
@@ -4288,8 +4352,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -4302,7 +4364,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -4314,11 +4375,11 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -4326,7 +4387,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
@@ -4337,7 +4397,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane24;
     private javax.swing.JScrollPane jScrollPane25;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
@@ -4350,7 +4409,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbBeverages1;
@@ -4482,11 +4540,12 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblEvents;
     private javax.swing.JTable tblFoodBev1;
     private javax.swing.JTable tblMerchandise;
-    private javax.swing.JTable tblParking;
+    private javax.swing.JTable tblPickup;
     private javax.swing.JPanel techService;
     private javax.swing.JTextField txtAddress1;
     private javax.swing.JTextField txtMobileNo;
     private javax.swing.JTextField txtName1;
+    private javax.swing.JTextField txtPickupLocation;
     private javax.swing.JTextField txtTicketCount;
     private javax.swing.JTextField txtUsername;
     private javax.swing.JPanel viewBookings;

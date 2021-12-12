@@ -16,6 +16,7 @@ import business.role.FoodBeverageEntAdminRole;
 import business.role.HumanResourceEntAdmin;
 import business.role.MerchendiseEntAdminRole;
 import business.role.Role;
+import business.role.TicketingAdmin;
 import business.role.merchandiseShopOwner;
 import business.useraccount.UserAccount;
 import java.awt.Color;
@@ -332,7 +333,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
                 HumanResourceEntAdmin role = new HumanResourceEntAdmin();
                 business.getUserAccountDirectory().createUserAccount(userName, txtManagerName.getText(), password, role, txtNetwork.getText());
             } else {
-                BookingEntAdminRole role = new BookingEntAdminRole();
+                TicketingAdmin role = new TicketingAdmin();
                 business.getUserAccountDirectory().createUserAccount(userName, txtManagerName.getText(), password, role, txtNetwork.getText());
             }
 
