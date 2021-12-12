@@ -8,8 +8,12 @@ package ui.SystemAdminWorkArea;
 import business.Business;
 import business.Customer.Ticket;
 import business.Customer.TicketDirectory;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.useraccount.UserAccount;
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -27,22 +31,28 @@ public class StatsPanel extends javax.swing.JPanel {
 
     TicketDirectory ticketDirectory;
     int foodBevCost;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
+    Business business;
 
     /**
      * Creates new form StatsPanel
      */
     public StatsPanel(Business business, UserAccount account, JPanel workAreaPanel) {
         initComponents();
-        this.foodBevCost = 0;
+        this.business = business;
 
-        if (business.getTicketDirectory() == null) {
-            this.ticketDirectory = new TicketDirectory();
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
         } else {
-            this.ticketDirectory = business.getTicketDirectory();
+            this.network = business.getNetworkList();
         }
 
-        for (Ticket ticket : ticketDirectory.getTicketList()) {
-            foodBevCost = foodBevCost + ticket.getFoodCost() + ticket.getReservationCost();
+        cmbNetworks.removeAllItems();
+        for (Map.Entry<String, Enterprise> map : network.entrySet()) {
+            cmbNetworks.addItem(map.getKey());
         }
 
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
@@ -59,7 +69,6 @@ public class StatsPanel extends javax.swing.JPanel {
         pnlChart.removeAll();
         pnlChart.add(chartPanel);
         pnlChart.updateUI();
-
     }
 
     /**
@@ -74,6 +83,8 @@ public class StatsPanel extends javax.swing.JPanel {
         lblRestaurantName1 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         pnlChart = new javax.swing.JPanel();
+        cmbNetworks = new javax.swing.JComboBox<>();
+        btnNetwork = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(240, 255, 255));
 
@@ -96,20 +107,42 @@ public class StatsPanel extends javax.swing.JPanel {
         pnlChart.setBackground(new java.awt.Color(240, 255, 255));
         pnlChart.setLayout(new javax.swing.BoxLayout(pnlChart, javax.swing.BoxLayout.LINE_AXIS));
 
+        cmbNetworks.setBackground(new java.awt.Color(255, 255, 255));
+        cmbNetworks.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cmbNetworks.setForeground(new java.awt.Color(0, 51, 51));
+
+        btnNetwork.setBackground(new java.awt.Color(0, 153, 153));
+        btnNetwork.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnNetwork.setForeground(new java.awt.Color(0, 51, 51));
+        btnNetwork.setText("SUBMIT NETWORK");
+        btnNetwork.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNetwork.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNetworkActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(91, Short.MAX_VALUE)
+                .addComponent(lblRestaurantName1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7)
+                .addGap(127, 127, 127))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlChart, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(lblRestaurantName1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7)))
-                .addGap(125, 125, 125))
+                        .addGap(34, 34, 34)
+                        .addComponent(pnlChart, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addComponent(cmbNetworks, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnNetwork)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,17 +151,55 @@ public class StatsPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRestaurantName1)
                     .addComponent(jButton7))
+                .addGap(83, 83, 83)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbNetworks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNetwork))
                 .addGap(18, 18, 18)
                 .addComponent(pnlChart, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(184, 184, 184))
+                .addGap(79, 79, 79))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void btnNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNetworkActionPerformed
+
+        this.foodBevCost = 0;
+
+        this.enterprise = business.findEnterpriseByNetwork(cmbNetworks.getSelectedItem().toString());
+
+        if (enterprise.getTicketDirectory() == null) {
+            this.ticketDirectory = new TicketDirectory();
+        } else {
+            this.ticketDirectory = enterprise.getTicketDirectory();
+        }
+
+        for (Ticket ticket : ticketDirectory.getTicketList()) {
+            foodBevCost = foodBevCost + ticket.getFoodCost() + ticket.getReservationCost();
+        }
+
+        DefaultCategoryDataset dcd = new DefaultCategoryDataset();
+        dcd.setValue(foodBevCost, "Food & Beverage revenue", "Food & Beverage");
+
+        JFreeChart jchart = ChartFactory.createBarChart3D("", "ENTERPRISE", "REVENUE", dcd, PlotOrientation.VERTICAL, true, true, false);
+        CategoryPlot plot = jchart.getCategoryPlot();
+        plot.setRangeGridlinePaint(Color.black);
+        ChartFrame chartFrm = new ChartFrame("Student Record", jchart, true);
+        chartFrm.setVisible(true);
+        chartFrm.setSize(500, 400);
+        ChartPanel chartPanel = new ChartPanel(jchart);
+        chartFrm.dispose();
+        pnlChart.removeAll();
+        pnlChart.add(chartPanel);
+        pnlChart.updateUI();
+    }//GEN-LAST:event_btnNetworkActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNetwork;
+    private javax.swing.JComboBox<String> cmbNetworks;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel lblRestaurantName1;
     private javax.swing.JPanel pnlChart;

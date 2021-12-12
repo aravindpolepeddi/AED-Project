@@ -6,8 +6,9 @@
 package ui.Organization.HR;
 
 import business.Business;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.FlagClass;
-import business.hrservices.EmergencyServicesDirectory;
 import business.hrservices.SecurityServices;
 import business.hrservices.SecurityServicesDirectory;
 import business.hrservices.Staff;
@@ -16,6 +17,8 @@ import business.useraccount.UserAccount;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
@@ -36,20 +39,33 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
     StaffDirectory staffDirectory;
     String managerName;
     FlagClass flags;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form SecurityServicesJPanel
      */
     public SecurityServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+        this.networkString = account.getNetwork();
 
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = business.getNetworkList();
+        }
+
+        this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
+        
         this.managerName = account.getName();
         this.flags = new FlagClass();
 
-        if (business.getSecurityServices() == null) {
+        if (enterprise.getSecurityServices() == null) {
             this.securityServicesDirectory = new SecurityServicesDirectory();
         } else {
-            this.securityServicesDirectory = business.getSecurityServices();
+            this.securityServicesDirectory = enterprise.getSecurityServices();
         }
 
         securityServices = securityServicesDirectory.findSecurityServiceByManagerName(managerName);
@@ -59,7 +75,7 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         } else {
             this.staffDirectory = securityServices.getStaffDirectory();
         }
-        
+
         populateStaff();
     }
 

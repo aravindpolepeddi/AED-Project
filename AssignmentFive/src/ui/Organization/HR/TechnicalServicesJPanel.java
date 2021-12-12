@@ -6,6 +6,8 @@
 package ui.Organization.HR;
 
 import business.Business;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.FlagClass;
 import business.hrservices.SecurityServicesDirectory;
 import business.hrservices.Staff;
@@ -16,6 +18,8 @@ import business.useraccount.UserAccount;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -34,20 +38,32 @@ public class TechnicalServicesJPanel extends javax.swing.JPanel {
     StaffDirectory staffDirectory;
     String managerName;
     FlagClass flags;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form TechnicalServicesJPanel
      */
     public TechnicalServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
-
+        this.networkString = account.getNetwork();
         this.managerName = account.getName();
         this.flags = new FlagClass();
 
-        if (business.getTechnicalServices() == null) {
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = business.getNetworkList();
+        }
+
+        this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
+
+        if (enterprise.getTechnicalServices() == null) {
             this.technicalServicesDirectory = new TechnicalServicesDirectory();
         } else {
-            this.technicalServicesDirectory = business.getTechnicalServices();
+            this.technicalServicesDirectory = enterprise.getTechnicalServices();
         }
 
         technicalService = technicalServicesDirectory.findTechServiceByManagerName(managerName);

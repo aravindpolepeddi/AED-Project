@@ -290,7 +290,7 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
             if (Error.isEmpty()) {
                 system.setParkingDirectory(parkingDirectory);
                 ParkingManagerRole role = new ParkingManagerRole();
-                system.getUserAccountDirectory().createUserAccount(parking.getUsername(), parking.getParkingManagerName(), parking.getPassword(), role);
+                system.getUserAccountDirectory().createUserAccount(parking.getUsername(), parking.getParkingManagerName(), parking.getPassword(), role, null);
 
             } else {
                 JOptionPane.showMessageDialog(this, Error);
@@ -323,7 +323,7 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
             }
             if (Error.isEmpty()) {
                 system.getPdDirectory().getPdList().add(pd);
-                system.getUserAccountDirectory().createUserAccount(pd.getUsername(), pd.getManagerName(), pd.getPassword(), pd);
+                system.getUserAccountDirectory().createUserAccount(pd.getUsername(), pd.getManagerName(), pd.getPassword(), pd, null);
             } else {
                 JOptionPane.showMessageDialog(this, Error);
             }

@@ -13,11 +13,12 @@ import java.util.Date;
  */
 public class Event {
 
-    String eventName;
-    String eventType;
-    int capacity;
-    Date startDate;
-    Date endDate;
+    private String eventName;
+    private String eventType;
+    private int capacity;
+    private Date startDate;
+    private Date endDate;
+    private String network;
 
     public String getEventName() {
         return eventName;
@@ -57,6 +58,14 @@ public class Event {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
     }
 
     @Override

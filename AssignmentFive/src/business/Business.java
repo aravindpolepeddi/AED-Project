@@ -212,4 +212,15 @@ public class Business extends Organization {
         this.networkList = networkList;
     }
 
+    public Enterprise findEnterpriseByNetwork(String network) {
+        Enterprise enterprise = new Enterprise();
+
+        for (Map.Entry<String, Enterprise> map : networkList.entrySet()) {
+            if (map.getKey().equals(network)) {
+                enterprise = map.getValue();
+            }
+        }
+        return enterprise;
+    }
+
 }

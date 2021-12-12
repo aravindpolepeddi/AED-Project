@@ -9,7 +9,6 @@ import business.Business;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
 import ui.Enterprises.FoodBevEntJPanel;
-import ui.RestaurantRole.RestaurantAreaJPanel;
 
 /**
  *

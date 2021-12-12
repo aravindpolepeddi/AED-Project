@@ -9,6 +9,8 @@ import business.Business;
 import business.Customer.Customer;
 import business.Customer.CustomerDirectory;
 import business.DB4OUtil.DB4OUtil;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.SendMail;
@@ -17,6 +19,8 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -33,18 +37,29 @@ public class LoginScreen extends javax.swing.JPanel {
     RestaurantDirectory restaurantDirectory;
     CustomerDirectory customerDirectory;
     OrderDirectory orderDirectory;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form Duplicate
      */
     public LoginScreen(JPanel mainWorkArea, Business business) {
         initComponents();
+
         this.business = business;
         this.mainWorkArea = mainWorkArea;
         system = dB4OUtil.retrieveSystem();
         this.restaurantDirectory = restaurantDirectory;
         this.customerDirectory = customerDirectory;
         this.orderDirectory = orderDirectory;
+
+        if (system.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = system.getNetworkList();
+        }
 
         if (business.getCustomerDirectory() == null) {
             this.customerDirectory = new CustomerDirectory();
@@ -89,6 +104,8 @@ public class LoginScreen extends javax.swing.JPanel {
         txtEmail = new javax.swing.JTextField();
         btnRegister2 = new javax.swing.JButton();
         pwdPassword = new javax.swing.JPasswordField();
+        jLabel10 = new javax.swing.JLabel();
+        txtNetwork = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(240, 255, 255));
 
@@ -277,6 +294,10 @@ public class LoginScreen extends javax.swing.JPanel {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel10.setText("CITY : ");
+
         javax.swing.GroupLayout RegisterPanelLayout = new javax.swing.GroupLayout(RegisterPanel);
         RegisterPanel.setLayout(RegisterPanelLayout);
         RegisterPanelLayout.setHorizontalGroup(
@@ -284,39 +305,50 @@ public class LoginScreen extends javax.swing.JPanel {
             .addGroup(RegisterPanelLayout.createSequentialGroup()
                 .addGap(212, 212, 212)
                 .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblUserName, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegisterPanelLayout.createSequentialGroup()
-                        .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pwdPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(RegisterPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtMobileNo, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                                        .addComponent(txtUsername))
-                                    .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(359, 359, 359))
                     .addGroup(RegisterPanelLayout.createSequentialGroup()
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblUserName, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegisterPanelLayout.createSequentialGroup()
+                                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(RegisterPanelLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtMobileNo, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                                                .addComponent(txtUsername))
+                                            .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNetwork, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(359, 359, 359))
+                            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(RegisterPanelLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(pwdPassword)
+                                .addGap(359, 359, 359))
+                            .addGroup(RegisterPanelLayout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addComponent(btnRegister1)
+                                .addGap(48, 48, 48)
+                                .addComponent(btnRegister2)
+                                .addContainerGap(343, Short.MAX_VALUE))))))
             .addGroup(RegisterPanelLayout.createSequentialGroup()
                 .addGap(307, 307, 307)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(RegisterPanelLayout.createSequentialGroup()
-                .addGap(278, 278, 278)
-                .addComponent(btnRegister1)
-                .addGap(48, 48, 48)
-                .addComponent(btnRegister2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         RegisterPanelLayout.setVerticalGroup(
             RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,7 +376,11 @@ public class LoginScreen extends javax.swing.JPanel {
                 .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(28, 28, 28)
+                .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(33, 33, 33)
                 .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(pwdPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -352,7 +388,7 @@ public class LoginScreen extends javax.swing.JPanel {
                 .addGroup(RegisterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegister1)
                     .addComponent(btnRegister2))
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(RegisterPanel, "card3");
@@ -471,15 +507,48 @@ public class LoginScreen extends javax.swing.JPanel {
                 txtUserName.setText("");
                 pwdPassword.setText("");
             } else {
-                Customer customer = customerDirectory.addCustomer();
-                customer.setEmail(txtEmail.getText());
-                customer.setFullName(txtName.getText());
-                customer.setPhoneNumber(txtMobileNo.getText());
-                customer.setUserName(userName);
-                customer.setAddress(txtAddress.getText());
-                system.setCustomerDirectory(customerDirectory);
                 business.role.Customer customerRole = new business.role.Customer();
-                system.getUserAccountDirectory().createUserAccount(userName, txtName.getText(), password, customerRole);
+                system.getUserAccountDirectory().createUserAccount(userName, txtName.getText(), password, customerRole, txtNetwork.getText());
+
+                if (network.containsKey(txtNetwork.getText())) {
+                    for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                        if (iteration.getKey().equals(txtNetwork.getText())) {
+                            if (iteration.getValue().getCustomerDirectory() == null) {
+                                customerDirectory = new CustomerDirectory();
+                                Enterprise enterprise = iteration.getValue();
+                                Customer customer = customerDirectory.addCustomer();
+                                customer.setEmail(txtEmail.getText());
+                                customer.setFullName(txtName.getText());
+                                customer.setPhoneNumber(txtMobileNo.getText());
+                                customer.setUserName(userName);
+                                customer.setAddress(txtAddress.getText());
+                                enterprise.setCustomerDirectory(customerDirectory);
+                                network.put(txtNetwork.getText(), enterprise);
+                                system.setNetworkList(network);
+                            } else {
+                                customerDirectory = iteration.getValue().getCustomerDirectory();
+                                Customer customer = customerDirectory.addCustomer();
+                                customer.setEmail(txtEmail.getText());
+                                customer.setFullName(txtName.getText());
+                                customer.setPhoneNumber(txtMobileNo.getText());
+                                customer.setUserName(userName);
+                                customer.setAddress(txtAddress.getText());
+                            }
+                        }
+                    }
+                } else {
+                    Enterprise enterprise = new Enterprise();
+                    CustomerDirectory customerDirectory = new CustomerDirectory();
+                    Customer customer = customerDirectory.addCustomer();
+                    customer.setEmail(txtEmail.getText());
+                    customer.setFullName(txtName.getText());
+                    customer.setPhoneNumber(txtMobileNo.getText());
+                    customer.setUserName(userName);
+                    customer.setAddress(txtAddress.getText());
+                    enterprise.setCustomerDirectory(customerDirectory);
+                    network.put(txtNetwork.getText(), enterprise);
+                    system.setNetworkList(network);
+                }
                 JOptionPane.showMessageDialog(null, "Registered successfully!");
                 dB4OUtil.storeSystem(system);
                 switchPanels(LoginScreen);
@@ -524,6 +593,7 @@ public class LoginScreen extends javax.swing.JPanel {
     private javax.swing.JButton btnRegister1;
     private javax.swing.JButton btnRegister2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -542,6 +612,7 @@ public class LoginScreen extends javax.swing.JPanel {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMobileNo;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtNetwork;
     private javax.swing.JTextField txtUserName;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

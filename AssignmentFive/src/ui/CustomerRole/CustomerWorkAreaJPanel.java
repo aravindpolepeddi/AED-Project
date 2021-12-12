@@ -10,6 +10,8 @@ import business.Customer.Customer;
 import business.Customer.CustomerDirectory;
 import business.Customer.Ticket;
 import business.Customer.TicketDirectory;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.FlagClass;
 import business.SendMail;
 import business.event.Event;
@@ -55,12 +57,27 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     TicketDirectory ticketDirectory;
     Business business;
     FlagClass flags;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form CustomerWorkAreaJPanel
      */
     public CustomerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+
+        this.networkString = account.getNetwork();
+
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = business.getNetworkList();
+        }
+
+        this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
+
         this.ticket = new Ticket();
         this.totalCost = 0;
         this.reservationCost = 0;
@@ -76,28 +93,28 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             this.eventDirectory = business.getEventDirectory();
         }
 
-        if (business.getCustomerDirectory() == null) {
+        if (enterprise.getCustomerDirectory() == null) {
             this.customerDirectory = new CustomerDirectory();
         } else {
-            this.customerDirectory = business.getCustomerDirectory();
+            this.customerDirectory = enterprise.getCustomerDirectory();
         }
 
-        if (business.getSuitesDirectory() == null) {
+        if (enterprise.getSuitesDirectory() == null) {
             this.suitedDirectory = new SuitesDirectory();
         } else {
-            this.suitedDirectory = business.getSuitesDirectory();
+            this.suitedDirectory = enterprise.getSuitesDirectory();
         }
 
-        if (business.getPremiumDirectory() == null) {
+        if (enterprise.getPremiumDirectory() == null) {
             this.premiumDirectory = new PremiumDirectory();
         } else {
-            this.premiumDirectory = business.getPremiumDirectory();
+            this.premiumDirectory = enterprise.getPremiumDirectory();
         }
 
-        if (business.getTicketDirectory() == null) {
+        if (enterprise.getTicketDirectory() == null) {
             this.ticketDirectory = new TicketDirectory();
         } else {
-            this.ticketDirectory = business.getTicketDirectory();
+            this.ticketDirectory = enterprise.getTicketDirectory();
         }
 
         customer = customerDirectory.findCustomer(account.getUsername());
@@ -3285,7 +3302,9 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             Suites selectedSuite = (Suites) model.getValueAt(selectedRowIndex, 0);
             flags.setReservationCost(selectedSuite.getCost());
             flags.setSuites(selectedSuite);
-            enableSeats(selectedSuite);
+            if (selectedSuite.getSeats() != null && !selectedSuite.getSeats().isEmpty()) {
+                enableSeats(selectedSuite);
+            }
         }
     }//GEN-LAST:event_jButton19ActionPerformed
 
@@ -3695,7 +3714,9 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         ticket.setReservationCost(flags.getReservationCost());
 
         customer.setTicket(ticket);
-        business.setTicketDirectory(ticketDirectory);
+        enterprise.setTicketDirectory(ticketDirectory);
+        network.put(networkString, enterprise);
+        business.setNetworkList(network);
         populateBooking();
         switchPanels(viewBookings);
         SendMail sendMail = new SendMail();
@@ -3731,12 +3752,14 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (Event event : eventDirectory.getEventList()) {
-            Object[] row = new Object[4];
-            row[0] = event;
-            row[1] = event.getEndDate();
-            row[2] = event.getEventType();
-            row[3] = event.getCapacity();
-            model.addRow(row);
+            if (event.getNetwork().equals(networkString)) {
+                Object[] row = new Object[4];
+                row[0] = event;
+                row[1] = event.getEndDate();
+                row[2] = event.getEventType();
+                row[3] = event.getCapacity();
+                model.addRow(row);
+            }
         }
     }
 

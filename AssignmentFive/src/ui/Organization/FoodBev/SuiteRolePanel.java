@@ -8,6 +8,8 @@ package ui.Organization.FoodBev;
 import business.Business;
 import business.Customer.Ticket;
 import business.Customer.TicketDirectory;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.Order.Order;
 import business.Restaurant.Menu;
 import business.hrservices.CleaningServices;
@@ -45,6 +47,10 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     EmergencyServicesDirectory emergencyServiceDirectory;
     List<Staff> staffMembers;
     TicketDirectory ticketDirectory;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form SuiteRolePanel
@@ -52,22 +58,32 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     public SuiteRolePanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
 
+        this.networkString = account.getNetwork();
+
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = business.getNetworkList();
+        }
+
+        this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
+
         staffMembers = new ArrayList<>();
 
-        if (business.getSuitesDirectory() == null) {
+        if (enterprise.getSuitesDirectory() == null) {
             this.suitesDirectory = new SuitesDirectory();
         } else {
-            this.suitesDirectory = business.getSuitesDirectory();
+            this.suitesDirectory = enterprise.getSuitesDirectory();
         }
 
-        if (business.getTicketDirectory() == null) {
+        if (enterprise.getTicketDirectory() == null) {
             this.ticketDirectory = new TicketDirectory();
         } else {
-            this.ticketDirectory = business.getTicketDirectory();
+            this.ticketDirectory = enterprise.getTicketDirectory();
         }
 
-        if (business.getCleaningServices() != null) {
-            this.cleaningDirectory = business.getCleaningServices();
+        if (enterprise.getCleaningServices() != null) {
+            this.cleaningDirectory = enterprise.getCleaningServices();
             for (CleaningServices cleaningServices : this.cleaningDirectory.getCleaningServices()) {
                 if (cleaningServices.getStaffDirectory() != null && cleaningServices.getStaffDirectory().getStaffList() != null && !cleaningServices.getStaffDirectory().getStaffList().isEmpty()) {
                     staffMembers.addAll(cleaningServices.getStaffDirectory().getStaffList());
@@ -75,8 +91,8 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             }
         }
 
-        if (business.getEmergencyServices() != null) {
-            this.emergencyServiceDirectory = business.getEmergencyServices();
+        if (enterprise.getEmergencyServices() != null) {
+            this.emergencyServiceDirectory = enterprise.getEmergencyServices();
             for (EmergencyServices emergencyServices : this.emergencyServiceDirectory.getEmergencyServices()) {
                 if (emergencyServices.getStaffDirectory() != null && emergencyServices.getStaffDirectory().getStaffList() != null && !emergencyServices.getStaffDirectory().getStaffList().isEmpty()) {
                     staffMembers.addAll(emergencyServices.getStaffDirectory().getStaffList());

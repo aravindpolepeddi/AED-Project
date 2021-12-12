@@ -6,20 +6,20 @@
 package ui.Enterprises;
 
 import business.Business;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.FlagClass;
-import business.Restaurant.Restaurant;
-import business.organizations.FoodBevOrganization;
 import business.premium.Premium;
 import business.premium.PremiumDirectory;
-import business.role.FoodBeverageEntAdminRole;
 import business.role.FoodBeverageOrgAdminRole;
-import business.role.RestaurantRole;
 import business.role.Role;
 import business.role.SuitesRestaurantRole;
 import business.suites.Suites;
 import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
 import java.awt.Component;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -29,33 +29,46 @@ import javax.swing.table.DefaultTableModel;
  * @author deepv
  */
 public class FoodBevEntJPanel extends javax.swing.JPanel {
-    
+
     Business business;
     SuitesDirectory suites;
     PremiumDirectory premium;
     FlagClass flags;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form FoodBevEntJPanel
      */
     public FoodBevEntJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
-        
+        this.networkString = account.getNetwork();
+
         this.business = business;
-        
-        if (business.getSuitesDirectory() == null) {
+
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = business.getNetworkList();
+        }
+
+        this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
+
+        if (enterprise.getSuitesDirectory() == null) {
             this.suites = new SuitesDirectory();
         } else {
-            this.suites = business.getSuitesDirectory();
+            this.suites = enterprise.getSuitesDirectory();
         }
-        
-        if (business.getPremiumDirectory() == null) {
+
+        if (enterprise.getPremiumDirectory() == null) {
             this.premium = new PremiumDirectory();
         } else {
-            this.premium = business.getPremiumDirectory();
+            this.premium = enterprise.getPremiumDirectory();
         }
         this.flags = new FlagClass();
-        
+
         pnlUpdate.setVisible(false);
         populateTable();
     }
@@ -92,6 +105,8 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         cmbCreateManager = new javax.swing.JComboBox<>();
         lblRestaurantName = new javax.swing.JLabel();
         txtRestaurantName = new javax.swing.JTextField();
+        lblManagerName3 = new javax.swing.JLabel();
+        txtNetwork = new javax.swing.JTextField();
         manageZones = new javax.swing.JPanel();
         lblRestaurantName2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -258,6 +273,9 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         lblRestaurantName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblRestaurantName.setText("Restaurant Name : ");
 
+        lblManagerName3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblManagerName3.setText("Network : ");
+
         javax.swing.GroupLayout workAreaPanelLayout = new javax.swing.GroupLayout(workAreaPanel);
         workAreaPanel.setLayout(workAreaPanelLayout);
         workAreaPanelLayout.setHorizontalGroup(
@@ -274,35 +292,47 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnUpdate1))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(workAreaPanelLayout.createSequentialGroup()
-                                .addGap(128, 128, 128)
-                                .addComponent(lblAddUser2))
-                            .addGroup(workAreaPanelLayout.createSequentialGroup()
-                                .addGap(95, 95, 95)
                                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUserName2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblPassword2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCreateFoodManagerUserName)
-                                    .addComponent(pwdCreateFoodManagerPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                    .addComponent(btnCreateUser1)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                                    .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                        .addGap(128, 128, 128)
+                                        .addComponent(lblAddUser2))
+                                    .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                        .addGap(167, 167, 167)
+                                        .addComponent(btnCreateUser1)))
+                                .addGap(49, 49, 49))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                    .addGap(97, 97, 97)
+                                    .addComponent(lblManagerName3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtNetwork))
+                                .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                            .addGap(42, 42, 42)
+                                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblUserName2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(lblPassword2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtCreateFoodManagerUserName)
+                                                .addComponent(pwdCreateFoodManagerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                                            .addComponent(lblRestaurantName)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                    .addGroup(workAreaPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblManagerName2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblRestaurantName4, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGroup(workAreaPanelLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblRestaurantName)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtCreateFoodManagerName, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                .addComponent(cmbCreateManager, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(lblManagerName2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblRestaurantName4, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(11, 11, 11)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCreateFoodManagerName, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                            .addComponent(cmbCreateManager, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(38, 38, 38))
         );
         workAreaPanelLayout.setVerticalGroup(
@@ -332,6 +362,10 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
                             .addComponent(lblRestaurantName4)
                             .addComponent(cmbCreateManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblManagerName3)
+                            .addComponent(txtNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblRestaurantName))
@@ -480,51 +514,114 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         String userName = txtCreateFoodManagerUserName.getText();
         String password = pwdCreateFoodManagerPassword.getText();
         String orgType = cmbCreateManager.getSelectedItem().toString();
-        
+
         if (!business.getUserAccountDirectory().checkIfUsernameIsUnique(userName)) {
             JOptionPane.showMessageDialog(null, "UserName already taken!");
             txtCreateFoodManagerUserName.setText("");
             pwdCreateFoodManagerPassword.setText("");
         } else {
-            
+
             if (orgType.equals("SUITE") && suites != null && suites.getCount() > 0 && suites.getCount() == suites.getSuitesList().size()) {
                 JOptionPane.showMessageDialog(null, "No more Suites to create");
                 return;
             }
-            
+
             if (orgType.equals("PREMIUM") && premium != null && premium.getCount() > 0 && premium.getCount() == premium.getPremiumList().size()) {
                 JOptionPane.showMessageDialog(null, "No more Premium Slots to create");
                 return;
             }
-            
+
             String managerame = txtCreateFoodManagerName.getText();
-            
+
             if (orgType.equals("SUITE")) {
                 SuitesRestaurantRole role = new SuitesRestaurantRole();
-                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
-                Suites suite = suites.addSuites();
-                suite.setManagerName(managerame);
-                suite.setUserName(userName);
-                suite.setManagerType("SUITE");
-                suite.setRestaurantName(txtRestaurantName.getText());
-                business.setSuitesDirectory(suites);
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role, txtNetwork.getText());
+
+                if (network.containsKey(txtNetwork.getText())) {
+                    for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                        if (iteration.getKey().equals(txtNetwork.getText())) {
+                            if (iteration.getValue().getSuitesDirectory() == null) {
+                                suites = new SuitesDirectory();
+                                Enterprise enterprise = iteration.getValue();
+                                Suites suite = suites.addSuites();
+                                suite.setManagerName(managerame);
+                                suite.setUserName(userName);
+                                suite.setManagerType("SUITE");
+                                suite.setRestaurantName(txtRestaurantName.getText());
+                                enterprise.setSuitesDirectory(suites);
+                                network.put(txtNetwork.getText(), enterprise);
+                                business.setNetworkList(network);
+                            } else {
+                                suites = iteration.getValue().getSuitesDirectory();
+                                Suites suite = suites.addSuites();
+                                suite.setManagerName(managerame);
+                                suite.setUserName(userName);
+                                suite.setManagerType("SUITE");
+                                suite.setRestaurantName(txtRestaurantName.getText());
+                            }
+                        }
+                    }
+                } else {
+                    Enterprise enterprise = new Enterprise();
+                    SuitesDirectory suitesDirectory = new SuitesDirectory();
+                    Suites suite = suitesDirectory.addSuites();
+                    suite.setManagerName(managerame);
+                    suite.setUserName(userName);
+                    suite.setManagerType("SUITE");
+                    suite.setRestaurantName(txtRestaurantName.getText());
+                    enterprise.setSuitesDirectory(suitesDirectory);
+                    network.put(txtNetwork.getText(), enterprise);
+                    business.setNetworkList(network);
+                }
             } else if (orgType.equals("PREMIUM")) {
                 FoodBeverageOrgAdminRole role = new FoodBeverageOrgAdminRole();
-                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
-                Premium prem = premium.addPremium();
-                prem.setManagerName(managerame);
-                prem.setUserName(userName);
-                prem.setManagerType("PREMIUM");
-                prem.setRestaurantName(txtRestaurantName.getText());
-                business.setPremiumDirectory(premium);
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role, txtNetwork.getText());
+                if (network.containsKey(txtNetwork.getText())) {
+                    for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                        if (iteration.getKey().equals(txtNetwork.getText())) {
+                            if (iteration.getValue().getPremiumDirectory() == null) {
+                                premium = new PremiumDirectory();
+                                Enterprise enterprise = iteration.getValue();
+                                Premium prem = premium.addPremium();
+                                prem.setManagerName(managerame);
+                                prem.setUserName(userName);
+                                prem.setManagerType("PREMIUM");
+                                prem.setRestaurantName(txtRestaurantName.getText());
+                                enterprise.setPremiumDirectory(premium);
+                                network.put(txtNetwork.getText(), enterprise);
+                                business.setNetworkList(network);
+                            } else {
+                                premium = iteration.getValue().getPremiumDirectory();
+                                Premium prem = premium.addPremium();
+                                prem.setManagerName(managerame);
+                                prem.setUserName(userName);
+                                prem.setManagerType("PREMIUM");
+                                prem.setRestaurantName(txtRestaurantName.getText());
+                                business.setPremiumDirectory(premium);
+                            }
+                        }
+                    }
+                } else {
+                    Enterprise enterprise = new Enterprise();
+                    PremiumDirectory premiumDirectory = new PremiumDirectory();
+                    Premium prem = premiumDirectory.addPremium();
+                    prem.setManagerName(managerame);
+                    prem.setUserName(userName);
+                    prem.setManagerType("PREMIUM");
+                    prem.setRestaurantName(txtRestaurantName.getText());
+                    enterprise.setPremiumDirectory(premiumDirectory);
+                    network.put(txtNetwork.getText(), enterprise);
+                    business.setNetworkList(network);
+                }
             }
-            
+
             txtCreateFoodManagerName.setText("");
             cmbCreateManager.setSelectedItem("SELECT TYPE");
             txtCreateFoodManagerUserName.setText("");
             pwdCreateFoodManagerPassword.setText("");
             txtRestaurantName.setText("");
-            
+            txtNetwork.setText("");
+
             populateTable();
         }
     }//GEN-LAST:event_btnCreateUser1ActionPerformed
@@ -539,7 +636,7 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
         int selectedRowIndex = tblFoodBevManagers.getSelectedRow();
-        
+
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a User");
             return;
@@ -550,12 +647,12 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
             business.getUserAccountDirectory().removeAccount(accountToBeRemoved);
             JOptionPane.showMessageDialog(null, "User Account deleted successfully.");
             populateTable();
-            
+
             Suites removedSuite = suites.findSuiteByManagerName(selectedUserAccount.getName());
             if (removedSuite != null) {
                 suites.removeSuite(removedSuite);
             }
-            
+
             Premium removedPremium = premium.findPremiumByManagerName(selectedUserAccount.getName());
             if (removedPremium != null) {
                 premium.removePremium(removedPremium);
@@ -573,7 +670,7 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         int selectedRowIndex = tblFoodBevManagers.getSelectedRow();
-        
+
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a User");
             return;
@@ -591,8 +688,10 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     private void btnSave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave2ActionPerformed
         suites.setCount(Integer.parseInt(txtSuitsCount.getText()));
         premium.setCount(Integer.parseInt(txtPremiumCount.getText()));
-        business.setSuitesDirectory(suites);
-        business.setPremiumDirectory(premium);
+        enterprise.setSuitesDirectory(suites);
+        enterprise.setPremiumDirectory(premium);
+        network.put(networkString, enterprise);
+        business.setNetworkList(network);
         JOptionPane.showMessageDialog(this, "Updated seat count");
         switchPanels(workAreaPanel);
         txtSuitsCount.setText("");
@@ -600,7 +699,7 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         flags.setSuiteCount(Integer.parseInt(txtSuitsCount.getText()));
         flags.setPremiumCount(Integer.parseInt(txtPremiumCount.getText()));
     }//GEN-LAST:event_btnSave2ActionPerformed
-    
+
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(component);
@@ -624,6 +723,7 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblAddUser2;
     private javax.swing.JLabel lblManagerName2;
+    private javax.swing.JLabel lblManagerName3;
     private javax.swing.JLabel lblPassword2;
     private javax.swing.JLabel lblRestaurantName;
     private javax.swing.JLabel lblRestaurantName1;
@@ -636,6 +736,7 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblFoodBevManagers;
     private javax.swing.JTextField txtCreateFoodManagerName;
     private javax.swing.JTextField txtCreateFoodManagerUserName;
+    private javax.swing.JTextField txtNetwork;
     private javax.swing.JTextField txtPremiumCount;
     private javax.swing.JTextField txtRestaurantName;
     private javax.swing.JTextField txtSuitsCount;
@@ -645,10 +746,9 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblFoodBevManagers.getModel();
         model.setRowCount(0);
-        
+
         for (UserAccount userAccount : business.getUserAccountDirectory().getUserAccountList()) {
             Object[] row = new Object[4];
-            RestaurantRole role = new RestaurantRole();
             Suites currentSuite = null;
             Premium currentPremium = null;
             if (suites != null && suites.getSuitesList() != null && !suites.getSuitesList().isEmpty()) {
@@ -658,11 +758,11 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
                 currentPremium = premium.getPremiumList().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
             }
             if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.FoodBeverageEntAdmin) {
-                
+
                 row[0] = userAccount;
                 row[1] = userAccount.getPassword();
                 row[2] = userAccount.getName();
-                
+
                 if (currentSuite != null) {
                     row[3] = currentSuite.getManagerType();
                 } else if (currentPremium != null) {

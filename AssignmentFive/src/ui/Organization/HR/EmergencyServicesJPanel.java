@@ -6,6 +6,8 @@
 package ui.Organization.HR;
 
 import business.Business;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.FlagClass;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServices;
@@ -16,6 +18,8 @@ import business.useraccount.UserAccount;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -34,20 +38,33 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
     StaffDirectory staffDirectory;
     String managerName;
     FlagClass flags;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form EmergencyServicesJPanel
      */
     public EmergencyServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+        this.networkString = account.getNetwork();
+
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = business.getNetworkList();
+        }
+
+        this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
 
         this.managerName = account.getName();
         this.flags = new FlagClass();
 
-        if (business.getEmergencyServices() == null) {
+        if (enterprise.getEmergencyServices() == null) {
             this.emergencyServiceDirectory = new EmergencyServicesDirectory();
         } else {
-            this.emergencyServiceDirectory = business.getEmergencyServices();
+            this.emergencyServiceDirectory = enterprise.getEmergencyServices();
         }
 
         emergencyServiceFetch = emergencyServiceDirectory.findEmergencyServiceByManagerName(managerName);

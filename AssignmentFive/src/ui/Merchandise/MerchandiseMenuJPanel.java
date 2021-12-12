@@ -6,15 +6,16 @@
 package ui.Merchandise;
 
 import business.Business;
-import business.Restaurant.Restaurant;
-import business.hrservices.EmergencyServicesDirectory;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.useraccount.UserAccount;
 import business.merchandise.merchandise;
 import business.merchandise.merchandiseShop;
 import business.merchandise.merchandiseShopDirectory;
 import java.awt.CardLayout;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -36,18 +37,31 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
     merchandiseShopDirectory merchShopDirectory;
     merchandiseShop merchShop;
     ArrayList<merchandiseShop> mergeShopList;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     public MerchandiseMenuJPanel(JPanel userProcessContainer, UserAccount account, Business system) {
         initComponents();
+        this.networkString = account.getNetwork();
         this.mergeShopList = new ArrayList<>();
         this.userProcessContainer = userProcessContainer;
         this.useraccount = account;
         this.system = system;
 
-        if (system.getMerchandiseShopDirectory() == null) {
+        if (system.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = system.getNetworkList();
+        }
+
+        this.enterprise = system.findEnterpriseByNetwork(account.getNetwork());
+
+        if (enterprise.getMerchandiseShopDirectory() == null) {
             this.merchShopDirectory = new merchandiseShopDirectory();
         } else {
-            this.merchShopDirectory = system.getMerchandiseShopDirectory();
+            this.merchShopDirectory = enterprise.getMerchandiseShopDirectory();
         }
 
         if (merchShopDirectory != null && merchShopDirectory.getMerchandiseShopList() != null && !merchShopDirectory.getMerchandiseShopList().isEmpty()) {
@@ -220,7 +234,9 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
         }
         mergeShopList.add(merchShop);
         merchShopDirectory.setMerchandiseShopList(mergeShopList);
-        system.setMerchandiseShopDirectory(merchShopDirectory);
+        enterprise.setMerchandiseShopDirectory(merchShopDirectory);
+        network.put(networkString, enterprise);
+        system.setNetworkList(network);
 
         refreshTable();
 //        }
@@ -260,7 +276,7 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        merchandiseShop merchShop = system.getMerchandiseShopDirectory().findMerchandiseShop(useraccount.getUsername());
+        merchandiseShop merchShop = enterprise.getMerchandiseShopDirectory().findMerchandiseShop(useraccount.getUsername());
         int rowdelete = jTable1.getSelectedRow();
         if (rowdelete < 0) {
             JOptionPane.showMessageDialog(this, "Please select Item to Delete");

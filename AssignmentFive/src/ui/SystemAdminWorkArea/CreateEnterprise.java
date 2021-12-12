@@ -8,11 +8,14 @@ package ui.SystemAdminWorkArea;
 import business.Business;
 import business.Customer.CustomerDirectory;
 import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
+import business.Enterprises.EnterpriseUser;
 import business.FlagClass;
-import business.role.Customer;
-import business.role.RestaurantRole;
+import business.role.BookingEntAdminRole;
+import business.role.FoodBeverageEntAdminRole;
+import business.role.HumanResourceEntAdmin;
+import business.role.MerchendiseEntAdminRole;
 import business.role.Role;
-import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
 import java.awt.Color;
 import java.awt.Font;
@@ -38,6 +41,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
     CustomerDirectory customerDirectory;
     FlagClass flags;
     Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
 
     public CreateEnterprise(Business business, UserAccount account, JPanel workAreaPanel) {
         initComponents();
@@ -220,12 +224,9 @@ public class CreateEnterprise extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(pnlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnDelete)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnDelete)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(83, 83, 83)
@@ -320,7 +321,49 @@ public class CreateEnterprise extends javax.swing.JPanel {
             txtUserName.setText("");
             pwdPassword.setText("");
         } else {
+            if (cmbEntType.getSelectedItem().toString().equals("Food & Beverage")) {
+                FoodBeverageEntAdminRole role = new FoodBeverageEntAdminRole();
+                business.getUserAccountDirectory().createUserAccount(userName, txtManagerName.getText(), password, role, txtNetwork.getText());
+            } else if (cmbEntType.getSelectedItem().toString().equals("Merchandise")) {
+                MerchendiseEntAdminRole role = new MerchendiseEntAdminRole();
+                business.getUserAccountDirectory().createUserAccount(userName, txtManagerName.getText(), password, role, txtNetwork.getText());
+            } else if (cmbEntType.getSelectedItem().toString().equals("Human Resources")) {
+                HumanResourceEntAdmin role = new HumanResourceEntAdmin();
+                business.getUserAccountDirectory().createUserAccount(userName, txtManagerName.getText(), password, role, txtNetwork.getText());
+            } else {
+                BookingEntAdminRole role = new BookingEntAdminRole();
+                business.getUserAccountDirectory().createUserAccount(userName, txtManagerName.getText(), password, role, txtNetwork.getText());
+            }
 
+            if (network.containsKey(txtNetwork.getText())) {
+                for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                    if (iteration.getKey().equals(txtNetwork.getText())) {
+                        if (iteration.getValue().getEnterpriseDirectory() == null) {
+                            enterpriseDirectory = new EnterpriseDirectory();
+                        } else {
+                            enterpriseDirectory = iteration.getValue().getEnterpriseDirectory();
+                        }
+                        EnterpriseUser enterprise = enterpriseDirectory.addEnterprise();
+                        enterprise.setManagerType(cmbEntType.getSelectedItem().toString());
+                        enterprise.setUserName(txtUserName.getText());
+                    }
+                }
+            } else {
+                Enterprise enterprise = new Enterprise();
+                EnterpriseDirectory enterpriseDirectory1 = new EnterpriseDirectory();
+                EnterpriseUser entUser = enterpriseDirectory1.addEnterprise();
+                entUser.setManagerType(cmbEntType.getSelectedItem().toString());
+                entUser.setUserName(txtUserName.getText());
+                enterprise.setEnterpriseDirectory(enterpriseDirectory1);
+                network.put(txtNetwork.getText(), enterprise);
+                business.setNetworkList(network);
+            }
+
+            txtManagerName.setText("");
+            cmbEntType.setSelectedItem("SELECT ENT");
+            txtNetwork.setText("");
+            txtUserName.setText("");
+            pwdPassword.setText("");
         }
 
     }//GEN-LAST:event_btnCreateUserActionPerformed
@@ -419,7 +462,6 @@ public class CreateEnterprise extends javax.swing.JPanel {
 
         for (UserAccount userAccount : business.getUserAccountDirectory().getUserAccountList()) {
             Object[] row = new Object[3];
-            RestaurantRole role = new RestaurantRole();
             if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.Customer) {
                 row[0] = userAccount;
                 row[1] = userAccount.getPassword();

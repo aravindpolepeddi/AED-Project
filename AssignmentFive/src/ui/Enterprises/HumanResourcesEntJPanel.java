@@ -6,6 +6,8 @@
 package ui.Enterprises;
 
 import business.Business;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.hrservices.CleaningServices;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServices;
@@ -14,17 +16,14 @@ import business.hrservices.TechnicalServices;
 import business.hrservices.TechnicalServicesDirectory;
 import business.hrservices.SecurityServices;
 import business.hrservices.SecurityServicesDirectory;
-import business.premium.Premium;
 import business.role.CleaningServicesRole;
 import business.role.EmergencyServicesRole;
-import business.role.HumanResourceEntAdmin;
-import business.role.RestaurantRole;
 import business.role.Role;
 import business.role.SecurityServicesRole;
 import business.role.TechnicalServicesRole;
-import business.suites.Suites;
-import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +39,8 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
     EmergencyServicesDirectory emergencyServices;
     TechnicalServicesDirectory technicalServices;
     SecurityServicesDirectory securityServices;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
 
     /**
      * Creates new form HumanResourcesEntJPanel
@@ -52,6 +53,12 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
             this.cleaningServices = new CleaningServicesDirectory();
         } else {
             this.cleaningServices = business.getCleaningServices();
+        }
+
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = business.getNetworkList();
         }
 
         if (business.getEmergencyServices() == null) {
@@ -103,6 +110,8 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblHumanResourceManagers = new javax.swing.JTable();
         cmbServices = new javax.swing.JComboBox<>();
+        lblManagerName3 = new javax.swing.JLabel();
+        txtNetwork = new javax.swing.JTextField();
 
         NavigationJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -220,6 +229,9 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
 
         cmbServices.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT SERVICE", "CLEANING", "EMERGENCY", "TECHNICAL", "SECURITY" }));
 
+        lblManagerName3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblManagerName3.setText("Network : ");
+
         javax.swing.GroupLayout workAreaPanelLayout = new javax.swing.GroupLayout(workAreaPanel);
         workAreaPanel.setLayout(workAreaPanelLayout);
         workAreaPanelLayout.setHorizontalGroup(
@@ -229,37 +241,49 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblManagerName2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblRestaurantName4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblUserName2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPassword2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtManagerUsername)
-                            .addComponent(pwdManagerPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(txtManagerName, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                            .addComponent(btnCreateUser1)
-                            .addComponent(cmbServices, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(38, 38, 38))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(workAreaPanelLayout.createSequentialGroup()
                                 .addComponent(btnDelete1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnUpdate1))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(128, 128, 128)
-                        .addComponent(lblAddUser2)
-                        .addGap(110, 110, 110))))
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                .addGap(128, 128, 128)
+                                .addComponent(lblAddUser2))
+                            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                .addGap(179, 179, 179)
+                                .addComponent(lblManagerName3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblManagerName2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblRestaurantName4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtManagerName, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                    .addComponent(cmbServices, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblUserName2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblPassword2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtManagerUsername)
+                                    .addComponent(pwdManagerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCreateUser1))))))
+                .addGap(38, 38, 38))
         );
         workAreaPanelLayout.setVerticalGroup(
             workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(workAreaPanelLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(lblRestaurantName1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
                         .addComponent(lblAddUser2)
@@ -271,23 +295,27 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblRestaurantName4)
                             .addComponent(cmbServices, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(9, 9, 9)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblManagerName3)
+                            .addComponent(txtNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtManagerUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUserName2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPassword2)
-                            .addComponent(pwdManagerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblUserName2)))
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnUpdate1)
                             .addComponent(btnDelete1))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPassword2)
+                    .addComponent(pwdManagerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCreateUser1)
-                .addContainerGap(353, Short.MAX_VALUE))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(workAreaPanel, "card2");
@@ -332,37 +360,153 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
         } else {
 
             if (serviceType.equals("CLEANING")) {
-                CleaningServices cleaningService = cleaningServices.addCleaningService();
-                cleaningService.setManagerName(managerame);
-                cleaningService.setUserName(userName);
-                cleaningService.setManagerType("CLEANING");
-                business.setCleaningServices(cleaningServices);
                 CleaningServicesRole role = new CleaningServicesRole();
-                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role, txtNetwork.getText());
+
+                if (network.containsKey(txtNetwork.getText())) {
+                    for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                        if (iteration.getKey().equals(txtNetwork.getText())) {
+                            if (iteration.getValue().getCleaningServices() == null) {
+                                cleaningServices = new CleaningServicesDirectory();
+                                Enterprise enterprise = new Enterprise();
+                                CleaningServices cleaningService = cleaningServices.addCleaningService();
+                                cleaningService.setManagerName(managerame);
+                                cleaningService.setUserName(userName);
+                                cleaningService.setManagerType("CLEANING");
+                                enterprise.setCleaningServices(cleaningServices);
+                                network.put(txtNetwork.getText(), enterprise);
+                                business.setNetworkList(network);
+                            } else {
+                                cleaningServices = iteration.getValue().getCleaningServices();
+                                CleaningServices cleaningService = cleaningServices.addCleaningService();
+                                cleaningService.setManagerName(managerame);
+                                cleaningService.setUserName(userName);
+                                cleaningService.setManagerType("CLEANING");
+                            }
+                        }
+                    }
+                } else {
+                    Enterprise enterprise = new Enterprise();
+                    CleaningServicesDirectory cleaningServicesDirectory = new CleaningServicesDirectory();
+                    CleaningServices cleaningService = cleaningServicesDirectory.addCleaningService();
+                    cleaningService.setManagerName(managerame);
+                    cleaningService.setUserName(userName);
+                    cleaningService.setManagerType("CLEANING");
+                    enterprise.setCleaningServices(cleaningServices);
+                    network.put(txtNetwork.getText(), enterprise);
+                    business.setNetworkList(network);
+                }
             } else if (serviceType.equals("EMERGENCY")) {
-                EmergencyServices emergencyService = emergencyServices.addEmergencyService();
-                emergencyService.setManagerName(managerame);
-                emergencyService.setUserName(userName);
-                emergencyService.setManagerType("EMERGENCY");
-                business.setEmergencyServices(emergencyServices);
                 EmergencyServicesRole role = new EmergencyServicesRole();
-                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role, txtNetwork.getText());
+
+                if (network.containsKey(txtNetwork.getText())) {
+                    for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                        if (iteration.getKey().equals(txtNetwork.getText())) {
+                            if (iteration.getValue().getCleaningServices() == null) {
+                                emergencyServices = new EmergencyServicesDirectory();
+                                Enterprise enterprise = new Enterprise();
+                                EmergencyServices emergencyService = emergencyServices.addEmergencyService();
+                                emergencyService.setManagerName(managerame);
+                                emergencyService.setUserName(userName);
+                                emergencyService.setManagerType("EMERGENCY");
+                                enterprise.setEmergencyServices(emergencyServices);
+                                network.put(txtNetwork.getText(), enterprise);
+                                business.setNetworkList(network);
+                            } else {
+                                emergencyServices = iteration.getValue().getEmergencyServices();
+                                EmergencyServices emergencyService = emergencyServices.addEmergencyService();
+                                emergencyService.setManagerName(managerame);
+                                emergencyService.setUserName(userName);
+                                emergencyService.setManagerType("EMERGENCY");
+                            }
+                        }
+                    }
+                } else {
+                    Enterprise enterprise = new Enterprise();
+                    EmergencyServicesDirectory emergencyServicesDirectory = new EmergencyServicesDirectory();
+                    EmergencyServices emergencyService = emergencyServicesDirectory.addEmergencyService();
+                    emergencyService.setManagerName(managerame);
+                    emergencyService.setUserName(userName);
+                    emergencyService.setManagerType("EMERGENCY");
+                    enterprise.setEmergencyServices(emergencyServices);
+                    network.put(txtNetwork.getText(), enterprise);
+                    business.setNetworkList(network);
+                }
             } else if (serviceType.equals("TECHNICAL")) {
-                TechnicalServices technicalService = technicalServices.addGroundService();
-                technicalService.setManagerName(managerame);
-                technicalService.setUserName(userName);
-                technicalService.setManagerType("TECHNICAL");
-                business.setTechnicalServices(technicalServices);
                 TechnicalServicesRole role = new TechnicalServicesRole();
-                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role, txtNetwork.getText());
+
+                if (network.containsKey(txtNetwork.getText())) {
+                    for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                        if (iteration.getKey().equals(txtNetwork.getText())) {
+                            if (iteration.getValue().getTechnicalServices() == null) {
+                                technicalServices = new TechnicalServicesDirectory();
+                                Enterprise enterprise = new Enterprise();
+                                TechnicalServices technicalService = technicalServices.addGroundService();
+                                technicalService.setManagerName(managerame);
+                                technicalService.setUserName(userName);
+                                technicalService.setManagerType("TECHNICAL");
+                                enterprise.setTechnicalServices(technicalServices);
+                                network.put(txtNetwork.getText(), enterprise);
+                                business.setNetworkList(network);
+                            } else {
+                                technicalServices = iteration.getValue().getTechnicalServices();
+                                TechnicalServices technicalService = technicalServices.addGroundService();
+                                technicalService.setManagerName(managerame);
+                                technicalService.setUserName(userName);
+                                technicalService.setManagerType("TECHNICAL");
+                            }
+                        }
+                    }
+                } else {
+                    Enterprise enterprise = new Enterprise();
+                    TechnicalServicesDirectory technicalServicesDirectory = new TechnicalServicesDirectory();
+                    TechnicalServices technicalService = technicalServicesDirectory.addGroundService();
+                    technicalService.setManagerName(managerame);
+                    technicalService.setUserName(userName);
+                    technicalService.setManagerType("TECHNICAL");
+                    enterprise.setTechnicalServices(technicalServices);
+                    network.put(txtNetwork.getText(), enterprise);
+                    business.setNetworkList(network);
+                }
             } else if (serviceType.equals("SECURITY")) {
-                SecurityServices securityService = securityServices.addSecurityService();
-                securityService.setManagerName(managerame);
-                securityService.setUserName(userName);
-                securityService.setManagerType("SECURITY");
-                business.setSecurityServices(securityServices);
                 SecurityServicesRole role = new SecurityServicesRole();
-                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role, txtNetwork.getText());
+
+                if (network.containsKey(txtNetwork.getText())) {
+                    for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                        if (iteration.getKey().equals(txtNetwork.getText())) {
+                            if (iteration.getValue().getSecurityServices() == null) {
+                                securityServices = new SecurityServicesDirectory();
+                                Enterprise enterprise = new Enterprise();
+                                SecurityServices securityService = securityServices.addSecurityService();
+                                securityService.setManagerName(managerame);
+                                securityService.setUserName(userName);
+                                securityService.setManagerType("SECURITY");
+                                enterprise.setSecurityServices(securityServices);
+                                network.put(txtNetwork.getText(), enterprise);
+                                business.setNetworkList(network);
+                            } else {
+                                securityServices = iteration.getValue().getSecurityServices();
+                                SecurityServices securityService = securityServices.addSecurityService();
+                                securityService.setManagerName(managerame);
+                                securityService.setUserName(userName);
+                                securityService.setManagerType("SECURITY");
+                            }
+                        }
+                    }
+                } else {
+                    Enterprise enterprise = new Enterprise();
+                    SecurityServicesDirectory securityServicesDirectory = new SecurityServicesDirectory();
+                    SecurityServices securityService = securityServicesDirectory.addSecurityService();
+                    securityService.setManagerName(managerame);
+                    securityService.setUserName(userName);
+                    securityService.setManagerType("SECURITY");
+                    enterprise.setEmergencyServices(emergencyServices);
+                    network.put(txtNetwork.getText(), enterprise);
+                    business.setNetworkList(network);
+                }
             }
 
             txtManagerName.setText("");
@@ -493,6 +637,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblAddUser2;
     private javax.swing.JLabel lblManagerName2;
+    private javax.swing.JLabel lblManagerName3;
     private javax.swing.JLabel lblPassword2;
     private javax.swing.JLabel lblRestaurantName1;
     private javax.swing.JLabel lblRestaurantName4;
@@ -501,6 +646,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblHumanResourceManagers;
     private javax.swing.JTextField txtManagerName;
     private javax.swing.JTextField txtManagerUsername;
+    private javax.swing.JTextField txtNetwork;
     private javax.swing.JPanel workAreaPanel;
     // End of variables declaration//GEN-END:variables
 }

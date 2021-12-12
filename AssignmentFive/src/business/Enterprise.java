@@ -7,6 +7,7 @@ package business;
 
 import business.Customer.CustomerDirectory;
 import business.Customer.TicketDirectory;
+import business.Enterprises.EnterpriseDirectory;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.concessions.ConcessionsDirectory;
@@ -15,8 +16,11 @@ import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServicesDirectory;
 import business.hrservices.SecurityServicesDirectory;
 import business.hrservices.TechnicalServicesDirectory;
+import business.merchandise.merchandiseShopDirectory;
 import business.premium.PremiumDirectory;
 import business.suites.SuitesDirectory;
+import business.ticketing.ParkingDirectory;
+import business.ticketing.PickandDropDirectory;
 
 /**
  *
@@ -36,6 +40,10 @@ public class Enterprise {
     private SecurityServicesDirectory securityServices;
     private EventDirectory eventDirectory;
     private TicketDirectory ticketDirectory;
+    private EnterpriseDirectory enterpriseDirectory;
+    private merchandiseShopDirectory merchandiseShopDirectory;
+    private ParkingDirectory parkingDirectory;
+    private PickandDropDirectory pdDirectory;
 
     public RestaurantDirectory getRestaurantDirectory() {
         return restaurantDirectory;
@@ -131,6 +139,38 @@ public class Enterprise {
 
     public void setTicketDirectory(TicketDirectory ticketDirectory) {
         this.ticketDirectory = ticketDirectory;
+    }
+
+    public EnterpriseDirectory getEnterpriseDirectory() {
+        return enterpriseDirectory;
+    }
+
+    public void setEnterpriseDirectory(EnterpriseDirectory enterpriseDirectory) {
+        this.enterpriseDirectory = enterpriseDirectory;
+    }
+
+    public merchandiseShopDirectory getMerchandiseShopDirectory() {
+        return merchandiseShopDirectory;
+    }
+
+    public void setMerchandiseShopDirectory(merchandiseShopDirectory merchandiseShopDirectory) {
+        this.merchandiseShopDirectory = merchandiseShopDirectory;
+    }
+
+    public ParkingDirectory getParkingDirectory() {
+        return parkingDirectory;
+    }
+
+    public void setParkingDirectory(ParkingDirectory parkingDirectory) {
+        this.parkingDirectory = parkingDirectory;
+    }
+
+    public PickandDropDirectory getPdDirectory() {
+        return pdDirectory;
+    }
+
+    public void setPdDirectory(PickandDropDirectory pdDirectory) {
+        this.pdDirectory = pdDirectory;
     }
 
 }

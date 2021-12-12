@@ -12,7 +12,6 @@ import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.Restaurant;
 import business.Restaurant.RestaurantDirectory;
-import business.role.RestaurantRole;
 import business.role.Role;
 import business.useraccount.UserAccount;
 import java.awt.Color;
