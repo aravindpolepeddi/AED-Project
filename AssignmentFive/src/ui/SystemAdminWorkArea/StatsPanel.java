@@ -5,17 +5,61 @@
  */
 package ui.SystemAdminWorkArea;
 
+import business.Business;
+import business.Customer.Ticket;
+import business.Customer.TicketDirectory;
+import business.useraccount.UserAccount;
+import java.awt.Color;
+import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 /**
  *
  * @author deepv
  */
 public class StatsPanel extends javax.swing.JPanel {
 
+    TicketDirectory ticketDirectory;
+    int foodBevCost;
+
     /**
      * Creates new form StatsPanel
      */
-    public StatsPanel() {
+    public StatsPanel(Business business, UserAccount account, JPanel workAreaPanel) {
         initComponents();
+        this.foodBevCost = 0;
+
+        if (business.getTicketDirectory() == null) {
+            this.ticketDirectory = new TicketDirectory();
+        } else {
+            this.ticketDirectory = business.getTicketDirectory();
+        }
+
+        for (Ticket ticket : ticketDirectory.getTicketList()) {
+            foodBevCost = foodBevCost + ticket.getFoodCost() + ticket.getReservationCost();
+        }
+
+        DefaultCategoryDataset dcd = new DefaultCategoryDataset();
+        dcd.setValue(foodBevCost, "Food & Beverage revenue", "Food & Beverage");
+
+        JFreeChart jchart = ChartFactory.createBarChart3D("", "ENTERPRISE", "REVENUE", dcd, PlotOrientation.VERTICAL, true, true, false);
+        CategoryPlot plot = jchart.getCategoryPlot();
+        plot.setRangeGridlinePaint(Color.black);
+        ChartFrame chartFrm = new ChartFrame("Student Record", jchart, true);
+        chartFrm.setVisible(true);
+        chartFrm.setSize(500, 400);
+        ChartPanel chartPanel = new ChartPanel(jchart);
+        chartFrm.dispose();
+        pnlChart.removeAll();
+        pnlChart.add(chartPanel);
+        pnlChart.updateUI();
+
     }
 
     /**
@@ -27,21 +71,66 @@ public class StatsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblRestaurantName1 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        pnlChart = new javax.swing.JPanel();
+
         setBackground(new java.awt.Color(240, 255, 255));
+
+        lblRestaurantName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRestaurantName1.setForeground(new java.awt.Color(0, 153, 153));
+        lblRestaurantName1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRestaurantName1.setText("STATS");
+
+        jButton7.setBackground(new java.awt.Color(255, 255, 255));
+        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton7.setText("BACK");
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton7.setFocusPainted(false);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        pnlChart.setBackground(new java.awt.Color(240, 255, 255));
+        pnlChart.setLayout(new javax.swing.BoxLayout(pnlChart, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlChart, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(lblRestaurantName1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7)))
+                .addGap(125, 125, 125))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 604, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRestaurantName1)
+                    .addComponent(jButton7))
+                .addGap(18, 18, 18)
+                .addComponent(pnlChart, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(184, 184, 184))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButton7ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton7;
+    private javax.swing.JLabel lblRestaurantName1;
+    private javax.swing.JPanel pnlChart;
     // End of variables declaration//GEN-END:variables
 }

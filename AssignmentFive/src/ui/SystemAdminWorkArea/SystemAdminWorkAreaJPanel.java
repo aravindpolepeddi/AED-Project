@@ -91,6 +91,11 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         ReportingjButton.setText("REPORTING");
+        ReportingjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReportingjButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout NavigationJPanelLayout = new javax.swing.GroupLayout(NavigationJPanel);
         NavigationJPanel.setLayout(NavigationJPanelLayout);
@@ -195,12 +200,18 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        JPanel manageEventPanel = new manageEventPanel(business,account,workAreaPanel);
+        JPanel manageEventPanel = new manageEventPanel(business, account, workAreaPanel);
         workAreaPanel.add("ManageCustomerPanel", manageEventPanel);
         CardLayout layout = (CardLayout) workAreaPanel.getLayout();
         layout.next(workAreaPanel);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void ReportingjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportingjButtonActionPerformed
+        JPanel StatsPanel = new StatsPanel(business, account, workAreaPanel);
+        workAreaPanel.add("StatsPanel", StatsPanel);
+        CardLayout layout = (CardLayout) workAreaPanel.getLayout();
+        layout.next(workAreaPanel);
+    }//GEN-LAST:event_ReportingjButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
