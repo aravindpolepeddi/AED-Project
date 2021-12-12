@@ -11,6 +11,9 @@ package business.merchandise;
  */
 public class merchandise {
 
+    private String ItemName;
+    private int Price;
+
     public String getItemName() {
         return ItemName;
     }
@@ -26,9 +29,9 @@ public class merchandise {
     public void setPrice(int Price) {
         this.Price = Price;
     }
-        
-    
- String ItemName;
- int Price;
-    
+
+    @Override
+    public String toString() {
+        return ItemName;
+    }
 }

@@ -16,6 +16,7 @@ public class Customer extends Person {
     private String userName;
     private String address;
     private Ticket ticket;
+    private int merchCost;
 
     public String getUserName() {
         return userName;
@@ -39,6 +40,14 @@ public class Customer extends Person {
 
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
+    }
+
+    public int getMerchCost() {
+        return merchCost;
+    }
+
+    public void setMerchCost(int merchCost) {
+        this.merchCost = merchCost;
     }
 
 }

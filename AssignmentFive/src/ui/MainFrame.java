@@ -8,10 +8,10 @@ package ui;
 import business.Business;
 import business.ConfigureABusiness;
 import business.Customer.CustomerDirectory;
-import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import java.awt.CardLayout;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -31,6 +31,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     public MainFrame() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         business = ConfigureABusiness.configure();
         if (business.getRestaurantDirectory() != null) {
             this.restaurantDirectory = business.getRestaurantDirectory();

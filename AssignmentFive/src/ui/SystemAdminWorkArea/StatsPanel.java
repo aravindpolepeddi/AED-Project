@@ -6,6 +6,8 @@
 package ui.SystemAdminWorkArea;
 
 import business.Business;
+import business.Customer.Customer;
+import business.Customer.CustomerDirectory;
 import business.Customer.Ticket;
 import business.Customer.TicketDirectory;
 import business.Enterprise;
@@ -36,6 +38,8 @@ public class StatsPanel extends javax.swing.JPanel {
     Enterprise enterprise;
     String networkString;
     Business business;
+    CustomerDirectory customerDirectory;
+    int merchCost;
 
     /**
      * Creates new form StatsPanel
@@ -180,8 +184,20 @@ public class StatsPanel extends javax.swing.JPanel {
             foodBevCost = foodBevCost + ticket.getFoodCost() + ticket.getReservationCost();
         }
 
+        this.merchCost = 0;
+        if (enterprise.getCustomerDirectory() == null) {
+            this.customerDirectory = new CustomerDirectory();
+        } else {
+            this.customerDirectory = enterprise.getCustomerDirectory();
+        }
+
+        for (Customer customer : customerDirectory.getCustomers()) {
+            merchCost = merchCost + customer.getMerchCost();
+        }
+
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
         dcd.setValue(foodBevCost, "Food & Beverage revenue", "Food & Beverage");
+        dcd.setValue(merchCost, "Merchandise revenue", "Merchandise");
 
         JFreeChart jchart = ChartFactory.createBarChart3D("", "ENTERPRISE", "REVENUE", dcd, PlotOrientation.VERTICAL, true, true, false);
         CategoryPlot plot = jchart.getCategoryPlot();

@@ -16,6 +16,7 @@ import business.role.FoodBeverageEntAdminRole;
 import business.role.HumanResourceEntAdmin;
 import business.role.MerchendiseEntAdminRole;
 import business.role.Role;
+import business.role.merchandiseShopOwner;
 import business.useraccount.UserAccount;
 import java.awt.Color;
 import java.awt.Font;
@@ -325,7 +326,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
                 FoodBeverageEntAdminRole role = new FoodBeverageEntAdminRole();
                 business.getUserAccountDirectory().createUserAccount(userName, txtManagerName.getText(), password, role, txtNetwork.getText());
             } else if (cmbEntType.getSelectedItem().toString().equals("Merchandise")) {
-                MerchendiseEntAdminRole role = new MerchendiseEntAdminRole();
+                merchandiseShopOwner role = new merchandiseShopOwner();
                 business.getUserAccountDirectory().createUserAccount(userName, txtManagerName.getText(), password, role, txtNetwork.getText());
             } else if (cmbEntType.getSelectedItem().toString().equals("Human Resources")) {
                 HumanResourceEntAdmin role = new HumanResourceEntAdmin();

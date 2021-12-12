@@ -13,7 +13,6 @@ import business.Restaurant.RestaurantDirectory;
 import business.role.Role.RoleType;
 import business.useraccount.UserAccount;
 import javax.swing.JPanel;
-import ui.CustomerRole.CustomerAreaJPanel;
 import ui.CustomerRole.CustomerWorkAreaJPanel;
 
 /**
