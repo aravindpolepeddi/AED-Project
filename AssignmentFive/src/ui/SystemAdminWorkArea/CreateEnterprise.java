@@ -11,10 +11,8 @@ import business.Enterprise;
 import business.Enterprises.EnterpriseDirectory;
 import business.Enterprises.EnterpriseUser;
 import business.FlagClass;
-import business.role.BookingEntAdminRole;
 import business.role.FoodBeverageEntAdminRole;
 import business.role.HumanResourceEntAdmin;
-import business.role.MerchendiseEntAdminRole;
 import business.role.Role;
 import business.role.TicketingAdmin;
 import business.role.merchandiseShopOwner;
@@ -441,7 +439,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
 
         for (UserAccount userAccount : business.getUserAccountDirectory().getUserAccountList()) {
             Object[] row = new Object[3];
-            if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.Customer) {
+            if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.FoodBeverageEntAdmin || userAccount.getRole().type == Role.RoleType.MerchendiseEntAdmin || userAccount.getRole().type == Role.RoleType.HumanResourceEntAdmin || userAccount.getRole().type == Role.RoleType.TicketingAdmin) {
                 row[0] = userAccount;
                 row[1] = userAccount.getPassword();
                 row[2] = userAccount.getName();

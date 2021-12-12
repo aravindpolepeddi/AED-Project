@@ -12,6 +12,7 @@ import business.Enterprise;
 import business.Enterprises.EnterpriseDirectory;
 import business.ticketing.CarBooking;
 import business.ticketing.Parking;
+import business.ticketing.ParkingDirectory;
 import business.ticketing.PickandDropDirectory;
 import business.useraccount.UserAccount;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ParkingJPanel extends javax.swing.JPanel {
 
-    Boolean update = false;
+    Boolean update;
     JPanel userProcessContainer;
     Business system;
     UserAccount useraccount;
@@ -38,9 +39,11 @@ public class ParkingJPanel extends javax.swing.JPanel {
     String networkString;
     CustomerDirectory customerDirectory;
     Customer customer;
+    ParkingDirectory parkingDirectory;
 
     public ParkingJPanel(JPanel userProcessContainer, UserAccount account, Business system) {
         initComponents();
+        this.update = system.isUpdate();
         this.networkString = account.getNetwork();
 
         if (system.getNetworkList() == null) {
@@ -55,6 +58,12 @@ public class ParkingJPanel extends javax.swing.JPanel {
             pdDirectory = new PickandDropDirectory();
         } else {
             this.pdDirectory = enterprise.getPdDirectory();
+        }
+
+        if (enterprise.getParkingDirectory() == null) {
+            parkingDirectory = new ParkingDirectory();
+        } else {
+            this.parkingDirectory = enterprise.getParkingDirectory();
         }
 
         if (enterprise.getCustomerDirectory() == null) {
@@ -279,7 +288,7 @@ public class ParkingJPanel extends javax.swing.JPanel {
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        for (Parking p : enterprise.getParkingDirectory().getParkingList()) {
+        for (Parking p : parkingDirectory.getParkingList()) {
             Object row[] = new Object[6];
             row[0] = p.getCarNumber();
             row[1] = p.getEnteredTie();
@@ -351,8 +360,8 @@ public class ParkingJPanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, Error);
         }
-        if (update = true) {
-            update = false;
+        if (system.isUpdate() == true) {
+            system.setUpdate(false);
         }
         refreshTable();
     }//GEN-LAST:event_jButtonSaveActionPerformed
@@ -364,10 +373,10 @@ public class ParkingJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select a Vehicle");
             return;
         } else {
-            update = true;
+            system.setUpdate(true);
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             int j = 0;
-            for (Parking p : enterprise.getParkingDirectory().getParkingList()) {
+            for (Parking p : parkingDirectory.getParkingList()) {
                 if (j == selectedRowIndex) {
                     jTextCarNumber.setText(p.getCarNumber());
                     jDateChooserEnter.setDate(p.getEnteredTie());
@@ -376,7 +385,9 @@ public class ParkingJPanel extends javax.swing.JPanel {
                     jTextTicketNumber.setText(String.valueOf(p.getTicketNumber()));
                     jTextPrice.setText(String.valueOf(p.getPrice()));
                     enterprise.getParkingDirectory().getParkingList().remove(p);
+                    return;
                 }
+                j++;
             }
         }
 

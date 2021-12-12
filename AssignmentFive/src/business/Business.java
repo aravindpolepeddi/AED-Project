@@ -48,8 +48,8 @@ public class Business extends Organization {
     private merchandiseShopDirectory merchandiseShopDirectory;
     private ParkingDirectory parkingDirectory;
     private PickandDropDirectory pdDirectory;
-
     private Map<String, Enterprise> networkList;
+    private boolean update;
 
     public PremiumDirectory getPremiumDirectory() {
         return premiumDirectory;
@@ -140,6 +140,7 @@ public class Business extends Organization {
     private Business() {
         super(null);
         eventDirectory = new EventDirectory();
+        this.update = false;
         // networkList=new ArrayList<Network>();
     }
 
@@ -210,6 +211,14 @@ public class Business extends Organization {
 
     public void setNetworkList(Map<String, Enterprise> networkList) {
         this.networkList = networkList;
+    }
+
+    public boolean isUpdate() {
+        return update;
+    }
+
+    public void setUpdate(boolean update) {
+        this.update = update;
     }
 
     public Enterprise findEnterpriseByNetwork(String network) {

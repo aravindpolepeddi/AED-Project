@@ -13,6 +13,7 @@ import business.Restaurant.RestaurantDirectory;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -143,11 +144,16 @@ public class MainScreen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOffActionPerformed
-        dB4OUtil.storeSystem(system);
-        JPanel loginScreen = new LoginScreen(mainWorkArea, business);
-        mainWorkArea.add("LoginScreen", loginScreen);
-        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-        layout.next(mainWorkArea);
+        if (business.isUpdate() == false) {
+            dB4OUtil.storeSystem(system);
+            JPanel loginScreen = new LoginScreen(mainWorkArea, business);
+            mainWorkArea.add("LoginScreen", loginScreen);
+            CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+            layout.next(mainWorkArea);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please save your changes before logging off!");
+            return;
+        }
     }//GEN-LAST:event_btnLogOffActionPerformed
 
     private void btnLogOffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOffMouseEntered
