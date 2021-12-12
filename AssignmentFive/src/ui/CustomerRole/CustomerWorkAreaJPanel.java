@@ -241,6 +241,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPickup = new javax.swing.JTable();
         jLabel31 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
         orderFood = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -865,6 +866,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("PICK & DROP!");
 
+        jLabel24.setText("jLabel24");
+
         javax.swing.GroupLayout parkingDetailsLayout = new javax.swing.GroupLayout(parkingDetails);
         parkingDetails.setLayout(parkingDetailsLayout);
         parkingDetailsLayout.setHorizontalGroup(
@@ -872,13 +875,22 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(parkingDetailsLayout.createSequentialGroup()
                 .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(parkingDetailsLayout.createSequentialGroup()
-                        .addGap(241, 241, 241)
-                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(parkingDetailsLayout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(parkingDetailsLayout.createSequentialGroup()
-                                .addGap(90, 90, 90)
+                                .addGap(196, 196, 196)
+                                .addComponent(jButton8))))
+                    .addGroup(parkingDetailsLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(parkingDetailsLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(parkingDetailsLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
                                 .addGroup(parkingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel10))
@@ -887,12 +899,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                                     .addComponent(chkReturntrip)
                                     .addComponent(txtPickupLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(parkingDetailsLayout.createSequentialGroup()
-                                .addGap(175, 175, 175)
-                                .addComponent(btnSubmit))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(parkingDetailsLayout.createSequentialGroup()
-                                .addGap(196, 196, 196)
-                                .addComponent(jButton8)))))
+                                .addGap(101, 101, 101)
+                                .addComponent(btnSubmit)))))
                 .addContainerGap(544, Short.MAX_VALUE))
         );
         parkingDetailsLayout.setVerticalGroup(
@@ -915,6 +923,10 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jButton8)
                 .addContainerGap(423, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parkingDetailsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jLayeredPane1.add(parkingDetails, "card5");
@@ -4416,6 +4428,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
