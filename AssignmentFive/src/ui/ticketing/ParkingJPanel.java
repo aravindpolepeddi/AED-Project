@@ -77,7 +77,13 @@ public class ParkingJPanel extends javax.swing.JPanel {
         initComponents();
         refreshTable();
     }
-
+  private static boolean validateIntegerInput(String userInput) {
+        if (userInput.matches("^[0-9]*$") ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,7 +110,13 @@ public class ParkingJPanel extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jTextTicketNumber = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        lblRestaurantName = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(240, 255, 255));
+
+        jTable1.setBackground(new java.awt.Color(255, 255, 255));
+        jTable1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(0, 51, 51));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -116,91 +128,124 @@ public class ParkingJPanel extends javax.swing.JPanel {
                 "CarNumber", "EnterTime", "Exit Time", "SlotNumber", "Price"
             }
         ));
+        jTable1.setSelectionBackground(new java.awt.Color(0, 204, 204));
+        jTable1.setSelectionForeground(new java.awt.Color(0, 51, 51));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 51));
         jLabel1.setText("Car Number");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 51, 51));
         jLabel2.setText("Enter Time");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 51, 51));
         jLabel3.setText("Exit Time");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 51, 51));
         jLabel4.setText("Slot Number");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 51, 51));
         jLabel5.setText("Price");
 
+        jButtonSave.setBackground(new java.awt.Color(204, 255, 204));
+        jButtonSave.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonSave.setForeground(new java.awt.Color(0, 102, 0));
         jButtonSave.setText("Save");
+        jButtonSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSaveActionPerformed(evt);
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(0, 204, 204));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 51, 51));
         jButton2.setText("Update");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 153, 153));
         jButton3.setText("Services");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 51, 51));
         jLabel6.setText("Ticket Number");
+
+        lblRestaurantName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRestaurantName.setForeground(new java.awt.Color(0, 153, 153));
+        lblRestaurantName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRestaurantName.setText("PARKING");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jDateChooserEnter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jTextCarNumber)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextTicketNumber)
-                                    .addComponent(jDateChooserExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextSlotNumber)
-                                    .addComponent(jTextPrice))))
-                        .addGap(41, 41, 41))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(jTextCarNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooserEnter, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooserExit, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextSlotNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextTicketNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonSave))))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSave)
-                        .addGap(88, 88, 88))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jButton2)
-                .addGap(214, 214, 214)
-                .addComponent(jButton3)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton2)
+                        .addGap(214, 214, 214)
+                        .addComponent(jButton3))
+                    .addComponent(lblRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jDateChooserEnter, jDateChooserExit, jTextCarNumber});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextPrice, jTextSlotNumber, jTextTicketNumber});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(lblRestaurantName)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jTextCarNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,8 +271,11 @@ public class ParkingJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addComponent(jButtonSave)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jDateChooserEnter, jDateChooserExit, jTextCarNumber, jTextPrice, jTextSlotNumber, jTextTicketNumber});
+
     }// </editor-fold>//GEN-END:initComponents
 
     public void refreshTable() {
@@ -293,8 +341,8 @@ public class ParkingJPanel extends javax.swing.JPanel {
             customer = customerDirectory.findCustomerByTicketId(Integer.parseInt(jTextTicketNumber.getText()));
             jTextTicketNumber.setText("");
         }
-        if (jTextPrice.getText().isEmpty()) {
-            Error.append("Enter Price \n");
+        if (jTextPrice.getText().isEmpty() || !validateIntegerInput(jTextPrice.getText())) {
+            Error.append("Enter valid Price \n");
         } else {
             parking.setPrice(Integer.parseInt(jTextPrice.getText()));
             if (customer.getParkingCost() == 0) {
@@ -360,5 +408,6 @@ public class ParkingJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextPrice;
     private javax.swing.JTextField jTextSlotNumber;
     private javax.swing.JTextField jTextTicketNumber;
+    private javax.swing.JLabel lblRestaurantName;
     // End of variables declaration//GEN-END:variables
 }
