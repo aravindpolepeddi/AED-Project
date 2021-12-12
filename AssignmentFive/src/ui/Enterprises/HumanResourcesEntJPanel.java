@@ -10,8 +10,8 @@ import business.hrservices.CleaningServices;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServices;
 import business.hrservices.EmergencyServicesDirectory;
-import business.hrservices.GroundServices;
-import business.hrservices.GroundServicesDirectory;
+import business.hrservices.TechnicalServices;
+import business.hrservices.TechnicalServicesDirectory;
 import business.hrservices.SecurityServices;
 import business.hrservices.SecurityServicesDirectory;
 import business.premium.Premium;
@@ -21,6 +21,7 @@ import business.role.HumanResourceEntAdmin;
 import business.role.RestaurantRole;
 import business.role.Role;
 import business.role.SecurityServicesRole;
+import business.role.TechnicalServicesRole;
 import business.suites.Suites;
 import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
@@ -37,7 +38,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
     Business business;
     CleaningServicesDirectory cleaningServices;
     EmergencyServicesDirectory emergencyServices;
-    GroundServicesDirectory groundServices;
+    TechnicalServicesDirectory technicalServices;
     SecurityServicesDirectory securityServices;
 
     /**
@@ -59,10 +60,10 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
             this.emergencyServices = business.getEmergencyServices();
         }
 
-        if (business.getGroundServices() == null) {
-            this.groundServices = new GroundServicesDirectory();
+        if (business.getTechnicalServices() == null) {
+            this.technicalServices = new TechnicalServicesDirectory();
         } else {
-            this.groundServices = business.getGroundServices();
+            this.technicalServices = business.getTechnicalServices();
         }
 
         if (business.getSecurityServices() == null) {
@@ -217,7 +218,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
         tblHumanResourceManagers.setSelectionForeground(new java.awt.Color(0, 51, 51));
         jScrollPane3.setViewportView(tblHumanResourceManagers);
 
-        cmbServices.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT SERVICE", "CLEANING", "EMERGENCY", "GROUND", "SECURITY" }));
+        cmbServices.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT SERVICE", "CLEANING", "EMERGENCY", "TECHNICAL", "SECURITY" }));
 
         javax.swing.GroupLayout workAreaPanelLayout = new javax.swing.GroupLayout(workAreaPanel);
         workAreaPanel.setLayout(workAreaPanelLayout);
@@ -346,13 +347,13 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                 business.setEmergencyServices(emergencyServices);
                 EmergencyServicesRole role = new EmergencyServicesRole();
                 business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
-            } else if (serviceType.equals("GROUND")) {
-                GroundServices groundService = groundServices.addGroundService();
-                groundService.setManagerName(managerame);
-                groundService.setUserName(userName);
-                groundService.setManagerType("GROUND");
-                business.setGroundServices(groundServices);
-                HumanResourceEntAdmin role = new HumanResourceEntAdmin();
+            } else if (serviceType.equals("TECHNICAL")) {
+                TechnicalServices technicalService = technicalServices.addGroundService();
+                technicalService.setManagerName(managerame);
+                technicalService.setUserName(userName);
+                technicalService.setManagerType("TECHNICAL");
+                business.setTechnicalServices(technicalServices);
+                TechnicalServicesRole role = new TechnicalServicesRole();
                 business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
             } else if (serviceType.equals("SECURITY")) {
                 SecurityServices securityService = securityServices.addSecurityService();
@@ -405,9 +406,9 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                 emergencyServices.removeEmergencyService(removedEmergencyServices);
             }
 
-            GroundServices removedGroundServices = groundServices.findGroundServiceByManagerName(selectedUserAccount.getName());
+            TechnicalServices removedGroundServices = technicalServices.findTechServiceByManagerName(selectedUserAccount.getName());
             if (removedGroundServices != null) {
-                groundServices.removeGroundService(removedGroundServices);
+                technicalServices.removeGroundService(removedGroundServices);
             }
 
             SecurityServices removedSecurityServices = securityServices.findSecurityServiceByManagerName(selectedUserAccount.getName());
@@ -445,7 +446,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
             Object[] row = new Object[4];
             CleaningServices cleaningService = null;
             EmergencyServices emergencyService = null;
-            GroundServices groundService = null;
+            TechnicalServices groundService = null;
             SecurityServices securityService = null;
             if (cleaningServices != null && cleaningServices.getCleaningServices() != null && !cleaningServices.getCleaningServices().isEmpty()) {
                 cleaningService = cleaningServices.getCleaningServices().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
@@ -454,8 +455,8 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                 emergencyService = emergencyServices.getEmergencyServices().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
             }
 
-            if (groundServices != null && groundServices.getGroundServices() != null && !groundServices.getGroundServices().isEmpty()) {
-                groundService = groundServices.getGroundServices().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
+            if (technicalServices != null && technicalServices.getGroundServices() != null && !technicalServices.getGroundServices().isEmpty()) {
+                groundService = technicalServices.getGroundServices().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
             }
 
             if (securityServices != null && securityServices.getSecurityServices() != null && !securityServices.getSecurityServices().isEmpty()) {
