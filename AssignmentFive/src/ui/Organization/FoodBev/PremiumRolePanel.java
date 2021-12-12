@@ -6,6 +6,10 @@
 package ui.Organization.FoodBev;
 
 import business.Business;
+import business.Customer.Ticket;
+import business.Customer.TicketDirectory;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.Restaurant.Menu;
 import business.hrservices.CleaningServices;
 import business.hrservices.CleaningServicesDirectory;
@@ -16,15 +20,21 @@ import business.premium.Premium;
 import business.premium.PremiumDirectory;
 import business.useraccount.UserAccount;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -37,23 +47,44 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     CleaningServicesDirectory cleaningDirectory;
     EmergencyServicesDirectory emergencyServiceDirectory;
     List<Staff> staffMembers;
+    TicketDirectory ticketDirectory;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form PremiumRolePanel
      */
     public PremiumRolePanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
-
+        this.networkString = account.getNetwork();
         staffMembers = new ArrayList<>();
+        pnlFeedbackTable.setVisible(false);
+        btnClose.setVisible(false);
 
-        if (business.getPremiumDirectory() == null) {
-            this.premiumDirectory = new PremiumDirectory();
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
         } else {
-            this.premiumDirectory = business.getPremiumDirectory();
+            this.network = business.getNetworkList();
         }
 
-        if (business.getCleaningServices() != null) {
-            this.cleaningDirectory = business.getCleaningServices();
+        this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
+
+        if (enterprise.getPremiumDirectory() == null) {
+            this.premiumDirectory = new PremiumDirectory();
+        } else {
+            this.premiumDirectory = enterprise.getPremiumDirectory();
+        }
+
+        if (enterprise.getTicketDirectory() == null) {
+            this.ticketDirectory = new TicketDirectory();
+        } else {
+            this.ticketDirectory = enterprise.getTicketDirectory();
+        }
+
+        if (enterprise.getCleaningServices() != null) {
+            this.cleaningDirectory = enterprise.getCleaningServices();
             for (CleaningServices cleaningServices : this.cleaningDirectory.getCleaningServices()) {
                 if (cleaningServices.getStaffDirectory() != null && cleaningServices.getStaffDirectory().getStaffList() != null && !cleaningServices.getStaffDirectory().getStaffList().isEmpty()) {
                     staffMembers.addAll(cleaningServices.getStaffDirectory().getStaffList());
@@ -61,8 +92,8 @@ public class PremiumRolePanel extends javax.swing.JPanel {
             }
         }
 
-        if (business.getEmergencyServices() != null) {
-            this.emergencyServiceDirectory = business.getEmergencyServices();
+        if (enterprise.getEmergencyServices() != null) {
+            this.emergencyServiceDirectory = enterprise.getEmergencyServices();
             for (EmergencyServices emergencyServices : this.emergencyServiceDirectory.getEmergencyServices()) {
                 if (emergencyServices.getStaffDirectory() != null && emergencyServices.getStaffDirectory().getStaffList() != null && !emergencyServices.getStaffDirectory().getStaffList().isEmpty()) {
                     staffMembers.addAll(emergencyServices.getStaffDirectory().getStaffList());
@@ -70,8 +101,18 @@ public class PremiumRolePanel extends javax.swing.JPanel {
             }
         }
 
+        JTableHeader tableHeader = tblOrders.getTableHeader();
+        tableHeader.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        ((DefaultTableCellRenderer) tableHeader.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+
         premium = premiumDirectory.findPremiumByManagerName(account.getName());
         lblRestaurantName.setText(premium.getRestaurantName() == null ? account.getName() + "'s Dashboard" : premium.getRestaurantName());
+        populateOrders();
+
+        ImageIcon icon1 = new ImageIcon(".\\src\\images\\menu.png");
+        Image image1 = icon1.getImage().getScaledInstance(75, 70, Image.SCALE_SMOOTH);
+        btnMenu.setIcon(new ImageIcon(image1));
+
     }
 
     /**
@@ -86,22 +127,20 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         NavigationJPanel = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
-        btnEditDetails = new javax.swing.JButton();
         btnMenu2 = new javax.swing.JButton();
+        btnMenu3 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         workAreaPanel = new javax.swing.JPanel();
         lblRestaurantName = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblOrders = new javax.swing.JTable();
-        btnAcceptOrder = new javax.swing.JButton();
-        btnrejectOrder = new javax.swing.JButton();
         btnFeedback = new javax.swing.JButton();
         pnlFeedbackTable = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblFeedBack = new javax.swing.JTable();
+        txtTiers = new javax.swing.JTextField();
+        btnFeedback1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         btnClose = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
-        btnDetails1 = new javax.swing.JButton();
         EditDetailsPanel = new javax.swing.JPanel();
         lblHeader = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
@@ -244,25 +283,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
             }
         });
 
-        btnEditDetails.setBackground(new java.awt.Color(206, 217, 217));
-        btnEditDetails.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEditDetails.setForeground(new java.awt.Color(0, 51, 51));
-        btnEditDetails.setText("EDIT DETAILS");
-        btnEditDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditDetails.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditDetailsMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditDetailsMouseExited(evt);
-            }
-        });
-        btnEditDetails.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditDetailsActionPerformed(evt);
-            }
-        });
-
         btnMenu2.setBackground(new java.awt.Color(206, 217, 217));
         btnMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnMenu2.setForeground(new java.awt.Color(0, 51, 51));
@@ -282,16 +302,37 @@ public class PremiumRolePanel extends javax.swing.JPanel {
             }
         });
 
+        btnMenu3.setBackground(new java.awt.Color(206, 217, 217));
+        btnMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnMenu3.setForeground(new java.awt.Color(0, 51, 51));
+        btnMenu3.setText("ADD TIERS");
+        btnMenu3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMenu3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMenu3MouseExited(evt);
+            }
+        });
+        btnMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenu3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout NavigationJPanelLayout = new javax.swing.GroupLayout(NavigationJPanel);
         NavigationJPanel.setLayout(NavigationJPanelLayout);
         NavigationJPanelLayout.setHorizontalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEditDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(NavigationJPanelLayout.createSequentialGroup()
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnMenu3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(NavigationJPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -301,11 +342,11 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         NavigationJPanelLayout.setVerticalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                .addGap(196, 196, 196)
-                .addComponent(btnEditDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(383, Short.MAX_VALUE))
+                .addGap(237, 237, 237)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(btnMenu3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(264, Short.MAX_VALUE))
             .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(NavigationJPanelLayout.createSequentialGroup()
                     .addGap(321, 321, 321)
@@ -328,56 +369,18 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         tblOrders.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "CUSTOMER", "BILL AMOUNT", "ORDER TIME", "STATUS", "DELIVERY STAFF", "ADDRESS"
+                "ID", "CUSTOMER", "BILL AMOUNT", "EVENT", "TIER"
             }
         ));
-        tblOrders.setSelectionBackground(new java.awt.Color(153, 209, 232));
+        tblOrders.setSelectionBackground(new java.awt.Color(0, 204, 204));
         tblOrders.setSelectionForeground(new java.awt.Color(0, 51, 51));
         jScrollPane3.setViewportView(tblOrders);
-
-        btnAcceptOrder.setBackground(new java.awt.Color(204, 255, 204));
-        btnAcceptOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnAcceptOrder.setForeground(new java.awt.Color(0, 102, 51));
-        btnAcceptOrder.setText("ACCEPT ORDER");
-        btnAcceptOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAcceptOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAcceptOrderMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAcceptOrderMouseExited(evt);
-            }
-        });
-        btnAcceptOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAcceptOrderActionPerformed(evt);
-            }
-        });
-
-        btnrejectOrder.setBackground(new java.awt.Color(255, 204, 204));
-        btnrejectOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnrejectOrder.setForeground(new java.awt.Color(204, 0, 0));
-        btnrejectOrder.setText("REJECT ORDER");
-        btnrejectOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnrejectOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnrejectOrderMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnrejectOrderMouseExited(evt);
-            }
-        });
-        btnrejectOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnrejectOrderActionPerformed(evt);
-            }
-        });
 
         btnFeedback.setBackground(new java.awt.Color(255, 255, 255));
         btnFeedback.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -400,22 +403,28 @@ public class PremiumRolePanel extends javax.swing.JPanel {
 
         pnlFeedbackTable.setBackground(new java.awt.Color(240, 255, 255));
 
-        tblFeedBack.setBackground(new java.awt.Color(255, 255, 255));
-        tblFeedBack.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        tblFeedBack.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "ID", "FEEDBACK"
+        btnFeedback1.setBackground(new java.awt.Color(255, 255, 255));
+        btnFeedback1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnFeedback1.setForeground(new java.awt.Color(0, 102, 102));
+        btnFeedback1.setText("ADD");
+        btnFeedback1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFeedback1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnFeedback1MouseEntered(evt);
             }
-        ));
-        tblFeedBack.setSelectionBackground(new java.awt.Color(153, 209, 232));
-        tblFeedBack.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        jScrollPane4.setViewportView(tblFeedBack);
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnFeedback1MouseExited(evt);
+            }
+        });
+        btnFeedback1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFeedback1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel2.setText("Enter tiers comma ( , ) seperated");
 
         javax.swing.GroupLayout pnlFeedbackTableLayout = new javax.swing.GroupLayout(pnlFeedbackTable);
         pnlFeedbackTable.setLayout(pnlFeedbackTableLayout);
@@ -423,15 +432,24 @@ public class PremiumRolePanel extends javax.swing.JPanel {
             pnlFeedbackTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFeedbackTableLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(pnlFeedbackTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFeedbackTableLayout.createSequentialGroup()
+                        .addComponent(txtTiers, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFeedback1))
+                    .addComponent(jLabel2))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         pnlFeedbackTableLayout.setVerticalGroup(
             pnlFeedbackTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFeedbackTableLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(pnlFeedbackTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTiers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFeedback1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         btnClose.setBackground(new java.awt.Color(255, 204, 204));
@@ -472,52 +490,26 @@ public class PremiumRolePanel extends javax.swing.JPanel {
             }
         });
 
-        btnDetails1.setBackground(new java.awt.Color(204, 255, 255));
-        btnDetails1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnDetails1.setForeground(new java.awt.Color(0, 153, 204));
-        btnDetails1.setText("MARK DELIVERED");
-        btnDetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDetails1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDetails1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDetails1MouseExited(evt);
-            }
-        });
-        btnDetails1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetails1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout workAreaPanelLayout = new javax.swing.GroupLayout(workAreaPanel);
         workAreaPanel.setLayout(workAreaPanelLayout);
         workAreaPanelLayout.setHorizontalGroup(
             workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblRestaurantName, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
             .addGroup(workAreaPanelLayout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnFeedback, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnClose)
+                        .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                .addGap(0, 65, Short.MAX_VALUE)
                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(workAreaPanelLayout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnClose)
-                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnFeedback)
-                                .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(workAreaPanelLayout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(btnAcceptOrder)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnrejectOrder)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDetails1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDetails)))
-                .addContainerGap(145, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDetails)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(70, Short.MAX_VALUE))
+            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                .addComponent(lblRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         workAreaPanelLayout.setVerticalGroup(
@@ -525,21 +517,17 @@ public class PremiumRolePanel extends javax.swing.JPanel {
             .addGroup(workAreaPanelLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(lblRestaurantName)
-                .addGap(62, 62, 62)
-                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcceptOrder)
-                    .addComponent(btnrejectOrder)
-                    .addComponent(btnDetails)
-                    .addComponent(btnDetails1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(68, 68, 68)
+                .addComponent(btnDetails)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFeedback)
-                .addGap(8, 8, 8)
+                .addGap(20, 20, 20)
                 .addComponent(btnClose)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(workAreaPanel, "card2");
@@ -1606,7 +1594,7 @@ public class PremiumRolePanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDetails4))
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         ServiceDetailsLayout.setVerticalGroup(
             ServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1701,7 +1689,7 @@ public class PremiumRolePanel extends javax.swing.JPanel {
                             .addComponent(txtPhoneNumber1)
                             .addComponent(txtEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFullName1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         ViewServiceDetailsLayout.setVerticalGroup(
             ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1745,30 +1733,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAcceptOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptOrderMouseEntered
-
-    }//GEN-LAST:event_btnAcceptOrderMouseEntered
-
-    private void btnAcceptOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptOrderMouseExited
-
-    }//GEN-LAST:event_btnAcceptOrderMouseExited
-
-    private void btnAcceptOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptOrderActionPerformed
-
-    }//GEN-LAST:event_btnAcceptOrderActionPerformed
-
-    private void btnrejectOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrejectOrderMouseEntered
-
-    }//GEN-LAST:event_btnrejectOrderMouseEntered
-
-    private void btnrejectOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrejectOrderMouseExited
-
-    }//GEN-LAST:event_btnrejectOrderMouseExited
-
-    private void btnrejectOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrejectOrderActionPerformed
-
-    }//GEN-LAST:event_btnrejectOrderActionPerformed
-
     private void btnFeedbackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFeedbackMouseEntered
     }//GEN-LAST:event_btnFeedbackMouseEntered
 
@@ -1778,19 +1742,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private void btnFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeedbackActionPerformed
 
     }//GEN-LAST:event_btnFeedbackActionPerformed
-
-    private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
-
-    }//GEN-LAST:event_btnCloseMouseEntered
-
-    private void btnCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseExited
-
-    }//GEN-LAST:event_btnCloseMouseExited
-
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        btnClose.setVisible(false);
-        pnlFeedbackTable.setVisible(false);
-    }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnDetailsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetailsMouseEntered
 
@@ -1808,25 +1759,13 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         } else {
             switchPanels(OrderDetails);
             DefaultTableModel model = (DefaultTableModel) tblOrders.getModel();
-//            Order selectedOrder = (Order) model.getValueAt(selectedRowIndex, 0);
-//            lblHeader3.setText("Order " + selectedOrder.getId() + " details");
-//            lblOrderedByValue.setText(selectedOrder.getCustomerName());
-//            lblOrderedAtValue.setText(String.valueOf(selectedOrder.getOrderDateTime()));
-//            popuateFoodItemList(selectedOrder.getId());
+            Ticket selectedTicket = (Ticket) model.getValueAt(selectedRowIndex, 0);
+            lblHeader3.setText("Ticket " + selectedTicket.getId() + "order details");
+            lblOrderedByValue.setText(selectedTicket.getCustomerName());
+            lblOrderedAtValue.setText(String.valueOf(selectedTicket.getEventName()));
+            popuateFoodItemList(selectedTicket.getId());
         }
     }//GEN-LAST:event_btnDetailsActionPerformed
-
-    private void btnDetails1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails1MouseEntered
-
-    }//GEN-LAST:event_btnDetails1MouseEntered
-
-    private void btnDetails1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails1MouseExited
-
-    }//GEN-LAST:event_btnDetails1MouseExited
-
-    private void btnDetails1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails1ActionPerformed
-
-    }//GEN-LAST:event_btnDetails1ActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
@@ -2202,18 +2141,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAssignActionPerformed
 
-    private void btnEditDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDetailsActionPerformed
-
-    }//GEN-LAST:event_btnEditDetailsActionPerformed
-
-    private void btnEditDetailsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditDetailsMouseExited
-
-    }//GEN-LAST:event_btnEditDetailsMouseExited
-
-    private void btnEditDetailsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditDetailsMouseEntered
-
-    }//GEN-LAST:event_btnEditDetailsMouseEntered
-
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         switchPanels(MenuPanel1);
         populateMenuFields();
@@ -2341,6 +2268,46 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private void btnBack8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack8ActionPerformed
         switchPanels(workAreaPanel);
     }//GEN-LAST:event_btnBack8ActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        btnClose.setVisible(false);
+        pnlFeedbackTable.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseExited
+
+    }//GEN-LAST:event_btnCloseMouseExited
+
+    private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
+
+    }//GEN-LAST:event_btnCloseMouseEntered
+
+    private void btnFeedback1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFeedback1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFeedback1MouseEntered
+
+    private void btnFeedback1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFeedback1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFeedback1MouseExited
+
+    private void btnFeedback1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeedback1ActionPerformed
+        List<String> tierList = new ArrayList<>();
+        tierList = Stream.of(txtTiers.getText().split(",", -1)).collect(Collectors.toList());
+        premium.setTiers(tierList);
+    }//GEN-LAST:event_btnFeedback1ActionPerformed
+
+    private void btnMenu3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenu3MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMenu3MouseEntered
+
+    private void btnMenu3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenu3MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMenu3MouseExited
+
+    private void btnMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenu3ActionPerformed
+        pnlFeedbackTable.setVisible(true);
+        btnClose.setVisible(true);
+    }//GEN-LAST:event_btnMenu3ActionPerformed
 
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
@@ -2544,6 +2511,37 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         }
     }
 
+    private void populateOrders() {
+        DefaultTableModel model = (DefaultTableModel) tblOrders.getModel();
+        model.setRowCount(0);
+
+        for (Ticket ticket : ticketDirectory.getTicketList()) {
+            if (ticket.getSuiteName() != null && ticket.getSuiteName().equals(premium.getRestaurantName())) {
+                Object[] row = new Object[5];
+                row[0] = ticket;
+                row[1] = ticket.getCustomerName();
+                row[2] = "$ " + String.valueOf(ticket.getFoodCost() + ticket.getReservationCost());
+                row[3] = ticket.getEventName();
+                row[4] = ticket.getTier();
+
+                model.addRow(row);
+            }
+        }
+    }
+
+    private void popuateFoodItemList(int id) {
+        DefaultTableModel model = (DefaultTableModel) tblFoodList.getModel();
+        model.setRowCount(0);
+        Ticket ticket = ticketDirectory.findTicketById(id);
+
+        if (ticket != null && ticket.getFoodItems() != null && !ticket.getFoodItems().isEmpty()) {
+            for (String food : ticket.getFoodItems()) {
+                Object[] row = new Object[1];
+                row[0] = food;
+                model.addRow(row);
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AssignDeliveryPanel;
@@ -2553,7 +2551,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private javax.swing.JPanel OrderDetails;
     private javax.swing.JPanel ServiceDetails;
     private javax.swing.JPanel ViewServiceDetails;
-    private javax.swing.JButton btnAcceptOrder;
     private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBack1;
@@ -2564,26 +2561,25 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack8;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnDetails;
-    private javax.swing.JButton btnDetails1;
     private javax.swing.JButton btnDetails2;
     private javax.swing.JButton btnDetails3;
     private javax.swing.JButton btnDetails4;
-    private javax.swing.JButton btnEditDetails;
     private javax.swing.JButton btnFeedback;
+    private javax.swing.JButton btnFeedback1;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnMenu2;
+    private javax.swing.JButton btnMenu3;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnrejectOrder;
     private javax.swing.JCheckBox chkAll;
     private javax.swing.JCheckBox chkNonVeg;
     private javax.swing.JCheckBox chkVeg;
     private javax.swing.JCheckBox chkVegan;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
@@ -2648,7 +2644,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton rdVeggiePizza1;
     private javax.swing.JRadioButton rdWhiteBeanDip1;
     private javax.swing.JTable tblDeliveryStaff;
-    private javax.swing.JTable tblFeedBack;
     private javax.swing.JTable tblFoodList;
     private javax.swing.JTable tblOrders;
     private javax.swing.JTable tblServices;
@@ -2679,6 +2674,7 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtSausageDip;
     private javax.swing.JTextField txtSpinachPie;
     private javax.swing.JTextField txtSpringRoles;
+    private javax.swing.JTextField txtTiers;
     private javax.swing.JTextField txtTofuAndRiceBowl;
     private javax.swing.JTextField txtTofuSalad;
     private javax.swing.JTextField txtTortillaChips;

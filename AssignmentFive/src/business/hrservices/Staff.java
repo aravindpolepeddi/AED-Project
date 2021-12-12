@@ -19,6 +19,7 @@ public class Staff extends Person {
     private String staffSubType;
     private String status;
     private String hiredBy;
+    private String trainingStatus;
 
     public String getStaffType() {
         return staffType;
@@ -66,6 +67,14 @@ public class Staff extends Person {
 
     public void setHiredBy(String hiredBy) {
         this.hiredBy = hiredBy;
+    }
+
+    public String getTrainingStatus() {
+        return trainingStatus;
+    }
+
+    public void setTrainingStatus(String trainingStatus) {
+        this.trainingStatus = trainingStatus;
     }
 
     @Override

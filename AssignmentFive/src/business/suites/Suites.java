@@ -15,14 +15,15 @@ import java.util.Map;
  */
 public class Suites {
 
-    String managerName;
-    String userName;
-    String managerType;
+    private String restaurantName;
+    private String managerName;
+    private String userName;
+    private String managerType;
     private String cuisine;
     private String vegOrNonVeg;
     private Menu menu;
-    private String restaurantName;
     private Map<String, List<String>> seats;
+    private int cost;
 
     public String getManagerName() {
         return managerName;
@@ -86,6 +87,19 @@ public class Suites {
 
     public void setSeats(Map<String, List<String>> seats) {
         this.seats = seats;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return restaurantName;
     }
 
 }

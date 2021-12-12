@@ -90,25 +90,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblManagerName2" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblRestaurantName4" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblUserName2" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblPassword2" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtManagerUsername" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="pwdManagerPassword" alignment="0" pref="123" max="32767" attributes="0"/>
-                                      <Component id="txtManagerName" alignment="0" pref="123" max="32767" attributes="0"/>
-                                      <Component id="btnCreateUser1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cmbServices" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="btnDelete1" min="-2" max="-2" attributes="0"/>
@@ -117,11 +99,49 @@
                                       </Group>
                                       <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
-                                  <Component id="lblAddUser2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+                                          <Component id="lblAddUser2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
+                                          <Component id="lblManagerName3" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtNetwork" min="-2" pref="123" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblManagerName2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblRestaurantName4" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtManagerName" alignment="0" pref="123" max="32767" attributes="0"/>
+                                              <Component id="cmbServices" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblUserName2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblPassword2" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtManagerUsername" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="pwdManagerPassword" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                                              <Component id="btnCreateUser1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
+                          <EmptySpace min="38" pref="38" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -130,7 +150,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="lblRestaurantName1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="76" max="32767" attributes="0"/>
+                          <EmptySpace pref="80" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblAddUser2" min="-2" max="-2" attributes="0"/>
@@ -144,15 +164,15 @@
                                       <Component id="lblRestaurantName4" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="cmbServices" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblManagerName3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtNetwork" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="txtManagerUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblUserName2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblPassword2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="pwdManagerPassword" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -164,9 +184,14 @@
                                   <Component id="jScrollPane3" min="-2" pref="107" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblPassword2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="pwdManagerPassword" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnCreateUser1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="353" max="32767" attributes="0"/>
+                          <EmptySpace pref="313" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -366,7 +391,7 @@
                         <StringItem index="0" value="SELECT SERVICE"/>
                         <StringItem index="1" value="CLEANING"/>
                         <StringItem index="2" value="EMERGENCY"/>
-                        <StringItem index="3" value="GROUND"/>
+                        <StringItem index="3" value="TECHNICAL"/>
                         <StringItem index="4" value="SECURITY"/>
                       </StringArray>
                     </Property>
@@ -374,6 +399,16 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblManagerName3">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="12" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Network : "/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtNetwork">
                 </Component>
               </SubComponents>
             </Container>

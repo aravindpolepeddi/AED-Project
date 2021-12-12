@@ -6,6 +6,8 @@
 package ui.Organization.HR;
 
 import business.Business;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.FlagClass;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServices;
@@ -16,6 +18,8 @@ import business.useraccount.UserAccount;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -34,20 +38,33 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
     StaffDirectory staffDirectory;
     String managerName;
     FlagClass flags;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form EmergencyServicesJPanel
      */
     public EmergencyServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+        this.networkString = account.getNetwork();
+
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = business.getNetworkList();
+        }
+
+        this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
 
         this.managerName = account.getName();
         this.flags = new FlagClass();
 
-        if (business.getEmergencyServices() == null) {
+        if (enterprise.getEmergencyServices() == null) {
             this.emergencyServiceDirectory = new EmergencyServicesDirectory();
         } else {
-            this.emergencyServiceDirectory = business.getEmergencyServices();
+            this.emergencyServiceDirectory = enterprise.getEmergencyServices();
         }
 
         emergencyServiceFetch = emergencyServiceDirectory.findEmergencyServiceByManagerName(managerName);
@@ -101,6 +118,7 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblStaff = new javax.swing.JTable();
         btnDetails = new javax.swing.JButton();
+        btnDetails1 = new javax.swing.JButton();
         AddProvisions = new javax.swing.JPanel();
         lblRestaurantName1 = new javax.swing.JLabel();
         btnBack5 = new javax.swing.JButton();
@@ -273,6 +291,25 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnDetails1.setBackground(new java.awt.Color(255, 255, 255));
+        btnDetails1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDetails1.setForeground(new java.awt.Color(0, 153, 51));
+        btnDetails1.setText("APPROVE REQUEST");
+        btnDetails1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetails1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetails1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDetails1MouseExited(evt);
+            }
+        });
+        btnDetails1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout EmergencyDashboardLayout = new javax.swing.GroupLayout(EmergencyDashboard);
         EmergencyDashboard.setLayout(EmergencyDashboardLayout);
         EmergencyDashboardLayout.setHorizontalGroup(
@@ -283,7 +320,10 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
                     .addGroup(EmergencyDashboardLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDetails)
+                            .addGroup(EmergencyDashboardLayout.createSequentialGroup()
+                                .addComponent(btnDetails)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDetails1))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(EmergencyDashboardLayout.createSequentialGroup()
                         .addGap(270, 270, 270)
@@ -322,7 +362,9 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
                     .addComponent(lblAirAmbulance)
                     .addComponent(lblAirAmbulanceCount))
                 .addGap(68, 68, 68)
-                .addComponent(btnDetails)
+                .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDetails)
+                    .addComponent(btnDetails1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(95, Short.MAX_VALUE))
@@ -900,6 +942,28 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         switchPanels(EmergencyDashboard);
     }//GEN-LAST:event_btnBack8ActionPerformed
 
+    private void btnDetails1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetails1MouseEntered
+
+    private void btnDetails1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetails1MouseExited
+
+    private void btnDetails1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails1ActionPerformed
+        int selectedRowIndex = tblStaff.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+            Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
+            selectedStaff.setStatus("APPROVED");
+            populateStaff();
+        }
+    }//GEN-LAST:event_btnDetails1ActionPerformed
+
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(component);
@@ -935,6 +999,7 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack6;
     private javax.swing.JButton btnBack8;
     private javax.swing.JButton btnDetails;
+    private javax.swing.JButton btnDetails1;
     private javax.swing.JButton btnEditDetails;
     private javax.swing.JButton btnEditDetails1;
     private javax.swing.JButton btnProfileImage;

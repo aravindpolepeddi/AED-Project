@@ -6,26 +6,34 @@
 package ui.Organization.FoodBev;
 
 import business.Business;
+import business.Customer.Ticket;
+import business.Customer.TicketDirectory;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
+import business.Order.Order;
 import business.Restaurant.Menu;
 import business.hrservices.CleaningServices;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServices;
 import business.hrservices.EmergencyServicesDirectory;
 import business.hrservices.Staff;
-import business.premium.PremiumDirectory;
 import business.suites.Suites;
 import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -38,6 +46,11 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     CleaningServicesDirectory cleaningDirectory;
     EmergencyServicesDirectory emergencyServiceDirectory;
     List<Staff> staffMembers;
+    TicketDirectory ticketDirectory;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form SuiteRolePanel
@@ -45,16 +58,36 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     public SuiteRolePanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
 
-        staffMembers = new ArrayList<>();
+        ImageIcon icon1 = new ImageIcon(".\\src\\images\\menu.png");
+        Image image1 = icon1.getImage().getScaledInstance(75, 70, Image.SCALE_SMOOTH);
+        btnMenu.setIcon(new ImageIcon(image1));
 
-        if (business.getSuitesDirectory() == null) {
-            this.suitesDirectory = new SuitesDirectory();
+        this.networkString = account.getNetwork();
+
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
         } else {
-            this.suitesDirectory = business.getSuitesDirectory();
+            this.network = business.getNetworkList();
         }
 
-        if (business.getCleaningServices() != null) {
-            this.cleaningDirectory = business.getCleaningServices();
+        this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
+
+        staffMembers = new ArrayList<>();
+
+        if (enterprise.getSuitesDirectory() == null) {
+            this.suitesDirectory = new SuitesDirectory();
+        } else {
+            this.suitesDirectory = enterprise.getSuitesDirectory();
+        }
+
+        if (enterprise.getTicketDirectory() == null) {
+            this.ticketDirectory = new TicketDirectory();
+        } else {
+            this.ticketDirectory = enterprise.getTicketDirectory();
+        }
+
+        if (enterprise.getCleaningServices() != null) {
+            this.cleaningDirectory = enterprise.getCleaningServices();
             for (CleaningServices cleaningServices : this.cleaningDirectory.getCleaningServices()) {
                 if (cleaningServices.getStaffDirectory() != null && cleaningServices.getStaffDirectory().getStaffList() != null && !cleaningServices.getStaffDirectory().getStaffList().isEmpty()) {
                     staffMembers.addAll(cleaningServices.getStaffDirectory().getStaffList());
@@ -62,8 +95,8 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             }
         }
 
-        if (business.getEmergencyServices() != null) {
-            this.emergencyServiceDirectory = business.getEmergencyServices();
+        if (enterprise.getEmergencyServices() != null) {
+            this.emergencyServiceDirectory = enterprise.getEmergencyServices();
             for (EmergencyServices emergencyServices : this.emergencyServiceDirectory.getEmergencyServices()) {
                 if (emergencyServices.getStaffDirectory() != null && emergencyServices.getStaffDirectory().getStaffList() != null && !emergencyServices.getStaffDirectory().getStaffList().isEmpty()) {
                     staffMembers.addAll(emergencyServices.getStaffDirectory().getStaffList());
@@ -71,8 +104,13 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             }
         }
 
+        JTableHeader tableHeader = tblOrders.getTableHeader();
+        tableHeader.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        ((DefaultTableCellRenderer) tableHeader.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+
         suites = suitesDirectory.findSuiteByManagerName(account.getName());
         lblRestaurantName.setText(suites.getRestaurantName() == null ? account.getName() + "'s Dashboard" : suites.getRestaurantName());
+        populateOrders();
     }
 
     /**
@@ -89,7 +127,6 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         NavigationJPanel = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
-        btnEditDetails = new javax.swing.JButton();
         btnMenu1 = new javax.swing.JButton();
         btnMenu2 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
@@ -97,10 +134,11 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         lblRestaurantName = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblOrders = new javax.swing.JTable();
-        btnAcceptOrder = new javax.swing.JButton();
-        btnrejectOrder = new javax.swing.JButton();
         pnlFeedbackTable = new javax.swing.JPanel();
         btnDetails = new javax.swing.JButton();
+        txtCost = new javax.swing.JTextField();
+        btnPricePerTable = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         EditDetailsPanel = new javax.swing.JPanel();
         lblHeader = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
@@ -271,6 +309,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         btnDetails1 = new javax.swing.JButton();
         btnDetails2 = new javax.swing.JButton();
         btnDetails3 = new javax.swing.JButton();
+        btnDetails4 = new javax.swing.JButton();
         ViewServiceDetails = new javax.swing.JPanel();
         btnBack8 = new javax.swing.JButton();
         lblStaffMemberName = new javax.swing.JLabel();
@@ -281,6 +320,12 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         txtPhoneNumber1 = new javax.swing.JTextField();
         lblEmail2 = new javax.swing.JLabel();
         txtEmail1 = new javax.swing.JTextField();
+        AddInstructionsPanel = new javax.swing.JPanel();
+        lblHeading = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        txtFeedback = new javax.swing.JTextField();
+        lblFeedback = new javax.swing.JLabel();
+        btnSubmitFeedback = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jTextPane1);
 
@@ -302,25 +347,6 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);
-            }
-        });
-
-        btnEditDetails.setBackground(new java.awt.Color(206, 217, 217));
-        btnEditDetails.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEditDetails.setForeground(new java.awt.Color(0, 51, 51));
-        btnEditDetails.setText("EDIT DETAILS");
-        btnEditDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditDetails.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditDetailsMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditDetailsMouseExited(evt);
-            }
-        });
-        btnEditDetails.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditDetailsActionPerformed(evt);
             }
         });
 
@@ -370,9 +396,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                        .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEditDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                            .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(btnMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMenu2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -381,15 +405,13 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         NavigationJPanelLayout.setVerticalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                .addGap(196, 196, 196)
-                .addComponent(btnEditDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(230, 230, 230)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(btnMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(btnMenu2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(386, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(NavigationJPanel);
@@ -407,56 +429,18 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         tblOrders.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "CUSTOMER", "BILL AMOUNT", "ORDER TIME", "STATUS", "DELIVERY STAFF", "ADDRESS"
+                "ID", "CUSTOMER", "BILL AMOUNT", "EVENT"
             }
         ));
-        tblOrders.setSelectionBackground(new java.awt.Color(153, 209, 232));
+        tblOrders.setSelectionBackground(new java.awt.Color(0, 204, 204));
         tblOrders.setSelectionForeground(new java.awt.Color(0, 51, 51));
         jScrollPane3.setViewportView(tblOrders);
-
-        btnAcceptOrder.setBackground(new java.awt.Color(204, 255, 204));
-        btnAcceptOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnAcceptOrder.setForeground(new java.awt.Color(0, 102, 51));
-        btnAcceptOrder.setText("ACCEPT ORDER");
-        btnAcceptOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAcceptOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAcceptOrderMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAcceptOrderMouseExited(evt);
-            }
-        });
-        btnAcceptOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAcceptOrderActionPerformed(evt);
-            }
-        });
-
-        btnrejectOrder.setBackground(new java.awt.Color(255, 204, 204));
-        btnrejectOrder.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnrejectOrder.setForeground(new java.awt.Color(204, 0, 0));
-        btnrejectOrder.setText("REJECT ORDER");
-        btnrejectOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnrejectOrder.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnrejectOrderMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnrejectOrderMouseExited(evt);
-            }
-        });
-        btnrejectOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnrejectOrderActionPerformed(evt);
-            }
-        });
 
         pnlFeedbackTable.setBackground(new java.awt.Color(240, 255, 255));
 
@@ -464,11 +448,11 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         pnlFeedbackTable.setLayout(pnlFeedbackTableLayout);
         pnlFeedbackTableLayout.setHorizontalGroup(
             pnlFeedbackTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 479, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
         pnlFeedbackTableLayout.setVerticalGroup(
             pnlFeedbackTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 103, Short.MAX_VALUE)
+            .addGap(0, 146, Short.MAX_VALUE)
         );
 
         btnDetails.setBackground(new java.awt.Color(255, 255, 255));
@@ -490,43 +474,58 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             }
         });
 
+        btnPricePerTable.setBackground(new java.awt.Color(255, 102, 0));
+        btnPricePerTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnPricePerTable.setForeground(new java.awt.Color(255, 255, 0));
+        btnPricePerTable.setText("Add Price per table");
+        btnPricePerTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPricePerTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPricePerTableActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/suiteFood1.gif"))); // NOI18N
+
         javax.swing.GroupLayout workAreaPanelLayout = new javax.swing.GroupLayout(workAreaPanel);
         workAreaPanel.setLayout(workAreaPanelLayout);
         workAreaPanelLayout.setHorizontalGroup(
             workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblRestaurantName, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
             .addGroup(workAreaPanelLayout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(workAreaPanelLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(btnAcceptOrder)
-                .addGap(18, 18, 18)
-                .addComponent(btnrejectOrder)
-                .addGap(26, 26, 26)
-                .addComponent(btnDetails)
+                .addGap(30, 30, 30)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(workAreaPanelLayout.createSequentialGroup()
+                        .addGap(446, 446, 446)
+                        .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(workAreaPanelLayout.createSequentialGroup()
+                            .addComponent(btnDetails)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnPricePerTable))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         workAreaPanelLayout.setVerticalGroup(
             workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(workAreaPanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(35, 35, 35)
                 .addComponent(lblRestaurantName)
-                .addGap(62, 62, 62)
+                .addGap(43, 43, 43)
                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcceptOrder)
-                    .addComponent(btnrejectOrder)
-                    .addComponent(btnDetails))
+                    .addComponent(btnDetails)
+                    .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPricePerTable))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(workAreaPanel, "card2");
@@ -687,7 +686,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(EditDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                                     .addComponent(txtName)
-                                    .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                    .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
                                     .addComponent(txtCuisine)
                                     .addComponent(txtPhoneNum)
                                     .addComponent(txtEmailId, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1098,7 +1097,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                         .addComponent(lblMainsVeg1)
                         .addGap(189, 189, 189)
                         .addComponent(lblMainsNonVeg1)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(327, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1240,7 +1239,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                     .addComponent(btnBack3)
                     .addComponent(btnBack4))
                 .addGap(39, 39, 39))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 990, Short.MAX_VALUE)
         );
         MenuPanel1Layout.setVerticalGroup(
             MenuPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1255,7 +1254,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                         .addGap(19, 19, 19)
                         .addComponent(lblHeader2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(MenuPanel1, "card5");
@@ -1292,7 +1291,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
 
         lblOrderedAt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblOrderedAt.setForeground(new java.awt.Color(0, 51, 51));
-        lblOrderedAt.setText("ORDERED AT :");
+        lblOrderedAt.setText("EVENT");
 
         lblOrderedByValue.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblOrderedByValue.setForeground(new java.awt.Color(0, 153, 51));
@@ -1300,7 +1299,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
 
         lblOrderedAtValue.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblOrderedAtValue.setForeground(new java.awt.Color(0, 153, 51));
-        lblOrderedAtValue.setText("<OrderTime>");
+        lblOrderedAtValue.setText("<EventName>");
 
         tblFoodList.setBackground(new java.awt.Color(255, 255, 255));
         tblFoodList.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -1340,7 +1339,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                             .addComponent(lblOrderedByValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(OrderDetailsLayout.createSequentialGroup()
                         .addComponent(lblHeader3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 426, Short.MAX_VALUE)
                         .addComponent(btnBack5)))
                 .addGap(34, 34, 34))
         );
@@ -1361,7 +1360,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                     .addComponent(lblOrderedAt))
                 .addGap(102, 102, 102)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(OrderDetails, "card5");
@@ -1581,7 +1580,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         SeatingPanelLayout.setHorizontalGroup(
             SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SeatingPanelLayout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
+                .addContainerGap(337, Short.MAX_VALUE)
                 .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rdT1C1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(rdT1C2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1857,7 +1856,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                                 .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(rdT6C7)
                                     .addComponent(rdT6C8))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
                         .addGroup(SeatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rdT7C3)
                             .addComponent(rdT7C4))
@@ -2017,6 +2016,25 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             }
         });
 
+        btnDetails4.setBackground(new java.awt.Color(255, 255, 255));
+        btnDetails4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDetails4.setForeground(new java.awt.Color(0, 153, 51));
+        btnDetails4.setText("Add Instructions");
+        btnDetails4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDetails4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDetails4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDetails4MouseExited(evt);
+            }
+        });
+        btnDetails4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetails4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ServicesPanelLayout = new javax.swing.GroupLayout(ServicesPanel);
         ServicesPanel.setLayout(ServicesPanelLayout);
         ServicesPanelLayout.setHorizontalGroup(
@@ -2032,15 +2050,17 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                         .addComponent(lblHeader1))
                     .addGroup(ServicesPanelLayout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addGroup(ServicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ServicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(ServicesPanelLayout.createSequentialGroup()
                                 .addComponent(btnDetails1)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDetails2)
                                 .addGap(18, 18, 18)
+                                .addComponent(btnDetails4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnDetails3))
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(329, Short.MAX_VALUE))
         );
         ServicesPanelLayout.setVerticalGroup(
             ServicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2053,10 +2073,11 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                 .addGroup(ServicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDetails1)
                     .addComponent(btnDetails2)
-                    .addComponent(btnDetails3))
+                    .addComponent(btnDetails3)
+                    .addComponent(btnDetails4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(294, Short.MAX_VALUE))
+                .addContainerGap(427, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(ServicesPanel, "card7");
@@ -2135,7 +2156,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                             .addComponent(txtPhoneNumber1)
                             .addComponent(txtEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFullName1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
 
         ViewServiceDetailsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtEmail1, txtFullName1, txtPhoneNumber1});
@@ -2163,10 +2184,87 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                 .addGroup(ViewServiceDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEmail1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmail2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(336, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(ViewServiceDetails, "card8");
+
+        AddInstructionsPanel.setBackground(new java.awt.Color(240, 255, 255));
+
+        lblHeading.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblHeading.setForeground(new java.awt.Color(0, 153, 153));
+        lblHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHeading.setText("INSTRUCTIONS");
+
+        jButton2.setBackground(new java.awt.Color(255, 204, 204));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 0, 0));
+        jButton2.setText("BACK");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        txtFeedback.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        lblFeedback.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblFeedback.setForeground(new java.awt.Color(0, 51, 51));
+        lblFeedback.setText("INSTRUCTIONS : ");
+
+        btnSubmitFeedback.setBackground(new java.awt.Color(215, 254, 211));
+        btnSubmitFeedback.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSubmitFeedback.setForeground(new java.awt.Color(72, 151, 64));
+        btnSubmitFeedback.setText("SUBMIT FEEDBACK");
+        btnSubmitFeedback.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSubmitFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitFeedbackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AddInstructionsPanelLayout = new javax.swing.GroupLayout(AddInstructionsPanel);
+        AddInstructionsPanel.setLayout(AddInstructionsPanelLayout);
+        AddInstructionsPanelLayout.setHorizontalGroup(
+            AddInstructionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddInstructionsPanelLayout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addGroup(AddInstructionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFeedback)
+                    .addGroup(AddInstructionsPanelLayout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(btnSubmitFeedback)))
+                .addContainerGap(395, Short.MAX_VALUE))
+            .addGroup(AddInstructionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(AddInstructionsPanelLayout.createSequentialGroup()
+                    .addGap(120, 120, 120)
+                    .addComponent(lblHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jButton2)
+                    .addContainerGap(365, Short.MAX_VALUE)))
+        );
+        AddInstructionsPanelLayout.setVerticalGroup(
+            AddInstructionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddInstructionsPanelLayout.createSequentialGroup()
+                .addContainerGap(346, Short.MAX_VALUE)
+                .addComponent(lblFeedback)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btnSubmitFeedback)
+                .addGap(139, 139, 139))
+            .addGroup(AddInstructionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(AddInstructionsPanelLayout.createSequentialGroup()
+                    .addGap(66, 66, 66)
+                    .addGroup(AddInstructionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2))
+                    .addContainerGap(700, Short.MAX_VALUE)))
+        );
+
+        jLayeredPane1.add(AddInstructionsPanel, "card9");
 
         jSplitPane1.setRightComponent(jLayeredPane1);
 
@@ -2195,42 +2293,6 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         populateMenuFields();
     }//GEN-LAST:event_btnMenuActionPerformed
 
-    private void btnEditDetailsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditDetailsMouseEntered
-
-    }//GEN-LAST:event_btnEditDetailsMouseEntered
-
-    private void btnEditDetailsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditDetailsMouseExited
-
-    }//GEN-LAST:event_btnEditDetailsMouseExited
-
-    private void btnEditDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDetailsActionPerformed
-
-    }//GEN-LAST:event_btnEditDetailsActionPerformed
-
-    private void btnAcceptOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptOrderMouseEntered
-
-    }//GEN-LAST:event_btnAcceptOrderMouseEntered
-
-    private void btnAcceptOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcceptOrderMouseExited
-
-    }//GEN-LAST:event_btnAcceptOrderMouseExited
-
-    private void btnAcceptOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptOrderActionPerformed
-
-    }//GEN-LAST:event_btnAcceptOrderActionPerformed
-
-    private void btnrejectOrderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrejectOrderMouseEntered
-
-    }//GEN-LAST:event_btnrejectOrderMouseEntered
-
-    private void btnrejectOrderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnrejectOrderMouseExited
-
-    }//GEN-LAST:event_btnrejectOrderMouseExited
-
-    private void btnrejectOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrejectOrderActionPerformed
-
-    }//GEN-LAST:event_btnrejectOrderActionPerformed
-
     private void btnDetailsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetailsMouseEntered
 
     }//GEN-LAST:event_btnDetailsMouseEntered
@@ -2240,7 +2302,20 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDetailsMouseExited
 
     private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
+        int selectedRowIndex = tblOrders.getSelectedRow();
 
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select an Order");
+            return;
+        } else {
+            switchPanels(OrderDetails);
+            DefaultTableModel model = (DefaultTableModel) tblOrders.getModel();
+            Ticket selectedTicket = (Ticket) model.getValueAt(selectedRowIndex, 0);
+            lblHeader3.setText("Ticket " + selectedTicket.getId() + "order details");
+            lblOrderedByValue.setText(selectedTicket.getCustomerName());
+            lblOrderedAtValue.setText(String.valueOf(selectedTicket.getEventName()));
+            popuateFoodItemList(selectedTicket.getId());
+        }
     }//GEN-LAST:event_btnDetailsActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -2594,7 +2669,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBack5MouseExited
 
     private void btnBack5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack5ActionPerformed
-
+        switchPanels(workAreaPanel);
     }//GEN-LAST:event_btnBack5ActionPerformed
 
     private void btnMenu1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenu1MouseEntered
@@ -3001,7 +3076,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         } else {
             DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
             Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
-            selectedStaff.setStatus("HIRED");
+            selectedStaff.setStatus("REQUESTED");
             populateStaff();
         }
     }//GEN-LAST:event_btnDetails2ActionPerformed
@@ -3015,7 +3090,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBack8MouseExited
 
     private void btnBack8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack8ActionPerformed
-        switchPanels(workAreaPanel);
+        switchPanels(ServicesPanel);
     }//GEN-LAST:event_btnBack8ActionPerformed
 
     private void btnDetails3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails3MouseEntered
@@ -3044,6 +3119,36 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             populateStaff();
         }
     }//GEN-LAST:event_btnDetails3ActionPerformed
+
+    private void btnDetails4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails4MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetails4MouseEntered
+
+    private void btnDetails4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDetails4MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDetails4MouseExited
+
+    private void btnDetails4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails4ActionPerformed
+        switchPanels(AddInstructionsPanel);
+    }//GEN-LAST:event_btnDetails4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        switchPanels(workAreaPanel);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnSubmitFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitFeedbackActionPerformed
+
+    }//GEN-LAST:event_btnSubmitFeedbackActionPerformed
+
+    private void btnPricePerTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPricePerTableActionPerformed
+
+        if (txtCost.getText() == null || txtCost.getText().isEmpty() || txtCost.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Enter a valid cost!");
+        } else {
+            suites.setCost(Integer.parseInt(txtCost.getText()));
+            JOptionPane.showMessageDialog(this, "Price per table added successfully");
+        }
+    }//GEN-LAST:event_btnPricePerTableActionPerformed
 
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
@@ -3541,7 +3646,39 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         }
     }
 
+    private void populateOrders() {
+        DefaultTableModel model = (DefaultTableModel) tblOrders.getModel();
+        model.setRowCount(0);
+
+        for (Ticket ticket : ticketDirectory.getTicketList()) {
+            if (ticket.getSuiteName() != null && ticket.getSuiteName().equals(suites.getRestaurantName())) {
+                Object[] row = new Object[4];
+                row[0] = ticket;
+                row[1] = ticket.getCustomerName();
+                row[2] = "$ " + String.valueOf(ticket.getFoodCost() + ticket.getReservationCost());
+                row[3] = ticket.getEventName();
+
+                model.addRow(row);
+            }
+        }
+    }
+
+    private void popuateFoodItemList(int id) {
+        DefaultTableModel model = (DefaultTableModel) tblFoodList.getModel();
+        model.setRowCount(0);
+        Ticket ticket = ticketDirectory.findTicketById(id);
+
+        if (ticket != null && ticket.getFoodItems() != null && !ticket.getFoodItems().isEmpty()) {
+            for (String food : ticket.getFoodItems()) {
+                Object[] row = new Object[1];
+                row[0] = food;
+                model.addRow(row);
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AddInstructionsPanel;
     private javax.swing.JPanel EditDetailsPanel;
     private javax.swing.JPanel MenuPanel1;
     private javax.swing.JPanel NavigationJPanel;
@@ -3549,7 +3686,6 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     private javax.swing.JPanel SeatingPanel;
     private javax.swing.JPanel ServicesPanel;
     private javax.swing.JPanel ViewServiceDetails;
-    private javax.swing.JButton btnAcceptOrder;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnBack3;
@@ -3561,17 +3697,19 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDetails1;
     private javax.swing.JButton btnDetails2;
     private javax.swing.JButton btnDetails3;
-    private javax.swing.JButton btnEditDetails;
+    private javax.swing.JButton btnDetails4;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnMenu1;
     private javax.swing.JButton btnMenu2;
+    private javax.swing.JButton btnPricePerTable;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSaveSeats;
-    private javax.swing.JButton btnrejectOrder;
+    private javax.swing.JButton btnSubmitFeedback;
     private javax.swing.JCheckBox chkAll;
     private javax.swing.JCheckBox chkNonVeg;
     private javax.swing.JCheckBox chkVeg;
     private javax.swing.JCheckBox chkVegan;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -3579,6 +3717,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -3599,12 +3738,14 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblDesserts1;
     private javax.swing.JLabel lblEmail2;
     private javax.swing.JLabel lblEmailId;
+    private javax.swing.JLabel lblFeedback;
     private javax.swing.JLabel lblFullName1;
     private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblHeader1;
     private javax.swing.JLabel lblHeader2;
     private javax.swing.JLabel lblHeader3;
     private javax.swing.JLabel lblHeader4;
+    private javax.swing.JLabel lblHeading;
     private javax.swing.JLabel lblMains1;
     private javax.swing.JLabel lblMainsNonVeg1;
     private javax.swing.JLabel lblMainsVeg1;
@@ -3711,11 +3852,13 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtCheeseBurger;
     private javax.swing.JTextField txtChocolateMousse;
     private javax.swing.JTextField txtCocaCola;
+    private javax.swing.JTextField txtCost;
     private javax.swing.JTextField txtCrispyTofu;
     private javax.swing.JTextField txtCuisine;
     private javax.swing.JTextField txtEmail1;
     private javax.swing.JTextField txtEmailId;
     private javax.swing.JTextField txtFalafelBowl;
+    private javax.swing.JTextField txtFeedback;
     private javax.swing.JTextField txtFishNChips;
     private javax.swing.JTextField txtFreshLimeSalted;
     private javax.swing.JTextField txtFriedRice;

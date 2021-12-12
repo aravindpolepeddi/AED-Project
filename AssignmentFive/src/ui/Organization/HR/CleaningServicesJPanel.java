@@ -6,20 +6,19 @@
 package ui.Organization.HR;
 
 import business.Business;
+import business.Enterprise;
+import business.Enterprises.EnterpriseDirectory;
 import business.FlagClass;
 import business.hrservices.CleaningServices;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.Staff;
 import business.hrservices.StaffDirectory;
-import business.premium.Premium;
-import business.premium.PremiumDirectory;
-import business.role.RestaurantRole;
-import business.role.Role;
-import business.suites.Suites;
 import business.useraccount.UserAccount;
 import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -38,20 +37,33 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
     CleaningServices cleaningServices;
     String managerName;
     FlagClass flags;
+    Map<String, Enterprise> network;
+    EnterpriseDirectory enterpriseDirectory;
+    Enterprise enterprise;
+    String networkString;
 
     /**
      * Creates new form CleaningServicesJPanel
      */
     public CleaningServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+        this.networkString = account.getNetwork();
+
+        if (business.getNetworkList() == null) {
+            this.network = new HashMap<String, Enterprise>();
+        } else {
+            this.network = business.getNetworkList();
+        }
+
+        this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
 
         this.managerName = account.getName();
         this.flags = new FlagClass();
 
-        if (business.getCleaningServices() == null) {
+        if (enterprise.getCleaningServices() == null) {
             this.cleaningDirectory = new CleaningServicesDirectory();
         } else {
-            this.cleaningDirectory = business.getCleaningServices();
+            this.cleaningDirectory = enterprise.getCleaningServices();
         }
 
         this.cleaningServices = cleaningDirectory.findCleaningServiceByManagerName(managerName);
@@ -161,13 +173,13 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
         tblStaff.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         tblStaff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "STAFF MEMBER", "ASSIGNED TO"
+                "STAFF MEMBER", "ASSIGNED TO", "STATUS"
             }
         ));
         tblStaff.setSelectionBackground(new java.awt.Color(153, 209, 232));
@@ -636,11 +648,12 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (Staff staffMember : staffDirectory.getStaffList()) {
-            Object[] row = new Object[2];
+            Object[] row = new Object[3];
             if (staffMember.getStaffType().equals("CLEANING")) {
 
                 row[0] = staffMember;
                 row[1] = staffMember.getEmail();
+                row[2] = staffMember.getStatus();
                 model.addRow(row);
             }
         }

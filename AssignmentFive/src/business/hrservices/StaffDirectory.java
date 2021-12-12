@@ -55,13 +55,24 @@ public class StaffDirectory {
     }
 
     /**
-     * Return staff whose manager matches the input manager
+     * Return staff whose manager matches the input type
      *
      * @param managerNames
      * @return
      */
     public Staff findStaffByManager(String serviceType) {
         Staff staff = staffList.stream().filter(x -> x.getStaffType().equals(serviceType)).findAny().orElse(null);
+        return staff;
+    }
+
+    /**
+     * Return staff whose manager matches the input name
+     *
+     * @param managerNames
+     * @return
+     */
+    public Staff findStaffByName(String name) {
+        Staff staff = staffList.stream().filter(x -> x.getFullName().equals(name)).findAny().orElse(null);
         return staff;
     }
 

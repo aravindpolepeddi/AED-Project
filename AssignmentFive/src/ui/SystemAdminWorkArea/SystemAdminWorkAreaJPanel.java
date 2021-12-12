@@ -13,6 +13,8 @@ import business.Restaurant.RestaurantDirectory;
 import business.useraccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -37,6 +39,17 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.customerDirectory = customerDirectory;
         this.orderDirectory = orderDirectory;
         this.account = account;
+        ImageIcon icon1 = new ImageIcon(".\\src\\images\\report.jpg");
+        Image image1 = icon1.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ReportingjButton.setIcon(new ImageIcon(image1));
+
+        ImageIcon icon2 = new ImageIcon(".\\src\\images\\events.png");
+        Image image2 = icon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        jButton2.setIcon(new ImageIcon(image2));
+
+        ImageIcon icon3 = new ImageIcon(".\\src\\images\\createEnterprise.png");
+        Image image3 = icon3.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        btnCreateEnterprise.setIcon(new ImageIcon(image3));
     }
 
     /**
@@ -55,6 +68,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         ReportingjButton = new javax.swing.JButton();
+        btnCreateEnterprise = new javax.swing.JButton();
         workAreaPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -80,40 +94,76 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         NavigationJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
         jLabel5.setBackground(new java.awt.Color(178, 209, 201));
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel5.setText("<html><span font color=\"rgb(178, 209, 201)\">C</span> <span font color=\"rgb(0,153,153)\">!<span></html> ");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel5.setText("<html><span font color=\"rgb(178, 209, 201)\">Diego</span> <span font color=\"rgb(0,153,153)\">!<span></html>");
 
+        jButton2.setBackground(new java.awt.Color(206, 217, 217));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 51, 51));
         jButton2.setText("MANAGE EVENT");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
+        ReportingjButton.setBackground(new java.awt.Color(206, 217, 217));
+        ReportingjButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ReportingjButton.setForeground(new java.awt.Color(0, 51, 51));
         ReportingjButton.setText("REPORTING");
+        ReportingjButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ReportingjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReportingjButtonActionPerformed(evt);
+            }
+        });
+
+        btnCreateEnterprise.setBackground(new java.awt.Color(206, 217, 217));
+        btnCreateEnterprise.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCreateEnterprise.setForeground(new java.awt.Color(0, 51, 51));
+        btnCreateEnterprise.setText("CREATE ENTERPRISE");
+        btnCreateEnterprise.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCreateEnterprise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateEnterpriseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout NavigationJPanelLayout = new javax.swing.GroupLayout(NavigationJPanel);
         NavigationJPanel.setLayout(NavigationJPanelLayout);
         NavigationJPanelLayout.setHorizontalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(NavigationJPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ReportingjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(NavigationJPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCreateEnterprise, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(NavigationJPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
-            .addComponent(ReportingjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         NavigationJPanelLayout.setVerticalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                .addGap(204, 204, 204)
+                .addGap(114, 114, 114)
+                .addComponent(btnCreateEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(32, 32, 32)
+                .addGap(27, 27, 27)
                 .addComponent(ReportingjButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addGap(139, 139, 139)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
+
+        NavigationJPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ReportingjButton, btnCreateEnterprise, jButton2});
 
         jSplitPane1.setLeftComponent(NavigationJPanel);
 
@@ -190,17 +240,31 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        JPanel manageEventPanel = new manageEventPanel(business,account,workAreaPanel);
+        JPanel manageEventPanel = new manageEventPanel(business, account, workAreaPanel);
         workAreaPanel.add("ManageCustomerPanel", manageEventPanel);
         CardLayout layout = (CardLayout) workAreaPanel.getLayout();
         layout.next(workAreaPanel);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void ReportingjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportingjButtonActionPerformed
+        JPanel StatsPanel = new StatsPanel(business, account, workAreaPanel);
+        workAreaPanel.add("StatsPanel", StatsPanel);
+        CardLayout layout = (CardLayout) workAreaPanel.getLayout();
+        layout.next(workAreaPanel);
+    }//GEN-LAST:event_ReportingjButtonActionPerformed
+
+    private void btnCreateEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateEnterpriseActionPerformed
+        JPanel CreateEnterprise = new CreateEnterprise(business, account, workAreaPanel);
+        workAreaPanel.add("CreateEnterprise", CreateEnterprise);
+        CardLayout layout = (CardLayout) workAreaPanel.getLayout();
+        layout.next(workAreaPanel);
+    }//GEN-LAST:event_btnCreateEnterpriseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel NavigationJPanel;
     private javax.swing.JButton ReportingjButton;
+    private javax.swing.JButton btnCreateEnterprise;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

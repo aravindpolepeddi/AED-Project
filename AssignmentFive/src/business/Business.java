@@ -6,23 +6,25 @@
 package business;
 
 import business.Customer.CustomerDirectory;
-import business.Order.Order;
+import business.Customer.TicketDirectory;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.concessions.ConcessionsDirectory;
 import business.event.EventDirectory;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServicesDirectory;
-import business.hrservices.GroundServicesDirectory;
-import business.hrservices.SecurityServices;
+import business.hrservices.TechnicalServicesDirectory;
 import business.hrservices.SecurityServicesDirectory;
-import business.organizations.FoodBevOrganization;
+import business.merchandise.merchandiseShopDirectory;
 import business.premium.PremiumDirectory;
 import business.role.Role;
 import business.role.SystemAdminRole;
 import business.suites.SuitesDirectory;
-import business.useraccount.UserAccountDirectory;
+import business.ticketing.ParkingDirectory;
+import business.ticketing.PickandDropDirectory;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -39,8 +41,15 @@ public class Business extends Organization {
     private SuitesDirectory suitesDirectory;
     private CleaningServicesDirectory cleaningServices;
     private EmergencyServicesDirectory emergencyServices;
-    private GroundServicesDirectory groundServices;
+    private TechnicalServicesDirectory technicalServices;
     private SecurityServicesDirectory securityServices;
+    private EventDirectory eventDirectory;
+    private TicketDirectory ticketDirectory;
+    private merchandiseShopDirectory merchandiseShopDirectory;
+    private ParkingDirectory parkingDirectory;
+    private PickandDropDirectory pdDirectory;
+
+    private Map<String, Enterprise> networkList;
 
     public PremiumDirectory getPremiumDirectory() {
         return premiumDirectory;
@@ -57,7 +66,6 @@ public class Business extends Organization {
     public void setSuitesDirectory(SuitesDirectory suitesDirectory) {
         this.suitesDirectory = suitesDirectory;
     }
-    private EventDirectory eventDirectory;
 
     public EventDirectory getEventDirectory() {
         return eventDirectory;
@@ -66,8 +74,6 @@ public class Business extends Organization {
     public void setEventDirectory(EventDirectory eventDirectory) {
         this.eventDirectory = eventDirectory;
     }
-
-    ;
 
     public ConcessionsDirectory getConcessionsDirectory() {
         return concessionsDirectory;
@@ -93,12 +99,12 @@ public class Business extends Organization {
         this.emergencyServices = emergencyServices;
     }
 
-    public GroundServicesDirectory getGroundServices() {
-        return groundServices;
+    public TechnicalServicesDirectory getTechnicalServices() {
+        return technicalServices;
     }
 
-    public void setGroundServices(GroundServicesDirectory groundServices) {
-        this.groundServices = groundServices;
+    public void setTechnicalServices(TechnicalServicesDirectory technicalServices) {
+        this.technicalServices = technicalServices;
     }
 
     public SecurityServicesDirectory getSecurityServices() {
@@ -107,6 +113,14 @@ public class Business extends Organization {
 
     public void setSecurityServices(SecurityServicesDirectory securityServices) {
         this.securityServices = securityServices;
+    }
+
+    public TicketDirectory getTicketDirectory() {
+        return ticketDirectory;
+    }
+
+    public void setTicketDirectory(TicketDirectory ticketDirectory) {
+        this.ticketDirectory = ticketDirectory;
     }
 
     public static Business getInstance() {
@@ -164,6 +178,49 @@ public class Business extends Organization {
 
     public void setOrderDirectory(OrderDirectory orderDirectory) {
         this.orderDirectory = orderDirectory;
+    }
+
+    public merchandiseShopDirectory getMerchandiseShopDirectory() {
+        return merchandiseShopDirectory;
+    }
+
+    public void setMerchandiseShopDirectory(merchandiseShopDirectory merchandiseShopDirectory) {
+        this.merchandiseShopDirectory = merchandiseShopDirectory;
+    }
+
+    public ParkingDirectory getParkingDirectory() {
+        return parkingDirectory;
+    }
+
+    public void setParkingDirectory(ParkingDirectory parkingDirectory) {
+        this.parkingDirectory = parkingDirectory;
+    }
+
+    public PickandDropDirectory getPdDirectory() {
+        return pdDirectory;
+    }
+
+    public void setPdDirectory(PickandDropDirectory pdDirectory) {
+        this.pdDirectory = pdDirectory;
+    }
+
+    public Map<String, Enterprise> getNetworkList() {
+        return networkList;
+    }
+
+    public void setNetworkList(Map<String, Enterprise> networkList) {
+        this.networkList = networkList;
+    }
+
+    public Enterprise findEnterpriseByNetwork(String network) {
+        Enterprise enterprise = new Enterprise();
+
+        for (Map.Entry<String, Enterprise> map : networkList.entrySet()) {
+            if (map.getKey().equals(network)) {
+                enterprise = map.getValue();
+            }
+        }
+        return enterprise;
     }
 
 }

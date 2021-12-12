@@ -37,7 +37,20 @@ public class CustomerDirectory {
         Customer customer = customers.stream().filter(x -> x.getUserName().equals(userName)).findAny().orElse(null);
         return customer;
     }
-    
+
+    public Customer findCustomerByTicketId(int ticketId) {
+        for (Customer customer : customers) {
+            if (customer.getTicket() != null) {
+                if (customer.getTicket().getId() == ticketId) {
+                    return customer;
+                }
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
+
     public void removeCustomer(Customer customer) {
         customers.remove(customer);
     }
