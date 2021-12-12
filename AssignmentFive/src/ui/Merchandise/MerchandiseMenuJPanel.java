@@ -7,10 +7,14 @@ package ui.Merchandise;
 
 import business.Business;
 import business.Restaurant.Restaurant;
+import business.hrservices.EmergencyServicesDirectory;
 import business.useraccount.UserAccount;
 import business.merchandise.merchandise;
 import business.merchandise.merchandiseShop;
+import business.merchandise.merchandiseShopDirectory;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -29,12 +33,31 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
     Business system;
     UserAccount useraccount;
     merchandise merchandise;
+    merchandiseShopDirectory merchShopDirectory;
+    merchandiseShop merchShop;
+    ArrayList<merchandiseShop> mergeShopList;
 
     public MerchandiseMenuJPanel(JPanel userProcessContainer, UserAccount account, Business system) {
         initComponents();
+        this.mergeShopList = new ArrayList<>();
         this.userProcessContainer = userProcessContainer;
         this.useraccount = account;
         this.system = system;
+
+        if (system.getMerchandiseShopDirectory() == null) {
+            this.merchShopDirectory = new merchandiseShopDirectory();
+        } else {
+            this.merchShopDirectory = system.getMerchandiseShopDirectory();
+        }
+
+        if (merchShopDirectory != null && merchShopDirectory.getMerchandiseShopList() != null && !merchShopDirectory.getMerchandiseShopList().isEmpty()) {
+            merchShop = merchShopDirectory.getMerchandiseShopList().get(0);
+        }
+
+        if (merchShop == null) {
+            merchShop = new merchandiseShop();
+        }
+
         refreshTable();
     }
 
@@ -165,55 +188,60 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        if (system.getMerchandiseShopDirectory() != null) {
-            merchandiseShop merchShop = system.getMerchandiseShopDirectory().findMerchandiseShop(useraccount.getUsername());
-            StringBuilder Error = new StringBuilder();
+        merchShop = merchShopDirectory.findMerchandiseShop(useraccount.getUsername());
 
-            merchandise merchandise = new merchandise();
-            if (jTextItemName.getText().isEmpty()) {
-                Error.append("Enter Valid Name \n");
-            } else {
-                merchandise.setItemName(jTextItemName.getText());
-                jTextItemName.setText("");
-            }
-            if (jTextPrice.getText().isEmpty()) {
-                Error.append("Enter Price \n");
-            } else {
-                merchandise.setItemName(jTextPrice.getText());
-                jTextPrice.setText("");
-            }
-            if (merchShop.findItem(merchandise.getItemName(), merchandise.getPrice()) != null) {
-                Error.append("Item exists \n");
-            }
-            if (Error.isEmpty()) {
-                merchShop.addMerchandise(merchandise);
-            } else {
-                JOptionPane.showMessageDialog(this, Error);
-            }
-
-            refreshTable();
+        if (merchShop == null) {
+            merchShop = merchShopDirectory.addShop();
         }
+
+        StringBuilder Error = new StringBuilder();
+
+        merchandise merchandise = new merchandise();
+
+        if (jTextItemName.getText().isEmpty()) {
+            Error.append("Enter Valid Name \n");
+        } else {
+            merchandise.setItemName(jTextItemName.getText());
+            jTextItemName.setText("");
+        }
+        if (jTextPrice.getText().isEmpty()) {
+            Error.append("Enter Price \n");
+        } else {
+            merchandise.setPrice(Integer.parseInt(jTextPrice.getText()));
+            jTextPrice.setText("");
+        }
+        if (merchShop != null && merchShop.findItem(merchandise.getItemName(), merchandise.getPrice()) != null) {
+            Error.append("Item exists \n");
+        }
+        if (Error.isEmpty()) {
+            merchShop.addMerchandise(merchandise);
+        } else {
+            JOptionPane.showMessageDialog(this, Error);
+        }
+        mergeShopList.add(merchShop);
+        merchShopDirectory.setMerchandiseShopList(mergeShopList);
+        system.setMerchandiseShopDirectory(merchShopDirectory);
+
+        refreshTable();
+//        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void refreshTable() {
 
-        if (system.getMerchandiseShopDirectory() != null) {
-            merchandiseShop merchShop = system.getMerchandiseShopDirectory().findMerchandiseShop(useraccount.getUsername());
+//        mmerchShop = merchShopDirectory.findMerchandiseShop(useraccount.getUsername());
+        int rowCount = jTable1.getRowCount();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
 
-            int rowCount = jTable1.getRowCount();
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            for (int i = rowCount - 1; i >= 0; i--) {
-                model.removeRow(i);
-            }
-
-            if (merchShop != null) {
-                for (merchandise i : merchShop.getMerchandiseMenu()) {
-                    Object row[] = new Object[2];
-                    row[0] = i.getItemName();
-                    row[1] = i.getPrice();
-                    model.addRow(row);
-                }
+        if (merchShop != null) {
+            for (merchandise i : merchShop.getMerchandiseMenu()) {
+                Object row[] = new Object[2];
+                row[0] = i.getItemName();
+                row[1] = i.getPrice();
+                model.addRow(row);
             }
         }
     }

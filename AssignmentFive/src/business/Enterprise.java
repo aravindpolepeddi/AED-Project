@@ -22,7 +22,7 @@ import business.suites.SuitesDirectory;
  *
  * @author deepv
  */
-public class Network {
+public class Enterprise {
 
     private RestaurantDirectory restaurantDirectory;
     private CustomerDirectory customerDirectory;

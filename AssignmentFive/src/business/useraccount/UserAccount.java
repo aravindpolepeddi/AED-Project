@@ -16,14 +16,16 @@ public class UserAccount {
     private String username;
     private String password;
     private Role role;
-    String name;
+    private String name;
+    private String network;
 
     public UserAccount(String username, String password, String name,
-            Role role) {
+            Role role, String network) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.role = role;
+        this.network = network;
     }
 
     public String getUsername() {
@@ -56,6 +58,14 @@ public class UserAccount {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
     }
 
     @Override

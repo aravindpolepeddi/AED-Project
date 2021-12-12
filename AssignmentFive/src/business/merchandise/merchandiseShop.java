@@ -5,6 +5,7 @@
  */
 package business.merchandise;
 
+import business.hrservices.CleaningServices;
 import business.role.Role;
 import java.util.ArrayList;
 
@@ -12,13 +13,17 @@ import java.util.ArrayList;
  *
  * @author aravindpolepeddi
  */
-public class merchandiseShop  {
-    
+public class merchandiseShop {
+
     private String MerchandiseShopName;
     private String OwnerName;
     private String username;
     private String password;
     private ArrayList<merchandise> merchandiseMenu;
+
+    public merchandiseShop() {
+        merchandiseMenu = new ArrayList<>();
+    }
 
     public ArrayList<merchandise> getMerchandiseMenu() {
         return merchandiseMenu;
@@ -38,7 +43,6 @@ public class merchandiseShop  {
     public void setMerchandiseShopName(String MerchandiseShopName) {
         this.MerchandiseShopName = MerchandiseShopName;
     }
-
 
     public String getOwnerName() {
         return OwnerName;
@@ -79,31 +83,30 @@ public class merchandiseShop  {
     public static void setCount(int count) {
         merchandiseShop.count = count;
     }
-    
+
     public void setRole(Role role) {
         this.role = role;
     }
-    
+
     public Role getRole() {
         return role;
     }
-    
-    public merchandise findItem(String name, int price){
-    for(merchandise i: merchandiseMenu){
-    if(i.getItemName()==name && i.getPrice()==price){
-    return i;
+
+    public merchandise findItem(String name, int price) {
+        for (merchandise i : merchandiseMenu) {
+            if (i.getItemName() == name && i.getPrice() == price) {
+                return i;
+            }
+        }
+        return null;
     }
-    }
-    return null;
-    }
-    
-    public void addMerchandise(merchandise item){
+
+    public void addMerchandise(merchandise item) {
         merchandiseMenu.add(item);
     }
-    
-    public void removeItem(merchandise item){
+
+    public void removeItem(merchandise item) {
         merchandiseMenu.remove(item);
     }
 
-    
 }

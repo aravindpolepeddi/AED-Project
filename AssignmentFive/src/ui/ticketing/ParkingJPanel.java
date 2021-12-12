@@ -10,6 +10,7 @@ import business.merchandise.merchandise;
 import business.merchandise.merchandiseShop;
 import business.ticketing.CarBooking;
 import business.ticketing.Parking;
+import business.ticketing.PickandDropDirectory;
 import business.useraccount.UserAccount;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,19 +22,29 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ParkingJPanel extends javax.swing.JPanel {
 
-    Boolean update=false;
+    Boolean update = false;
     JPanel userProcessContainer;
     Business system;
     UserAccount useraccount;
     Parking parking;
+    private PickandDropDirectory pdDirectory;
+
     public ParkingJPanel(JPanel userProcessContainer, UserAccount account, Business system) {
         initComponents();
+
+        if (system.getPdDirectory() == null) {
+            pdDirectory = new PickandDropDirectory();
+        } else {
+            this.pdDirectory = system.getPdDirectory();
+        }
+
         this.userProcessContainer = userProcessContainer;
-        this.useraccount=account;
+        this.useraccount = account;
         this.system = system;
         parking = new Parking();
-        refreshTable();  
+        refreshTable();
     }
+
     /**
      * Creates new form ParkingJPanel
      */
@@ -193,15 +204,15 @@ public class ParkingJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-        public void refreshTable(){
-        
-        int rowCount =jTable1.getRowCount();
+    public void refreshTable() {
+
+        int rowCount = jTable1.getRowCount();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        for(int i=rowCount - 1;i>=0;i--){
+        for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        for(Parking p: system.getParkingDirectory().getParkingVehiclesList()){
-            Object row[] = new Object[5];
+        for (Parking p : system.getParkingDirectory().getParkingList()) {
+            Object row[] = new Object[6];
             row[0] = p.getCarNumber();
             row[1] = p.getEnteredTie();
             row[2] = p.getExitTime();
@@ -211,74 +222,92 @@ public class ParkingJPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
-        
+
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         // TODO add your handling code here:
 
-                
-        
         StringBuilder Error = new StringBuilder();
-        
-        if(jTextCarNumber.getText().isEmpty()){ Error.append("Enter Valid Car Number \n");}
-        else{
-        for(CarBooking cb: system.getPdDirectory().getCarBookingList()){
-        if(cb.getCarNumber().equals(jTextCarNumber.getText())){
-        cb.setStatus("dropped");
+
+        if (jTextCarNumber.getText().isEmpty()) {
+            Error.append("Enter Valid Car Number \n");
+        } else {
+            if (pdDirectory.getCarBookingList() != null && !pdDirectory.getCarBookingList().isEmpty()) {
+                for (CarBooking cb : pdDirectory.getCarBookingList()) {
+                    if (cb.getCarNumber().equals(jTextCarNumber.getText())) {
+                        cb.setStatus("dropped");
+                    }
+                }
+            }
+            parking.setCarNumber(jTextCarNumber.getText());
+            jTextCarNumber.setText("");
         }
-        }       
-        parking.setCarNumber(jTextCarNumber.getText());
-        jTextCarNumber.setText("");}
-        
-        if(jDateChooserEnter.getDate()==null){ Error.append("Enter Entry Time \n");}
-        else{parking.setEnteredTie(jDateChooserEnter.getDate());
-        jDateChooserEnter.setDate(null);}
-        if(jDateChooserExit.getDate()==null){ Error.append("Enter Exit Time \n");}
-        else{parking.setEnteredTie(jDateChooserExit.getDate());
-        jDateChooserExit.setDate(null);}
-        if(jTextSlotNumber.getText().isEmpty()){ Error.append("Enter Valid Slot Number \n");}
-        else{parking.setSlotNumber(Integer.parseInt(jTextSlotNumber.getText()));
-        jTextSlotNumber.setText("");}
-        if(jTextTicketNumber.getText().isEmpty()){ Error.append("Enter Valid Ticket Number \n");}
-        else{parking.setTicketNumber(Integer.parseInt(jTextTicketNumber.getText()));
-        jTextTicketNumber.setText("");}
-        if(jTextPrice.getText().isEmpty()){ Error.append("Enter Price \n");}
-        else{parking.setPrice(Integer.parseInt(jTextPrice.getText()));
-        jTextPrice.setText("");}
-        if(Error.isEmpty())
-        system.getParkingDirectory().getParkingVehiclesList().add(parking);
-        else
-        JOptionPane.showMessageDialog(this, Error);
-        if(update=true)
-            update=false;
-        
+
+        if (jDateChooserEnter.getDate() == null) {
+            Error.append("Enter Entry Time \n");
+        } else {
+            parking.setEnteredTie(jDateChooserEnter.getDate());
+            jDateChooserEnter.setDate(null);
+        }
+        if (jDateChooserExit.getDate() == null) {
+            Error.append("Enter Exit Time \n");
+        } else {
+            parking.setEnteredTie(jDateChooserExit.getDate());
+            jDateChooserExit.setDate(null);
+        }
+        if (jTextSlotNumber.getText().isEmpty()) {
+            Error.append("Enter Valid Slot Number \n");
+        } else {
+            parking.setSlotNumber(Integer.parseInt(jTextSlotNumber.getText()));
+            jTextSlotNumber.setText("");
+        }
+        if (jTextTicketNumber.getText().isEmpty()) {
+            Error.append("Enter Valid Ticket Number \n");
+        } else {
+            parking.setTicketNumber(Integer.parseInt(jTextTicketNumber.getText()));
+            jTextTicketNumber.setText("");
+        }
+        if (jTextPrice.getText().isEmpty()) {
+            Error.append("Enter Price \n");
+        } else {
+            parking.setPrice(Integer.parseInt(jTextPrice.getText()));
+            jTextPrice.setText("");
+        }
+        if (Error.isEmpty()) {
+            system.getParkingDirectory().getParkingList().add(parking);
+        } else {
+            JOptionPane.showMessageDialog(this, Error);
+        }
+        if (update = true) {
+            update = false;
+        }
+
         refreshTable();
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int selectedRowIndex = jTable1.getSelectedRow();        
+        int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a Vehicle");
             return;
-        }
-        else{
-            update=true;
+        } else {
+            update = true;
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            int j=0;
-            for(Parking p:system.getParkingDirectory().getParkingVehiclesList()){
-            if(j==selectedRowIndex){
-            jTextCarNumber.setText(p.getCarNumber());
-            jDateChooserEnter.setDate(p.getEnteredTie());
-            jDateChooserExit.setDate(p.getExitTime());
-            jTextSlotNumber.setText(String.valueOf(p.getSlotNumber()));
-            jTextTicketNumber.setText(String.valueOf(p.getTicketNumber()));
-            jTextPrice.setText(String.valueOf(p.getPrice()));
-            system.getParkingDirectory().getParkingVehiclesList().remove(p);
-            }
+            int j = 0;
+            for (Parking p : system.getParkingDirectory().getParkingList()) {
+                if (j == selectedRowIndex) {
+                    jTextCarNumber.setText(p.getCarNumber());
+                    jDateChooserEnter.setDate(p.getEnteredTie());
+                    jDateChooserExit.setDate(p.getExitTime());
+                    jTextSlotNumber.setText(String.valueOf(p.getSlotNumber()));
+                    jTextTicketNumber.setText(String.valueOf(p.getTicketNumber()));
+                    jTextPrice.setText(String.valueOf(p.getPrice()));
+                    system.getParkingDirectory().getParkingList().remove(p);
+                }
             }
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

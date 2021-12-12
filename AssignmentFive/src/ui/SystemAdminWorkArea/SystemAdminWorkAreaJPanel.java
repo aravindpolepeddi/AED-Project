@@ -55,6 +55,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         ReportingjButton = new javax.swing.JButton();
+        btnCreateEnterprise = new javax.swing.JButton();
         workAreaPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -97,6 +98,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnCreateEnterprise.setText("CREATE ENTERPRISE");
+        btnCreateEnterprise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateEnterpriseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout NavigationJPanelLayout = new javax.swing.GroupLayout(NavigationJPanel);
         NavigationJPanel.setLayout(NavigationJPanelLayout);
         NavigationJPanelLayout.setHorizontalGroup(
@@ -106,21 +114,26 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addGroup(NavigationJPanelLayout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addGap(0, 86, Short.MAX_VALUE))
                     .addGroup(NavigationJPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(ReportingjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ReportingjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(NavigationJPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+                    .addComponent(btnCreateEnterprise, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
                 .addContainerGap())
         );
         NavigationJPanelLayout.setVerticalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                .addGap(204, 204, 204)
+                .addGap(156, 156, 156)
+                .addComponent(btnCreateEnterprise)
+                .addGap(29, 29, 29)
                 .addComponent(jButton2)
-                .addGap(30, 30, 30)
+                .addGap(27, 27, 27)
                 .addComponent(ReportingjButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75))
         );
@@ -213,10 +226,18 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(workAreaPanel);
     }//GEN-LAST:event_ReportingjButtonActionPerformed
 
+    private void btnCreateEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateEnterpriseActionPerformed
+        JPanel CreateEnterprise = new CreateEnterprise(business, account, workAreaPanel);
+        workAreaPanel.add("CreateEnterprise", CreateEnterprise);
+        CardLayout layout = (CardLayout) workAreaPanel.getLayout();
+        layout.next(workAreaPanel);
+    }//GEN-LAST:event_btnCreateEnterpriseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel NavigationJPanel;
     private javax.swing.JButton ReportingjButton;
+    private javax.swing.JButton btnCreateEnterprise;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

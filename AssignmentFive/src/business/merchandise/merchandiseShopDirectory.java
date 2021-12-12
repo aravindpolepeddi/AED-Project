@@ -5,6 +5,8 @@
  */
 package business.merchandise;
 
+import business.hrservices.CleaningServices;
+import business.hrservices.Staff;
 import business.role.Role;
 import java.util.ArrayList;
 
@@ -28,6 +30,12 @@ public class merchandiseShopDirectory {
         this.merchandiseShopList = merchandiseShopList;
     }
 
+    public merchandiseShop addShop() {
+        merchandiseShop cleaningService = new merchandiseShop();
+        merchandiseShopList.add(cleaningService);
+        return cleaningService;
+    }
+
     public merchandiseShop findMerchandiseShop(String MerchShopName) {
         for (merchandiseShop merchshop : merchandiseShopList) {
             if (merchshop.getMerchandiseShopName().equals(MerchShopName)) {
@@ -35,6 +43,17 @@ public class merchandiseShopDirectory {
             }
         }
         return null;
+    }
+
+    /**
+     * Return staff whose manager matches the input type
+     *
+     * @param managerNames
+     * @return
+     */
+    public merchandiseShop findStaffByManager(String managerName) {
+        merchandiseShop shop = merchandiseShopList.stream().filter(x -> x.getOwnerName().equals(managerName)).findAny().orElse(null);
+        return shop;
     }
 
     public void deleteRestaurant(merchandiseShop merchshop) {

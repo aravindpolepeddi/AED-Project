@@ -6,12 +6,15 @@ package ui.Enterprises;
  * and open the template in the editor.
  */
 import business.Business;
-import business.event.EventDirectory;
 
 import business.useraccount.UserAccount;
 import business.merchandise.merchandiseShop;
 import business.merchandise.merchandiseShopDirectory;
+import business.role.ParkingManagerRole;
+import business.role.Role;
+import business.ticketing.ParkingDirectory;
 import business.ticketing.ParkingManager;
+import business.ticketing.PickandDropDirectory;
 import business.ticketing.PickandDropManager;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -29,6 +32,8 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
      */
     private Business system;
     merchandiseShopDirectory merchShopDir;
+    private ParkingDirectory parkingDirectory;
+    private PickandDropDirectory pdDirectory;
 
     private JPanel userProcessContainer;
     private Boolean update = false;
@@ -37,11 +42,16 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
     public TicketingEntJPanel(JPanel userProcessContainer, UserAccount uadir, Business system) {
         initComponents();
 
-//        if (system.getMerchandiseShopDirectory()== null) {
-//            this.merchShopDir = new merchandiseShopDirectory();
-//        } else {
-//            this.merchShop = business.getEventDirectory();
-//        }
+        if (system.getPdDirectory() == null) {
+            pdDirectory = new PickandDropDirectory();
+        } else {
+            this.pdDirectory = system.getPdDirectory();
+        }
+        if (system.getParkingDirectory() == null) {
+            parkingDirectory = new ParkingDirectory();
+        } else {
+            this.parkingDirectory = system.getParkingDirectory();
+        }
 
         this.userProcessContainer = userProcessContainer;
         this.system = system;
@@ -49,18 +59,31 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
     }
 
     private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) jTableMerchandiseManagers.getModel();
-
+        DefaultTableModel model = (DefaultTableModel) jTableTicketingManagers.getModel();
         model.setRowCount(0);
-        //if(resdir.getRestaurantList()==null){}
-
-        for (merchandiseShop merchShop : system.getMerchandiseShopDirectory().getMerchandiseShopList()) {
-            Object[] row = new Object[2];
-            row[0] = merchShop.getOwnerName();
-            row[1] = merchShop.getMerchandiseShopName();
-
-            model.addRow(row);
+        for (UserAccount userAccount : system.getUserAccountDirectory().getUserAccountList()) {
+            Object[] row = new Object[4];
+            ParkingManager pm = null;
+            PickandDropManager pdm = null;
+            if (parkingDirectory != null && parkingDirectory.getParkingManagerList() != null && !parkingDirectory.getParkingManagerList().isEmpty()) {
+                pm = parkingDirectory.getParkingManagerList().stream().filter(x -> x.getParkingManagerName().equals(userAccount.getName())).findAny().orElse(null);
+            }
+            if (pdDirectory != null && pdDirectory.getPdList() != null && !pdDirectory.getPdList().isEmpty()) {
+                pdm = pdDirectory.getPdList().stream().filter(x -> x.getManagerName().equals(userAccount.getName())).findAny().orElse(null);
+            }
+            if (userAccount.getRole() != null && userAccount.getRole().type != null && userAccount.getRole().type == Role.RoleType.TicketingAdmin) {
+                row[0] = userAccount.getUsername();
+                row[1] = userAccount.getPassword();
+                row[2] = userAccount.getName();
+                if (pm != null) {
+                    row[3] = pm.type.ParkingManager.toString();
+                } else if (pdm != null) {
+                    row[3] = pdm.type.PickandDropManager.toString();
+                }
+                model.addRow(row);
+            }
         }
+
     }
 
     /**
@@ -74,7 +97,7 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableMerchandiseManagers = new javax.swing.JTable();
+        jTableTicketingManagers = new javax.swing.JTable();
         jTextName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -90,18 +113,18 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 51));
 
-        jTableMerchandiseManagers.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTicketingManagers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Organization"
+                "Username", "Password", "Name", "Organization"
             }
         ));
-        jScrollPane1.setViewportView(jTableMerchandiseManagers);
+        jScrollPane1.setViewportView(jTableTicketingManagers);
 
         jTextName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +263,7 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
 
         StringBuilder Error = new StringBuilder();
         if (jComboBox1.getSelectedIndex() == 0) {
-            ParkingManager parking = new ParkingManager();
+            ParkingManager parking = parkingDirectory.addParkingManager();
             if (jTextName.getText().isEmpty()) {
                 Error.append("Enter Valid Name \n");
             } else {
@@ -265,8 +288,9 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
                 update = false;
             }
             if (Error.isEmpty()) {
-                system.getParkingDirectory().getParkingList().add(parking);
-                system.getUserAccountDirectory().createUserAccount(parking.getUsername(), parking.getParkingManagerName(), parking.getPassword(), parking);
+                system.setParkingDirectory(parkingDirectory);
+                ParkingManagerRole role = new ParkingManagerRole();
+                system.getUserAccountDirectory().createUserAccount(parking.getUsername(), parking.getParkingManagerName(), parking.getPassword(), role);
 
             } else {
                 JOptionPane.showMessageDialog(this, Error);
@@ -348,12 +372,12 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int index = jTableMerchandiseManagers.getSelectedRow();
+        int index = jTableTicketingManagers.getSelectedRow();
         if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select an Manager");
             return;
         } else {
-            DefaultTableModel model = (DefaultTableModel) jTableMerchandiseManagers.getModel();
+            DefaultTableModel model = (DefaultTableModel) jTableTicketingManagers.getModel();
             UserAccount selectedUserAccount = (UserAccount) model.getValueAt(index, 0);
             UserAccount deleteUserAccount = system.getUserAccountDirectory().fetchUserAccountUsingUserName(selectedUserAccount.getUsername());
             system.getUserAccountDirectory().getUserAccountList().remove(deleteUserAccount);
@@ -380,12 +404,12 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        int index = jTableMerchandiseManagers.getSelectedRow();
+        int index = jTableTicketingManagers.getSelectedRow();
         if (index < 0) {
             JOptionPane.showMessageDialog(this, "Please select an Manager");
             return;
         } else {
-            DefaultTableModel model = (DefaultTableModel) jTableMerchandiseManagers.getModel();
+            DefaultTableModel model = (DefaultTableModel) jTableTicketingManagers.getModel();
             UserAccount selectedUserAccount = (UserAccount) model.getValueAt(index, 0);
             UserAccount deleteUserAccount = system.getUserAccountDirectory().fetchUserAccountUsingUserName(selectedUserAccount.getUsername());
             system.getUserAccountDirectory().getUserAccountList().remove(deleteUserAccount);
@@ -417,7 +441,7 @@ public class TicketingEntJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableMerchandiseManagers;
+    private javax.swing.JTable jTableTicketingManagers;
     private javax.swing.JTextField jTextName;
     private javax.swing.JTextField jTextUsername;
     // End of variables declaration//GEN-END:variables

@@ -12,9 +12,14 @@ import java.util.ArrayList;
  * @author aravindpolepeddi
  */
 public class PickandDropDirectory {
- 
+
     private ArrayList<PickandDropManager> PdList;
     private ArrayList<CarBooking> carBookingList;
+
+    public PickandDropDirectory() {
+        PdList = new ArrayList<>();
+        carBookingList = new ArrayList<>();
+    }
 
     public ArrayList<CarBooking> getCarBookingList() {
         return carBookingList;
@@ -31,23 +36,35 @@ public class PickandDropDirectory {
     public void setPdList(ArrayList<PickandDropManager> PdList) {
         this.PdList = PdList;
     }
-    
-    public PickandDropManager findPickandDrop(String Name){
-    for(PickandDropManager pd:PdList){
-    if(pd.getManagerName().equals(Name)){
-    return pd;
+
+    public PickandDropManager findPickandDrop(String Name) {
+        for (PickandDropManager pd : PdList) {
+            if (pd.getManagerName().equals(Name)) {
+                return pd;
+            }
+        }
+        return null;
     }
+
+    public CarBooking findCarBooking(String Name) {
+        for (CarBooking cb : carBookingList) {
+            if (cb.getCustomerName().equals(Name)) {
+                return cb;
+            }
+        }
+        return null;
     }
-    return null;
+
+    public PickandDropManager addPickDropManager() {
+        PickandDropManager parking = new PickandDropManager();
+        PdList.add(parking);
+        return parking;
     }
-    
-    public CarBooking findCarBooking(String Name){
-    for(CarBooking cb:carBookingList){
-    if(cb.getCustomerName().equals(Name)){
-    return cb;
+
+    public CarBooking addCarBooking() {
+        CarBooking parkingManager = new CarBooking();
+        carBookingList.add(parkingManager);
+        return parkingManager;
     }
-    }
-    return null;
-    }
-    
+
 }

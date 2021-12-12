@@ -5,6 +5,7 @@
  */
 package business.ticketing;
 
+import business.hrservices.CleaningServices;
 import java.util.ArrayList;
 
 /**
@@ -12,43 +13,58 @@ import java.util.ArrayList;
  * @author aravindpolepeddi
  */
 public class ParkingDirectory {
+
     private ArrayList<ParkingManager> ParkingManagerList;
-    private ArrayList<Parking> parkingList= new ArrayList<Parking>();   
-    public ArrayList<ParkingManager> getParkingList() {
+    private ArrayList<Parking> parkingList = new ArrayList<Parking>();
+
+    public ParkingDirectory() {
+        ParkingManagerList = new ArrayList<>();
+        parkingList = new ArrayList<>();
+    }
+
+    public ArrayList<ParkingManager> getParkingManagerList() {
         return ParkingManagerList;
     }
 
-    public void setParkingList(ArrayList<ParkingManager> ParkingManagerList) {
-        if(this.ParkingManagerList==null)
-            ParkingManagerList = new ArrayList<ParkingManager>();
+    public void setParkingManagerList(ArrayList<ParkingManager> ParkingManagerList) {
         this.ParkingManagerList = ParkingManagerList;
     }
-    
-    public ArrayList<Parking> getParkingVehiclesList() {
+
+    public ArrayList<Parking> getParkingList() {
         return parkingList;
     }
 
-    public void setParkingVehiclesList(ArrayList<Parking> ParkingList) {
-        if(this.parkingList==null)
-            parkingList = new ArrayList<Parking>();
-        this.parkingList = ParkingList;
+    public void setParkingList(ArrayList<Parking> parkingList) {
+        this.parkingList = parkingList;
     }
-    
-    public ParkingManager findParking(String Name){
-    for(ParkingManager parking:ParkingManagerList){
-    if(parking.getParkingManagerName().equals(Name)){
-    return parking;
+
+    public ParkingManager findParking(String Name) {
+        for (ParkingManager parking : ParkingManagerList) {
+            if (parking.getParkingManagerName().equals(Name)) {
+                return parking;
+            }
+        }
+        return null;
     }
+
+    public Parking findParkingVehicle(String Number) {
+        for (Parking vehicle : parkingList) {
+            if (vehicle.getCarNumber().equals(Number)) {
+                return vehicle;
+            }
+        }
+        return null;
     }
-    return null;
+
+    public Parking addParking() {
+        Parking parking = new Parking();
+        parkingList.add(parking);
+        return parking;
     }
-    
-    public Parking findParkingVehicle(String Number){
-    for(Parking vehicle:parkingList){
-    if(vehicle.getCarNumber().equals(Number)){
-    return vehicle;
-    }
-    }
-    return null;
+
+    public ParkingManager addParkingManager() {
+        ParkingManager parkingManager = new ParkingManager();
+        ParkingManagerList.add(parkingManager);
+        return parkingManager;
     }
 }

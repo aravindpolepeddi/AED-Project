@@ -7,7 +7,6 @@ package business;
 
 import business.Customer.CustomerDirectory;
 import business.Customer.TicketDirectory;
-import business.Order.Order;
 import business.Order.OrderDirectory;
 import business.Restaurant.RestaurantDirectory;
 import business.concessions.ConcessionsDirectory;
@@ -15,17 +14,14 @@ import business.event.EventDirectory;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServicesDirectory;
 import business.hrservices.TechnicalServicesDirectory;
-import business.hrservices.SecurityServices;
 import business.hrservices.SecurityServicesDirectory;
 import business.merchandise.merchandiseShopDirectory;
-import business.organizations.FoodBevOrganization;
 import business.premium.PremiumDirectory;
 import business.role.Role;
 import business.role.SystemAdminRole;
 import business.suites.SuitesDirectory;
 import business.ticketing.ParkingDirectory;
 import business.ticketing.PickandDropDirectory;
-import business.useraccount.UserAccountDirectory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +49,7 @@ public class Business extends Organization {
     private ParkingDirectory parkingDirectory;
     private PickandDropDirectory pdDirectory;
 
-    private Map<String, List<Network>> networkList;
+    private Map<String, Enterprise> networkList;
 
     public PremiumDirectory getPremiumDirectory() {
         return premiumDirectory;
@@ -208,11 +204,11 @@ public class Business extends Organization {
         this.pdDirectory = pdDirectory;
     }
 
-    public Map<String, List<Network>> getNetworkList() {
+    public Map<String, Enterprise> getNetworkList() {
         return networkList;
     }
 
-    public void setNetworkList(Map<String, List<Network>> networkList) {
+    public void setNetworkList(Map<String, Enterprise> networkList) {
         this.networkList = networkList;
     }
 

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package business.useraccount;
+
 import business.role.Role;
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class UserAccountDirectory {
     }
 
     public UserAccount createUserAccount(String username, String name, String password, Role role) {
-        UserAccount userAccount = new UserAccount(username, password, name, role);
+        UserAccount userAccount = new UserAccount(username, password, name, role, null);
         userAccount.setUsername(username);
         userAccount.setPassword(password);
         userAccount.setRole(role);
