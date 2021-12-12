@@ -108,6 +108,11 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         premium = premiumDirectory.findPremiumByManagerName(account.getName());
         lblRestaurantName.setText(premium.getRestaurantName() == null ? account.getName() + "'s Dashboard" : premium.getRestaurantName());
         populateOrders();
+
+        ImageIcon icon1 = new ImageIcon(".\\src\\images\\menu.png");
+        Image image1 = icon1.getImage().getScaledInstance(75, 70, Image.SCALE_SMOOTH);
+        btnMenu.setIcon(new ImageIcon(image1));
+
     }
 
     /**
@@ -122,7 +127,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         NavigationJPanel = new javax.swing.JPanel();
         btnMenu = new javax.swing.JButton();
-        btnEditDetails = new javax.swing.JButton();
         btnMenu2 = new javax.swing.JButton();
         btnMenu3 = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
@@ -279,25 +283,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
             }
         });
 
-        btnEditDetails.setBackground(new java.awt.Color(206, 217, 217));
-        btnEditDetails.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEditDetails.setForeground(new java.awt.Color(0, 51, 51));
-        btnEditDetails.setText("EDIT DETAILS");
-        btnEditDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditDetails.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditDetailsMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditDetailsMouseExited(evt);
-            }
-        });
-        btnEditDetails.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditDetailsActionPerformed(evt);
-            }
-        });
-
         btnMenu2.setBackground(new java.awt.Color(206, 217, 217));
         btnMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnMenu2.setForeground(new java.awt.Color(0, 51, 51));
@@ -344,9 +329,7 @@ public class PremiumRolePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                        .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEditDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                            .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(btnMenu3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -359,11 +342,9 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         NavigationJPanelLayout.setVerticalGroup(
             NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
-                .addGap(196, 196, 196)
-                .addComponent(btnEditDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
+                .addGap(237, 237, 237)
+                .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
                 .addComponent(btnMenu3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(264, Short.MAX_VALUE))
             .addGroup(NavigationJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,7 +494,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
         workAreaPanel.setLayout(workAreaPanelLayout);
         workAreaPanelLayout.setHorizontalGroup(
             workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblRestaurantName, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
             .addGroup(workAreaPanelLayout.createSequentialGroup()
                 .addGap(108, 108, 108)
                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -528,6 +508,9 @@ public class PremiumRolePanel extends javax.swing.JPanel {
                     .addComponent(btnDetails)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(70, Short.MAX_VALUE))
+            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                .addComponent(lblRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         workAreaPanelLayout.setVerticalGroup(
             workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2158,18 +2141,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAssignActionPerformed
 
-    private void btnEditDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDetailsActionPerformed
-
-    }//GEN-LAST:event_btnEditDetailsActionPerformed
-
-    private void btnEditDetailsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditDetailsMouseExited
-
-    }//GEN-LAST:event_btnEditDetailsMouseExited
-
-    private void btnEditDetailsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditDetailsMouseEntered
-
-    }//GEN-LAST:event_btnEditDetailsMouseEntered
-
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         switchPanels(MenuPanel1);
         populateMenuFields();
@@ -2593,7 +2564,6 @@ public class PremiumRolePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDetails2;
     private javax.swing.JButton btnDetails3;
     private javax.swing.JButton btnDetails4;
-    private javax.swing.JButton btnEditDetails;
     private javax.swing.JButton btnFeedback;
     private javax.swing.JButton btnFeedback1;
     private javax.swing.JButton btnMenu;

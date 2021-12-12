@@ -75,23 +75,23 @@ public class CreateEnterprise extends javax.swing.JPanel {
     private void initComponents() {
 
         lblPanelHeading = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCustomers = new javax.swing.JTable();
-        lblAddUser = new javax.swing.JLabel();
-        lblFirstName = new javax.swing.JLabel();
-        txtManagerName = new javax.swing.JTextField();
-        lblUserName = new javax.swing.JLabel();
-        txtUserName = new javax.swing.JTextField();
-        lblPassword = new javax.swing.JLabel();
-        pwdPassword = new javax.swing.JPasswordField();
-        btnCreateUser = new javax.swing.JButton();
-        lblLastName = new javax.swing.JLabel();
-        txtNetwork = new javax.swing.JTextField();
         pnlUpdate = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
+        txtManagerName = new javax.swing.JTextField();
+        lblLastName = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        lblAddUser = new javax.swing.JLabel();
         lblFirstName1 = new javax.swing.JLabel();
+        lblFirstName = new javax.swing.JLabel();
+        pwdPassword = new javax.swing.JPasswordField();
+        txtNetwork = new javax.swing.JTextField();
+        btnCreateUser = new javax.swing.JButton();
         cmbEntType = new javax.swing.JComboBox<>();
+        lblUserName = new javax.swing.JLabel();
+        txtUserName = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(240, 255, 255));
 
@@ -100,25 +100,6 @@ public class CreateEnterprise extends javax.swing.JPanel {
         lblPanelHeading.setForeground(new java.awt.Color(0, 204, 255));
         lblPanelHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPanelHeading.setText("Enterprise");
-
-        jButton1.setBackground(new java.awt.Color(252, 227, 227));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 0, 0));
-        jButton1.setText("BACK");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButton1MouseExited(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         tblCustomers.setBackground(new java.awt.Color(255, 255, 255));
         tblCustomers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -137,52 +118,17 @@ public class CreateEnterprise extends javax.swing.JPanel {
         tblCustomers.setSelectionForeground(new java.awt.Color(0, 51, 51));
         jScrollPane2.setViewportView(tblCustomers);
 
-        lblAddUser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblAddUser.setForeground(new java.awt.Color(0, 102, 102));
-        lblAddUser.setText("ADD NEW ENTERPRISE");
-
-        lblFirstName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblFirstName.setText("Manager Name : ");
-
-        lblUserName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblUserName.setText("Username : ");
-
-        lblPassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPassword.setText("Password : ");
-
-        btnCreateUser.setBackground(new java.awt.Color(175, 211, 211));
-        btnCreateUser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCreateUser.setForeground(new java.awt.Color(0, 102, 102));
-        btnCreateUser.setText("CREATE");
-        btnCreateUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCreateUser.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCreateUserMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCreateUserMouseExited(evt);
-            }
-        });
-        btnCreateUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateUserActionPerformed(evt);
-            }
-        });
-
-        lblLastName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblLastName.setText("Network : ");
-
         pnlUpdate.setBackground(new java.awt.Color(240, 255, 255));
 
         javax.swing.GroupLayout pnlUpdateLayout = new javax.swing.GroupLayout(pnlUpdate);
         pnlUpdate.setLayout(pnlUpdateLayout);
         pnlUpdateLayout.setHorizontalGroup(
             pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 379, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
         pnlUpdateLayout.setVerticalGroup(
             pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 253, Short.MAX_VALUE)
+            .addGap(0, 441, Short.MAX_VALUE)
         );
 
         btnDelete.setBackground(new java.awt.Color(255, 255, 255));
@@ -204,31 +150,69 @@ public class CreateEnterprise extends javax.swing.JPanel {
             }
         });
 
+        lblLastName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblLastName.setText("Network : ");
+
+        lblPassword.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblPassword.setText("Password : ");
+
+        lblAddUser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAddUser.setForeground(new java.awt.Color(0, 102, 102));
+        lblAddUser.setText("ADD NEW ENTERPRISE");
+
         lblFirstName1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblFirstName1.setText("Enterprise : ");
 
+        lblFirstName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblFirstName.setText("Manager Name : ");
+
+        btnCreateUser.setBackground(new java.awt.Color(175, 211, 211));
+        btnCreateUser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCreateUser.setForeground(new java.awt.Color(0, 102, 102));
+        btnCreateUser.setText("CREATE");
+        btnCreateUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCreateUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCreateUserMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCreateUserMouseExited(evt);
+            }
+        });
+        btnCreateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateUserActionPerformed(evt);
+            }
+        });
+
         cmbEntType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT ENT", "Food & Beverage", "Merchandise", "Human Resources", "Bookings" }));
+
+        lblUserName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblUserName.setText("Username : ");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/enterpriseCreate.gif"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblPanelHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton1)
-                        .addGap(53, 244, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(lblPanelHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(pnlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnDelete)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnDelete)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(83, 83, 83)
@@ -258,7 +242,11 @@ public class CreateEnterprise extends javax.swing.JPanel {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(cmbEntType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txtManagerName, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)))))
-                        .addGap(119, 119, 119))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(pnlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(339, 339, 339))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbEntType, pwdPassword, txtManagerName, txtNetwork, txtUserName});
@@ -266,22 +254,11 @@ public class CreateEnterprise extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPanelHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButton1)))
+                .addGap(32, 32, 32)
+                .addComponent(lblPanelHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(btnDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(pnlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
                         .addComponent(lblAddUser)
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -298,20 +275,28 @@ public class CreateEnterprise extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblUserName)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(btnDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPassword)
                             .addComponent(pwdPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
-                        .addComponent(btnCreateUser)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addComponent(btnCreateUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUserActionPerformed
         String userName = txtUserName.getText();
@@ -390,14 +375,6 @@ public class CreateEnterprise extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
-        jButton1.setBackground(new Color(248, 186, 186));
-    }//GEN-LAST:event_jButton1MouseEntered
-
-    private void jButton1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseExited
-        jButton1.setBackground(Color.white);
-    }//GEN-LAST:event_jButton1MouseExited
-
     private void btnDeleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseEntered
         btnDelete.setBackground(new Color(248, 186, 186));
     }//GEN-LAST:event_btnDeleteMouseEntered
@@ -441,7 +418,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
     private javax.swing.JButton btnCreateUser;
     private javax.swing.JButton btnDelete;
     private javax.swing.JComboBox<String> cmbEntType;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAddUser;
     private javax.swing.JLabel lblFirstName;
