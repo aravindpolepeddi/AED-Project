@@ -73,25 +73,6 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         NavigationJPanel = new javax.swing.JPanel();
         btnManageZones = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        workAreaPanel = new javax.swing.JPanel();
-        lblRestaurantName1 = new javax.swing.JLabel();
-        lblAddUser2 = new javax.swing.JLabel();
-        lblManagerName2 = new javax.swing.JLabel();
-        txtCreateFoodManagerName = new javax.swing.JTextField();
-        lblRestaurantName4 = new javax.swing.JLabel();
-        lblUserName2 = new javax.swing.JLabel();
-        txtCreateFoodManagerUserName = new javax.swing.JTextField();
-        lblPassword2 = new javax.swing.JLabel();
-        pwdCreateFoodManagerPassword = new javax.swing.JPasswordField();
-        btnCreateUser1 = new javax.swing.JButton();
-        btnDelete1 = new javax.swing.JButton();
-        btnUpdate1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblFoodBevManagers = new javax.swing.JTable();
-        pnlUpdate = new javax.swing.JPanel();
-        cmbCreateManager = new javax.swing.JComboBox<>();
-        lblRestaurantName = new javax.swing.JLabel();
-        txtRestaurantName = new javax.swing.JTextField();
         manageZones = new javax.swing.JPanel();
         lblRestaurantName2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -100,6 +81,38 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         txtPremiumCount = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
         btnSave2 = new javax.swing.JButton();
+        workAreaPanel = new javax.swing.JPanel();
+        lblRestaurantName1 = new javax.swing.JLabel();
+        lblAddUser2 = new javax.swing.JLabel();
+        lblManagerName2 = new javax.swing.JLabel();
+        txtCreateFoodManagerName = new javax.swing.JTextField();
+        lblRestaurantName4 = new javax.swing.JLabel();
+        btnDelete1 = new javax.swing.JButton();
+        btnUpdate1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblFoodBevManagers = new javax.swing.JTable();
+        pnlUpdate = new javax.swing.JPanel();
+        lblUserName3 = new javax.swing.JLabel();
+        lblPassword3 = new javax.swing.JLabel();
+        txtCreateFoodManagerUserName2 = new javax.swing.JTextField();
+        pwdCreateFoodManagerPassword2 = new javax.swing.JTextField();
+        btnUpdateUser2 = new javax.swing.JButton();
+        cmbCreateManager = new javax.swing.JComboBox<>();
+        lblRestaurantName = new javax.swing.JLabel();
+        txtRestaurantName = new javax.swing.JTextField();
+        pwdCreateFoodManagerPassword = new javax.swing.JPasswordField();
+        txtCreateFoodManagerUserName = new javax.swing.JTextField();
+        btnCreateUser1 = new javax.swing.JButton();
+        lblUserName2 = new javax.swing.JLabel();
+        lblPassword2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        lblAddUser3 = new javax.swing.JLabel();
+        lblManagerName3 = new javax.swing.JLabel();
+        lblRestaurantName5 = new javax.swing.JLabel();
+        lblRestaurantName3 = new javax.swing.JLabel();
+        txtCreateFoodManagerName2 = new javax.swing.JTextField();
+        txtRestaurantName2 = new javax.swing.JTextField();
+        cmbCreateManager2 = new javax.swing.JComboBox<>();
 
         NavigationJPanel.setBackground(new java.awt.Color(0, 51, 51));
 
@@ -136,219 +149,12 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
             .addGroup(NavigationJPanelLayout.createSequentialGroup()
                 .addGap(287, 287, 287)
                 .addComponent(btnManageZones, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addContainerGap(402, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(NavigationJPanel);
 
         jLayeredPane1.setLayout(new java.awt.CardLayout());
-
-        workAreaPanel.setBackground(new java.awt.Color(240, 255, 255));
-
-        lblRestaurantName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblRestaurantName1.setForeground(new java.awt.Color(0, 153, 153));
-        lblRestaurantName1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRestaurantName1.setText("Food & Beverages");
-
-        lblAddUser2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblAddUser2.setForeground(new java.awt.Color(0, 102, 102));
-        lblAddUser2.setText("ADD NEW USER");
-
-        lblManagerName2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblManagerName2.setText("Manager Name :");
-
-        lblRestaurantName4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblRestaurantName4.setText("Organization Type :");
-
-        lblUserName2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblUserName2.setText("Username : ");
-
-        lblPassword2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPassword2.setText("Password : ");
-
-        btnCreateUser1.setBackground(new java.awt.Color(175, 211, 211));
-        btnCreateUser1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCreateUser1.setForeground(new java.awt.Color(0, 102, 102));
-        btnCreateUser1.setText("CREATE");
-        btnCreateUser1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCreateUser1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCreateUser1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCreateUser1MouseExited(evt);
-            }
-        });
-        btnCreateUser1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateUser1ActionPerformed(evt);
-            }
-        });
-
-        btnDelete1.setBackground(new java.awt.Color(255, 255, 255));
-        btnDelete1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnDelete1.setForeground(new java.awt.Color(153, 0, 0));
-        btnDelete1.setText("DELETE USER");
-        btnDelete1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDelete1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDelete1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDelete1MouseExited(evt);
-            }
-        });
-        btnDelete1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelete1ActionPerformed(evt);
-            }
-        });
-
-        btnUpdate1.setBackground(new java.awt.Color(255, 255, 255));
-        btnUpdate1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnUpdate1.setForeground(new java.awt.Color(0, 102, 0));
-        btnUpdate1.setText("UPDATE USER");
-        btnUpdate1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnUpdate1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnUpdate1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnUpdate1MouseExited(evt);
-            }
-        });
-        btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdate1ActionPerformed(evt);
-            }
-        });
-
-        tblFoodBevManagers.setBackground(new java.awt.Color(255, 255, 255));
-        tblFoodBevManagers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        tblFoodBevManagers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "USER NAME", "PASSWORD", "MANAGER NAME", "ORG TYP"
-            }
-        ));
-        tblFoodBevManagers.setSelectionBackground(new java.awt.Color(153, 209, 232));
-        tblFoodBevManagers.setSelectionForeground(new java.awt.Color(0, 51, 51));
-        jScrollPane3.setViewportView(tblFoodBevManagers);
-
-        pnlUpdate.setBackground(new java.awt.Color(240, 255, 255));
-
-        javax.swing.GroupLayout pnlUpdateLayout = new javax.swing.GroupLayout(pnlUpdate);
-        pnlUpdate.setLayout(pnlUpdateLayout);
-        pnlUpdateLayout.setHorizontalGroup(
-            pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 368, Short.MAX_VALUE)
-        );
-        pnlUpdateLayout.setVerticalGroup(
-            pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 208, Short.MAX_VALUE)
-        );
-
-        cmbCreateManager.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "SUITE", "PREMIUM" }));
-
-        lblRestaurantName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblRestaurantName.setText("Restaurant Name : ");
-
-        javax.swing.GroupLayout workAreaPanelLayout = new javax.swing.GroupLayout(workAreaPanel);
-        workAreaPanel.setLayout(workAreaPanelLayout);
-        workAreaPanelLayout.setHorizontalGroup(
-            workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblRestaurantName1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(workAreaPanelLayout.createSequentialGroup()
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pnlUpdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(workAreaPanelLayout.createSequentialGroup()
-                                .addComponent(btnDelete1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnUpdate1))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(workAreaPanelLayout.createSequentialGroup()
-                                .addGap(128, 128, 128)
-                                .addComponent(lblAddUser2))
-                            .addGroup(workAreaPanelLayout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUserName2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblPassword2, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCreateFoodManagerUserName)
-                                    .addComponent(pwdCreateFoodManagerPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                    .addComponent(btnCreateUser1)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblManagerName2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblRestaurantName4, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGroup(workAreaPanelLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblRestaurantName)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtCreateFoodManagerName, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                .addComponent(cmbCreateManager, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(38, 38, 38))
-        );
-        workAreaPanelLayout.setVerticalGroup(
-            workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(workAreaPanelLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(lblRestaurantName1)
-                .addGap(62, 62, 62)
-                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(workAreaPanelLayout.createSequentialGroup()
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnUpdate1)
-                            .addComponent(btnDelete1))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                        .addComponent(pnlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(67, Short.MAX_VALUE))
-                    .addGroup(workAreaPanelLayout.createSequentialGroup()
-                        .addComponent(lblAddUser2)
-                        .addGap(18, 18, 18)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblManagerName2)
-                            .addComponent(txtCreateFoodManagerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblRestaurantName4)
-                            .addComponent(cmbCreateManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblRestaurantName))
-                        .addGap(8, 8, 8)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCreateFoodManagerUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUserName2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPassword2)
-                            .addComponent(pwdCreateFoodManagerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCreateUser1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-
-        jLayeredPane1.add(workAreaPanel, "card2");
 
         manageZones.setBackground(new java.awt.Color(240, 255, 255));
 
@@ -358,11 +164,9 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         lblRestaurantName2.setText("Zones");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("How many 'Suite' tiers do you want?");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("How many 'Premium' tiers do you want?");
 
         btnBack.setBackground(new java.awt.Color(255, 204, 204));
@@ -430,10 +234,333 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
                     .addComponent(txtPremiumCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(143, 143, 143)
                 .addComponent(btnSave2)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(manageZones, "card2");
+
+        workAreaPanel.setBackground(new java.awt.Color(240, 255, 255));
+
+        lblRestaurantName1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRestaurantName1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRestaurantName1.setText("Food & Beverages");
+
+        lblAddUser2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAddUser2.setForeground(new java.awt.Color(0, 102, 102));
+        lblAddUser2.setText("ADD NEW USER");
+
+        lblManagerName2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblManagerName2.setText("Manager Name :");
+
+        txtCreateFoodManagerName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCreateFoodManagerNameActionPerformed(evt);
+            }
+        });
+
+        lblRestaurantName4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblRestaurantName4.setText("Organization Type :");
+
+        btnDelete1.setBackground(new java.awt.Color(153, 0, 0));
+        btnDelete1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDelete1.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete1.setText("DELETE USER");
+        btnDelete1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDelete1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDelete1MouseExited(evt);
+            }
+        });
+        btnDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelete1ActionPerformed(evt);
+            }
+        });
+
+        btnUpdate1.setBackground(new java.awt.Color(0, 102, 102));
+        btnUpdate1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnUpdate1.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdate1.setText("UPDATE USER");
+        btnUpdate1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUpdate1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnUpdate1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnUpdate1MouseExited(evt);
+            }
+        });
+        btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdate1ActionPerformed(evt);
+            }
+        });
+
+        tblFoodBevManagers.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tblFoodBevManagers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "USER NAME", "PASSWORD", "MANAGER NAME", "ORG TYP"
+            }
+        ));
+        tblFoodBevManagers.setSelectionBackground(new java.awt.Color(153, 209, 232));
+        tblFoodBevManagers.setSelectionForeground(new java.awt.Color(0, 51, 51));
+        jScrollPane3.setViewportView(tblFoodBevManagers);
+
+        pnlUpdate.setBackground(new java.awt.Color(240, 255, 255));
+
+        lblUserName3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblUserName3.setText("Username : ");
+
+        lblPassword3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblPassword3.setText("Password : ");
+
+        pwdCreateFoodManagerPassword2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdCreateFoodManagerPassword2ActionPerformed(evt);
+            }
+        });
+
+        btnUpdateUser2.setBackground(new java.awt.Color(0, 102, 102));
+        btnUpdateUser2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnUpdateUser2.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateUser2.setText("UPDATE");
+        btnUpdateUser2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUpdateUser2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnUpdateUser2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnUpdateUser2MouseExited(evt);
+            }
+        });
+        btnUpdateUser2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateUser2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlUpdateLayout = new javax.swing.GroupLayout(pnlUpdate);
+        pnlUpdate.setLayout(pnlUpdateLayout);
+        pnlUpdateLayout.setHorizontalGroup(
+            pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUpdateLayout.createSequentialGroup()
+                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUserName3)
+                    .addComponent(lblPassword3))
+                .addGap(51, 51, 51)
+                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnUpdateUser2)
+                    .addComponent(txtCreateFoodManagerUserName2, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                    .addComponent(pwdCreateFoodManagerPassword2))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pnlUpdateLayout.setVerticalGroup(
+            pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUpdateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUserName3)
+                    .addComponent(txtCreateFoodManagerUserName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPassword3)
+                    .addComponent(pwdCreateFoodManagerPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdateUser2)
+                .addContainerGap(100, Short.MAX_VALUE))
+        );
+
+        cmbCreateManager.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "SUITE", "PREMIUM" }));
+
+        lblRestaurantName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblRestaurantName.setText("Restaurant Name : ");
+
+        pwdCreateFoodManagerPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwdCreateFoodManagerPasswordActionPerformed(evt);
+            }
+        });
+
+        btnCreateUser1.setBackground(new java.awt.Color(0, 102, 102));
+        btnCreateUser1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCreateUser1.setForeground(new java.awt.Color(255, 255, 255));
+        btnCreateUser1.setText("CREATE");
+        btnCreateUser1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCreateUser1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCreateUser1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCreateUser1MouseExited(evt);
+            }
+        });
+        btnCreateUser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateUser1ActionPerformed(evt);
+            }
+        });
+
+        lblUserName2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblUserName2.setText("Username : ");
+
+        lblPassword2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblPassword2.setText("Password : ");
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Segoe UI Black", 0, 11)); // NOI18N
+        jButton1.setText("BACK");
+
+        lblAddUser3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAddUser3.setForeground(new java.awt.Color(0, 102, 102));
+        lblAddUser3.setText("UPDATE USER");
+
+        lblManagerName3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblManagerName3.setText("Manager Name :");
+
+        lblRestaurantName5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblRestaurantName5.setText("Organization Type :");
+
+        lblRestaurantName3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblRestaurantName3.setText("Restaurant Name : ");
+
+        cmbCreateManager2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "SUITE", "PREMIUM" }));
+
+        javax.swing.GroupLayout workAreaPanelLayout = new javax.swing.GroupLayout(workAreaPanel);
+        workAreaPanel.setLayout(workAreaPanelLayout);
+        workAreaPanelLayout.setHorizontalGroup(
+            workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(workAreaPanelLayout.createSequentialGroup()
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                    .addComponent(lblRestaurantName1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblManagerName3))
+                        .addContainerGap(65, Short.MAX_VALUE))
+                    .addGroup(workAreaPanelLayout.createSequentialGroup()
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnDelete1)
+                                    .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                        .addComponent(lblRestaurantName3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtRestaurantName2))
+                                    .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                        .addComponent(lblRestaurantName5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtCreateFoodManagerName2)
+                                            .addComponent(cmbCreateManager2, 0, 112, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                                            .addComponent(lblManagerName2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtCreateFoodManagerName, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(lblRestaurantName4)
+                                                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblRestaurantName)
+                                                    .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(lblPassword2)
+                                                        .addComponent(lblUserName2))))
+                                            .addGap(38, 38, 38)
+                                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(cmbCreateManager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtRestaurantName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(pwdCreateFoodManagerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnCreateUser1)
+                                        .addComponent(txtCreateFoodManagerUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(80, 80, 80))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                                .addComponent(btnUpdate1)
+                                .addGap(74, 74, 74))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(lblAddUser3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAddUser2)
+                .addGap(179, 179, 179))
+        );
+        workAreaPanelLayout.setVerticalGroup(
+            workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRestaurantName1)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUpdate1)
+                    .addComponent(btnDelete1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAddUser3)
+                    .addComponent(lblAddUser2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(workAreaPanelLayout.createSequentialGroup()
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCreateFoodManagerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblManagerName2)
+                            .addComponent(lblManagerName3)
+                            .addComponent(txtCreateFoodManagerName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbCreateManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblRestaurantName4)
+                                .addComponent(lblRestaurantName5)
+                                .addComponent(cmbCreateManager2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRestaurantName))
+                        .addGap(25, 25, 25)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUserName2)
+                            .addComponent(txtCreateFoodManagerUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pwdCreateFoodManagerPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPassword2))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCreateUser1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workAreaPanelLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRestaurantName3)
+                            .addComponent(txtRestaurantName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(80, Short.MAX_VALUE))
+        );
+
+        jLayeredPane1.add(workAreaPanel, "card2");
 
         jSplitPane1.setRightComponent(jLayeredPane1);
 
@@ -475,9 +602,42 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     private void btnCreateUser1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateUser1MouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCreateUser1MouseExited
+ private static boolean validateStringInput(String userInput) {
+        if (userInput.trim().equals("") || userInput == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
+    private static boolean validateIntegerInput(String userInput) {
+        if (userInput.matches("^[0-9]*$") && userInput.length() == 10) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     private void btnCreateUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUser1ActionPerformed
-        String userName = txtCreateFoodManagerUserName.getText();
+        boolean formDatafilled = true;
+        if (!validateStringInput(txtCreateFoodManagerName.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter Manager name");
+        }
+        if (!validateStringInput(txtCreateFoodManagerUserName.getText())) {
+            formDatafilled = false;
+             JOptionPane.showMessageDialog(this, "Please enter username ");
+        }
+        if (!validateStringInput(pwdCreateFoodManagerPassword.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter password");
+        }
+        if (!validateStringInput(txtRestaurantName.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter password");
+        }
+
+        if(formDatafilled){
+          String userName = txtCreateFoodManagerUserName.getText();
         String password = pwdCreateFoodManagerPassword.getText();
         String orgType = cmbCreateManager.getSelectedItem().toString();
         
@@ -526,7 +686,9 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
             txtRestaurantName.setText("");
             
             populateTable();
+        }  
         }
+        
     }//GEN-LAST:event_btnCreateUser1ActionPerformed
 
     private void btnDelete1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelete1MouseEntered
@@ -600,6 +762,101 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
         flags.setSuiteCount(Integer.parseInt(txtSuitsCount.getText()));
         flags.setPremiumCount(Integer.parseInt(txtPremiumCount.getText()));
     }//GEN-LAST:event_btnSave2ActionPerformed
+
+    private void pwdCreateFoodManagerPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdCreateFoodManagerPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwdCreateFoodManagerPasswordActionPerformed
+
+    private void btnUpdateUser2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateUser2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateUser2MouseEntered
+
+    private void btnUpdateUser2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateUser2MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateUser2MouseExited
+
+    private void btnUpdateUser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateUser2ActionPerformed
+        // TODO add your handling code here:
+          boolean formDatafilled = true;
+        if (!validateStringInput(txtCreateFoodManagerName2.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter Manager name");
+        }
+        if (!validateStringInput(txtCreateFoodManagerUserName2.getText())) {
+            formDatafilled = false;
+             JOptionPane.showMessageDialog(this, "Please enter username ");
+        }
+        if (!validateStringInput(pwdCreateFoodManagerPassword2.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter password");
+        }
+        if (!validateStringInput(txtRestaurantName2.getText())) {
+            formDatafilled = false;
+            JOptionPane.showMessageDialog(this, "Please enter password");
+        }
+        
+        if(formDatafilled){
+           String userName = txtCreateFoodManagerUserName2.getText();
+        String password = pwdCreateFoodManagerPassword2.getText();
+        String orgType = cmbCreateManager2.getSelectedItem().toString();
+        
+        if (!business.getUserAccountDirectory().checkIfUsernameIsUnique(userName)) {
+            JOptionPane.showMessageDialog(null, "UserName already taken!");
+            txtCreateFoodManagerUserName2.setText("");
+            pwdCreateFoodManagerPassword2.setText("");
+        } else {
+            
+            if (orgType.equals("SUITE") && suites != null && suites.getCount() > 0 && suites.getCount() == suites.getSuitesList().size()) {
+                JOptionPane.showMessageDialog(null, "No more Suites to create");
+                return;
+            }
+            
+            if (orgType.equals("PREMIUM") && premium != null && premium.getCount() > 0 && premium.getCount() == premium.getPremiumList().size()) {
+                JOptionPane.showMessageDialog(null, "No more Premium Slots to create");
+                return;
+            }
+            
+            String managerame = txtCreateFoodManagerName2.getText();
+            
+            if (orgType.equals("SUITE")) {
+                SuitesRestaurantRole role = new SuitesRestaurantRole();
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+                Suites suite = suites.addSuites();
+                suite.setManagerName(managerame);
+                suite.setUserName(userName);
+                suite.setManagerType("SUITE");
+                suite.setRestaurantName(txtRestaurantName2.getText());
+                business.setSuitesDirectory(suites);
+            } else if (orgType.equals("PREMIUM")) {
+                FoodBeverageOrgAdminRole role = new FoodBeverageOrgAdminRole();
+                business.getUserAccountDirectory().createUserAccount(userName, managerame, password, role);
+                Premium prem = premium.addPremium();
+                prem.setManagerName(managerame);
+                prem.setUserName(userName);
+                prem.setManagerType("PREMIUM");
+                prem.setRestaurantName(txtRestaurantName2.getText());
+                business.setPremiumDirectory(premium);
+            }
+            
+            txtCreateFoodManagerName2.setText("");
+            cmbCreateManager2.setSelectedItem("SELECT TYPE");
+            txtCreateFoodManagerUserName2.setText("");
+            pwdCreateFoodManagerPassword2.setText("");
+            txtRestaurantName2.setText("");
+            
+            populateTable();
+        }  
+        }
+       
+    }//GEN-LAST:event_btnUpdateUser2ActionPerformed
+
+    private void txtCreateFoodManagerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCreateFoodManagerNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCreateFoodManagerNameActionPerformed
+
+    private void pwdCreateFoodManagerPassword2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwdCreateFoodManagerPassword2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwdCreateFoodManagerPassword2ActionPerformed
     
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
@@ -616,28 +873,41 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnManageZones;
     private javax.swing.JButton btnSave2;
     private javax.swing.JButton btnUpdate1;
+    private javax.swing.JButton btnUpdateUser2;
     private javax.swing.JComboBox<String> cmbCreateManager;
+    private javax.swing.JComboBox<String> cmbCreateManager2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblAddUser2;
+    private javax.swing.JLabel lblAddUser3;
     private javax.swing.JLabel lblManagerName2;
+    private javax.swing.JLabel lblManagerName3;
     private javax.swing.JLabel lblPassword2;
+    private javax.swing.JLabel lblPassword3;
     private javax.swing.JLabel lblRestaurantName;
     private javax.swing.JLabel lblRestaurantName1;
     private javax.swing.JLabel lblRestaurantName2;
+    private javax.swing.JLabel lblRestaurantName3;
     private javax.swing.JLabel lblRestaurantName4;
+    private javax.swing.JLabel lblRestaurantName5;
     private javax.swing.JLabel lblUserName2;
+    private javax.swing.JLabel lblUserName3;
     private javax.swing.JPanel manageZones;
     private javax.swing.JPanel pnlUpdate;
     private javax.swing.JPasswordField pwdCreateFoodManagerPassword;
+    private javax.swing.JTextField pwdCreateFoodManagerPassword2;
     private javax.swing.JTable tblFoodBevManagers;
     private javax.swing.JTextField txtCreateFoodManagerName;
+    private javax.swing.JTextField txtCreateFoodManagerName2;
     private javax.swing.JTextField txtCreateFoodManagerUserName;
+    private javax.swing.JTextField txtCreateFoodManagerUserName2;
     private javax.swing.JTextField txtPremiumCount;
     private javax.swing.JTextField txtRestaurantName;
+    private javax.swing.JTextField txtRestaurantName2;
     private javax.swing.JTextField txtSuitsCount;
     private javax.swing.JPanel workAreaPanel;
     // End of variables declaration//GEN-END:variables
