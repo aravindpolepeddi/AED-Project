@@ -18,6 +18,7 @@ public class Customer extends Person {
     private Ticket ticket;
     private int merchCost;
     private int pickDropCost;
+    private int parkingCost;
 
     public String getUserName() {
         return userName;
@@ -57,6 +58,14 @@ public class Customer extends Person {
 
     public void setPickDropCost(int pickDropCost) {
         this.pickDropCost = pickDropCost;
+    }
+
+    public int getParkingCost() {
+        return parkingCost;
+    }
+
+    public void setParkingCost(int parkingCost) {
+        this.parkingCost = parkingCost;
     }
 
 }

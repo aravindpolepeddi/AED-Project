@@ -6,6 +6,8 @@
 package ui.ticketing;
 
 import business.Business;
+import business.Customer.Customer;
+import business.Customer.CustomerDirectory;
 import business.Enterprise;
 import business.Enterprises.EnterpriseDirectory;
 import business.ticketing.CarBooking;
@@ -34,6 +36,8 @@ public class ParkingJPanel extends javax.swing.JPanel {
     EnterpriseDirectory enterpriseDirectory;
     Enterprise enterprise;
     String networkString;
+    CustomerDirectory customerDirectory;
+    Customer customer;
 
     public ParkingJPanel(JPanel userProcessContainer, UserAccount account, Business system) {
         initComponents();
@@ -53,6 +57,12 @@ public class ParkingJPanel extends javax.swing.JPanel {
             this.pdDirectory = enterprise.getPdDirectory();
         }
 
+        if (enterprise.getCustomerDirectory() == null) {
+            this.customerDirectory = new CustomerDirectory();
+        } else {
+            this.customerDirectory = enterprise.getCustomerDirectory();
+        }
+
         this.userProcessContainer = userProcessContainer;
         this.useraccount = account;
         this.system = system;
@@ -65,6 +75,7 @@ public class ParkingJPanel extends javax.swing.JPanel {
      */
     public ParkingJPanel() {
         initComponents();
+        refreshTable();
     }
 
     /**
@@ -266,7 +277,7 @@ public class ParkingJPanel extends javax.swing.JPanel {
         if (jDateChooserExit.getDate() == null) {
             Error.append("Enter Exit Time \n");
         } else {
-            parking.setEnteredTie(jDateChooserExit.getDate());
+            parking.setExitTime(jDateChooserExit.getDate());
             jDateChooserExit.setDate(null);
         }
         if (jTextSlotNumber.getText().isEmpty()) {
@@ -279,12 +290,18 @@ public class ParkingJPanel extends javax.swing.JPanel {
             Error.append("Enter Valid Ticket Number \n");
         } else {
             parking.setTicketNumber(Integer.parseInt(jTextTicketNumber.getText()));
+            customer = customerDirectory.findCustomerByTicketId(Integer.parseInt(jTextTicketNumber.getText()));
             jTextTicketNumber.setText("");
         }
         if (jTextPrice.getText().isEmpty()) {
             Error.append("Enter Price \n");
         } else {
             parking.setPrice(Integer.parseInt(jTextPrice.getText()));
+            if (customer.getParkingCost() == 0) {
+                customer.setParkingCost(Integer.parseInt(jTextPrice.getText()));
+            } else {
+                customer.setParkingCost(customer.getParkingCost() + Integer.parseInt(jTextPrice.getText()));
+            }
             jTextPrice.setText("");
         }
         if (Error.isEmpty()) {
@@ -295,7 +312,6 @@ public class ParkingJPanel extends javax.swing.JPanel {
         if (update = true) {
             update = false;
         }
-
         refreshTable();
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
