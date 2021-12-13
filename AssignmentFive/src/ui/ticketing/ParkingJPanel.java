@@ -554,7 +554,7 @@ public class ParkingJPanel extends javax.swing.JPanel {
             customer = customerDirectory.findCustomerByTicketId(Integer.parseInt(jTextTicketNumber.getText()));
             jTextTicketNumber.setText("");
         }
-        if (jTextPrice.getText().isEmpty()) {
+        if (jTextPrice.getText().isEmpty() || !validateIntegerInput(jTextPrice.getText())) {
             Error.append("Enter Price \n");
         } else {
             parking.setPrice(Integer.parseInt(jTextPrice.getText()));
@@ -575,6 +575,14 @@ public class ParkingJPanel extends javax.swing.JPanel {
         }
         refreshTable();
     }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private static boolean validateIntegerInput(String userInput) {
+        if (userInput.matches("^[0-9]*$")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:

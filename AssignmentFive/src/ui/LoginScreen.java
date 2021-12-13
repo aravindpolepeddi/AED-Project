@@ -491,88 +491,116 @@ public class LoginScreen extends javax.swing.JPanel {
     private void btnRegister1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegister1ActionPerformed
         // TODO add your handling code here:
         boolean formDatafilled = true;
-//        if (validateStringInput(txtName.getText())) {
-//            formDatafilled = false;
+        StringBuilder Error = new StringBuilder();
+        if (!validateStringInput(txtName.getText())) {
+            formDatafilled = false;
 //            JOptionPane.showMessageDialog(this, "Please enter username");
-//        }
-//        if (validateStringInput(txtUsername.getText())) {
-//            formDatafilled = false;
+            Error.append("Please enter username \n");
+        }
+        if (!validateStringInput(txtUsername.getText())) {
+            formDatafilled = false;
 //            JOptionPane.showMessageDialog(this, "Please enter password");
-//        }
-//        if (validateStringInput(txtMobileNo.getText())) {
-//            formDatafilled = false;
+            Error.append("Please enter password \n");
+        }
+        if (!validateStringInput(txtMobileNo.getText())) {
+            formDatafilled = false;
 //            JOptionPane.showMessageDialog(this, "Please enter mobile no");
-//        }
-//        if (validateIntegerInput(txtMobileNo.getText())) {
-//            formDatafilled = false;
-//            JOptionPane.showMessageDialog(this, "Please enter mobile no");
-//        }
-//        if (validateStringInput(txtAddress.getText())) {
-//            formDatafilled = false;
+            Error.append("Please enter mobile no \n");
+        }
+        if (!validateIntegerInput(txtMobileNo.getText())) {
+            formDatafilled = false;
+//            JOptionPane.showMessageDialog(this, "Enter a valid mobile no");
+            Error.append("Enter a valid mobile no \n");
+        }
+        if (!validateStringInput(txtAddress.getText())) {
+            formDatafilled = false;
 //            JOptionPane.showMessageDialog(this, "Please enter address");
-//        }
-//        if (validateStringInput(pwdPassword.getText())) {
-//            formDatafilled = false;
+            Error.append("lease enter address \n");
+        }
+        if (!validateStringInput(pwdPassword.getText())) {
+            formDatafilled = false;
 //            JOptionPane.showMessageDialog(this, "Please enter password");
-//        }
+            Error.append("Please enter password \n");
+        }
 
-        if (formDatafilled) {
-            String userName = txtUsername.getText();
-            String password = pwdPassword.getText();
+        if (!validateEmail(txtEmail.getText())) {
+            formDatafilled = false;
+//            JOptionPane.showMessageDialog(this, "Please enter password");
+            Error.append("Enter a valid Email \n");
+        }
 
-            if (!business.getUserAccountDirectory().checkIfUsernameIsUnique(userName)) {
-                JOptionPane.showMessageDialog(null, "UserName already taken!");
-                txtUserName.setText("");
-                pwdPassword.setText("");
-            } else {
-                business.role.Customer customerRole = new business.role.Customer();
-                system.getUserAccountDirectory().createUserAccount(userName, txtName.getText(), password, customerRole, txtNetwork.getText());
+        if (!validateStringInput(pwdPassword.getText())) {
+            if (validatePasswordInput(pwdPassword.getText())) {
+                formDatafilled = false;
+//                JOptionPane.showMessageDialog(this, "Please enter password");
+//                JOptionPane.showMessageDialog(this, "Please enter password containing 8 character,"
+//                        + "one uppercase,one lowercase, one number and one special character");
+                Error.append("Please enter password containing 8 character,"
+                        + "one uppercase,one lowercase, one number and one special character \n");
+            }
+        }
 
-                if (network.containsKey(txtNetwork.getText())) {
-                    for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
-                        if (iteration.getKey().equals(txtNetwork.getText())) {
-                            if (iteration.getValue().getCustomerDirectory() == null) {
-                                customerDirectory = new CustomerDirectory();
-                                Enterprise enterprise = iteration.getValue();
-                                Customer customer = customerDirectory.addCustomer();
-                                customer.setEmail(txtEmail.getText());
-                                customer.setFullName(txtName.getText());
-                                customer.setPhoneNumber(txtMobileNo.getText());
-                                customer.setUserName(userName);
-                                customer.setAddress(txtAddress.getText());
-                                enterprise.setCustomerDirectory(customerDirectory);
-                                network.put(txtNetwork.getText(), enterprise);
-                                system.setNetworkList(network);
-                            } else {
-                                customerDirectory = iteration.getValue().getCustomerDirectory();
-                                Customer customer = customerDirectory.addCustomer();
-                                customer.setEmail(txtEmail.getText());
-                                customer.setFullName(txtName.getText());
-                                customer.setPhoneNumber(txtMobileNo.getText());
-                                customer.setUserName(userName);
-                                customer.setAddress(txtAddress.getText());
+        if (Error.isEmpty()) {
+            if (formDatafilled) {
+                String userName = txtUsername.getText();
+                String password = pwdPassword.getText();
+
+                if (!business.getUserAccountDirectory().checkIfUsernameIsUnique(userName)) {
+                    JOptionPane.showMessageDialog(null, "UserName already taken!");
+                    txtUserName.setText("");
+                    pwdPassword.setText("");
+                } else {
+                    business.role.Customer customerRole = new business.role.Customer();
+                    system.getUserAccountDirectory().createUserAccount(userName, txtName.getText(), password, customerRole, txtNetwork.getText());
+
+                    if (network.containsKey(txtNetwork.getText())) {
+                        for (Map.Entry<String, Enterprise> iteration : network.entrySet()) {
+                            if (iteration.getKey().equals(txtNetwork.getText())) {
+                                if (iteration.getValue().getCustomerDirectory() == null) {
+                                    customerDirectory = new CustomerDirectory();
+                                    Enterprise enterprise = iteration.getValue();
+                                    Customer customer = customerDirectory.addCustomer();
+                                    customer.setEmail(txtEmail.getText());
+                                    customer.setFullName(txtName.getText());
+                                    customer.setPhoneNumber(txtMobileNo.getText());
+                                    customer.setUserName(userName);
+                                    customer.setAddress(txtAddress.getText());
+                                    enterprise.setCustomerDirectory(customerDirectory);
+                                    network.put(txtNetwork.getText(), enterprise);
+                                    system.setNetworkList(network);
+                                } else {
+                                    customerDirectory = iteration.getValue().getCustomerDirectory();
+                                    Customer customer = customerDirectory.addCustomer();
+                                    customer.setEmail(txtEmail.getText());
+                                    customer.setFullName(txtName.getText());
+                                    customer.setPhoneNumber(txtMobileNo.getText());
+                                    customer.setUserName(userName);
+                                    customer.setAddress(txtAddress.getText());
+                                }
                             }
                         }
+                    } else {
+                        Enterprise enterprise = new Enterprise();
+                        CustomerDirectory customerDirectory = new CustomerDirectory();
+                        Customer customer = customerDirectory.addCustomer();
+                        customer.setEmail(txtEmail.getText());
+                        customer.setFullName(txtName.getText());
+                        customer.setPhoneNumber(txtMobileNo.getText());
+                        customer.setUserName(userName);
+                        customer.setAddress(txtAddress.getText());
+                        enterprise.setCustomerDirectory(customerDirectory);
+                        network.put(txtNetwork.getText(), enterprise);
+                        system.setNetworkList(network);
                     }
-                } else {
-                    Enterprise enterprise = new Enterprise();
-                    CustomerDirectory customerDirectory = new CustomerDirectory();
-                    Customer customer = customerDirectory.addCustomer();
-                    customer.setEmail(txtEmail.getText());
-                    customer.setFullName(txtName.getText());
-                    customer.setPhoneNumber(txtMobileNo.getText());
-                    customer.setUserName(userName);
-                    customer.setAddress(txtAddress.getText());
-                    enterprise.setCustomerDirectory(customerDirectory);
-                    network.put(txtNetwork.getText(), enterprise);
-                    system.setNetworkList(network);
+                    JOptionPane.showMessageDialog(null, "Registered successfully!");
+                    dB4OUtil.storeSystem(system);
+                    switchPanels(LoginScreen);
+                    SendMail sendMail = new SendMail();
+                    sendMail.sendMail(txtEmail.getText(), null, null, null, null);
                 }
-                JOptionPane.showMessageDialog(null, "Registered successfully!");
-                dB4OUtil.storeSystem(system);
-                switchPanels(LoginScreen);
-                SendMail sendMail = new SendMail();
-                sendMail.sendMail(txtEmail.getText(), null, null, null, null);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, Error);
         }
     }//GEN-LAST:event_btnRegister1ActionPerformed
 
@@ -601,6 +629,20 @@ public class LoginScreen extends javax.swing.JPanel {
         } else {
             return false;
         }
+    }
+
+    private static boolean validatePasswordInput(String userInput) {
+        if (userInput.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")) {
+
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private static boolean validateEmail(String userInput) {
+        String regex = "^[\\w-\\.+]*[\\w-\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return userInput.matches(regex);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

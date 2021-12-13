@@ -113,6 +113,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         }
 
         this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
+        disableRadioButtons();
 
         this.ticket = new Ticket();
         this.totalCost = 0;
@@ -3844,6 +3845,36 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         populatePickAndDrop();
 
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void disableRadioButtons() {
+        rdOnionRings1.setEnabled(false);
+        rdSpinachPie1.setEnabled(false);
+        rdSpringRoles1.setEnabled(false);
+        rdMeatBalls1.setEnabled(false);
+        rdSausageDip1.setEnabled(false);
+        rdFriedShrimp1.setEnabled(false);
+        rdWhiteBeanDip1.setEnabled(false);
+        rdTortillaChips1.setEnabled(false);
+        rdCrispyTofu1.setEnabled(false);
+
+        rdCheeseBurger1.setEnabled(false);
+        rdFriedRice1.setEnabled(false);
+        rdVeggiePizza1.setEnabled(false);
+        rdHamBurger1.setEnabled(false);
+        rdFishNChips1.setEnabled(false);
+        rdPrawnFriedRice1.setEnabled(false);
+        rdTofuSalad1.setEnabled(false);
+        rdFalafelBowl1.setEnabled(false);
+        rdTofuAndRiceBowl1.setEnabled(false);
+
+        rdBlackForestCake1.setEnabled(false);
+        rdPineappleSwissRole1.setEnabled(false);
+        rdChocolateMousse1.setEnabled(false);
+
+        rdCocaCola1.setEnabled(false);
+        rdFreshLimesalted1.setEnabled(false);
+        rdPepsi1.setEnabled(false);
+    }
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         switchPanels(parkingDetails);

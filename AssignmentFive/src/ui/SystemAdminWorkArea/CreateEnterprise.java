@@ -350,7 +350,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
             txtUserName.setText("");
             pwdPassword.setText("");
         }
-
+        populateCustomerRole();
     }//GEN-LAST:event_btnCreateUserActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

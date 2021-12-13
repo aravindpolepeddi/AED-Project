@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class PickandDropJPanel extends javax.swing.JPanel {
-    
+
     JPanel userProcessContainer;
     Business system;
     UserAccount useraccount;
@@ -40,31 +40,33 @@ public class PickandDropJPanel extends javax.swing.JPanel {
      */
     public PickandDropJPanel(JPanel userProcessContainer, UserAccount account, Business system) {
         initComponents();
-        
+
         this.networkString = account.getNetwork();
-        
+
         if (system.getNetworkList() == null) {
             this.network = new HashMap<String, Enterprise>();
         } else {
             this.network = system.getNetworkList();
         }
-        
-        this.enterprise = system.findEnterpriseByNetwork(account.getNetwork());
-        
+
+        if (account != null && account.getNetwork() != null && !account.getName().isBlank()) {
+            this.enterprise = system.findEnterpriseByNetwork(account.getNetwork());
+        }
+
         if (enterprise.getPdDirectory() == null) {
             this.pdDirectory = new PickandDropDirectory();
         } else {
             this.pdDirectory = enterprise.getPdDirectory();
         }
-        
+
         this.userProcessContainer = userProcessContainer;
         this.useraccount = account;
         this.system = system;
         refreshTable();
     }
-    
+
     public void refreshTable() {
-        
+
         int rowCount = tblBookings.getRowCount();
         DefaultTableModel model = (DefaultTableModel) tblBookings.getModel();
         for (int i = rowCount - 1; i >= 0; i--) {
@@ -240,15 +242,26 @@ public class PickandDropJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Please select Booking");
                     return;
                 }
+                if (!validateIntegerInput(jTextPrice.getText())) {
+                    JOptionPane.showMessageDialog(this, "Please enter correct price value");
+                    return;
+                }
                 cb.setPrice(Integer.parseInt(jTextPrice.getText()));
                 cb.setCarNumber(randomOrderId);
             }
             j++;
         }
-        
+
         refreshTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private static boolean validateIntegerInput(String userInput) {
+        if (userInput.matches("^[0-9]*$")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int rowupdate = tblBookings.getSelectedRow();
