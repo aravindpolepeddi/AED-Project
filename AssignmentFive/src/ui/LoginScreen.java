@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -47,6 +49,9 @@ public class LoginScreen extends javax.swing.JPanel {
      */
     public LoginScreen(JPanel mainWorkArea, Business business) {
         initComponents();
+        Logger logger = Logger.getLogger(LoginScreen.class);
+        BasicConfigurator.configure();
+        logger.info("Login application loaded");
 
         this.business = business;
         this.mainWorkArea = mainWorkArea;

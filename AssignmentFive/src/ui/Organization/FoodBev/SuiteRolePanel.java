@@ -15,8 +15,12 @@ import business.Restaurant.Menu;
 import business.hrservices.CleaningServices;
 import business.hrservices.CleaningServicesDirectory;
 import business.hrservices.EmergencyServices;
+import business.hrservices.SecurityServices;
+import business.hrservices.TechnicalServices;
 import business.hrservices.EmergencyServicesDirectory;
+import business.hrservices.SecurityServicesDirectory;
 import business.hrservices.Staff;
+import business.hrservices.TechnicalServicesDirectory;
 import business.suites.Suites;
 import business.suites.SuitesDirectory;
 import business.useraccount.UserAccount;
@@ -45,6 +49,8 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     SuitesDirectory suitesDirectory;
     CleaningServicesDirectory cleaningDirectory;
     EmergencyServicesDirectory emergencyServiceDirectory;
+    SecurityServicesDirectory securityServicesDirectory;
+    TechnicalServicesDirectory technicalServicesDirectory;
     List<Staff> staffMembers;
     TicketDirectory ticketDirectory;
     Map<String, Enterprise> network;
@@ -57,6 +63,8 @@ public class SuiteRolePanel extends javax.swing.JPanel {
      */
     public SuiteRolePanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+        txtInstructions.setVisible(false);
+        btnSubmit.setVisible(false);
 
         ImageIcon icon1 = new ImageIcon(".\\src\\images\\menu.png");
         Image image1 = icon1.getImage().getScaledInstance(75, 70, Image.SCALE_SMOOTH);
@@ -100,6 +108,24 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             for (EmergencyServices emergencyServices : this.emergencyServiceDirectory.getEmergencyServices()) {
                 if (emergencyServices.getStaffDirectory() != null && emergencyServices.getStaffDirectory().getStaffList() != null && !emergencyServices.getStaffDirectory().getStaffList().isEmpty()) {
                     staffMembers.addAll(emergencyServices.getStaffDirectory().getStaffList());
+                }
+            }
+        }
+
+        if (enterprise.getSecurityServices() != null) {
+            this.securityServicesDirectory = enterprise.getSecurityServices();
+            for (SecurityServices securityServices : this.securityServicesDirectory.getSecurityServices()) {
+                if (securityServices.getStaffDirectory() != null && securityServices.getStaffDirectory().getStaffList() != null && !securityServices.getStaffDirectory().getStaffList().isEmpty()) {
+                    staffMembers.addAll(securityServices.getStaffDirectory().getStaffList());
+                }
+            }
+        }
+
+        if (enterprise.getTechnicalServices() != null) {
+            this.technicalServicesDirectory = enterprise.getTechnicalServices();
+            for (TechnicalServices techServices : this.technicalServicesDirectory.getGroundServices()) {
+                if (techServices.getStaffDirectory() != null && techServices.getStaffDirectory().getStaffList() != null && !techServices.getStaffDirectory().getStaffList().isEmpty()) {
+                    staffMembers.addAll(techServices.getStaffDirectory().getStaffList());
                 }
             }
         }
@@ -310,6 +336,8 @@ public class SuiteRolePanel extends javax.swing.JPanel {
         btnDetails2 = new javax.swing.JButton();
         btnDetails3 = new javax.swing.JButton();
         btnDetails4 = new javax.swing.JButton();
+        txtInstructions = new javax.swing.JTextField();
+        btnSubmit = new javax.swing.JButton();
         ViewServiceDetails = new javax.swing.JPanel();
         btnBack8 = new javax.swing.JButton();
         lblStaffMemberName = new javax.swing.JLabel();
@@ -2035,6 +2063,19 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             }
         });
 
+        txtInstructions.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtInstructions.setForeground(new java.awt.Color(0, 51, 51));
+
+        btnSubmit.setBackground(new java.awt.Color(204, 255, 204));
+        btnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSubmit.setForeground(new java.awt.Color(0, 102, 0));
+        btnSubmit.setText("Submit Instructions");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ServicesPanelLayout = new javax.swing.GroupLayout(ServicesPanel);
         ServicesPanel.setLayout(ServicesPanelLayout);
         ServicesPanelLayout.setHorizontalGroup(
@@ -2050,16 +2091,19 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                         .addComponent(lblHeader1))
                     .addGroup(ServicesPanelLayout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addGroup(ServicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(ServicesPanelLayout.createSequentialGroup()
-                                .addComponent(btnDetails1)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDetails2)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDetails4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDetails3))
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(ServicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSubmit)
+                            .addGroup(ServicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(ServicesPanelLayout.createSequentialGroup()
+                                    .addComponent(btnDetails1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnDetails2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnDetails4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnDetails3))
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(329, Short.MAX_VALUE))
         );
         ServicesPanelLayout.setVerticalGroup(
@@ -2077,7 +2121,11 @@ public class SuiteRolePanel extends javax.swing.JPanel {
                     .addComponent(btnDetails4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(427, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSubmit)
+                .addContainerGap(353, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(ServicesPanel, "card7");
@@ -3129,7 +3177,8 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDetails4MouseExited
 
     private void btnDetails4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetails4ActionPerformed
-        switchPanels(AddInstructionsPanel);
+        txtInstructions.setVisible(true);
+        btnSubmit.setVisible(true);
     }//GEN-LAST:event_btnDetails4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -3149,6 +3198,26 @@ public class SuiteRolePanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Price per table added successfully");
         }
     }//GEN-LAST:event_btnPricePerTableActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        int selectedRowIndex = tblServices.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+
+            if (txtInstructions.getText() == "") {
+                JOptionPane.showMessageDialog(this, "Please enter some instructions");
+                return;
+            } else {
+                DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
+                Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
+                selectedStaff.setInstructions(txtInstructions.getText());
+                populateStaff();
+            }
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
@@ -3704,6 +3773,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnPricePerTable;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSaveSeats;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnSubmitFeedback;
     private javax.swing.JCheckBox chkAll;
     private javax.swing.JCheckBox chkNonVeg;
@@ -3865,6 +3935,7 @@ public class SuiteRolePanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtFriedShrimp;
     private javax.swing.JTextField txtFullName1;
     private javax.swing.JTextField txtHamBurger;
+    private javax.swing.JTextField txtInstructions;
     private javax.swing.JTextField txtMeatBalls;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtOnionRings;

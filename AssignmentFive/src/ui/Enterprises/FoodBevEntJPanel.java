@@ -23,6 +23,9 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+import ui.LoginScreen;
 
 /**
  *
@@ -38,12 +41,17 @@ public class FoodBevEntJPanel extends javax.swing.JPanel {
     EnterpriseDirectory enterpriseDirectory;
     Enterprise enterprise;
     String networkString;
+    Logger logger = Logger.getLogger(FoodBevEntJPanel.class);
 
     /**
      * Creates new form FoodBevEntJPanel
      */
     public FoodBevEntJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+
+        BasicConfigurator.configure();
+        logger.info("Food Beverange Enterprise panel loaded");
+
         this.networkString = account.getNetwork();
 
         this.business = business;

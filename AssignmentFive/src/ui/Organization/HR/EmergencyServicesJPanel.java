@@ -48,6 +48,7 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
      */
     public EmergencyServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+        txtInstructions.setVisible(false);
         this.networkString = account.getNetwork();
 
         if (business.getNetworkList() == null) {
@@ -119,6 +120,12 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         tblStaff = new javax.swing.JTable();
         btnDetails = new javax.swing.JButton();
         btnDetails1 = new javax.swing.JButton();
+        txtInstructions = new javax.swing.JTextField();
+        btnSubmit = new javax.swing.JButton();
+        btnAmbulance = new javax.swing.JButton();
+        btnFirebrigade = new javax.swing.JButton();
+        btnFirstAid = new javax.swing.JButton();
+        btnAirambulance = new javax.swing.JButton();
         AddProvisions = new javax.swing.JPanel();
         lblRestaurantName1 = new javax.swing.JLabel();
         btnBack5 = new javax.swing.JButton();
@@ -310,6 +317,63 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
             }
         });
 
+        txtInstructions.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtInstructions.setForeground(new java.awt.Color(0, 51, 51));
+
+        btnSubmit.setBackground(new java.awt.Color(204, 255, 204));
+        btnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSubmit.setForeground(new java.awt.Color(0, 102, 0));
+        btnSubmit.setText("VIEW INSTRUCTIONS");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
+        btnAmbulance.setBackground(new java.awt.Color(204, 0, 0));
+        btnAmbulance.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAmbulance.setForeground(new java.awt.Color(255, 255, 255));
+        btnAmbulance.setText("DISPATCH");
+        btnAmbulance.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAmbulance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAmbulanceActionPerformed(evt);
+            }
+        });
+
+        btnFirebrigade.setBackground(new java.awt.Color(204, 0, 0));
+        btnFirebrigade.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnFirebrigade.setForeground(new java.awt.Color(255, 255, 255));
+        btnFirebrigade.setText("DISPATCH");
+        btnFirebrigade.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFirebrigade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirebrigadeActionPerformed(evt);
+            }
+        });
+
+        btnFirstAid.setBackground(new java.awt.Color(204, 0, 0));
+        btnFirstAid.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnFirstAid.setForeground(new java.awt.Color(255, 255, 255));
+        btnFirstAid.setText("DISPATCH");
+        btnFirstAid.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFirstAid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstAidActionPerformed(evt);
+            }
+        });
+
+        btnAirambulance.setBackground(new java.awt.Color(204, 0, 0));
+        btnAirambulance.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAirambulance.setForeground(new java.awt.Color(255, 255, 255));
+        btnAirambulance.setText("DISPATCH");
+        btnAirambulance.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAirambulance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAirambulanceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout EmergencyDashboardLayout = new javax.swing.GroupLayout(EmergencyDashboard);
         EmergencyDashboard.setLayout(EmergencyDashboardLayout);
         EmergencyDashboardLayout.setHorizontalGroup(
@@ -323,15 +387,30 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
                             .addGroup(EmergencyDashboardLayout.createSequentialGroup()
                                 .addComponent(btnDetails)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnDetails1))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnDetails1)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSubmit))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(EmergencyDashboardLayout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAmbulance, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblFireBrigades, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblFirstAidKits, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblAirAmbulance, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(152, 152, 152)
+                        .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(EmergencyDashboardLayout.createSequentialGroup()
+                                .addComponent(btnAirambulance)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblAirAmbulance))
+                            .addGroup(EmergencyDashboardLayout.createSequentialGroup()
+                                .addComponent(btnFirstAid)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblFirstAidKits))
+                            .addGroup(EmergencyDashboardLayout.createSequentialGroup()
+                                .addComponent(btnFirebrigade)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblFireBrigades))
+                            .addGroup(EmergencyDashboardLayout.createSequentialGroup()
+                                .addComponent(btnAmbulance)
+                                .addGap(63, 63, 63)
+                                .addComponent(lblAmbulance)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAmbulanceCount)
@@ -348,26 +427,33 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
                 .addGap(86, 86, 86)
                 .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAmbulance)
-                    .addComponent(lblAmbulanceCount))
+                    .addComponent(lblAmbulanceCount)
+                    .addComponent(btnAmbulance))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFireBrigades)
-                    .addComponent(lblFireBrigadeCount))
+                    .addComponent(lblFireBrigadeCount)
+                    .addComponent(btnFirebrigade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFirstAidKits)
-                    .addComponent(lblFirstAidKitCount))
+                    .addComponent(lblFirstAidKitCount)
+                    .addComponent(btnFirstAid))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAirAmbulance)
-                    .addComponent(lblAirAmbulanceCount))
-                .addGap(68, 68, 68)
+                    .addComponent(lblAirAmbulanceCount)
+                    .addComponent(btnAirambulance))
+                .addGap(66, 66, 66)
                 .addGroup(EmergencyDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDetails)
-                    .addComponent(btnDetails1))
+                    .addComponent(btnDetails1)
+                    .addComponent(btnSubmit))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(EmergencyDashboard, "card2");
@@ -964,6 +1050,91 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDetails1ActionPerformed
 
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        int selectedRowIndex = tblStaff.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+            Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
+            txtInstructions.setText(selectedStaff.getInstructions());
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void btnAirambulanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirambulanceActionPerformed
+        int selectedRowIndex = tblStaff.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+            if (emergencyServiceFetch.getNumOfAirAmbulance() != 0) {
+                emergencyServiceFetch.setNumOfAirAmbulance(emergencyServiceFetch.getNumOfAirAmbulance() - 1);
+                lblAirAmbulanceCount.setText(String.valueOf(emergencyServiceFetch.getNumOfAirAmbulance()));
+            } else {
+                JOptionPane.showMessageDialog(this, "No more Air Ambulances");
+                return;
+            }
+        }
+    }//GEN-LAST:event_btnAirambulanceActionPerformed
+
+    private void btnAmbulanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbulanceActionPerformed
+        int selectedRowIndex = tblStaff.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+            if (emergencyServiceFetch.getNumOfAmbulances() != 0) {
+                emergencyServiceFetch.setNumOfAmbulances(emergencyServiceFetch.getNumOfAmbulances() - 1);
+                lblAmbulanceCount.setText(String.valueOf(emergencyServiceFetch.getNumOfAmbulances()));
+            } else {
+                JOptionPane.showMessageDialog(this, "No more Abmulances");
+                return;
+            }
+        }
+    }//GEN-LAST:event_btnAmbulanceActionPerformed
+
+    private void btnFirebrigadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirebrigadeActionPerformed
+        int selectedRowIndex = tblStaff.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+            if (emergencyServiceFetch.getNumOfFireBrigades() != 0) {
+                emergencyServiceFetch.setNumOfFireBrigades(emergencyServiceFetch.getNumOfFireBrigades() - 1);
+                lblFireBrigadeCount.setText(String.valueOf(emergencyServiceFetch.getNumOfFireBrigades()));
+            } else {
+                JOptionPane.showMessageDialog(this, "No more Fire Brigades");
+                return;
+            }
+        }
+    }//GEN-LAST:event_btnFirebrigadeActionPerformed
+
+    private void btnFirstAidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstAidActionPerformed
+        int selectedRowIndex = tblStaff.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+            if (emergencyServiceFetch.getNumOfFirstAidKits() != 0) {
+                emergencyServiceFetch.setNumOfFirstAidKits(emergencyServiceFetch.getNumOfFirstAidKits() - 1);
+                lblFirstAidKitCount.setText(String.valueOf(emergencyServiceFetch.getNumOfFirstAidKits()));
+            } else {
+                JOptionPane.showMessageDialog(this, "No more First Aid kits");
+                return;
+            }
+        }
+    }//GEN-LAST:event_btnFirstAidActionPerformed
+
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(component);
@@ -974,6 +1145,7 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
     private void populateStaff() {
         DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
         model.setRowCount(0);
+        txtInstructions.setVisible(true);
 
         for (Staff staffMember : staffDirectory.getStaffList()) {
             Object[] row = new Object[4];
@@ -993,6 +1165,8 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel AddStaff;
     private javax.swing.JPanel EmergencyDashboard;
     private javax.swing.JPanel ViewDetailsPanel;
+    private javax.swing.JButton btnAirambulance;
+    private javax.swing.JButton btnAmbulance;
     private javax.swing.JButton btnBack3;
     private javax.swing.JButton btnBack4;
     private javax.swing.JButton btnBack5;
@@ -1002,7 +1176,10 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDetails1;
     private javax.swing.JButton btnEditDetails;
     private javax.swing.JButton btnEditDetails1;
+    private javax.swing.JButton btnFirebrigade;
+    private javax.swing.JButton btnFirstAid;
     private javax.swing.JButton btnProfileImage;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.JComboBox<String> cmbSubType;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1044,6 +1221,7 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtFirstAidCount;
     private javax.swing.JTextField txtFullName;
     private javax.swing.JTextField txtFullName1;
+    private javax.swing.JTextField txtInstructions;
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtPhoneNumber1;
     private javax.swing.JTextField txtStaffType;

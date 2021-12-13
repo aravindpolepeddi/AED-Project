@@ -20,6 +20,7 @@ public class Staff extends Person {
     private String status;
     private String hiredBy;
     private String trainingStatus;
+    private String instructions;
 
     public String getStaffType() {
         return staffType;
@@ -75,6 +76,14 @@ public class Staff extends Person {
 
     public void setTrainingStatus(String trainingStatus) {
         this.trainingStatus = trainingStatus;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 
     @Override

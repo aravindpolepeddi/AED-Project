@@ -42,6 +42,9 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+import ui.MainScreen;
 
 /**
  *
@@ -70,12 +73,16 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     String networkString;
     merchandiseShopDirectory merchDirectory;
     PickandDropDirectory pdDirectory;
+    Logger logger = Logger.getLogger(CustomerWorkAreaJPanel.class);
 
     /**
      * Creates new form CustomerWorkAreaJPanel
      */
     public CustomerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+
+        BasicConfigurator.configure();
+        logger.info("Logged in as Customer.");
 
         ImageIcon icon1 = new ImageIcon(".\\src\\images\\profile.png");
         Image image1 = icon1.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -2703,6 +2710,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnMenuMouseExited
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        BasicConfigurator.configure();
+        logger.info("Registering for an event");
         switchPanels(registerEvent);
         populateEventTable();
     }//GEN-LAST:event_btnMenuActionPerformed
@@ -2717,27 +2726,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnEditDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDetailsActionPerformed
         switchPanels(registerEvent);
-//        txtName1.setText(restaurant.getName());
-//        txtAddress1.setText(restaurant.getAddress());
-//        txtCuisine.setText(restaurant.getCuisine());
-//        txtPhoneNum.setText(restaurant.getPhoneNumber());
-//        txtEmailId.setText(restaurant.getEmailId());
-
-//        if (restaurant.getVegOrNonVeg().equals("VEG")) {
-//            chkVeg.setSelected(true);
-//        }
-//
-//        if (restaurant.getVegOrNonVeg().equals("NON-VEG")) {
-//            chkNonVeg.setSelected(true);
-//        }
-//
-//        if (restaurant.getVegOrNonVeg().equals("VEGAN")) {
-//            chkVegan.setSelected(true);
-//        }
-//
-//        if (restaurant.getVegOrNonVeg().equals("ALL")) {
-//            chkAll.setSelected(true);
-//        }
     }//GEN-LAST:event_btnEditDetailsActionPerformed
 
     private void txtName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName1ActionPerformed
@@ -2745,6 +2733,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtName1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        BasicConfigurator.configure();
+        logger.info("Viewing all previous bookings");
         switchPanels(viewBookings);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -2762,6 +2752,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Booking not yet approved!");
                 return;
             } else {
+                logger.info("Logged in as Customer.");
                 switchPanels(bookEventDetails);
 
                 if (customer.getPickDropCost() == 0) {
@@ -2779,6 +2770,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         if (merchDirectory != null && merchDirectory.getMerchandiseShopList() != null && !merchDirectory.getMerchandiseShopList().isEmpty()) {
             populateMerchandise();
         }
+        BasicConfigurator.configure();
+        logger.info("Visting the merchandise store");
         switchPanels(merchandize);
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -3248,6 +3241,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
 
     private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        BasicConfigurator.configure();
+        logger.info("Booking an event");
         switchPanels(bookEventDetails);
         lblOnionRingsPrice.setText("- NA -");
         lblOnionRingsPrice.setForeground(new java.awt.Color(0, 102, 102));
@@ -3367,6 +3362,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select a place to eat");
             return;
         } else {
+            BasicConfigurator.configure();
+            logger.info("Booking reservations");
             switchPanels(SeatingPanel);
             DefaultTableModel model = (DefaultTableModel) tblFoodBev1.getModel();
             Suites selectedSuite = (Suites) model.getValueAt(selectedRowIndex, 0);

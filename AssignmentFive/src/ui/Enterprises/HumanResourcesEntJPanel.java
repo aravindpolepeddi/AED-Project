@@ -368,7 +368,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                         if (iteration.getKey().equals(txtNetwork.getText())) {
                             if (iteration.getValue().getCleaningServices() == null) {
                                 cleaningServices = new CleaningServicesDirectory();
-                                Enterprise enterprise = new Enterprise();
+                                Enterprise enterprise = iteration.getValue();
                                 CleaningServices cleaningService = cleaningServices.addCleaningService();
                                 cleaningService.setManagerName(managerame);
                                 cleaningService.setUserName(userName);
@@ -405,7 +405,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                         if (iteration.getKey().equals(txtNetwork.getText())) {
                             if (iteration.getValue().getCleaningServices() == null) {
                                 emergencyServices = new EmergencyServicesDirectory();
-                                Enterprise enterprise = new Enterprise();
+                                Enterprise enterprise = iteration.getValue();
                                 EmergencyServices emergencyService = emergencyServices.addEmergencyService();
                                 emergencyService.setManagerName(managerame);
                                 emergencyService.setUserName(userName);
@@ -442,7 +442,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                         if (iteration.getKey().equals(txtNetwork.getText())) {
                             if (iteration.getValue().getTechnicalServices() == null) {
                                 technicalServices = new TechnicalServicesDirectory();
-                                Enterprise enterprise = new Enterprise();
+                                Enterprise enterprise = iteration.getValue();
                                 TechnicalServices technicalService = technicalServices.addGroundService();
                                 technicalService.setManagerName(managerame);
                                 technicalService.setUserName(userName);
@@ -479,7 +479,7 @@ public class HumanResourcesEntJPanel extends javax.swing.JPanel {
                         if (iteration.getKey().equals(txtNetwork.getText())) {
                             if (iteration.getValue().getSecurityServices() == null) {
                                 securityServices = new SecurityServicesDirectory();
-                                Enterprise enterprise = new Enterprise();
+                                Enterprise enterprise = iteration.getValue();
                                 SecurityServices securityService = securityServices.addSecurityService();
                                 securityService.setManagerName(managerame);
                                 securityService.setUserName(userName);

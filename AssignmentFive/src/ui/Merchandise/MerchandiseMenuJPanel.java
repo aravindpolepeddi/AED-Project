@@ -12,7 +12,6 @@ import business.useraccount.UserAccount;
 import business.merchandise.merchandise;
 import business.merchandise.merchandiseShop;
 import business.merchandise.merchandiseShopDirectory;
-import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,6 +43,7 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
 
     public MerchandiseMenuJPanel(JPanel userProcessContainer, UserAccount account, Business system) {
         initComponents();
+        pnlTable.setVisible(false);
         this.update = system.isUpdate();
         this.networkString = account.getNetwork();
         this.mergeShopList = new ArrayList<>();
@@ -72,7 +72,6 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
         if (merchShop == null) {
             merchShop = new merchandiseShop();
         }
-
         refreshTable();
     }
 
@@ -95,6 +94,10 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         lblRestaurantName = new javax.swing.JLabel();
+        pnlTable = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblServices = new javax.swing.JTable();
+        btnServices = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(240, 255, 255));
 
@@ -166,6 +169,56 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
         lblRestaurantName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRestaurantName.setText("MERCHANDISE");
 
+        pnlTable.setBackground(new java.awt.Color(240, 255, 255));
+
+        tblServices.setBackground(new java.awt.Color(255, 255, 255));
+        tblServices.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "STAFF MANAGER", "SERVICE TYPE", "SUB-TYPE", "SERVICE-MANAGER", "STATUS"
+            }
+        ));
+        tblServices.setSelectionBackground(new java.awt.Color(0, 204, 204));
+        tblServices.setSelectionForeground(new java.awt.Color(0, 51, 51));
+        jScrollPane2.setViewportView(tblServices);
+
+        javax.swing.GroupLayout pnlTableLayout = new javax.swing.GroupLayout(pnlTable);
+        pnlTable.setLayout(pnlTableLayout);
+        pnlTableLayout.setHorizontalGroup(
+            pnlTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 703, Short.MAX_VALUE)
+            .addGroup(pnlTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlTableLayout.createSequentialGroup()
+                    .addGap(124, 124, 124)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(125, Short.MAX_VALUE)))
+        );
+        pnlTableLayout.setVerticalGroup(
+            pnlTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 237, Short.MAX_VALUE)
+            .addGroup(pnlTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlTableLayout.createSequentialGroup()
+                    .addGap(36, 36, 36)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(37, Short.MAX_VALUE)))
+        );
+
+        btnServices.setBackground(new java.awt.Color(204, 255, 204));
+        btnServices.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnServices.setForeground(new java.awt.Color(0, 153, 0));
+        btnServices.setText("Services");
+        btnServices.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnServices.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServicesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -175,25 +228,32 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
                 .addComponent(lblRestaurantName, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
                 .addGap(172, 172, 172))
             .addGroup(layout.createSequentialGroup()
-                .addGap(193, 193, 193)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
+                        .addGap(193, 193, 193)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextItemName, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(77, 77, 77)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(pnlTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextItemName, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnServices)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -208,13 +268,16 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
                     .addComponent(jTextPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton4)
-                    .addComponent(jButton2))
-                .addContainerGap(199, Short.MAX_VALUE))
+                    .addComponent(jButton2)
+                    .addComponent(btnServices))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(pnlTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -330,17 +393,25 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void btnServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicesActionPerformed
+
+    }//GEN-LAST:event_btnServicesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnServices;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextItemName;
     private javax.swing.JTextField jTextPrice;
     private javax.swing.JLabel lblRestaurantName;
+    private javax.swing.JPanel pnlTable;
+    private javax.swing.JTable tblServices;
     // End of variables declaration//GEN-END:variables
 }

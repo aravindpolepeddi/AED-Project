@@ -47,6 +47,7 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
      */
     public CleaningServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
+        txtInstructions.setVisible(false);
         this.networkString = account.getNetwork();
 
         if (business.getNetworkList() == null) {
@@ -96,6 +97,8 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
         tblStaff = new javax.swing.JTable();
         pnlFeedbackTable = new javax.swing.JPanel();
         btnDetails = new javax.swing.JButton();
+        btnSubmit = new javax.swing.JButton();
+        txtInstructions = new javax.swing.JTextField();
         AddNewStaffMember = new javax.swing.JPanel();
         lblRestaurantName1 = new javax.swing.JLabel();
         btnBack3 = new javax.swing.JButton();
@@ -218,36 +221,56 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnSubmit.setBackground(new java.awt.Color(204, 255, 204));
+        btnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSubmit.setForeground(new java.awt.Color(0, 102, 0));
+        btnSubmit.setText("VIEW INSTRUCTIONS");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
+        txtInstructions.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtInstructions.setForeground(new java.awt.Color(0, 51, 51));
+
         javax.swing.GroupLayout workAreaPanelLayout = new javax.swing.GroupLayout(workAreaPanel);
         workAreaPanel.setLayout(workAreaPanelLayout);
         workAreaPanelLayout.setHorizontalGroup(
             workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(workAreaPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblRestaurantName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(43, 43, 43))
-            .addGroup(workAreaPanelLayout.createSequentialGroup()
                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
-                        .addGap(389, 389, 389)
+                        .addGap(664, 664, 664)
                         .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDetails)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                .addComponent(btnDetails)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSubmit))
+                            .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(workAreaPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblRestaurantName, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         workAreaPanelLayout.setVerticalGroup(
             workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(workAreaPanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(35, 35, 35)
                 .addComponent(lblRestaurantName)
-                .addGap(56, 56, 56)
-                .addComponent(btnDetails)
+                .addGap(50, 50, 50)
+                .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDetails)
+                    .addComponent(btnSubmit))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addGap(18, 18, 18)
+                .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(pnlFeedbackTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(151, Short.MAX_VALUE))
         );
@@ -345,7 +368,7 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
                                     .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnProfileImage))))))
-                .addGap(94, 224, Short.MAX_VALUE))
+                .addGap(94, 499, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddNewStaffMemberLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnBack3)
@@ -442,7 +465,7 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
                     .addComponent(txtFullName1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPhoneNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(608, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ViewDetailsPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnBack5)
@@ -600,6 +623,19 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
         switchPanels(workAreaPanel);
     }//GEN-LAST:event_btnBack5ActionPerformed
 
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        int selectedRowIndex = tblStaff.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+            Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
+            txtInstructions.setText(selectedStaff.getInstructions());
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(component);
@@ -617,6 +653,7 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDetails;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnProfileImage;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
@@ -638,6 +675,7 @@ public class CleaningServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtEmail1;
     private javax.swing.JTextField txtFullName;
     private javax.swing.JTextField txtFullName1;
+    private javax.swing.JTextField txtInstructions;
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtPhoneNumber1;
     private javax.swing.JPanel workAreaPanel;

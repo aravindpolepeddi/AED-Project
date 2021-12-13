@@ -15,6 +15,8 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -144,16 +146,17 @@ public class MainScreen extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOffActionPerformed
-        if (business.isUpdate() == false) {
-            dB4OUtil.storeSystem(system);
-            JPanel loginScreen = new LoginScreen(mainWorkArea, business);
-            mainWorkArea.add("LoginScreen", loginScreen);
-            CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-            layout.next(mainWorkArea);
-        } else {
-            JOptionPane.showMessageDialog(this, "Please save your changes before logging off!");
-            return;
-        }
+//        if (business.isUpdate() == false) {
+        dB4OUtil.storeSystem(system);
+        JPanel loginScreen = new LoginScreen(mainWorkArea, business);
+        mainWorkArea.add("LoginScreen", loginScreen);
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.next(mainWorkArea);
+//        } 
+//else {
+//            JOptionPane.showMessageDialog(this, "Please save your changes before logging off!");
+//            return;
+//        }
     }//GEN-LAST:event_btnLogOffActionPerformed
 
     private void btnLogOffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOffMouseEntered
@@ -175,6 +178,9 @@ public class MainScreen extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void initUserWorkArea() {
+        Logger logger = Logger.getLogger(MainScreen.class);
+        BasicConfigurator.configure();
+        logger.info("Logging in, redirecting to the correct panel based on the user role.");
         lblUser.setText("Logged in as " + ((userAccount.getName() != null) ? userAccount.getName().toUpperCase() : userAccount.getUsername()));
         CardLayout layout = (CardLayout) workArea.getLayout();
         workArea.add("workArea", userAccount.getRole().createWorkArea(workArea, userAccount, system));

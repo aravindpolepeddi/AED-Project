@@ -50,6 +50,7 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
     public SecurityServicesJPanel(JPanel userProcessContainer, UserAccount account, Business business) {
         initComponents();
         this.networkString = account.getNetwork();
+        txtInstructions.setVisible(false);
 
         if (business.getNetworkList() == null) {
             this.network = new HashMap<String, Enterprise>();
@@ -58,7 +59,7 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         }
 
         this.enterprise = business.findEnterpriseByNetwork(account.getNetwork());
-        
+
         this.managerName = account.getName();
         this.flags = new FlagClass();
 
@@ -98,6 +99,8 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblStaff = new javax.swing.JTable();
         btnDetails = new javax.swing.JButton();
+        btnSubmit = new javax.swing.JButton();
+        txtInstructions = new javax.swing.JTextField();
         AddStaff = new javax.swing.JPanel();
         lblRestaurantName2 = new javax.swing.JLabel();
         btnBack3 = new javax.swing.JButton();
@@ -243,6 +246,19 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnSubmit.setBackground(new java.awt.Color(204, 255, 204));
+        btnSubmit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSubmit.setForeground(new java.awt.Color(0, 102, 0));
+        btnSubmit.setText("VIEW INSTRUCTIONS");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
+        txtInstructions.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtInstructions.setForeground(new java.awt.Color(0, 51, 51));
+
         javax.swing.GroupLayout SecurityDashboardLayout = new javax.swing.GroupLayout(SecurityDashboard);
         SecurityDashboard.setLayout(SecurityDashboardLayout);
         SecurityDashboardLayout.setHorizontalGroup(
@@ -251,7 +267,11 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
             .addGroup(SecurityDashboardLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(SecurityDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDetails)
+                    .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(SecurityDashboardLayout.createSequentialGroup()
+                        .addComponent(btnDetails)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSubmit))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -261,10 +281,14 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
                 .addGap(38, 38, 38)
                 .addComponent(lblRestaurantName)
                 .addGap(66, 66, 66)
-                .addComponent(btnDetails)
+                .addGroup(SecurityDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDetails)
+                    .addComponent(btnSubmit))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(256, Short.MAX_VALUE))
         );
 
         jLayeredPane1.add(SecurityDashboard, "card2");
@@ -822,6 +846,19 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btnBack7ActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        int selectedRowIndex = tblStaff.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a Staff member");
+            return;
+        } else {
+            DefaultTableModel model = (DefaultTableModel) tblStaff.getModel();
+            Staff selectedStaff = (Staff) model.getValueAt(selectedRowIndex, 0);
+            txtInstructions.setText(selectedStaff.getInstructions());
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
     private void switchPanels(Component component) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(component);
@@ -864,6 +901,7 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnEditDetails1;
     private javax.swing.JButton btnEditDetails2;
     private javax.swing.JButton btnProfileImage;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -891,6 +929,7 @@ public class SecurityServicesJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtEmail1;
     private javax.swing.JTextField txtFullName;
     private javax.swing.JTextField txtFullName1;
+    private javax.swing.JTextField txtInstructions;
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtPhoneNumber1;
     // End of variables declaration//GEN-END:variables
