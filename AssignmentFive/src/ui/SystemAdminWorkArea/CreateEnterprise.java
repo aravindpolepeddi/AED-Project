@@ -13,6 +13,7 @@ import business.Enterprises.EnterpriseUser;
 import business.FlagClass;
 import business.role.FoodBeverageEntAdminRole;
 import business.role.HumanResourceEntAdmin;
+import business.role.MerchendiseEntAdminRole;
 import business.role.Role;
 import business.role.TicketingAdmin;
 import business.role.merchandiseShopOwner;
@@ -310,7 +311,7 @@ public class CreateEnterprise extends javax.swing.JPanel {
                 FoodBeverageEntAdminRole role = new FoodBeverageEntAdminRole();
                 business.getUserAccountDirectory().createUserAccount(userName, txtManagerName.getText(), password, role, txtNetwork.getText());
             } else if (cmbEntType.getSelectedItem().toString().equals("Merchandise")) {
-                merchandiseShopOwner role = new merchandiseShopOwner();
+                MerchendiseEntAdminRole role = new MerchendiseEntAdminRole();
                 business.getUserAccountDirectory().createUserAccount(userName, txtManagerName.getText(), password, role, txtNetwork.getText());
             } else if (cmbEntType.getSelectedItem().toString().equals("Human Resources")) {
                 HumanResourceEntAdmin role = new HumanResourceEntAdmin();

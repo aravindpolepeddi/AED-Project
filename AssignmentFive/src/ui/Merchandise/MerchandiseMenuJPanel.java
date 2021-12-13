@@ -326,14 +326,15 @@ public class MerchandiseMenuJPanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, Error);
         }
+        refreshTable();
         if (formValid) {
-            mergeShopList.add(merchShop);
-            merchShopDirectory.setMerchandiseShopList(mergeShopList);
-            enterprise.setMerchandiseShopDirectory(merchShopDirectory);
-            network.put(networkString, enterprise);
-            system.setNetworkList(network);
+//            mergeShopList.add(merchShop);
+//            merchShopDirectory.setMerchandiseShopList(mergeShopList);
+//            enterprise.setMerchandiseShopDirectory(merchShopDirectory);
+//            network.put(networkString, enterprise);
+//            system.setNetworkList(network);
 
-            refreshTable();
+//            refreshTable();
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

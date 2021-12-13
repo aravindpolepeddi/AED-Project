@@ -5,6 +5,7 @@
  */
 package business.merchandise;
 
+import business.Enterprise;
 import business.hrservices.CleaningServices;
 import business.hrservices.Staff;
 import business.role.Role;
@@ -38,7 +39,7 @@ public class merchandiseShopDirectory {
 
     public merchandiseShop findMerchandiseShop(String MerchShopName) {
         for (merchandiseShop merchshop : merchandiseShopList) {
-            if (merchshop.getMerchandiseShopName().equals(MerchShopName)) {
+            if (merchshop.getUsername().equals(MerchShopName)) {
                 return merchshop;
             }
         }
