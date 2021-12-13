@@ -928,8 +928,8 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="3">
                         <StringItem index="0" value="SELECT TYPE"/>
-                        <StringItem index="1" value="Medical"/>
-                        <StringItem index="2" value="Staff Fire Staff"/>
+                        <StringItem index="1" value="Medical Staff"/>
+                        <StringItem index="2" value="Fire Staff"/>
                       </StringArray>
                     </Property>
                   </Properties>

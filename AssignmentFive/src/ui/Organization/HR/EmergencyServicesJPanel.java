@@ -646,7 +646,7 @@ public class EmergencyServicesJPanel extends javax.swing.JPanel {
         lblEmail1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblEmail1.setText("Staff Type : ");
 
-        cmbSubType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "Medical", "Staff Fire Staff" }));
+        cmbSubType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT TYPE", "Medical Staff", "Fire Staff" }));
 
         lblImageSlot.setBackground(new java.awt.Color(204, 204, 204));
         lblImageSlot.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
